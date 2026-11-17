@@ -71,23 +71,32 @@
     .cs-brand-logo {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
+      gap: 12px;
       text-decoration: none;
+      transition: transform var(--transition-fast);
+    }
+
+    .cs-brand-logo:hover {
+      transform: translateY(-1px);
     }
 
     .cs-brand-icon {
-      width: 42px;
-      height: 42px;
-      background: var(--color-gold);
-      border-radius: var(--border-radius-md);
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #EAD3A2 0%, #C6A56B 50%, #947133 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-heading);
       font-weight: 800;
-      font-size: 1.25rem;
+      font-size: 1.7rem;
       color: var(--color-navy);
+      line-height: 1;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
       box-shadow: 0 4px 15px rgba(198, 165, 107, 0.4);
+      flex-shrink: 0;
     }
 
     .cs-brand-text {
@@ -97,19 +106,20 @@
 
     .cs-brand-name {
       font-family: var(--font-heading);
-      font-size: 1.35rem;
-      font-weight: 700;
+      font-size: 1.65rem;
+      font-weight: 800;
       color: var(--color-white);
-      letter-spacing: -0.01em;
-      line-height: 1.1;
+      letter-spacing: -0.015em;
+      line-height: 1.05;
     }
 
     .cs-brand-sub {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       color: var(--color-gold);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      font-weight: 500;
+      font-weight: 600;
+      margin-top: 2px;
     }
 
     .cs-top-actions {

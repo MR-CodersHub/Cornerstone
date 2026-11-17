@@ -83,7 +83,7 @@
   /* ── Layout ── */
   --container-max:  1280px;
   --container-pad:  1.5rem;
-  --navbar-height:  72px;
+  --navbar-height:  80px;
 
   /* ── Transitions ── */
   --transition-fast:   0.15s ease;

@@ -19,39 +19,51 @@
 .cs-footer__brand-logo {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 14px;
   margin-bottom: var(--space-5);
   text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.cs-footer__brand-logo:hover {
+  transform: translateY(-1px);
 }
 
 .cs-footer__brand-icon {
-  width: 44px;
-  height: 44px;
-  background: var(--color-gold);
-  border-radius: var(--border-radius-md);
+  width: 52px;
+  height: 52px;
+  background: linear-gradient(135deg, #EAD3A2 0%, #C6A56B 50%, #947133 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-heading);
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.8rem;
   color: var(--color-navy);
+  line-height: 1;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+  box-shadow: 0 4px 15px rgba(198, 165, 107, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   flex-shrink: 0;
 }
 
 .cs-footer__brand-name {
   font-family: var(--font-heading);
-  font-size: var(--font-size-md);
-  font-weight: 700;
+  font-size: 1.7rem;
+  font-weight: 800;
   color: var(--color-white);
+  letter-spacing: -0.015em;
+  line-height: 1.05;
 }
 
 .cs-footer__brand-tagline {
-  font-size: var(--font-size-xs);
+  font-size: 0.74rem;
   color: var(--color-gold);
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
+  margin-top: 3px;
 }
 
 .cs-footer__agency-desc {

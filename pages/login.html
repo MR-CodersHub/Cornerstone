@@ -74,23 +74,27 @@
     .auth-brand-badge {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-3);
+      gap: 14px;
       text-decoration: none;
     }
 
     .auth-brand-badge .badge-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--color-gold);
-      border-radius: var(--border-radius-md);
+      width: 54px;
+      height: 54px;
+      background: linear-gradient(135deg, #EAD3A2 0%, #C6A56B 50%, #947133 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--font-heading);
       font-weight: 800;
-      font-size: 1.3rem;
+      font-size: 1.85rem;
       color: var(--color-navy);
-      box-shadow: 0 4px 15px rgba(198, 165, 107, 0.4);
+      line-height: 1;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
+      box-shadow: 0 6px 20px rgba(198, 165, 107, 0.45);
+      flex-shrink: 0;
     }
 
     .auth-brand-badge .badge-text {
@@ -100,20 +104,20 @@
 
     .auth-brand-badge .brand-name {
       font-family: var(--font-heading);
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-size: 1.85rem;
+      font-weight: 800;
       color: var(--color-white);
       letter-spacing: -0.02em;
-      line-height: 1.1;
+      line-height: 1.05;
     }
 
     .auth-brand-badge .brand-tagline {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: var(--color-gold);
-      letter-spacing: 0.15em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       font-weight: 600;
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     .auth-hero-statement {
@@ -745,7 +749,7 @@
         <a href="../index.html" class="auth-panel-logo" aria-label="Cornerstone Home">
           <div class="cs-navbar__logo-icon">C</div>
           <div class="cs-navbar__logo-text">
-            <span class="cs-navbar__logo-name" style="color: var(--text-primary); font-size: 1.3rem;">Cornerstone</span>
+            <span class="cs-navbar__logo-name" style="color: var(--text-primary); font-size: 1.6rem; font-weight: 800;">Cornerstone</span>
             <span class="cs-navbar__logo-tagline">Real Estate</span>
           </div>
         </a>
