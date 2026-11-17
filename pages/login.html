@@ -1315,8 +1315,10 @@
             loginTime: new Date().toISOString()
           }));
 
+          showAlert('Authentication successful! Redirecting to home page...', 'success');
+
           setTimeout(() => {
-            window.location.href = 'buyer-dashboard.html';
+            window.location.href = '../index.html';
           }, 1200);
 
         } else if (isSellerMatch) {
@@ -1329,7 +1331,7 @@
           const btn = document.getElementById('btnSubmitSignIn');
           btn.disabled = true;
           btn.innerHTML = `<span>Signing In...</span>`;
-          showAlert('Authentication successful! Loading your Seller Dashboard...', 'success');
+          showAlert('Authentication successful! Redirecting to home page...', 'success');
 
           // Store demo auth state
           localStorage.setItem('cs_auth_user', JSON.stringify({
@@ -1340,7 +1342,7 @@
           }));
 
           setTimeout(() => {
-            window.location.href = 'seller-dashboard.html';
+            window.location.href = '../index.html';
           }, 1200);
 
         } else {
@@ -1350,7 +1352,7 @@
             const btn = document.getElementById('btnSubmitSignIn');
             btn.disabled = true;
             btn.innerHTML = `<span>Signing In...</span>`;
-            showAlert(`Welcome! Signing in to your ${currentRole === 'buyer' ? 'Buyer' : 'Seller'} dashboard...`, 'success');
+            showAlert('Welcome! Redirecting to home page...', 'success');
 
             localStorage.setItem('cs_auth_user', JSON.stringify({
               name: identifier.split('@')[0] || 'Valued Client',
@@ -1360,7 +1362,7 @@
             }));
 
             setTimeout(() => {
-              window.location.href = currentRole === 'buyer' ? 'buyer-dashboard.html' : 'seller-dashboard.html';
+              window.location.href = '../index.html';
             }, 1200);
           } else {
             showAlert('Invalid email or password. Try buyer@demo.com or seller@demo.com with password123', 'error');
@@ -1443,7 +1445,7 @@
         const btn = document.getElementById('btnSubmitRegister');
         btn.disabled = true;
         btn.innerHTML = `<span>Creating Account...</span>`;
-        showAlert('Account created! Redirecting to your dashboard...', 'success');
+        showAlert('Account created successfully! Redirecting to home page...', 'success');
 
         localStorage.setItem('cs_auth_user', JSON.stringify({
           name: fullName,
@@ -1454,8 +1456,8 @@
         }));
 
         setTimeout(() => {
-          window.location.href = currentRole === 'buyer' ? 'buyer-dashboard.html' : 'seller-dashboard.html';
-        }, 2000);
+          window.location.href = '../index.html';
+        }, 1200);
       });
 
       // ==============================================
