@@ -525,7 +525,7 @@ body.dark-mode .dashboard-dropdown-divider {
 
 /* ── Content Container & Sections ── */
 .dashboard-content {
-  padding: 2rem;
+  padding: 1.5rem 2rem 2.5rem;
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
@@ -534,6 +534,8 @@ body.dark-mode .dashboard-dropdown-divider {
 
 .dashboard-section {
   display: none;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .dashboard-section.active {
