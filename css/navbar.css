@@ -1,0 +1,356 @@
+/* ============================================================
+   Cornerstone Real Estate — Navbar Styles
+   ============================================================ */
+
+.cs-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  background: var(--bg-navbar);
+  z-index: var(--z-sticky);
+  transition: background var(--transition-base), box-shadow var(--transition-base),
+              height var(--transition-base);
+}
+
+.cs-navbar.scrolled {
+  box-shadow: var(--shadow-lg);
+  height: 62px;
+}
+
+.cs-navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  gap: var(--space-6);
+  padding-inline: var(--container-pad);
+  max-width: var(--container-max);
+  margin-inline: auto;
+}
+
+/* ── Logo ── */
+.cs-navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.cs-navbar__logo-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--color-gold);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--color-navy);
+  letter-spacing: -0.03em;
+  flex-shrink: 0;
+}
+
+.cs-navbar__logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.cs-navbar__logo-name {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.01em;
+}
+
+.cs-navbar__logo-tagline {
+  font-size: var(--font-size-xs);
+  color: var(--color-gold);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── Desktop Nav Links ── */
+.cs-navbar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex: 1;
+  justify-content: center;
+}
+
+.cs-navbar__nav-item {
+  position: relative;
+}
+
+.cs-navbar__nav-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: rgba(255,255,255,.85);
+  border-radius: var(--border-radius-sm);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.cs-navbar__nav-link:hover,
+.cs-navbar__nav-link.active {
+  color: var(--color-gold);
+  background: rgba(198,165,107,.08);
+}
+
+.cs-navbar__nav-link .chevron {
+  width: 14px;
+  height: 14px;
+  transition: transform var(--transition-fast);
+  opacity: .7;
+}
+
+.cs-navbar__nav-item:hover .chevron,
+.cs-navbar__nav-item:focus-within .chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown ── */
+.cs-navbar__dropdown {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  left: 0;
+  min-width: 200px;
+  background: var(--bg-secondary);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  z-index: var(--z-dropdown);
+}
+
+.cs-navbar__nav-item:hover .cs-navbar__dropdown,
+.cs-navbar__nav-item:focus-within .cs-navbar__dropdown {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.cs-navbar__dropdown-link {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  transition: background var(--transition-fast), color var(--transition-fast);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cs-navbar__dropdown-link:last-child {
+  border-bottom: none;
+}
+
+.cs-navbar__dropdown-link:hover {
+  background: var(--bg-primary);
+  color: var(--color-gold);
+}
+
+/* RTL dropdown */
+body.rtl .cs-navbar__dropdown {
+  left: auto;
+  right: 0;
+}
+
+/* ── Right Actions ── */
+.cs-navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* Icon buttons (theme / RTL toggle) */
+.cs-navbar__icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.8);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.cs-navbar__icon-btn:hover {
+  background: rgba(255,255,255,.1);
+  color: var(--color-gold);
+}
+
+.cs-navbar__icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Login button */
+.cs-navbar__login-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-gold);
+  color: var(--color-navy);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  border-radius: var(--border-radius-pill);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+}
+
+.cs-navbar__login-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+/* ── Hamburger ── */
+.cs-navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius-sm);
+  transition: background var(--transition-fast);
+}
+
+.cs-navbar__hamburger:hover {
+  background: rgba(255,255,255,.1);
+}
+
+.cs-navbar__hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-white);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform var(--transition-base), opacity var(--transition-base), width var(--transition-base);
+}
+
+.cs-navbar__hamburger.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.cs-navbar__hamburger.open span:nth-child(2) {
+  opacity: 0;
+  width: 0;
+}
+.cs-navbar__hamburger.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ── Mobile Menu ── */
+.cs-navbar__mobile-menu {
+  position: fixed;
+  top: var(--navbar-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-navbar);
+  z-index: calc(var(--z-sticky) - 1);
+  overflow-y: auto;
+  transform: translateX(-100%);
+  transition: transform var(--transition-slow);
+  padding: var(--space-6) var(--container-pad);
+}
+
+.cs-navbar__mobile-menu.open {
+  transform: translateX(0);
+}
+
+body.rtl .cs-navbar__mobile-menu {
+  transform: translateX(100%);
+}
+body.rtl .cs-navbar__mobile-menu.open {
+  transform: translateX(0);
+}
+
+.cs-mobile-nav__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) 0;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: rgba(255,255,255,.85);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  transition: color var(--transition-fast);
+}
+
+.cs-mobile-nav__link:hover,
+.cs-mobile-nav__link.active {
+  color: var(--color-gold);
+}
+
+.cs-mobile-nav__link svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
+}
+
+.cs-mobile-nav__submenu {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height var(--transition-slow);
+}
+
+.cs-mobile-nav__submenu.open {
+  max-height: 300px;
+}
+
+.cs-mobile-nav__sub-link {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,.65);
+  border-bottom: 1px solid rgba(255,255,255,.05);
+  transition: color var(--transition-fast);
+}
+
+.cs-mobile-nav__sub-link:hover {
+  color: var(--color-gold);
+}
+
+.cs-mobile-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.cs-mobile-nav__actions .cs-navbar__login-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+/* ── Responsive breakpoints ── */
+@media (max-width: 1024px) {
+  .cs-navbar__nav { display: none; }
+  .cs-navbar__hamburger { display: flex; }
+  .cs-navbar__login-btn { display: none; }
+}
+
+@media (max-width: 480px) {
+  .cs-navbar__logo-tagline { display: none; }
+}

@@ -1,0 +1,4187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seller Dashboard | Cornerstone Real Estate</title>
+  <meta name="description" content="Manage your property listings, buyer enquiries, site visits, and received offers on Cornerstone Real Estate.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* ============================================================
+       DASHBOARD CORE LAYOUT & THEME
+       ============================================================ */
+    :root {
+      --dash-sidebar-w: 260px;
+      --dash-topbar-h: 65px;
+      --dash-sidebar-bg: var(--color-navy);
+      --dash-sidebar-text: #E0E6ED;
+      --dash-sidebar-hover: rgba(255, 255, 255, 0.08);
+      --dash-sidebar-active: var(--color-gold);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: var(--font-body);
+    }
+
+    .dash-layout {
+      display: flex;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* ── SIDEBAR ── */
+    .dash-sidebar {
+      width: var(--dash-sidebar-w);
+      background-color: var(--dash-sidebar-bg);
+      color: var(--dash-sidebar-text);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1000;
+      transition: transform var(--transition-normal);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-header {
+      padding: 1.5rem 1.25rem 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .sidebar-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .sidebar-logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--color-gold), #8A6E35);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--color-navy);
+      box-shadow: 0 4px 10px rgba(198, 165, 107, 0.3);
+    }
+
+    .sidebar-logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-logo-text .brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+      line-height: 1.1;
+    }
+
+    .sidebar-logo-text .portal-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--color-gold);
+      font-weight: 600;
+    }
+
+    .sidebar-close-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--dash-sidebar-text);
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 1rem 0.75rem;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.2) transparent;
+    }
+
+    .nav-group-title {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: rgba(255, 255, 255, 0.4);
+      padding: 0.75rem 0.75rem 0.35rem;
+      font-weight: 600;
+    }
+
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .sidebar-item a {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.7rem 0.85rem;
+      color: #CAD5E2;
+      text-decoration: none;
+      border-radius: var(--border-radius-md);
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+
+    .sidebar-item a:hover {
+      background: var(--dash-sidebar-hover);
+      color: #FFFFFF;
+      transform: translateX(3px);
+    }
+
+    .sidebar-item a.active {
+      background: rgba(198, 165, 107, 0.15);
+      color: var(--color-gold);
+      font-weight: 600;
+      border-left: 3px solid var(--color-gold);
+      border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+    }
+
+    .sidebar-item a svg {
+      width: 19px;
+      height: 19px;
+      stroke-width: 2;
+      flex-shrink: 0;
+    }
+
+    .sidebar-badge {
+      margin-left: auto;
+      font-size: 0.72rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      background: rgba(198, 165, 107, 0.25);
+      color: var(--color-gold);
+      font-weight: 600;
+    }
+
+    .sidebar-badge.badge-danger {
+      background: rgba(220, 53, 69, 0.25);
+      color: #ff6b7a;
+    }
+
+    .sidebar-footer {
+      padding: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .user-brief {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .user-avatar-sm {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-gold);
+    }
+
+    .user-brief-info {
+      overflow: hidden;
+    }
+
+    .user-brief-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .user-brief-role {
+      font-size: 0.72rem;
+      color: var(--color-gold);
+      text-transform: capitalize;
+    }
+
+    /* ── MAIN CONTENT AREA ── */
+    .dash-main {
+      flex: 1;
+      margin-left: var(--dash-sidebar-w);
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      min-height: 100vh;
+      background: var(--bg-primary);
+    }
+
+    /* ── TOPBAR ── */
+    .dash-topbar {
+      height: var(--dash-topbar-h);
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 0.4rem 0.5rem;
+      border-radius: var(--border-radius-md);
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .page-title {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .topbar-search {
+      position: relative;
+      width: 280px;
+    }
+
+    .topbar-search input {
+      width: 100%;
+      padding: 0.45rem 0.75rem 0.45rem 2.2rem;
+      font-size: 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-pill);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      transition: all var(--transition-fast);
+    }
+
+    .topbar-search input:focus {
+      outline: none;
+      border-color: var(--color-gold);
+      background: var(--bg-secondary);
+      box-shadow: 0 0 0 3px rgba(198, 165, 107, 0.2);
+    }
+
+    .topbar-search svg {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 15px;
+      height: 15px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .topbar-icon-btn {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: all var(--transition-fast);
+    }
+
+    .topbar-icon-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      transform: translateY(-1px);
+    }
+
+    .topbar-icon-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .topbar-badge-dot {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 8px;
+      height: 8px;
+      background: #dc3545;
+      border-radius: 50%;
+      border: 2px solid var(--bg-secondary);
+    }
+
+    .user-profile-menu-wrapper {
+      position: relative;
+    }
+
+    .user-profile-trigger {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--border-radius-pill);
+      transition: background var(--transition-fast);
+    }
+
+    .user-profile-trigger:hover {
+      background: var(--bg-primary);
+    }
+
+    .user-profile-trigger img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--color-gold);
+    }
+
+    .user-profile-text {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .user-profile-text .user-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+
+    .user-profile-text .user-role {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .dropdown-menu-box {
+      display: none;
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      width: 220px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      box-shadow: var(--shadow-lg);
+      padding: 0.5rem 0;
+      z-index: 1001;
+    }
+
+    .dropdown-menu-box.show {
+      display: block;
+      animation: fadeIn 0.15s ease-out;
+    }
+
+    .dropdown-header-info {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .dropdown-header-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .dropdown-header-info small {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .dropdown-item-link {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.65rem 1rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: background var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .dropdown-item-link:hover {
+      background: var(--bg-primary);
+      color: var(--color-gold);
+    }
+
+    .dropdown-divider-line {
+      height: 1px;
+      background: var(--border-color);
+      margin: 0.4rem 0;
+    }
+
+    /* ── DASHBOARD CONTENT BODY ── */
+    .dash-content-area {
+      padding: 2rem;
+      flex: 1;
+    }
+
+    .dash-section {
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    .dash-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── STATS ROW ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      box-shadow: var(--shadow-sm);
+      transition: all var(--transition-fast);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--color-gold);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat-icon-wrapper {
+      width: 48px;
+      height: 48px;
+      border-radius: var(--border-radius-md);
+      background: rgba(198, 165, 107, 0.12);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .stat-info {
+      flex: 1;
+    }
+
+    .stat-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.1;
+      font-family: var(--font-heading);
+    }
+
+    /* ── SECTION CARDS & HEADINGS ── */
+    .content-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      padding: 1.75rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .content-box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .content-box-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .content-box-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+
+    /* ── TABLES & LISTS ── */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 0 -0.5rem;
+    }
+
+    .dash-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .dash-table th {
+      padding: 0.85rem 1rem;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .dash-table td {
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+      color: var(--text-primary);
+    }
+
+    .dash-table tr:hover td {
+      background: rgba(0, 0, 0, 0.015);
+    }
+
+    /* ── STATUS BADGES ── */
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: capitalize;
+      white-space: nowrap;
+    }
+
+    .badge-status::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .status-published, .status-accepted, .status-confirmed, .status-uploaded {
+      background: rgba(40, 91, 74, 0.12);
+      color: #285B4A;
+    }
+    .status-published::before, .status-accepted::before, .status-confirmed::before, .status-uploaded::before {
+      background: #285B4A;
+    }
+
+    .status-under-review, .status-requested, .status-pending-review {
+      background: rgba(230, 138, 0, 0.14);
+      color: #b36b00;
+    }
+    .status-under-review::before, .status-requested::before, .status-pending-review::before {
+      background: #b36b00;
+    }
+
+    .status-draft, .status-completed {
+      background: rgba(108, 117, 125, 0.14);
+      color: #5a6268;
+    }
+    .status-draft::before, .status-completed::before {
+      background: #5a6268;
+    }
+
+    .status-sold {
+      background: rgba(13, 110, 253, 0.12);
+      color: #0d6efd;
+    }
+    .status-sold::before {
+      background: #0d6efd;
+    }
+
+    .status-rented {
+      background: rgba(111, 66, 193, 0.12);
+      color: #6f42c1;
+    }
+    .status-rented::before {
+      background: #6f42c1;
+    }
+
+    .status-archived, .status-rejected, .status-cancelled {
+      background: rgba(220, 53, 69, 0.12);
+      color: #dc3545;
+    }
+    .status-archived::before, .status-rejected::before, .status-cancelled::before {
+      background: #dc3545;
+    }
+
+    .status-new {
+      background: rgba(0, 123, 255, 0.12);
+      color: #007bff;
+    }
+    .status-new::before {
+      background: #007bff;
+    }
+
+    .status-in-progress {
+      background: rgba(255, 193, 7, 0.2);
+      color: #856404;
+    }
+    .status-in-progress::before {
+      background: #856404;
+    }
+
+    .status-responded {
+      background: rgba(40, 167, 69, 0.12);
+      color: #28a745;
+    }
+    .status-responded::before {
+      background: #28a745;
+    }
+
+    /* ── ACTION BUTTONS IN TABLES ── */
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-wrap: nowrap;
+    }
+
+    .btn-action-icon {
+      padding: 0.35rem 0.55rem;
+      border: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      border-radius: var(--border-radius-sm);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all var(--transition-fast);
+    }
+
+    .btn-action-icon:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+    }
+
+    .btn-action-icon.danger:hover {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+
+    .dropdown-action {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* ── STEPPER / WIZARD (SECTION 3) ── */
+    .stepper-progress {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      margin-bottom: 2.5rem;
+      padding: 0 1rem;
+    }
+
+    .stepper-progress::before {
+      content: '';
+      position: absolute;
+      top: 18px;
+      left: 3rem;
+      right: 3rem;
+      height: 3px;
+      background: var(--border-color);
+      z-index: 1;
+    }
+
+    .stepper-progress-fill {
+      position: absolute;
+      top: 18px;
+      left: 3rem;
+      height: 3px;
+      background: var(--color-gold);
+      z-index: 2;
+      transition: width var(--transition-normal);
+      width: 0%;
+    }
+
+    .step-node {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .step-circle {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--bg-secondary);
+      border: 3px solid var(--border-color);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.88rem;
+      transition: all var(--transition-fast);
+    }
+
+    .step-node.active .step-circle {
+      background: var(--color-navy);
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      box-shadow: 0 0 0 4px rgba(198, 165, 107, 0.25);
+    }
+
+    .step-node.completed .step-circle {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+      color: var(--color-navy);
+    }
+
+    .step-label {
+      margin-top: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .step-node.active .step-label {
+      color: var(--color-gold);
+    }
+
+    .step-pane {
+      display: none;
+    }
+
+    .step-pane.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .wizard-nav-btns {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* Option selection buttons (Type, category) */
+    .option-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .option-card-btn {
+      border: 2px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      padding: 1.5rem 1rem;
+      text-align: center;
+      background: var(--bg-secondary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .option-card-btn:hover {
+      border-color: var(--color-gold);
+      transform: translateY(-2px);
+    }
+
+    .option-card-btn.selected {
+      border-color: var(--color-gold);
+      background: rgba(198, 165, 107, 0.08);
+      color: var(--color-navy);
+      box-shadow: 0 4px 12px rgba(198, 165, 107, 0.2);
+    }
+
+    .option-card-btn svg {
+      width: 28px;
+      height: 28px;
+      color: var(--color-gold);
+    }
+
+    .amenities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .checkbox-pill-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      cursor: pointer;
+      font-size: 0.85rem;
+      background: var(--bg-primary);
+      transition: all var(--transition-fast);
+    }
+
+    .checkbox-pill-label:hover {
+      border-color: var(--color-gold);
+    }
+
+    .checkbox-pill-label input:checked + span {
+      font-weight: 600;
+      color: var(--color-navy);
+    }
+
+    /* Photo Upload Area */
+    .dropzone-box {
+      border: 2px dashed var(--color-gold);
+      border-radius: var(--border-radius-md);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      background: rgba(198, 165, 107, 0.04);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .dropzone-box:hover {
+      background: rgba(198, 165, 107, 0.08);
+      border-color: var(--accent-hover);
+    }
+
+    .photo-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .photo-preview-item {
+      position: relative;
+      width: 100%;
+      height: 100px;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .photo-preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-remove-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      background: rgba(0, 0, 0, 0.65);
+      color: #fff;
+      border: none;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.75rem;
+      transition: background var(--transition-fast);
+    }
+
+    .photo-remove-btn:hover {
+      background: #dc3545;
+    }
+
+    /* ── CHARTS & PERFORMANCE (SECTION 7) ── */
+    .perf-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .perf-summary-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .perf-summary-box .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      font-family: var(--font-heading);
+    }
+
+    .perf-summary-box .lbl {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .perf-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .perf-card-header {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .perf-thumb {
+      width: 70px;
+      height: 55px;
+      border-radius: var(--border-radius-sm);
+      object-fit: cover;
+    }
+
+    .perf-card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .perf-card-loc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .metric-item {
+      background: var(--bg-primary);
+      padding: 0.85rem;
+      border-radius: var(--border-radius-sm);
+      text-align: center;
+    }
+
+    .metric-val {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .metric-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .progress-bar-container {
+      margin-top: 0.5rem;
+    }
+
+    .progress-bar-track {
+      height: 8px;
+      background: var(--border-color);
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--color-gold), #285B4A);
+      border-radius: 9999px;
+      transition: width 0.5s ease-in-out;
+    }
+
+    /* CSS Bar Chart Simulation */
+    .css-bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.5rem;
+      height: 180px;
+      padding: 1rem 0;
+      border-bottom: 2px solid var(--border-color);
+      margin-top: 1rem;
+    }
+
+    .chart-bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+      gap: 0.5rem;
+    }
+
+    .chart-bar-pillar {
+      width: 100%;
+      max-width: 45px;
+      background: linear-gradient(180deg, var(--color-gold), #8A6E35);
+      border-radius: 4px 4px 0 0;
+      transition: height 0.6s ease;
+      position: relative;
+    }
+
+    .chart-bar-pillar:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-navy);
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .chart-bar-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ── NOTIFICATIONS LIST (SECTION 9) ── */
+    .notification-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      transition: background var(--transition-fast);
+      cursor: pointer;
+    }
+
+    .notification-item:hover {
+      background: var(--bg-primary);
+    }
+
+    .notification-item.unread {
+      background: rgba(198, 165, 107, 0.08);
+      border-left: 3px solid var(--color-gold);
+    }
+
+    .notif-icon-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .notif-icon-offer { background: rgba(198, 165, 107, 0.2); color: var(--color-gold); }
+    .notif-icon-enquiry { background: rgba(0, 123, 255, 0.15); color: #007bff; }
+    .notif-icon-visit { background: rgba(40, 167, 69, 0.15); color: #28a745; }
+    .notif-icon-listing { background: rgba(111, 66, 193, 0.15); color: #6f42c1; }
+
+    .notif-content {
+      flex: 1;
+    }
+
+    .notif-message {
+      font-size: 0.88rem;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+    }
+
+    .notif-item.unread .notif-message {
+      font-weight: 600;
+    }
+
+    .notif-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ── FAQ ACCORDION (SECTION 11) ── */
+    .faq-accordion-item {
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-md);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      background: var(--bg-secondary);
+    }
+
+    .faq-accordion-header {
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+      transition: background var(--transition-fast);
+    }
+
+    .faq-accordion-header:hover {
+      background: var(--bg-primary);
+    }
+
+    .faq-accordion-body {
+      padding: 0 1.25rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .faq-accordion-item.open .faq-accordion-body {
+      padding: 1rem 1.25rem 1.25rem;
+      max-height: 400px;
+    }
+
+    .faq-accordion-item.open .faq-icon {
+      transform: rotate(180deg);
+    }
+
+    /* ── MODALS ── */
+    .dash-modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(10, 20, 30, 0.65);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .dash-modal-backdrop.show {
+      display: flex;
+      animation: fadeIn 0.15s ease-out;
+    }
+
+    .dash-modal-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow-xl);
+    }
+
+    .dash-modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dash-modal-header h3 {
+      margin: 0;
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      color: var(--text-primary);
+    }
+
+    .dash-modal-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 0.25rem;
+    }
+
+    .dash-modal-body {
+      padding: 1.5rem;
+    }
+
+    .dash-modal-footer {
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+      background: var(--bg-primary);
+    }
+
+    /* ── RESPONSIVE ADAPTATIONS ── */
+    @media (max-width: 992px) {
+      .dash-sidebar {
+        transform: translateX(-100%);
+      }
+
+      .dash-sidebar.open {
+        transform: translateX(0);
+      }
+
+      .dash-sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+      }
+
+      .dash-sidebar-overlay.show {
+        display: block;
+      }
+
+      .dash-main {
+        margin-left: 0;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+      }
+
+      .sidebar-close-btn {
+        display: block;
+      }
+
+      .topbar-search {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .dash-content-area {
+        padding: 1rem;
+      }
+
+      .dash-topbar {
+        padding: 0 1rem;
+      }
+
+      .stepper-progress {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+      }
+
+      .stepper-progress::before, .stepper-progress-fill {
+        display: none;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* RTL Support */
+    body.rtl .dash-sidebar {
+      left: auto;
+      right: 0;
+      border-right: none;
+      border-left: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    body.rtl .dash-main {
+      margin-left: 0;
+      margin-right: var(--dash-sidebar-w);
+    }
+    @media (max-width: 992px) {
+      body.rtl .dash-sidebar {
+        transform: translateX(100%);
+      }
+      body.rtl .dash-sidebar.open {
+        transform: translateX(0);
+      }
+      body.rtl .dash-main {
+        margin-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dash-layout">
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="dash-sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileSidebar(false)"></div>
+
+  <!-- ── SIDEBAR NAVIGATION (12 ITEMS) ── -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="sidebar-header">
+      <a href="../index.html" class="sidebar-logo">
+        <div class="sidebar-logo-icon">C</div>
+        <div class="sidebar-logo-text">
+          <span class="brand-name">Cornerstone</span>
+          <span class="portal-tag">Seller Portal</span>
+        </div>
+      </a>
+      <button class="sidebar-close-btn" onclick="toggleMobileSidebar(false)" aria-label="Close sidebar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Seller Dashboard Menu">
+      <div class="nav-group-title">Main Menu</div>
+      <ul class="sidebar-menu">
+        <!-- 1. Overview -->
+        <li class="sidebar-item">
+          <a href="#overview" data-target="overview" class="active" onclick="switchSection('overview', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            <span>Overview</span>
+          </a>
+        </li>
+        <!-- 2. My Listings -->
+        <li class="sidebar-item">
+          <a href="#my-listings" data-target="my-listings" onclick="switchSection('my-listings', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+            <span>My Listings</span>
+            <span class="sidebar-badge" id="badgeListingsCount">4</span>
+          </a>
+        </li>
+        <!-- 3. Add New Property -->
+        <li class="sidebar-item">
+          <a href="#add-property" data-target="add-property" onclick="switchSection('add-property', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+            <span>Add New Property</span>
+          </a>
+        </li>
+        <!-- 4. Property Enquiries -->
+        <li class="sidebar-item">
+          <a href="#enquiries" data-target="enquiries" onclick="switchSection('enquiries', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            <span>Property Enquiries</span>
+            <span class="sidebar-badge badge-danger" id="badgeEnquiryCount">3</span>
+          </a>
+        </li>
+        <!-- 5. Site Visits -->
+        <li class="sidebar-item">
+          <a href="#site-visits" data-target="site-visits" onclick="switchSection('site-visits', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>Site Visits</span>
+            <span class="sidebar-badge" id="badgeVisitsCount">1</span>
+          </a>
+        </li>
+        <!-- 6. Received Offers -->
+        <li class="sidebar-item">
+          <a href="#offers" data-target="offers" onclick="switchSection('offers', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            <span>Received Offers</span>
+            <span class="sidebar-badge badge-danger" id="badgeOffersCount">2</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-group-title">Analytics & Tools</div>
+      <ul class="sidebar-menu">
+        <!-- 7. Listing Performance -->
+        <li class="sidebar-item">
+          <a href="#performance" data-target="performance" onclick="switchSection('performance', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            <span>Listing Performance</span>
+          </a>
+        </li>
+        <!-- 8. Documents -->
+        <li class="sidebar-item">
+          <a href="#documents" data-target="documents" onclick="switchSection('documents', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            <span>Documents</span>
+          </a>
+        </li>
+        <!-- 9. Notifications -->
+        <li class="sidebar-item">
+          <a href="#notifications" data-target="notifications" onclick="switchSection('notifications', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            <span>Notifications</span>
+            <span class="sidebar-badge badge-danger" id="badgeNotifCount">2</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-group-title">Settings & Account</div>
+      <ul class="sidebar-menu">
+        <!-- 10. My Profile -->
+        <li class="sidebar-item">
+          <a href="#profile" data-target="profile" onclick="switchSection('profile', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>My Profile</span>
+          </a>
+        </li>
+        <!-- 11. Help & Support -->
+        <li class="sidebar-item">
+          <a href="#support" data-target="support" onclick="switchSection('support', event)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span>Help & Support</span>
+          </a>
+        </li>
+        <!-- 12. Logout -->
+        <li class="sidebar-item">
+          <a href="javascript:void(0)" onclick="triggerLogout()" style="color: #ff8591;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <span>Logout</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-brief">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150" alt="Meera Kapoor" class="user-avatar-sm">
+        <div class="user-brief-info">
+          <div class="user-brief-name">Meera Kapoor</div>
+          <div class="user-brief-role">Verified Seller</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="dash-main">
+    <!-- Topbar (60px) -->
+    <header class="dash-topbar">
+      <div class="topbar-left">
+        <button class="mobile-menu-btn" onclick="toggleMobileSidebar(true)" aria-label="Open sidebar menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <h1 class="page-title" id="topbarTitle">Overview</h1>
+      </div>
+
+      <div class="topbar-search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="globalDashSearch" placeholder="Search properties, leads, visits..." oninput="handleGlobalSearch(this.value)">
+      </div>
+
+      <div class="topbar-right">
+        <!-- Theme Toggle -->
+        <button class="topbar-icon-btn js-theme-toggle" aria-label="Toggle Theme" title="Toggle Dark/Light Mode">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="topbar-icon-btn js-dir-toggle" aria-label="Toggle Direction" title="Toggle RTL/LTR">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+        </button>
+
+        <!-- Notification Bell -->
+        <button class="topbar-icon-btn" onclick="switchSection('notifications')" title="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span class="topbar-badge-dot" id="topbarNotifDot"></span>
+        </button>
+
+        <!-- User Profile Dropdown -->
+        <div class="user-profile-menu-wrapper">
+          <button class="user-profile-trigger" id="userMenuBtn" onclick="toggleUserDropdown(event)">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150" alt="Meera Kapoor">
+            <div class="user-profile-text">
+              <span class="user-name">Meera Kapoor</span>
+              <span class="user-role">Seller</span>
+            </div>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <div class="dropdown-menu-box" id="userDropdownMenu">
+            <div class="dropdown-header-info">
+              <p>Meera Kapoor</p>
+              <small>meera.kapoor@cornerstone.in</small>
+            </div>
+            <a class="dropdown-item-link" onclick="switchSection('profile')">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              My Profile
+            </a>
+            <a class="dropdown-item-link" onclick="switchSection('support')">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              Help & Support
+            </a>
+            <div class="dropdown-divider-line"></div>
+            <a class="dropdown-item-link" onclick="triggerLogout()" style="color: #dc3545;">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── CONTENT VIEW CONTAINER ── -->
+    <div class="dash-content-area">
+
+      <!-- ============================================================
+           SECTION 1: OVERVIEW
+           ============================================================ -->
+      <section class="dash-section active" id="sec-overview">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+          <div>
+            <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin: 0 0 0.35rem; color: var(--text-primary);">
+              Welcome back, Meera! 👋
+            </h2>
+            <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem;" id="currentDateDisplay">
+              Today is Monday, 18 November 2024
+            </p>
+          </div>
+          <button class="btn btn-primary" onclick="switchSection('add-property')">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Add New Property
+          </button>
+        </div>
+
+        <!-- Stats Row (5 Stat Cards) -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-title">Active Listings</div>
+              <div class="stat-value" id="statActiveListings">2</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper" style="background: rgba(230, 138, 0, 0.15); color: #e68a00;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-title">Pending Listings</div>
+              <div class="stat-value" id="statPendingListings">1</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper" style="background: rgba(0, 123, 255, 0.15); color: #007bff;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-title">Total Enquiries</div>
+              <div class="stat-value" id="statTotalEnquiries">3</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper" style="background: rgba(40, 167, 69, 0.15); color: #28a745;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-title">Upcoming Visits</div>
+              <div class="stat-value" id="statUpcomingVisits">1</div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper" style="background: rgba(111, 66, 193, 0.15); color: #6f42c1;">
+              <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg>
+            </div>
+            <div class="stat-info">
+              <div class="stat-title">Received Offers</div>
+              <div class="stat-value" id="statReceivedOffers">2</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Overview Section: Active Listings Previews -->
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h3 class="content-box-title">Active Published Listings</h3>
+              <div class="content-box-subtitle">Currently live on the marketplace and receiving traffic</div>
+            </div>
+            <a href="javascript:void(0)" class="btn btn-ghost" onclick="switchSection('my-listings')" style="font-size: 0.8rem;">
+              View All Listings &rarr;
+            </a>
+          </div>
+          <div id="overviewActiveListingsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1.5rem;">
+          <!-- Latest Enquiries -->
+          <div class="content-box" style="margin-bottom: 0;">
+            <div class="content-box-header">
+              <div>
+                <h3 class="content-box-title">Latest Buyer Enquiries</h3>
+                <div class="content-box-subtitle">Recent inquiries submitted by verified buyers</div>
+              </div>
+              <a href="javascript:void(0)" class="btn btn-ghost" onclick="switchSection('enquiries')" style="font-size: 0.8rem;">
+                See All
+              </a>
+            </div>
+            <div id="overviewLatestEnquiriesList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Upcoming Visits & Offers -->
+          <div class="content-box" style="margin-bottom: 0;">
+            <div class="content-box-header">
+              <div>
+                <h3 class="content-box-title">Visits & Offers Pending Action</h3>
+                <div class="content-box-subtitle">Buyer visits and formal offers awaiting response</div>
+              </div>
+              <a href="javascript:void(0)" class="btn btn-ghost" onclick="switchSection('offers')" style="font-size: 0.8rem;">
+                Manage Offers
+              </a>
+            </div>
+            <div id="overviewVisitsOffersList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 2: MY LISTINGS
+           ============================================================ -->
+      <section class="dash-section" id="sec-my-listings">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">My Property Listings</h2>
+              <div class="content-box-subtitle">Manage, edit, publish or track status for all your properties</div>
+            </div>
+            <div style="display: flex; gap: 0.75rem;">
+              <select id="listingStatusFilter" class="form-input" style="width: auto; padding: 0.45rem 1rem;" onchange="filterListingsTable()">
+                <option value="All">All Statuses</option>
+                <option value="Published">Published</option>
+                <option value="Under Review">Under Review</option>
+                <option value="Draft">Draft</option>
+                <option value="Sold">Sold</option>
+                <option value="Rented">Rented</option>
+                <option value="Archived">Archived</option>
+              </select>
+              <button class="btn btn-primary" onclick="switchSection('add-property')">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                Add Listing
+              </button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="dash-table" id="listingsTable">
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Property Title</th>
+                  <th>Location</th>
+                  <th>Price</th>
+                  <th>Type</th>
+                  <th>Date Added</th>
+                  <th>Status</th>
+                  <th>Enquiries</th>
+                  <th>Views</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="listingsTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 3: ADD NEW PROPERTY (8-STEP WIZARD)
+           ============================================================ -->
+      <section class="dash-section" id="sec-add-property">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">Add New Property</h2>
+              <div class="content-box-subtitle">Complete the 8-step listing wizard to submit your property for review</div>
+            </div>
+            <button class="btn btn-ghost" onclick="saveWizardAsDraft()">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+              Save as Draft
+            </button>
+          </div>
+
+          <!-- Stepper Progress Bar -->
+          <div class="stepper-progress">
+            <div class="stepper-progress-fill" id="wizardProgressFill"></div>
+            
+            <div class="step-node active" data-step="1" onclick="jumpToWizardStep(1)">
+              <div class="step-circle">1</div>
+              <div class="step-label">Listing Type</div>
+            </div>
+            <div class="step-node" data-step="2" onclick="jumpToWizardStep(2)">
+              <div class="step-circle">2</div>
+              <div class="step-label">Category</div>
+            </div>
+            <div class="step-node" data-step="3" onclick="jumpToWizardStep(3)">
+              <div class="step-circle">3</div>
+              <div class="step-label">Details</div>
+            </div>
+            <div class="step-node" data-step="4" onclick="jumpToWizardStep(4)">
+              <div class="step-circle">4</div>
+              <div class="step-label">Location</div>
+            </div>
+            <div class="step-node" data-step="5" onclick="jumpToWizardStep(5)">
+              <div class="step-circle">5</div>
+              <div class="step-label">Pricing</div>
+            </div>
+            <div class="step-node" data-step="6" onclick="jumpToWizardStep(6)">
+              <div class="step-circle">6</div>
+              <div class="step-label">Amenities</div>
+            </div>
+            <div class="step-node" data-step="7" onclick="jumpToWizardStep(7)">
+              <div class="step-circle">7</div>
+              <div class="step-label">Images</div>
+            </div>
+            <div class="step-node" data-step="8" onclick="jumpToWizardStep(8)">
+              <div class="step-circle">8</div>
+              <div class="step-label">Review</div>
+            </div>
+          </div>
+
+          <!-- Wizard Form Container -->
+          <form id="addPropertyForm" onsubmit="handleWizardSubmit(event)">
+            <!-- STEP 1: Listing Type -->
+            <div class="step-pane active" id="wizardStep1">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 1: Choose Listing Purpose</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Select whether you want to offer this property for sale or as a rental lease.</p>
+              
+              <div class="option-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 500px; margin: 0 auto 2rem;">
+                <div class="option-card-btn selected" id="optListingSale" onclick="selectListingType('For Sale')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                  <strong style="font-size: 1.1rem;">For Sale</strong>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">List your property for outright purchase</span>
+                </div>
+                <div class="option-card-btn" id="optListingRent" onclick="selectListingType('For Rent')">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                  <strong style="font-size: 1.1rem;">For Rent</strong>
+                  <span style="font-size: 0.8rem; color: var(--text-muted);">List your property for tenancy / monthly lease</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 2: Property Category -->
+            <div class="step-pane" id="wizardStep2">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 2: Property Category</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">What style of property are you listing?</p>
+
+              <div class="option-grid" style="max-width: 750px; margin: 0 auto 2rem;">
+                <div class="option-card-btn selected" onclick="selectPropertyCategory('Apartment', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="9" y1="6" x2="9" y2="6.01"></line><line x1="15" y1="6" x2="15" y2="6.01"></line><line x1="9" y1="10" x2="9" y2="10.01"></line><line x1="15" y1="10" x2="15" y2="10.01"></line></svg>
+                  <strong>Apartment</strong>
+                </div>
+                <div class="option-card-btn" onclick="selectPropertyCategory('Villa', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                  <strong>Villa</strong>
+                </div>
+                <div class="option-card-btn" onclick="selectPropertyCategory('House', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                  <strong>House</strong>
+                </div>
+                <div class="option-card-btn" onclick="selectPropertyCategory('Plot', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                  <strong>Plot / Land</strong>
+                </div>
+                <div class="option-card-btn" onclick="selectPropertyCategory('Commercial', this)">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                  <strong>Commercial</strong>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 3: Property Details -->
+            <div class="step-pane" id="wizardStep3">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 3: Property Details</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Provide descriptive highlights and basic layout specifications.</p>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label" for="wizTitle">Property Title *</label>
+                  <input type="text" id="wizTitle" class="form-input" placeholder="e.g. Luxury 3BHK Sea-Facing Penthouse" required>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label" for="wizDescription">Description *</label>
+                  <textarea id="wizDescription" class="form-input" rows="3" placeholder="Provide a detailed overview of the property architecture, view, features and surrounding environment..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizBedrooms">Bedrooms</label>
+                  <select id="wizBedrooms" class="form-input">
+                    <option value="1">1 BHK / Bedroom</option>
+                    <option value="2">2 BHK / Bedrooms</option>
+                    <option value="3" selected>3 BHK / Bedrooms</option>
+                    <option value="4">4 BHK / Bedrooms</option>
+                    <option value="5">5+ BHK / Bedrooms</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizBathrooms">Bathrooms</label>
+                  <select id="wizBathrooms" class="form-input">
+                    <option value="1">1 Bathroom</option>
+                    <option value="2">2 Bathrooms</option>
+                    <option value="3" selected>3 Bathrooms</option>
+                    <option value="4">4 Bathrooms</option>
+                    <option value="5">5+ Bathrooms</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizArea">Carpet Area (sq ft) *</label>
+                  <input type="number" id="wizArea" class="form-input" placeholder="e.g. 1850" min="100" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizFurnishing">Furnishing Status</label>
+                  <select id="wizFurnishing" class="form-input">
+                    <option value="Furnished">Fully Furnished</option>
+                    <option value="Semi-Furnished" selected>Semi-Furnished</option>
+                    <option value="Unfurnished">Unfurnished</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizFloor">Floor / Total Floors</label>
+                  <input type="text" id="wizFloor" class="form-input" placeholder="e.g. 14th of 28 Floors">
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 4: Location -->
+            <div class="step-pane" id="wizardStep4">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 4: Location & Address</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Where can interested buyers locate this property?</p>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem;">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                  <label class="form-label" for="wizAddress">Street Address / Building *</label>
+                  <input type="text" id="wizAddress" class="form-input" placeholder="e.g. 102, Ocean Crest, Carter Road" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizLocality">Locality / Neighborhood *</label>
+                  <input type="text" id="wizLocality" class="form-input" placeholder="e.g. Bandra West" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizCity">City *</label>
+                  <input type="text" id="wizCity" class="form-input" value="Mumbai" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizState">State *</label>
+                  <input type="text" id="wizState" class="form-input" value="Maharashtra" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="wizPincode">Pincode *</label>
+                  <input type="text" id="wizPincode" class="form-input" placeholder="e.g. 400050" pattern="[0-9]{6}" required>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 5: Pricing -->
+            <div class="step-pane" id="wizardStep5">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 5: Pricing Structure</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Specify your expected price or monthly rent.</p>
+
+              <div style="max-width: 500px;">
+                <div class="form-group">
+                  <label class="form-label" for="wizPrice" id="wizPriceLabel">Asking Price (₹ in Rupees) *</label>
+                  <div style="position: relative;">
+                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-weight: 600; color: var(--text-muted);">₹</span>
+                    <input type="number" id="wizPrice" class="form-input" style="padding-left: 2.2rem;" placeholder="e.g. 25000000" min="1000" required>
+                  </div>
+                  <small style="color: var(--text-muted); display: block; margin-top: 0.35rem;" id="wizPricePreview">Display formatted: ₹0</small>
+                </div>
+
+                <div class="form-group" style="margin-top: 1.25rem;">
+                  <label class="checkbox-pill-label" style="display: inline-flex;">
+                    <input type="checkbox" id="wizNegotiable">
+                    <span>Price is Negotiable for serious buyers</span>
+                  </label>
+                </div>
+
+                <div class="form-group" style="margin-top: 1rem;">
+                  <label class="form-label" for="wizMaintenance">Expected Monthly Maintenance (₹)</label>
+                  <input type="number" id="wizMaintenance" class="form-input" placeholder="e.g. 8500">
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 6: Amenities & Features -->
+            <div class="step-pane" id="wizardStep6">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 6: Amenities & Features</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Check all features that apply to your property.</p>
+
+              <div class="amenities-grid" id="amenitiesCheckboxes">
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Covered Parking" checked><span>🚗 Covered Parking</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Gymnasium" checked><span>🏋️ Gymnasium</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Swimming Pool" checked><span>🏊 Swimming Pool</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="24/7 Security" checked><span>🛡️ 24/7 Security</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="High-Speed Elevators" checked><span>🛗 High-Speed Elevators</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Landscaped Garden"><span>🌳 Landscaped Garden</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Clubhouse"><span>🏛️ Clubhouse</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="24hr Water Supply" checked><span>💧 24hr Water Supply</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="100% Power Backup" checked><span>⚡ Power Backup</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Children's Play Area"><span>🛝 Children's Play Area</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Intercom Facility"><span>📞 Intercom</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Vastu Compliant"><span>🧭 Vastu Compliant</span></label>
+              </div>
+            </div>
+
+            <!-- STEP 7: Property Images -->
+            <div class="step-pane" id="wizardStep7">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 1rem;">Step 7: Upload High-Resolution Photos</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Listings with crisp photographs receive up to 5x more buyer visits (up to 10 photos).</p>
+
+              <div class="dropzone-box" onclick="document.getElementById('wizFileInput').click()">
+                <svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-gold); margin-bottom: 0.5rem;"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                <div style="font-weight: 600; font-size: 1.05rem; margin-bottom: 0.25rem;">Click to upload photos or drag and drop</div>
+                <div style="font-size: 0.8rem; color: var(--text-muted);">PNG, JPG, or WEBP up to 10MB each (max 10 images)</div>
+                <input type="file" id="wizFileInput" style="display: none;" multiple accept="image/*" onchange="handleWizardFiles(this.files)">
+              </div>
+
+              <div class="photo-preview-grid" id="wizPhotoPreviews">
+                <!-- Sample initial preview -->
+                <div class="photo-preview-item" data-url="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800">
+                  <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" alt="Main Photo">
+                  <button type="button" class="photo-remove-btn" onclick="removeWizardPhoto(this)">&times;</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- STEP 8: Review & Submit -->
+            <div class="step-pane" id="wizardStep8">
+              <h3 style="font-family: var(--font-heading); margin-bottom: 0.5rem;">Step 8: Review & Confirm Submission</h3>
+              <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Please review your listing details before sending it to our verification desk.</p>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; background: var(--bg-primary); padding: 1.5rem; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem; margin-bottom: 0.65rem;">
+                    <strong style="color: var(--color-gold);">Basic Info</strong>
+                    <button type="button" class="btn btn-ghost" style="padding: 0.15rem 0.45rem; font-size: 0.72rem;" onclick="jumpToWizardStep(1)">Edit</button>
+                  </div>
+                  <div id="reviewBasicInfo" style="font-size: 0.88rem; line-height: 1.6;"></div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem; margin-bottom: 0.65rem;">
+                    <strong style="color: var(--color-gold);">Location</strong>
+                    <button type="button" class="btn btn-ghost" style="padding: 0.15rem 0.45rem; font-size: 0.72rem;" onclick="jumpToWizardStep(4)">Edit</button>
+                  </div>
+                  <div id="reviewLocationInfo" style="font-size: 0.88rem; line-height: 1.6;"></div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem; margin-bottom: 0.65rem;">
+                    <strong style="color: var(--color-gold);">Pricing & Terms</strong>
+                    <button type="button" class="btn btn-ghost" style="padding: 0.15rem 0.45rem; font-size: 0.72rem;" onclick="jumpToWizardStep(5)">Edit</button>
+                  </div>
+                  <div id="reviewPricingInfo" style="font-size: 0.88rem; line-height: 1.6;"></div>
+                </div>
+
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 0.35rem; margin-bottom: 0.65rem;">
+                    <strong style="color: var(--color-gold);">Amenities Selected</strong>
+                    <button type="button" class="btn btn-ghost" style="padding: 0.15rem 0.45rem; font-size: 0.72rem;" onclick="jumpToWizardStep(6)">Edit</button>
+                  </div>
+                  <div id="reviewAmenitiesInfo" style="font-size: 0.85rem; line-height: 1.5;"></div>
+                </div>
+              </div>
+
+              <!-- Success Feedback Box (Initially Hidden) -->
+              <div id="wizardSuccessAlert" style="display: none; background: rgba(40, 91, 74, 0.12); border: 1px solid #285B4A; border-radius: var(--border-radius-md); padding: 1.25rem; margin-bottom: 1.5rem;">
+                <div style="display: flex; gap: 0.75rem; align-items: flex-start;">
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#285B4A" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                  <div>
+                    <h4 style="margin: 0 0 0.25rem; color: #285B4A; font-family: var(--font-heading);">Property Submitted for Review!</h4>
+                    <p style="margin: 0; font-size: 0.88rem; color: var(--text-secondary);">
+                      Your property has been submitted for review. Status: <strong>Under Review</strong>. Expected review time: 24-48 hours. This is a demo submission.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Wizard Bottom Nav Buttons -->
+            <div class="wizard-nav-btns">
+              <button type="button" class="btn btn-ghost" id="wizBtnBack" onclick="prevWizardStep()" style="display: none;">
+                &larr; Previous Step
+              </button>
+              <div style="margin-left: auto; display: flex; gap: 0.75rem;">
+                <button type="button" class="btn btn-ghost" onclick="saveWizardAsDraft()">Save as Draft</button>
+                <button type="button" class="btn btn-primary" id="wizBtnNext" onclick="nextWizardStep()">
+                  Next Step &rarr;
+                </button>
+                <button type="submit" class="btn btn-green" id="wizBtnSubmit" style="display: none;">
+                  Submit for Review
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 4: PROPERTY ENQUIRIES
+           ============================================================ -->
+      <section class="dash-section" id="sec-enquiries">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">Buyer Enquiries</h2>
+              <div class="content-box-subtitle">Communicate with prospective buyers and update lead status</div>
+            </div>
+            <select id="enquiryStatusFilter" class="form-input" style="width: auto; padding: 0.45rem 1rem;" onchange="filterEnquiriesTable()">
+              <option value="All">All Enquiries</option>
+              <option value="New">New</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Responded">Responded</option>
+              <option value="Closed">Closed</option>
+            </select>
+          </div>
+
+          <div class="table-responsive">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Buyer Name</th>
+                  <th>Property</th>
+                  <th>Date</th>
+                  <th>Message</th>
+                  <th>Assigned Agent</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="enquiriesTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 5: SITE VISITS
+           ============================================================ -->
+      <section class="dash-section" id="sec-site-visits">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">Scheduled Site Visits</h2>
+              <div class="content-box-subtitle">Manage walkthrough requests, confirm dates, or suggest alternative timings</div>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th>Buyer Name</th>
+                  <th>Requested Date</th>
+                  <th>Time Slot</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="visitsTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 6: RECEIVED OFFERS
+           ============================================================ -->
+      <section class="dash-section" id="sec-offers">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">Received Purchase & Lease Offers</h2>
+              <div class="content-box-subtitle">Review proposed contract figures, accept, reject or counteroffer</div>
+            </div>
+          </div>
+
+          <div class="alert alert-info" style="margin-bottom: 1.5rem; background: rgba(198, 165, 107, 0.08); border-left: 4px solid var(--color-gold); padding: 0.85rem 1.25rem; border-radius: var(--border-radius-sm); font-size: 0.85rem; color: var(--text-secondary);">
+            <strong>Notice:</strong> This is a demo platform. Actions performed here are for simulation and are not legally binding.
+          </div>
+
+          <div class="table-responsive">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Buyer</th>
+                  <th>Property</th>
+                  <th>Offer Amount</th>
+                  <th>Offer Date</th>
+                  <th>Closing Date</th>
+                  <th>Financing</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="offersTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 7: LISTING PERFORMANCE
+           ============================================================ -->
+      <section class="dash-section" id="sec-performance">
+        <div class="content-box-header" style="margin-bottom: 1.5rem;">
+          <div>
+            <h2 class="content-box-title">Listing Performance & Analytics</h2>
+            <div class="content-box-subtitle">Evaluate impression volumes, viewer bookmarks, and conversion efficiency</div>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button class="btn btn-ghost" id="perfRange7" onclick="setPerfTimeRange('7d', this)">Last 7 Days</button>
+            <button class="btn btn-primary" id="perfRange30" onclick="setPerfTimeRange('30d', this)">Last 30 Days</button>
+            <button class="btn btn-ghost" id="perfRangeAll" onclick="setPerfTimeRange('all', this)">All Time</button>
+          </div>
+        </div>
+
+        <!-- Summary Stats at Top -->
+        <div class="perf-summary-grid">
+          <div class="perf-summary-box">
+            <div class="num" id="perfTotalViews">2,394</div>
+            <div class="lbl">Total Views Across Listings</div>
+          </div>
+          <div class="perf-summary-box">
+            <div class="num" id="perfTotalEnquiries">15</div>
+            <div class="lbl">Total Buyer Inquiries</div>
+          </div>
+          <div class="perf-summary-box">
+            <div class="num" id="perfTotalOffers">2</div>
+            <div class="lbl">Total Submitted Offers</div>
+          </div>
+          <div class="perf-summary-box">
+            <div class="num" id="perfConversionRate">3.2%</div>
+            <div class="lbl">Inquiry Conversion Rate</div>
+          </div>
+        </div>
+
+        <!-- Trend Chart Container (Pure CSS Simulation) -->
+        <div class="content-box">
+          <h3 class="content-box-title" style="margin-bottom: 0.25rem;">Weekly Viewer Engagement Trends</h3>
+          <div class="content-box-subtitle">Page views generated across your portfolio</div>
+          <div class="css-bar-chart">
+            <div class="chart-bar-col">
+              <div class="chart-bar-pillar" style="height: 45%;" data-tooltip="Mon: 240 views"></div>
+              <div class="chart-bar-label">Mon</div>
+            </div>
+            <div class="chart-bar-col">
+              <div class="chart-bar-pillar" style="height: 60%;" data-tooltip="Tue: 310 views"></div>
+              <div class="chart-bar-label">Tue</div>
+            </div>
+            <div class="chart-bar-col">
+              <div class="chart-bar-pillar" style="height: 52%;" data-tooltip="Wed: 275 views"></div>
+              <div class="chart-bar-label">Wed</div>
+            </div>
+            <div class="chart-bar-col">
+              <div class="chart-bar-pillar" style="height: 75%;" data-tooltip="Thu: 390 views"></div>
+              <div class="chart-bar-label">Thu</div>
+            </div>
+            <div class="chart-bar-col">
+              <div class="chart-bar-pillar" style="height: 90%;" data-tooltip="Fri: 470 views"></div>
+              <div class="chart-bar-label">Fri</div>
+            </div>
+            <div class="chart-bar-col">
+              <div class="chart-bar-pillar" style="height: 100%;" data-tooltip="Sat: 520 views"></div>
+              <div class="chart-bar-label">Sat</div>
+            </div>
+            <div class="chart-bar-col">
+              <div class="chart-bar-pillar" style="height: 82%;" data-tooltip="Sun: 430 views"></div>
+              <div class="chart-bar-label">Sun</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Cards for each Published listing -->
+        <h3 class="content-box-title" style="margin: 2rem 0 1rem;">Performance By Listing</h3>
+        <div id="perfCardsContainer">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 8: DOCUMENTS
+           ============================================================ -->
+      <section class="dash-section" id="sec-documents">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">Property Legal & Architectural Documents</h2>
+              <div class="content-box-subtitle">Store deeds, society NOCs, floor plans and sanctions in one place</div>
+            </div>
+            <button class="btn btn-primary" onclick="openUploadDocModal()">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              Upload Document
+            </button>
+          </div>
+
+          <div class="alert" style="background: rgba(0, 123, 255, 0.08); border-left: 4px solid #007bff; padding: 0.85rem 1.25rem; border-radius: var(--border-radius-sm); font-size: 0.85rem; margin-bottom: 1.5rem; color: var(--text-secondary);">
+            <strong>Demo Feature:</strong> Document upload is a demo feature. In a live platform, documents would be securely stored and verified with municipal registries.
+          </div>
+
+          <div class="table-responsive">
+            <table class="dash-table">
+              <thead>
+                <tr>
+                  <th>Document Name</th>
+                  <th>Associated Property</th>
+                  <th>Upload Date</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="documentsTableBody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 9: NOTIFICATIONS
+           ============================================================ -->
+      <section class="dash-section" id="sec-notifications">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">System & Account Notifications</h2>
+              <div class="content-box-subtitle">Stay notified of visitor actions, agent replies, and listing reviews</div>
+            </div>
+            <button class="btn btn-ghost" onclick="markAllNotificationsAsRead()">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Mark All as Read
+            </button>
+          </div>
+
+          <div id="notificationsListContainer">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 10: MY PROFILE
+           ============================================================ -->
+      <section class="dash-section" id="sec-profile">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">Seller Profile & Account Settings</h2>
+              <div class="content-box-subtitle">Update your personal contact details, credentials and preferences</div>
+            </div>
+          </div>
+
+          <form id="sellerProfileForm" onsubmit="handleProfileSave(event)">
+            <!-- Avatar Banner -->
+            <div style="display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border-color);">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300" alt="Meera Kapoor" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 3px solid var(--color-gold);">
+              <div>
+                <h3 style="margin: 0 0 0.25rem; font-family: var(--font-heading);">Meera Kapoor</h3>
+                <p style="margin: 0 0 0.75rem; color: var(--text-muted); font-size: 0.85rem;">Member since October 2024 &bull; Verified Property Owner</p>
+                <button type="button" class="btn btn-ghost" style="padding: 0.35rem 0.85rem; font-size: 0.75rem;" onclick="window.showToast('Profile photo update is a demo feature', 'info')">
+                  Change Photo
+                </button>
+              </div>
+            </div>
+
+            <!-- Personal Info Grid -->
+            <h4 style="font-family: var(--font-heading); margin-bottom: 1rem; color: var(--color-gold);">Personal & Agency Information</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+              <div class="form-group">
+                <label class="form-label" for="profName">Full Name *</label>
+                <input type="text" id="profName" class="form-input" value="Meera Kapoor" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profEmail">Email Address *</label>
+                <input type="email" id="profEmail" class="form-input" value="meera.kapoor@cornerstone.in" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profPhone">Phone Number *</label>
+                <input type="tel" id="profPhone" class="form-input" value="+91 98200 12345" required>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profAgency">Agency Name (Optional)</label>
+                <input type="text" id="profAgency" class="form-input" value="Kapoor Real Estate Holdings" placeholder="Leave blank if private owner">
+              </div>
+            </div>
+
+            <!-- Address Section -->
+            <h4 style="font-family: var(--font-heading); margin-bottom: 1rem; color: var(--color-gold);">Primary Residence / Mailing Address</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label" for="profAddress">Street Address</label>
+                <input type="text" id="profAddress" class="form-input" value="12B, Palm Grove Residences, Juhu Tara Road">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profCity">City</label>
+                <input type="text" id="profCity" class="form-input" value="Mumbai">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profState">State</label>
+                <input type="text" id="profState" class="form-input" value="Maharashtra">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profPincode">Pincode</label>
+                <input type="text" id="profPincode" class="form-input" value="400049">
+              </div>
+            </div>
+
+            <!-- Password Change Section -->
+            <h4 style="font-family: var(--font-heading); margin-bottom: 1rem; color: var(--color-gold);">Security & Password</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+              <div class="form-group">
+                <label class="form-label" for="profCurrPass">Current Password</label>
+                <input type="password" id="profCurrPass" class="form-input" placeholder="••••••••">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profNewPass">New Password</label>
+                <input type="password" id="profNewPass" class="form-input" placeholder="Min 8 characters">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profConfirmPass">Confirm New Password</label>
+                <input type="password" id="profConfirmPass" class="form-input" placeholder="Re-type new password">
+              </div>
+            </div>
+
+            <!-- Communication Preferences -->
+            <h4 style="font-family: var(--font-heading); margin-bottom: 1rem; color: var(--color-gold);">Communication Preferences</h4>
+            <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2rem;">
+              <label class="checkbox-pill-label" style="display: inline-flex; width: fit-content;">
+                <input type="checkbox" id="prefEmail" checked>
+                <span>Instant Email Alerts for new buyer enquiries and offer notifications</span>
+              </label>
+              <label class="checkbox-pill-label" style="display: inline-flex; width: fit-content;">
+                <input type="checkbox" id="prefSms" checked>
+                <span>SMS Notifications for confirmed site visit appointments</span>
+              </label>
+              <label class="checkbox-pill-label" style="display: inline-flex; width: fit-content;">
+                <input type="checkbox" id="prefWeeklyReport" checked>
+                <span>Weekly summary of listing impressions, views, and market stats</span>
+              </label>
+            </div>
+
+            <div style="display: flex; justify-content: flex-end; gap: 1rem;">
+              <button type="button" class="btn btn-ghost" onclick="switchSection('overview')">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Profile Changes</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============================================================
+           SECTION 11: HELP & SUPPORT
+           ============================================================ -->
+      <section class="dash-section" id="sec-support">
+        <div class="content-box">
+          <div class="content-box-header">
+            <div>
+              <h2 class="content-box-title">Seller Help Center & Support</h2>
+              <div class="content-box-subtitle">Frequently asked seller questions, platform guides, and advisory contact</div>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+            <!-- FAQ Accordion (5 Questions) -->
+            <div>
+              <h3 style="font-family: var(--font-heading); margin-bottom: 1.25rem;">Frequently Asked Questions</h3>
+              
+              <div class="faq-accordion-item open">
+                <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                  <span>How long does it take for a listing to get approved?</span>
+                  <svg class="faq-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-accordion-body">
+                  Our listing verification desk reviews all submissions within 24 to 48 business hours. We verify ownership documentation, ensure property photographs meet standards, and validate municipal details to ensure top trust with buyers.
+                </div>
+              </div>
+
+              <div class="faq-accordion-item">
+                <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                  <span>What are the seller commission fees on Cornerstone?</span>
+                  <svg class="faq-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-accordion-body">
+                  Standard listing on Cornerstone is free with zero upfront charges. Upon a successful closing or lease agreement executed through our network, a transparent 1% advisory brokerage applies for residential sales and 15 days rent for lease agreements.
+                </div>
+              </div>
+
+              <div class="faq-accordion-item">
+                <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                  <span>Can I request professional photography for my property?</span>
+                  <svg class="faq-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-accordion-body">
+                  Yes! Cornerstone offers complimentary HDR architectural photography and 3D walkthrough scanning for exclusive listings valued above ₹1.5 Cr. Contact your assigned listing agent or submit a support ticket to schedule a photographer shoot.
+                </div>
+              </div>
+
+              <div class="faq-accordion-item">
+                <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                  <span>How do site visits work with prospective buyers?</span>
+                  <svg class="faq-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-accordion-body">
+                  Buyers request visits through your listing page. You will receive an instant dashboard alert where you can confirm the visit, reschedule to another time, or delegate the accompaniment to your Cornerstone neighborhood agent.
+                </div>
+              </div>
+
+              <div class="faq-accordion-item">
+                <div class="faq-accordion-header" onclick="toggleFaq(this)">
+                  <span>How do I reach my dedicated property advisor?</span>
+                  <svg class="faq-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-accordion-body">
+                  Every active seller has a designated relationship advisor assigned to their properties (e.g. Priya Sharma or Rahul Joshi). You can call them directly via the phone number listed on your enquiry cards or use the direct inquiry form on this page.
+                </div>
+              </div>
+            </div>
+
+            <!-- Contact & Help Form -->
+            <div>
+              <div style="background: var(--bg-primary); padding: 1.5rem; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+                <h4 style="font-family: var(--font-heading); margin: 0 0 0.5rem;">Dedicated Seller Support Desk</h4>
+                <p style="margin: 0 0 1rem; color: var(--text-muted); font-size: 0.88rem;">Our executive advisors are available Monday through Saturday, 9:00 AM – 7:00 PM IST.</p>
+                <div style="font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                  <div>📞 <strong>Phone:</strong> +91 (22) 6789-0100</div>
+                  <div>✉️ <strong>Email:</strong> seller-support@cornerstone.in</div>
+                  <div>📍 <strong>Corporate Office:</strong> Level 14, Tower 3, BKC, Mumbai 400051</div>
+                </div>
+              </div>
+
+              <form id="sellerSupportContactForm" onsubmit="handleSupportSubmit(event)" style="background: var(--bg-secondary); padding: 1.5rem; border: 1px solid var(--border-color); border-radius: var(--border-radius-md);">
+                <h4 style="font-family: var(--font-heading); margin: 0 0 1rem;">Send a Message to Support</h4>
+                
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="suppName">Your Name</label>
+                  <input type="text" id="suppName" class="form-input" value="Meera Kapoor" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="suppEmail">Your Email</label>
+                  <input type="email" id="suppEmail" class="form-input" value="meera.kapoor@cornerstone.in" required>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1rem;">
+                  <label class="form-label" for="suppCategory">Inquiry Topic</label>
+                  <select id="suppCategory" class="form-input">
+                    <option value="Listing Verification">Listing Verification & Updates</option>
+                    <option value="Photography">Request Free Photography</option>
+                    <option value="Offer Dispute">Assistance with Received Offer</option>
+                    <option value="Technical">Dashboard Technical Issue</option>
+                    <option value="Brokerage">Commission & Tax Queries</option>
+                  </select>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 1.25rem;">
+                  <label class="form-label" for="suppMessage">Message Details</label>
+                  <textarea id="suppMessage" class="form-input" rows="3" placeholder="Explain your request or issue..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Support Inquiry</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ============================================================
+     MODALS
+     ============================================================ -->
+
+<!-- 1. Edit Listing Modal -->
+<div class="dash-modal-backdrop" id="editListingModal">
+  <div class="dash-modal-card">
+    <div class="dash-modal-header">
+      <h3 id="editModalHeading">Edit Property Listing</h3>
+      <button class="dash-modal-close" onclick="closeModal('editListingModal')">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <form id="editListingForm" onsubmit="handleEditListingSave(event)">
+      <div class="dash-modal-body">
+        <input type="hidden" id="editListingId">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="editTitle">Property Title</label>
+          <input type="text" id="editTitle" class="form-input" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="editLocation">Location / Locality</label>
+          <input type="text" id="editLocation" class="form-input" required>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="editPrice">Price (₹)</label>
+            <input type="number" id="editPrice" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="editPriceDisplay">Price Display Tag</label>
+            <input type="text" id="editPriceDisplay" class="form-input" required>
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div class="form-group">
+            <label class="form-label" for="editType">Property Type</label>
+            <select id="editType" class="form-input">
+              <option value="Apartment">Apartment</option>
+              <option value="Villa">Villa</option>
+              <option value="House">House</option>
+              <option value="Plot">Plot</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="editStatus">Listing Status</label>
+            <select id="editStatus" class="form-input">
+              <option value="Published">Published</option>
+              <option value="Under Review">Under Review</option>
+              <option value="Draft">Draft</option>
+              <option value="Sold">Sold</option>
+              <option value="Rented">Rented</option>
+              <option value="Archived">Archived</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="dash-modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('editListingModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 2. View Enquiry Details Modal -->
+<div class="dash-modal-backdrop" id="viewEnquiryModal">
+  <div class="dash-modal-card">
+    <div class="dash-modal-header">
+      <h3>Buyer Enquiry Details</h3>
+      <button class="dash-modal-close" onclick="closeModal('viewEnquiryModal')">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="dash-modal-body" id="enquiryModalBody">
+      <!-- Populated via JS -->
+    </div>
+    <div class="dash-modal-footer">
+      <button type="button" class="btn btn-primary" onclick="closeModal('viewEnquiryModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- 3. Suggest Another Visit Date Modal -->
+<div class="dash-modal-backdrop" id="rescheduleVisitModal">
+  <div class="dash-modal-card">
+    <div class="dash-modal-header">
+      <h3>Suggest Alternative Visit Timing</h3>
+      <button class="dash-modal-close" onclick="closeModal('rescheduleVisitModal')">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <form id="rescheduleVisitForm" onsubmit="handleRescheduleVisit(event)">
+      <div class="dash-modal-body">
+        <input type="hidden" id="rescheduleVisitId">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">Select your preferred alternative date and time for the buyer inspection.</p>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="newVisitDate">Suggested Date *</label>
+          <input type="date" id="newVisitDate" class="form-input" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="newVisitTime">Suggested Time Slot *</label>
+          <select id="newVisitTime" class="form-input" required>
+            <option value="10:00 AM">10:00 AM – Morning</option>
+            <option value="11:30 AM">11:30 AM – Morning</option>
+            <option value="02:00 PM">02:00 PM – Afternoon</option>
+            <option value="04:00 PM">04:00 PM – Evening</option>
+            <option value="06:00 PM">06:00 PM – Twilight</option>
+          </select>
+        </div>
+      </div>
+      <div class="dash-modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('rescheduleVisitModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Send New Schedule</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 4. Cancel Visit Modal -->
+<div class="dash-modal-backdrop" id="cancelVisitModal">
+  <div class="dash-modal-card">
+    <div class="dash-modal-header">
+      <h3>Cancel Site Visit</h3>
+      <button class="dash-modal-close" onclick="closeModal('cancelVisitModal')">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <form id="cancelVisitForm" onsubmit="handleCancelVisitSubmit(event)">
+      <div class="dash-modal-body">
+        <input type="hidden" id="cancelVisitId">
+        <div class="form-group">
+          <label class="form-label" for="cancelReason">Reason for Cancellation</label>
+          <textarea id="cancelReason" class="form-input" rows="3" placeholder="e.g. Property undergoing brief painting maintenance..." required></textarea>
+        </div>
+      </div>
+      <div class="dash-modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('cancelVisitModal')">Back</button>
+        <button type="submit" class="btn btn-action-icon danger" style="padding: 0.65rem 1.25rem;">Confirm Cancellation</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 5. Offer Details Modal -->
+<div class="dash-modal-backdrop" id="viewOfferModal">
+  <div class="dash-modal-card">
+    <div class="dash-modal-header">
+      <h3>Purchase Offer Details</h3>
+      <button class="dash-modal-close" onclick="closeModal('viewOfferModal')">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="dash-modal-body" id="offerModalBody">
+      <!-- Populated via JS -->
+    </div>
+    <div class="dash-modal-footer">
+      <button type="button" class="btn btn-primary" onclick="closeModal('viewOfferModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- 6. Counteroffer Modal -->
+<div class="dash-modal-backdrop" id="counterofferModal">
+  <div class="dash-modal-card">
+    <div class="dash-modal-header">
+      <h3>Send Counteroffer</h3>
+      <button class="dash-modal-close" onclick="closeModal('counterofferModal')">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <form id="counterofferForm" onsubmit="handleCounterofferSubmit(event)">
+      <div class="dash-modal-body">
+        <input type="hidden" id="counterOfferId">
+        <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1.25rem;">
+          Propose a revised sale figure to the buyer. Our advisory team will transmit this counteroffer.
+        </p>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="counterAmount">Counteroffer Price (₹) *</label>
+          <input type="number" id="counterAmount" class="form-input" min="1000" placeholder="e.g. 24000000" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="counterNotes">Seller Notes / Conditions</label>
+          <textarea id="counterNotes" class="form-input" rows="2" placeholder="e.g. Closing within 45 days, semi-furnished inclusions intact"></textarea>
+        </div>
+      </div>
+      <div class="dash-modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('counterofferModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Transmit Counteroffer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 7. Upload Document Modal -->
+<div class="dash-modal-backdrop" id="uploadDocumentModal">
+  <div class="dash-modal-card">
+    <div class="dash-modal-header">
+      <h3>Upload Property Document</h3>
+      <button class="dash-modal-close" onclick="closeModal('uploadDocumentModal')">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <form id="uploadDocForm" onsubmit="handleUploadDocSubmit(event)">
+      <div class="dash-modal-body">
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="docPropertySelect">Associated Property *</label>
+          <select id="docPropertySelect" class="form-input" required>
+            <!-- Populated via JS -->
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="docNameInput">Document Title / Name *</label>
+          <input type="text" id="docNameInput" class="form-input" placeholder="e.g. Municipal Approval Certificate" required>
+        </div>
+        <div class="form-group" style="margin-bottom: 1rem;">
+          <label class="form-label" for="docCategorySelect">Document Category *</label>
+          <select id="docCategorySelect" class="form-input">
+            <option value="Ownership">Ownership (Deed, Conveyance)</option>
+            <option value="Legal">Legal & Municipal NOC</option>
+            <option value="Plans">Architectural & Floor Plans</option>
+            <option value="Tax">Property Tax & Electricity Receipts</option>
+            <option value="Other">Other Certificate</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="docFileInput">Select File (PDF, DOCX, JPG) *</label>
+          <input type="file" id="docFileInput" class="form-input" required>
+        </div>
+      </div>
+      <div class="dash-modal-footer">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('uploadDocumentModal')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Upload Document</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 8. Generic Confirmation Dialog Modal -->
+<div class="dash-modal-backdrop" id="confirmModal">
+  <div class="dash-modal-card" style="max-width: 440px;">
+    <div class="dash-modal-header">
+      <h3 id="confirmModalTitle">Please Confirm</h3>
+      <button class="dash-modal-close" onclick="closeModal('confirmModal')">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+    <div class="dash-modal-body">
+      <p id="confirmModalMessage" style="font-size: 0.95rem; color: var(--text-secondary); margin: 0;"></p>
+    </div>
+    <div class="dash-modal-footer">
+      <button type="button" class="btn btn-ghost" onclick="closeModal('confirmModal')">Cancel</button>
+      <button type="button" class="btn btn-primary" id="confirmModalActionBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- Shared Data & Scripts -->
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/components.js"></script>
+
+<!-- ============================================================
+     SELLER DASHBOARD LOGIC
+     ============================================================ -->
+<script>
+  /* ------------------------------------------------------------
+     1. DEMO DATA DEFINITIONS
+     ------------------------------------------------------------ */
+  let SELLER_LISTINGS = [
+    { id: "P001", title: "Sunrise Villa, Bandra", location: "Bandra West, Mumbai", type: "Villa", listingType: "For Sale", price: 25000000, priceDisplay: "₹2.5 Cr", status: "Published", dateAdded: "2024-10-15", views: 1240, savedCount: 34, enquiries: 8, image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800" },
+    { id: "P002", title: "Modern 3BHK Apartment", location: "Powai, Mumbai", type: "Apartment", listingType: "For Sale", price: 15000000, priceDisplay: "₹1.5 Cr", status: "Published", dateAdded: "2024-10-28", views: 834, savedCount: 21, enquiries: 5, image: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=800" },
+    { id: "P003", title: "2BHK Rental Flat", location: "Andheri East, Mumbai", type: "Apartment", listingType: "For Rent", price: 45000, priceDisplay: "₹45,000/mo", status: "Under Review", dateAdded: "2024-11-05", views: 320, savedCount: 8, enquiries: 2, image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800" },
+    { id: "P004", title: "Commercial Office Space", location: "BKC, Mumbai", type: "Commercial", listingType: "For Rent", price: 180000, priceDisplay: "₹1.8 L/mo", status: "Draft", dateAdded: "2024-11-10", views: 0, savedCount: 0, enquiries: 0, image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800" }
+  ];
+
+  let SELLER_ENQUIRIES = [
+    { id: "EQ001", buyerName: "Rahul Mehta", buyerEmail: "rahul@email.com", buyerPhone: "+91 98765 43210", propertyId: "P001", propertyTitle: "Sunrise Villa, Bandra", date: "2024-11-14", message: "I am very interested in this property. Could we schedule a viewing this weekend?", agent: "Priya Sharma", status: "New" },
+    { id: "EQ002", buyerName: "Anjali Singh", buyerEmail: "anjali@email.com", buyerPhone: "+91 87654 32109", propertyId: "P002", propertyTitle: "Modern 3BHK Apartment", date: "2024-11-12", message: "What are the maintenance charges? Is the society pet-friendly?", agent: "Rahul Joshi", status: "Responded" },
+    { id: "EQ003", buyerName: "Vikram Nair", buyerEmail: "vikram@email.com", buyerPhone: "+91 76543 21098", propertyId: "P001", propertyTitle: "Sunrise Villa, Bandra", date: "2024-11-10", message: "Is the price negotiable? Looking to close quickly.", agent: "Priya Sharma", status: "In Progress" }
+  ];
+
+  let SELLER_VISITS = [
+    { id: "SV001", propertyId: "P001", propertyTitle: "Sunrise Villa, Bandra", buyerName: "Rahul Mehta", requestedDate: "2024-11-25", requestedTime: "10:00 AM", status: "Confirmed" },
+    { id: "SV002", propertyId: "P002", propertyTitle: "Modern 3BHK Apartment", buyerName: "Anjali Singh", requestedDate: "2024-11-22", requestedTime: "03:00 PM", status: "Requested" },
+    { id: "SV003", propertyId: "P001", propertyTitle: "Sunrise Villa, Bandra", buyerName: "Vikram Nair", requestedDate: "2024-11-18", requestedTime: "11:00 AM", status: "Completed" }
+  ];
+
+  let SELLER_OFFERS = [
+    { id: "OF001", buyerName: "Rahul Mehta", propertyId: "P001", propertyTitle: "Sunrise Villa, Bandra", offerAmount: 23000000, offerDate: "2024-11-12", closingDate: "2025-01-15", financingType: "Home Loan", status: "Under Review", notes: "Pre-approved home loan" },
+    { id: "OF002", buyerName: "Suresh Kumar", propertyId: "P002", propertyTitle: "Modern 3BHK Apartment", offerAmount: 14000000, offerDate: "2024-11-08", closingDate: "2025-02-01", financingType: "Cash", status: "Accepted", notes: "" }
+  ];
+
+  let SELLER_DOCUMENTS = [
+    { id: "D001", name: "Property Title Deed", property: "Sunrise Villa, Bandra", uploadDate: "2024-10-16", category: "Ownership", status: "Uploaded" },
+    { id: "D002", name: "Floor Plan", property: "Modern 3BHK Apartment", uploadDate: "2024-10-29", category: "Plans", status: "Uploaded" },
+    { id: "D003", name: "Society NOC", property: "Sunrise Villa, Bandra", uploadDate: "2024-11-01", category: "Legal", status: "Pending Review" }
+  ];
+
+  let SELLER_NOTIFICATIONS = [
+    { id: "N001", type: "offer", message: "New offer received for Sunrise Villa: ₹2.3 Cr", date: "2024-11-12", read: false },
+    { id: "N002", type: "enquiry", message: "New enquiry from Rahul Mehta for Sunrise Villa", date: "2024-11-14", read: false },
+    { id: "N003", type: "visit", message: "Site visit requested by Anjali Singh for 3BHK Apartment", date: "2024-11-13", read: true },
+    { id: "N004", type: "listing", message: "Your listing '2BHK Rental Flat' is under review", date: "2024-11-05", read: true }
+  ];
+
+  let currentWizardStep = 1;
+  let wizardData = {
+    listingType: 'For Sale',
+    category: 'Apartment',
+    title: '',
+    description: '',
+    bedrooms: '3',
+    bathrooms: '3',
+    area: '',
+    furnishing: 'Semi-Furnished',
+    floor: '',
+    address: '',
+    locality: '',
+    city: 'Mumbai',
+    state: 'Maharashtra',
+    pincode: '',
+    price: '',
+    isNegotiable: false,
+    maintenance: '',
+    amenities: ['Covered Parking', 'Gymnasium', 'Swimming Pool', '24/7 Security', 'High-Speed Elevators', '24hr Water Supply', '100% Power Backup'],
+    images: ['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800']
+  };
+
+  /* ------------------------------------------------------------
+     2. NAVIGATION & ROUTER
+     ------------------------------------------------------------ */
+  const SECTION_TITLES = {
+    'overview': 'Overview',
+    'my-listings': 'My Property Listings',
+    'add-property': 'Add New Property',
+    'enquiries': 'Property Enquiries',
+    'site-visits': 'Scheduled Site Visits',
+    'offers': 'Received Offers',
+    'performance': 'Listing Performance',
+    'documents': 'Documents',
+    'notifications': 'Notifications',
+    'profile': 'My Profile',
+    'support': 'Help & Support'
+  };
+
+  function switchSection(targetId, evt) {
+    if (evt) evt.preventDefault();
+    if (!SECTION_TITLES[targetId]) return;
+
+    // Update active tab in sidebar
+    document.querySelectorAll('.sidebar-item a').forEach(a => {
+      if (a.getAttribute('data-target') === targetId) {
+        a.classList.add('active');
+      } else {
+        a.classList.remove('active');
+      }
+    });
+
+    // Update page title
+    document.getElementById('topbarTitle').textContent = SECTION_TITLES[targetId];
+
+    // Show selected section, hide others
+    document.querySelectorAll('.dash-section').forEach(sec => sec.classList.remove('active'));
+    const targetSection = document.getElementById('sec-' + targetId);
+    if (targetSection) {
+      targetSection.classList.add('active');
+    }
+
+    // Close user dropdown if open
+    closeUserDropdown();
+
+    // Close mobile sidebar if open
+    toggleMobileSidebar(false);
+
+    // Update URL hash
+    window.location.hash = targetId;
+
+    // Scroll to top of main area
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Refresh specific section views
+    if (targetId === 'overview') renderOverview();
+    if (targetId === 'my-listings') renderListingsTable();
+    if (targetId === 'enquiries') renderEnquiriesTable();
+    if (targetId === 'site-visits') renderVisitsTable();
+    if (targetId === 'offers') renderOffersTable();
+    if (targetId === 'performance') renderPerformance();
+    if (targetId === 'documents') renderDocumentsTable();
+    if (targetId === 'notifications') renderNotificationsList();
+  }
+
+  function toggleMobileSidebar(show) {
+    const sidebar = document.getElementById('dashSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (show) {
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+    } else {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+    }
+  }
+
+  function toggleUserDropdown(e) {
+    e.stopPropagation();
+    document.getElementById('userDropdownMenu').classList.toggle('show');
+  }
+
+  function closeUserDropdown() {
+    const el = document.getElementById('userDropdownMenu');
+    if (el) el.classList.remove('show');
+  }
+
+  window.addEventListener('click', (e) => {
+    if (!e.target.closest('.user-profile-menu-wrapper')) {
+      closeUserDropdown();
+    }
+  });
+
+  /* ------------------------------------------------------------
+     3. MODAL CONTROLS
+     ------------------------------------------------------------ */
+  function openModal(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('show');
+  }
+
+  function closeModal(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('show');
+  }
+
+  function showConfirm(title, message, onConfirmCallback) {
+    document.getElementById('confirmModalTitle').textContent = title;
+    document.getElementById('confirmModalMessage').textContent = message;
+    const btn = document.getElementById('confirmModalActionBtn');
+    
+    // Replace listener cleanly
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+
+    newBtn.addEventListener('click', () => {
+      closeModal('confirmModal');
+      if (typeof onConfirmCallback === 'function') onConfirmCallback();
+    });
+
+    openModal('confirmModal');
+  }
+
+  function triggerLogout() {
+    showConfirm('Confirm Sign Out', 'Are you sure you want to log out of your Seller account?', () => {
+      if (window.showToast) window.showToast('Logging out...', 'info');
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 1000);
+    });
+  }
+
+  /* ------------------------------------------------------------
+     4. RENDERERS: OVERVIEW & STATS
+     ------------------------------------------------------------ */
+  function updateTopStats() {
+    const published = SELLER_LISTINGS.filter(l => l.status === 'Published').length;
+    const pending = SELLER_LISTINGS.filter(l => l.status === 'Under Review').length;
+    const totalEnquiries = SELLER_ENQUIRIES.length;
+    const upcomingVisits = SELLER_VISITS.filter(v => v.status === 'Confirmed' || v.status === 'Requested').length;
+    const receivedOffers = SELLER_OFFERS.length;
+
+    document.getElementById('statActiveListings').textContent = published;
+    document.getElementById('statPendingListings').textContent = pending;
+    document.getElementById('statTotalEnquiries').textContent = totalEnquiries;
+    document.getElementById('statUpcomingVisits').textContent = upcomingVisits;
+    document.getElementById('statReceivedOffers').textContent = receivedOffers;
+
+    document.getElementById('badgeListingsCount').textContent = SELLER_LISTINGS.length;
+    document.getElementById('badgeEnquiryCount').textContent = totalEnquiries;
+    document.getElementById('badgeVisitsCount').textContent = upcomingVisits;
+    document.getElementById('badgeOffersCount').textContent = receivedOffers;
+
+    const unreadNotifs = SELLER_NOTIFICATIONS.filter(n => !n.read).length;
+    document.getElementById('badgeNotifCount').textContent = unreadNotifs;
+    document.getElementById('topbarNotifDot').style.display = unreadNotifs > 0 ? 'block' : 'none';
+  }
+
+  function renderOverview() {
+    updateTopStats();
+
+    // 1. Active Listings Cards
+    const activeGrid = document.getElementById('overviewActiveListingsGrid');
+    const publishedListings = SELLER_LISTINGS.filter(l => l.status === 'Published');
+    
+    if (publishedListings.length === 0) {
+      activeGrid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--text-muted);">No active published listings right now.</div>`;
+    } else {
+      activeGrid.innerHTML = publishedListings.map(item => `
+        <div style="background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: var(--border-radius-md); overflow: hidden; display: flex; flex-direction: column;">
+          <div style="height: 160px; position: relative;">
+            <img src="${item.image}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover;">
+            <span class="badge-status status-published" style="position: absolute; top: 10px; right: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">Published</span>
+            <span style="position: absolute; bottom: 10px; left: 10px; background: rgba(0,0,0,0.7); color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">
+              ${item.listingType}
+            </span>
+          </div>
+          <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
+            <h4 style="margin: 0 0 0.35rem; font-size: 1.05rem; font-family: var(--font-heading); color: var(--text-primary);">${item.title}</h4>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.85rem;">📍 ${item.location}</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--color-gold); margin-bottom: 1rem;">${item.priceDisplay}</div>
+            
+            <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 0.75rem; font-size: 0.78rem; color: var(--text-secondary); margin-top: auto;">
+              <span>👀 <strong>${item.views}</strong> views</span>
+              <span>💬 <strong>${item.enquiries}</strong> leads</span>
+              <span>❤️ <strong>${item.savedCount}</strong> saves</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 2. Latest Enquiries (Last 3)
+    const enqContainer = document.getElementById('overviewLatestEnquiriesList');
+    const recentEnquiries = [...SELLER_ENQUIRIES].slice(0, 3);
+    enqContainer.innerHTML = recentEnquiries.map(eq => `
+      <div style="display: flex; gap: 0.85rem; padding: 0.85rem 0; border-bottom: 1px solid var(--border-color); align-items: flex-start;">
+        <div style="width: 38px; height: 38px; border-radius: 50%; background: rgba(198, 165, 107, 0.15); color: var(--color-gold); display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; font-size: 0.9rem;">
+          ${eq.buyerName.charAt(0)}
+        </div>
+        <div style="flex: 1; min-width: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.2rem;">
+            <strong style="font-size: 0.88rem; color: var(--text-primary);">${eq.buyerName}</strong>
+            <span style="font-size: 0.72rem; color: var(--text-muted);">${eq.date}</span>
+          </div>
+          <div style="font-size: 0.75rem; color: var(--color-gold); margin-bottom: 0.25rem;">${eq.propertyTitle}</div>
+          <div style="font-size: 0.82rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            "${eq.message}"
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    // 3. Visits & Offers Pending
+    const visitsOffersContainer = document.getElementById('overviewVisitsOffersList');
+    const pendingVisits = SELLER_VISITS.filter(v => v.status === 'Confirmed' || v.status === 'Requested').slice(0, 2);
+    const pendingOffers = SELLER_OFFERS.filter(o => o.status === 'Under Review').slice(0, 2);
+
+    let html = '';
+    pendingVisits.forEach(v => {
+      html += `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color);">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="badge-status status-${v.status.toLowerCase()}">${v.status}</span>
+              <strong style="font-size: 0.88rem;">${v.buyerName}</strong>
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">
+              📅 ${v.requestedDate} at ${v.requestedTime} &bull; ${v.propertyTitle}
+            </div>
+          </div>
+          <button class="btn btn-ghost" style="padding: 0.3rem 0.65rem; font-size: 0.75rem;" onclick="switchSection('site-visits')">View</button>
+        </div>
+      `;
+    });
+
+    pendingOffers.forEach(o => {
+      html += `
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem 0; border-bottom: 1px solid var(--border-color);">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span class="badge-status status-under-review">Offer Under Review</span>
+              <strong style="font-size: 0.88rem;">₹${(o.offerAmount / 10000000).toFixed(2)} Cr</strong>
+            </div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">
+              By ${o.buyerName} &bull; ${o.propertyTitle}
+            </div>
+          </div>
+          <button class="btn btn-primary" style="padding: 0.3rem 0.65rem; font-size: 0.75rem;" onclick="switchSection('offers')">Respond</button>
+        </div>
+      `;
+    });
+
+    visitsOffersContainer.innerHTML = html || `<div style="color: var(--text-muted); padding: 1rem 0; text-align: center;">No urgent actions pending.</div>`;
+  }
+
+  /* ------------------------------------------------------------
+     5. RENDERERS: MY LISTINGS (SECTION 2)
+     ------------------------------------------------------------ */
+  function renderListingsTable() {
+    updateTopStats();
+    const filter = document.getElementById('listingStatusFilter') ? document.getElementById('listingStatusFilter').value : 'All';
+    const tbody = document.getElementById('listingsTableBody');
+    if (!tbody) return;
+
+    let filtered = SELLER_LISTINGS;
+    if (filter !== 'All') {
+      filtered = SELLER_LISTINGS.filter(l => l.status === filter);
+    }
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="10" style="text-align: center; padding: 2rem; color: var(--text-muted);">No property listings found matching the selected filter.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(item => {
+      const statusClass = 'status-' + item.status.toLowerCase().replace(/\s+/g, '-');
+      return `
+        <tr>
+          <td>
+            <img src="${item.image}" alt="${item.title}" style="width: 54px; height: 42px; object-fit: cover; border-radius: var(--border-radius-sm);">
+          </td>
+          <td>
+            <strong>${item.title}</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">${item.id} &bull; ${item.listingType}</div>
+          </td>
+          <td>${item.location}</td>
+          <td><strong style="color: var(--color-gold);">${item.priceDisplay}</strong></td>
+          <td>${item.type}</td>
+          <td>${item.dateAdded}</td>
+          <td>
+            <span class="badge-status ${statusClass}">${item.status}</span>
+          </td>
+          <td><strong>${item.enquiries}</strong></td>
+          <td>${item.views}</td>
+          <td>
+            <div class="action-group">
+              <button class="btn-action-icon" title="View Property" onclick="previewProperty('${item.id}')">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </button>
+              <button class="btn-action-icon" title="Edit Listing" onclick="openEditListingModal('${item.id}')">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+              </button>
+              <select onchange="handleQuickStatusChange('${item.id}', this.value)" class="form-input" style="padding: 0.2rem 0.4rem; font-size: 0.75rem; width: auto;">
+                <option value="" disabled selected>Change...</option>
+                <option value="Published">Publish</option>
+                <option value="Sold">Mark Sold</option>
+                <option value="Rented">Mark Rented</option>
+                <option value="Archived">Archive</option>
+              </select>
+              <button class="btn-action-icon danger" title="Delete Listing" onclick="deleteListing('${item.id}')">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function filterListingsTable() {
+    renderListingsTable();
+  }
+
+  function previewProperty(id) {
+    const item = SELLER_LISTINGS.find(l => l.id === id);
+    if (!item) return;
+    window.open(`property-details.html?id=${id}`, '_blank');
+  }
+
+  function openEditListingModal(id) {
+    const item = SELLER_LISTINGS.find(l => l.id === id);
+    if (!item) return;
+
+    document.getElementById('editListingId').value = item.id;
+    document.getElementById('editModalHeading').textContent = `Edit Listing: ${item.id}`;
+    document.getElementById('editTitle').value = item.title;
+    document.getElementById('editLocation').value = item.location;
+    document.getElementById('editPrice').value = item.price;
+    document.getElementById('editPriceDisplay').value = item.priceDisplay;
+    document.getElementById('editType').value = item.type;
+    document.getElementById('editStatus').value = item.status;
+
+    openModal('editListingModal');
+  }
+
+  function handleEditListingSave(e) {
+    e.preventDefault();
+    const id = document.getElementById('editListingId').value;
+    const item = SELLER_LISTINGS.find(l => l.id === id);
+    if (!item) return;
+
+    item.title = document.getElementById('editTitle').value;
+    item.location = document.getElementById('editLocation').value;
+    item.price = Number(document.getElementById('editPrice').value);
+    item.priceDisplay = document.getElementById('editPriceDisplay').value;
+    item.type = document.getElementById('editType').value;
+    item.status = document.getElementById('editStatus').value;
+
+    closeModal('editListingModal');
+    renderListingsTable();
+    if (window.showToast) window.showToast(`Listing ${id} updated successfully!`, 'success');
+  }
+
+  function handleQuickStatusChange(id, newStatus) {
+    const item = SELLER_LISTINGS.find(l => l.id === id);
+    if (!item || !newStatus) return;
+
+    item.status = newStatus;
+    renderListingsTable();
+    if (window.showToast) window.showToast(`Status updated to "${newStatus}" for ${item.title}`, 'success');
+  }
+
+  function deleteListing(id) {
+    const item = SELLER_LISTINGS.find(l => l.id === id);
+    if (!item) return;
+
+    showConfirm(
+      'Delete Listing Confirmation',
+      `Are you sure you want to permanently delete listing "${item.title}" (${item.id})? This cannot be undone.`,
+      () => {
+        SELLER_LISTINGS = SELLER_LISTINGS.filter(l => l.id !== id);
+        renderListingsTable();
+        if (window.showToast) window.showToast(`Listing ${id} has been deleted.`, 'info');
+      }
+    );
+  }
+
+  /* ------------------------------------------------------------
+     6. ADD PROPERTY WIZARD (SECTION 3)
+     ------------------------------------------------------------ */
+  function selectListingType(type) {
+    wizardData.listingType = type;
+    document.getElementById('optListingSale').classList.toggle('selected', type === 'For Sale');
+    document.getElementById('optListingRent').classList.toggle('selected', type === 'For Rent');
+    document.getElementById('wizPriceLabel').textContent = type === 'For Sale' ? 'Asking Price (₹ in Rupees) *' : 'Monthly Rent (₹ in Rupees) *';
+  }
+
+  function selectPropertyCategory(cat, element) {
+    wizardData.category = cat;
+    document.querySelectorAll('#wizardStep2 .option-card-btn').forEach(btn => btn.classList.remove('selected'));
+    if (element) element.classList.add('selected');
+  }
+
+  function jumpToWizardStep(step) {
+    if (step < 1 || step > 8) return;
+    currentWizardStep = step;
+    updateWizardUI();
+  }
+
+  function nextWizardStep() {
+    if (!validateWizardStep(currentWizardStep)) return;
+    if (currentWizardStep < 8) {
+      currentWizardStep++;
+      updateWizardUI();
+    }
+  }
+
+  function prevWizardStep() {
+    if (currentWizardStep > 1) {
+      currentWizardStep--;
+      updateWizardUI();
+    }
+  }
+
+  function validateWizardStep(step) {
+    if (step === 3) {
+      const title = document.getElementById('wizTitle').value.trim();
+      const desc = document.getElementById('wizDescription').value.trim();
+      const area = document.getElementById('wizArea').value.trim();
+      if (!title || !desc || !area) {
+        if (window.showToast) window.showToast('Please fill out all required details (Title, Description, Area)', 'warning');
+        return false;
+      }
+    } else if (step === 4) {
+      const addr = document.getElementById('wizAddress').value.trim();
+      const loc = document.getElementById('wizLocality').value.trim();
+      const pin = document.getElementById('wizPincode').value.trim();
+      if (!addr || !loc || !pin) {
+        if (window.showToast) window.showToast('Please complete Address, Locality and Pincode', 'warning');
+        return false;
+      }
+    } else if (step === 5) {
+      const price = document.getElementById('wizPrice').value.trim();
+      if (!price || Number(price) <= 0) {
+        if (window.showToast) window.showToast('Please provide a valid asking price or rent', 'warning');
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function updateWizardUI() {
+    // Hide all panes
+    document.querySelectorAll('.step-pane').forEach(p => p.classList.remove('active'));
+    const activePane = document.getElementById(`wizardStep${currentWizardStep}`);
+    if (activePane) activePane.classList.add('active');
+
+    // Update Stepper Nodes
+    document.querySelectorAll('.step-node').forEach(node => {
+      const s = parseInt(node.getAttribute('data-step'), 10);
+      node.classList.remove('active', 'completed');
+      if (s === currentWizardStep) node.classList.add('active');
+      else if (s < currentWizardStep) node.classList.add('completed');
+    });
+
+    // Update Progress Fill Line
+    const percent = ((currentWizardStep - 1) / 7) * 100;
+    const fill = document.getElementById('wizardProgressFill');
+    if (fill) fill.style.width = `${percent}%`;
+
+    // Button states
+    const btnBack = document.getElementById('wizBtnBack');
+    const btnNext = document.getElementById('wizBtnNext');
+    const btnSubmit = document.getElementById('wizBtnSubmit');
+
+    if (btnBack) btnBack.style.display = currentWizardStep > 1 ? 'inline-flex' : 'none';
+    if (btnNext) btnNext.style.display = currentWizardStep < 8 ? 'inline-flex' : 'none';
+    if (btnSubmit) btnSubmit.style.display = currentWizardStep === 8 ? 'inline-flex' : 'none';
+
+    // Populate review screen if step 8
+    if (currentWizardStep === 8) {
+      populateWizardReview();
+    }
+  }
+
+  function handleWizardFiles(files) {
+    if (!files || files.length === 0) return;
+    const container = document.getElementById('wizPhotoPreviews');
+    Array.from(files).forEach((file, index) => {
+      if (container.children.length >= 10) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const div = document.createElement('div');
+        div.className = 'photo-preview-item';
+        div.setAttribute('data-url', e.target.result);
+        div.innerHTML = `
+          <img src="${e.target.result}" alt="Property Photo">
+          <button type="button" class="photo-remove-btn" onclick="removeWizardPhoto(this)">&times;</button>
+        `;
+        container.appendChild(div);
+      };
+      reader.readAsDataURL(file);
+    });
+    if (window.showToast) window.showToast('Images added to preview!', 'info');
+  }
+
+  function removeWizardPhoto(btn) {
+    const item = btn.closest('.photo-preview-item');
+    if (item) item.remove();
+  }
+
+  function formatPriceDisplay(val, type) {
+    const num = Number(val);
+    if (isNaN(num) || num <= 0) return '₹0';
+    if (type === 'For Rent') {
+      return num >= 100000 ? `₹${(num / 100000).toFixed(1)} L/mo` : `₹${num.toLocaleString('en-IN')}/mo`;
+    }
+    if (num >= 10000000) {
+      return `₹${(num / 10000000).toFixed(2)} Cr`;
+    }
+    if (num >= 100000) {
+      return `₹${(num / 100000).toFixed(1)} L`;
+    }
+    return `₹${num.toLocaleString('en-IN')}`;
+  }
+
+  // Live formatting of price preview
+  document.getElementById('wizPrice')?.addEventListener('input', function() {
+    const disp = formatPriceDisplay(this.value, wizardData.listingType);
+    document.getElementById('wizPricePreview').textContent = `Display formatted: ${disp}`;
+  });
+
+  function populateWizardReview() {
+    const title = document.getElementById('wizTitle').value;
+    const desc = document.getElementById('wizDescription').value;
+    const beds = document.getElementById('wizBedrooms').value;
+    const baths = document.getElementById('wizBathrooms').value;
+    const area = document.getElementById('wizArea').value;
+    const furnish = document.getElementById('wizFurnishing').value;
+    const floor = document.getElementById('wizFloor').value || 'N/A';
+
+    const addr = document.getElementById('wizAddress').value;
+    const locality = document.getElementById('wizLocality').value;
+    const city = document.getElementById('wizCity').value;
+    const state = document.getElementById('wizState').value;
+    const pincode = document.getElementById('wizPincode').value;
+
+    const price = document.getElementById('wizPrice').value;
+    const negotiable = document.getElementById('wizNegotiable').checked;
+    const displayPrice = formatPriceDisplay(price, wizardData.listingType);
+
+    const checkedAmenities = Array.from(document.querySelectorAll('input[name="amenity"]:checked')).map(el => el.value);
+
+    document.getElementById('reviewBasicInfo').innerHTML = `
+      <div><strong>Title:</strong> ${title}</div>
+      <div><strong>Type:</strong> ${wizardData.listingType} &bull; ${wizardData.category}</div>
+      <div><strong>Specs:</strong> ${beds} Bed, ${baths} Bath, ${area} sq ft</div>
+      <div><strong>Furnishing:</strong> ${furnish} (Floor: ${floor})</div>
+    `;
+
+    document.getElementById('reviewLocationInfo').innerHTML = `
+      <div><strong>Address:</strong> ${addr}</div>
+      <div><strong>Locality:</strong> ${locality}</div>
+      <div><strong>City:</strong> ${city}, ${state} - ${pincode}</div>
+    `;
+
+    document.getElementById('reviewPricingInfo').innerHTML = `
+      <div><strong>Price / Rent:</strong> <span style="color: var(--color-gold); font-weight: 700;">${displayPrice}</span></div>
+      <div><strong>Negotiability:</strong> ${negotiable ? 'Open to negotiations' : 'Fixed asking figure'}</div>
+    `;
+
+    document.getElementById('reviewAmenitiesInfo').innerHTML = checkedAmenities.length ? checkedAmenities.join(', ') : 'None specified';
+  }
+
+  function handleWizardSubmit(e) {
+    e.preventDefault();
+
+    const title = document.getElementById('wizTitle').value;
+    const locality = document.getElementById('wizLocality').value;
+    const city = document.getElementById('wizCity').value;
+    const price = Number(document.getElementById('wizPrice').value);
+    const displayPrice = formatPriceDisplay(price, wizardData.listingType);
+
+    // Pick first preview photo or fallback
+    const firstPhoto = document.querySelector('#wizPhotoPreviews .photo-preview-item img');
+    const imageSrc = firstPhoto ? firstPhoto.src : 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800';
+
+    const newId = 'P0' + String(SELLER_LISTINGS.length + 1).padStart(2, '0');
+    const newProperty = {
+      id: newId,
+      title: title,
+      location: `${locality}, ${city}`,
+      type: wizardData.category,
+      listingType: wizardData.listingType,
+      price: price,
+      priceDisplay: displayPrice,
+      status: 'Under Review',
+      dateAdded: new Date().toISOString().split('T')[0],
+      views: 0,
+      savedCount: 0,
+      enquiries: 0,
+      image: imageSrc
+    };
+
+    SELLER_LISTINGS.unshift(newProperty);
+
+    // Also push a notification
+    SELLER_NOTIFICATIONS.unshift({
+      id: 'N' + String(SELLER_NOTIFICATIONS.length + 1).padStart(3, '0'),
+      type: 'listing',
+      message: `Your listing '${title}' has been submitted for review.`,
+      date: new Date().toISOString().split('T')[0],
+      read: false
+    });
+
+    document.getElementById('wizardSuccessAlert').style.display = 'block';
+    document.getElementById('wizBtnSubmit').disabled = true;
+
+    if (window.showToast) {
+      window.showToast('Your property has been submitted for review. Status: Under Review. Expected review time: 24-48 hours. This is a demo submission.', 'success', 5000);
+    }
+
+    setTimeout(() => {
+      switchSection('my-listings');
+      // Reset form
+      document.getElementById('addPropertyForm').reset();
+      document.getElementById('wizardSuccessAlert').style.display = 'none';
+      document.getElementById('wizBtnSubmit').disabled = false;
+      currentWizardStep = 1;
+      updateWizardUI();
+    }, 2500);
+  }
+
+  function saveWizardAsDraft() {
+    const title = document.getElementById('wizTitle').value || 'Untitled Draft Property';
+    const locality = document.getElementById('wizLocality').value || 'Unspecified Location';
+    const price = Number(document.getElementById('wizPrice').value) || 0;
+
+    const newId = 'P0' + String(SELLER_LISTINGS.length + 1).padStart(2, '0');
+    SELLER_LISTINGS.unshift({
+      id: newId,
+      title: title,
+      location: locality,
+      type: wizardData.category,
+      listingType: wizardData.listingType,
+      price: price,
+      priceDisplay: price > 0 ? formatPriceDisplay(price, wizardData.listingType) : '₹0',
+      status: 'Draft',
+      dateAdded: new Date().toISOString().split('T')[0],
+      views: 0,
+      savedCount: 0,
+      enquiries: 0,
+      image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800'
+    });
+
+    if (window.showToast) window.showToast('Listing draft saved to your portfolio!', 'info');
+    switchSection('my-listings');
+  }
+
+  /* ------------------------------------------------------------
+     7. PROPERTY ENQUIRIES (SECTION 4)
+     ------------------------------------------------------------ */
+  function renderEnquiriesTable() {
+    updateTopStats();
+    const filter = document.getElementById('enquiryStatusFilter') ? document.getElementById('enquiryStatusFilter').value : 'All';
+    const tbody = document.getElementById('enquiriesTableBody');
+    if (!tbody) return;
+
+    let filtered = SELLER_ENQUIRIES;
+    if (filter !== 'All') {
+      filtered = SELLER_ENQUIRIES.filter(e => e.status === filter);
+    }
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; padding: 2rem; color: var(--text-muted);">No enquiries found.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = filtered.map(eq => {
+      const statusClass = 'status-' + eq.status.toLowerCase().replace(/\s+/g, '-');
+      const truncated = eq.message.length > 55 ? eq.message.substring(0, 52) + '...' : eq.message;
+
+      return `
+        <tr>
+          <td>
+            <strong>${eq.buyerName}</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">${eq.buyerPhone}</div>
+          </td>
+          <td>
+            <div style="font-weight: 500;">${eq.propertyTitle}</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">Ref: ${eq.propertyId}</div>
+          </td>
+          <td>${eq.date}</td>
+          <td>
+            <span style="font-style: italic; color: var(--text-secondary);">"${truncated}"</span>
+          </td>
+          <td>${eq.agent}</td>
+          <td>
+            <select onchange="updateEnquiryStatus('${eq.id}', this.value)" class="form-input" style="padding: 0.2rem 0.5rem; font-size: 0.75rem; width: auto;">
+              <option value="New" ${eq.status === 'New' ? 'selected' : ''}>New</option>
+              <option value="In Progress" ${eq.status === 'In Progress' ? 'selected' : ''}>In Progress</option>
+              <option value="Responded" ${eq.status === 'Responded' ? 'selected' : ''}>Responded</option>
+              <option value="Closed" ${eq.status === 'Closed' ? 'selected' : ''}>Closed</option>
+            </select>
+          </td>
+          <td>
+            <button class="btn btn-ghost" style="padding: 0.35rem 0.65rem; font-size: 0.78rem;" onclick="viewEnquiryDetails('${eq.id}')">
+              View Details
+            </button>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function filterEnquiriesTable() {
+    renderEnquiriesTable();
+  }
+
+  function updateEnquiryStatus(id, newStatus) {
+    const eq = SELLER_ENQUIRIES.find(e => e.id === id);
+    if (!eq) return;
+    eq.status = newStatus;
+    renderEnquiriesTable();
+    if (window.showToast) window.showToast(`Enquiry ${id} status marked as "${newStatus}"`, 'success');
+  }
+
+  function viewEnquiryDetails(id) {
+    const eq = SELLER_ENQUIRIES.find(e => e.id === id);
+    if (!eq) return;
+
+    document.getElementById('enquiryModalBody').innerHTML = `
+      <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+        <div style="width: 50px; height: 50px; border-radius: 50%; background: var(--color-gold); color: var(--color-navy); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700;">
+          ${eq.buyerName.charAt(0)}
+        </div>
+        <div>
+          <h4 style="margin: 0; font-family: var(--font-heading);">${eq.buyerName}</h4>
+          <div style="font-size: 0.8rem; color: var(--text-muted);">${eq.buyerEmail} &bull; ${eq.buyerPhone}</div>
+        </div>
+      </div>
+      
+      <div style="margin-bottom: 1.25rem;">
+        <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Inquiry Regarding Property</label>
+        <div style="font-size: 1rem; font-weight: 600; color: var(--color-gold);">${eq.propertyTitle} (${eq.propertyId})</div>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <label style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Message Content</label>
+        <div style="background: var(--bg-primary); padding: 1rem; border-radius: var(--border-radius-sm); border: 1px solid var(--border-color); font-size: 0.9rem; line-height: 1.6; margin-top: 0.35rem;">
+          "${eq.message}"
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.85rem;">
+        <div><strong>Date Submitted:</strong> ${eq.date}</div>
+        <div><strong>Assigned Agent:</strong> ${eq.agent}</div>
+      </div>
+    `;
+
+    openModal('viewEnquiryModal');
+  }
+
+  /* ------------------------------------------------------------
+     8. SITE VISITS (SECTION 5)
+     ------------------------------------------------------------ */
+  function renderVisitsTable() {
+    updateTopStats();
+    const tbody = document.getElementById('visitsTableBody');
+    if (!tbody) return;
+
+    if (SELLER_VISITS.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 2rem; color: var(--text-muted);">No site visits scheduled.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = SELLER_VISITS.map(v => {
+      const statusClass = 'status-' + v.status.toLowerCase();
+      let actionButtons = '';
+
+      if (v.status === 'Requested') {
+        actionButtons = `
+          <button class="btn btn-green" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="confirmVisit('${v.id}')">Confirm</button>
+          <button class="btn btn-ghost" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="openRescheduleModal('${v.id}')">Suggest Date</button>
+          <button class="btn btn-action-icon danger" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="openCancelVisitModal('${v.id}')">Cancel</button>
+        `;
+      } else if (v.status === 'Confirmed') {
+        actionButtons = `
+          <button class="btn btn-primary" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="markVisitCompleted('${v.id}')">Mark Completed</button>
+          <button class="btn btn-ghost" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="openRescheduleModal('${v.id}')">Reschedule</button>
+          <button class="btn btn-action-icon danger" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="openCancelVisitModal('${v.id}')">Cancel</button>
+        `;
+      } else {
+        actionButtons = `<span style="font-size: 0.8rem; color: var(--text-muted);">&mdash;</span>`;
+      }
+
+      return `
+        <tr>
+          <td>
+            <strong>${v.propertyTitle}</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">${v.propertyId}</div>
+          </td>
+          <td>${v.buyerName}</td>
+          <td>📅 ${v.requestedDate}</td>
+          <td>⏰ ${v.requestedTime}</td>
+          <td><span class="badge-status ${statusClass}">${v.status}</span></td>
+          <td>
+            <div class="action-group">${actionButtons}</div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function confirmVisit(id) {
+    const v = SELLER_VISITS.find(item => item.id === id);
+    if (!v) return;
+    v.status = 'Confirmed';
+    renderVisitsTable();
+    if (window.showToast) window.showToast(`Site visit appointment with ${v.buyerName} is Confirmed!`, 'success');
+  }
+
+  function markVisitCompleted(id) {
+    const v = SELLER_VISITS.find(item => item.id === id);
+    if (!v) return;
+    v.status = 'Completed';
+    renderVisitsTable();
+    if (window.showToast) window.showToast(`Visit for ${v.propertyTitle} marked as Completed.`, 'info');
+  }
+
+  function openRescheduleModal(id) {
+    document.getElementById('rescheduleVisitId').value = id;
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('newVisitDate').min = tomorrow.toISOString().split('T')[0];
+    document.getElementById('newVisitDate').value = tomorrow.toISOString().split('T')[0];
+    openModal('rescheduleVisitModal');
+  }
+
+  function handleRescheduleVisit(e) {
+    e.preventDefault();
+    const id = document.getElementById('rescheduleVisitId').value;
+    const v = SELLER_VISITS.find(item => item.id === id);
+    if (!v) return;
+
+    v.requestedDate = document.getElementById('newVisitDate').value;
+    v.requestedTime = document.getElementById('newVisitTime').value;
+    v.status = 'Requested';
+
+    closeModal('rescheduleVisitModal');
+    renderVisitsTable();
+    if (window.showToast) window.showToast(`Suggested new timing (${v.requestedDate} at ${v.requestedTime}) sent to ${v.buyerName}!`, 'success');
+  }
+
+  function openCancelVisitModal(id) {
+    document.getElementById('cancelVisitId').value = id;
+    document.getElementById('cancelReason').value = '';
+    openModal('cancelVisitModal');
+  }
+
+  function handleCancelVisitSubmit(e) {
+    e.preventDefault();
+    const id = document.getElementById('cancelVisitId').value;
+    const v = SELLER_VISITS.find(item => item.id === id);
+    if (!v) return;
+
+    v.status = 'Cancelled';
+    closeModal('cancelVisitModal');
+    renderVisitsTable();
+    if (window.showToast) window.showToast(`Visit with ${v.buyerName} has been cancelled.`, 'warning');
+  }
+
+  /* ------------------------------------------------------------
+     9. RECEIVED OFFERS (SECTION 6)
+     ------------------------------------------------------------ */
+  function renderOffersTable() {
+    updateTopStats();
+    const tbody = document.getElementById('offersTableBody');
+    if (!tbody) return;
+
+    if (SELLER_OFFERS.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 2rem; color: var(--text-muted);">No offers received yet.</td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = SELLER_OFFERS.map(o => {
+      const statusClass = 'status-' + o.status.toLowerCase().replace(/\s+/g, '-');
+      const displayAmount = `₹${(o.offerAmount / 10000000).toFixed(2)} Cr`;
+
+      let actionsHtml = `
+        <button class="btn btn-ghost" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="viewOfferDetails('${o.id}')">View Details</button>
+      `;
+
+      if (o.status === 'Under Review') {
+        actionsHtml += `
+          <button class="btn btn-green" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="acceptOffer('${o.id}')">Accept Offer</button>
+          <button class="btn btn-action-icon danger" style="padding: 0.35rem 0.65rem; font-size: 0.75rem;" onclick="rejectOffer('${o.id}')">Reject</button>
+          <button class="btn btn-ghost" style="padding: 0.35rem 0.65rem; font-size: 0.75rem; border-color: #007bff; color: #007bff;" onclick="openCounterofferModal('${o.id}')">Counteroffer</button>
+        `;
+      }
+
+      return `
+        <tr>
+          <td><strong>${o.buyerName}</strong></td>
+          <td>
+            <strong>${o.propertyTitle}</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">${o.propertyId}</div>
+          </td>
+          <td><strong style="color: var(--color-gold); font-size: 1rem;">${displayAmount}</strong></td>
+          <td>${o.offerDate}</td>
+          <td>${o.closingDate}</td>
+          <td>${o.financingType}</td>
+          <td><span class="badge-status ${statusClass}">${o.status}</span></td>
+          <td>
+            <div class="action-group">${actionsHtml}</div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function viewOfferDetails(id) {
+    const o = SELLER_OFFERS.find(item => item.id === id);
+    if (!o) return;
+
+    document.getElementById('offerModalBody').innerHTML = `
+      <div style="background: var(--bg-primary); padding: 1.25rem; border-radius: var(--border-radius-md); border: 1px solid var(--border-color); margin-bottom: 1.25rem;">
+        <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Proposed Acquisition Figure</div>
+        <div style="font-size: 1.8rem; font-weight: 700; color: var(--color-gold); font-family: var(--font-heading);">
+          ₹${(o.offerAmount / 10000000).toFixed(2)} Cr
+        </div>
+        <div style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.35rem;">
+          Offered for <strong>${o.propertyTitle}</strong>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; font-size: 0.88rem; margin-bottom: 1.25rem;">
+        <div><strong>Prospective Buyer:</strong> ${o.buyerName}</div>
+        <div><strong>Offer Date:</strong> ${o.offerDate}</div>
+        <div><strong>Target Closing Date:</strong> ${o.closingDate}</div>
+        <div><strong>Financing Mechanism:</strong> ${o.financingType}</div>
+      </div>
+
+      <div style="margin-bottom: 1rem;">
+        <strong style="font-size: 0.85rem; display: block; margin-bottom: 0.25rem;">Buyer Special Stipulations:</strong>
+        <p style="font-size: 0.88rem; color: var(--text-secondary); margin: 0; background: var(--bg-primary); padding: 0.75rem; border-radius: var(--border-radius-sm);">
+          ${o.notes || 'Standard agreement format without contingency amendments.'}
+        </p>
+      </div>
+
+      <div style="font-size: 0.75rem; color: var(--text-muted); font-style: italic;">
+        Note: This is an exploratory demo offer. Not legally binding until signed on stamp paper.
+      </div>
+    `;
+
+    openModal('viewOfferModal');
+  }
+
+  function acceptOffer(id) {
+    const o = SELLER_OFFERS.find(item => item.id === id);
+    if (!o) return;
+
+    showConfirm(
+      'Accept Buyer Offer',
+      `Are you sure you want to accept the offer of ₹${(o.offerAmount / 10000000).toFixed(2)} Cr from ${o.buyerName}?`,
+      () => {
+        o.status = 'Accepted';
+        renderOffersTable();
+        if (window.showToast) window.showToast(`Offer from ${o.buyerName} accepted! Our closing desk will reach out.`, 'success');
+      }
+    );
+  }
+
+  function rejectOffer(id) {
+    const o = SELLER_OFFERS.find(item => item.id === id);
+    if (!o) return;
+
+    showConfirm(
+      'Decline Buyer Offer',
+      `Are you sure you want to decline this offer from ${o.buyerName}?`,
+      () => {
+        o.status = 'Rejected';
+        renderOffersTable();
+        if (window.showToast) window.showToast(`Offer from ${o.buyerName} declined.`, 'info');
+      }
+    );
+  }
+
+  function openCounterofferModal(id) {
+    document.getElementById('counterOfferId').value = id;
+    const o = SELLER_OFFERS.find(item => item.id === id);
+    if (o) {
+      document.getElementById('counterAmount').value = o.offerAmount + 1000000;
+    }
+    openModal('counterofferModal');
+  }
+
+  function handleCounterofferSubmit(e) {
+    e.preventDefault();
+    const id = document.getElementById('counterOfferId').value;
+    const o = SELLER_OFFERS.find(item => item.id === id);
+    if (!o) return;
+
+    const amt = Number(document.getElementById('counterAmount').value);
+    o.status = 'Counteroffer Sent';
+    o.offerAmount = amt;
+
+    closeModal('counterofferModal');
+    renderOffersTable();
+    if (window.showToast) window.showToast(`Counteroffer of ₹${(amt / 10000000).toFixed(2)} Cr submitted to ${o.buyerName}!`, 'success');
+  }
+
+  /* ------------------------------------------------------------
+     10. PERFORMANCE & ANALYTICS (SECTION 7)
+     ------------------------------------------------------------ */
+  function renderPerformance() {
+    const container = document.getElementById('perfCardsContainer');
+    if (!container) return;
+
+    const published = SELLER_LISTINGS.filter(l => l.status === 'Published');
+    if (published.length === 0) {
+      container.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-muted);">No published properties to track metrics for.</div>`;
+      return;
+    }
+
+    container.innerHTML = published.map(p => {
+      const maxViews = 2000;
+      const pct = Math.min(100, Math.round((p.views / maxViews) * 100));
+
+      return `
+        <div class="perf-card">
+          <div class="perf-card-header">
+            <img src="${p.image}" alt="${p.title}" class="perf-thumb">
+            <div>
+              <h4 class="perf-card-title">${p.title}</h4>
+              <div class="perf-card-loc">📍 ${p.location} &bull; ${p.priceDisplay}</div>
+            </div>
+          </div>
+
+          <div class="metrics-row">
+            <div class="metric-item">
+              <div class="metric-val">${p.views}</div>
+              <div class="metric-label">Total Views</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-val">${p.savedCount}</div>
+              <div class="metric-label">Saved Favorites</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-val">${p.enquiries}</div>
+              <div class="metric-label">Buyer Leads</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-val">2</div>
+              <div class="metric-label">Site Visit Requests</div>
+            </div>
+          </div>
+
+          <div class="progress-bar-container">
+            <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.35rem;">
+              <span>View Volume Benchmark</span>
+              <span><strong>${p.views}</strong> / ${maxViews} views (${pct}%)</span>
+            </div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" style="width: ${pct}%;"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function setPerfTimeRange(range, btn) {
+    document.querySelectorAll('#sec-performance .content-box-header .btn').forEach(b => {
+      b.classList.remove('btn-primary');
+      b.classList.add('btn-ghost');
+    });
+    btn.classList.remove('btn-ghost');
+    btn.classList.add('btn-primary');
+    if (window.showToast) window.showToast(`Analytics filtered for ${btn.textContent}`, 'info');
+  }
+
+  /* ------------------------------------------------------------
+     11. DOCUMENTS (SECTION 8)
+     ------------------------------------------------------------ */
+  function renderDocumentsTable() {
+    const tbody = document.getElementById('documentsTableBody');
+    if (!tbody) return;
+
+    tbody.innerHTML = SELLER_DOCUMENTS.map(doc => {
+      const statusClass = 'status-' + doc.status.toLowerCase().replace(/\s+/g, '-');
+      return `
+        <tr>
+          <td>
+            <strong>📄 ${doc.name}</strong>
+            <div style="font-size: 0.72rem; color: var(--text-muted);">${doc.id}</div>
+          </td>
+          <td>${doc.property}</td>
+          <td>${doc.uploadDate}</td>
+          <td><span style="background: var(--bg-primary); padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">${doc.category}</span></td>
+          <td><span class="badge-status ${statusClass}">${doc.status}</span></td>
+          <td>
+            <div class="action-group">
+              <button class="btn-action-icon" title="Download Document" onclick="window.showToast('Download feature available in live platform', 'info')">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Download
+              </button>
+            </div>
+          </td>
+        </tr>
+      `;
+    }).join('');
+  }
+
+  function openUploadDocModal() {
+    const select = document.getElementById('docPropertySelect');
+    select.innerHTML = SELLER_LISTINGS.map(l => `<option value="${l.title}">${l.title}</option>`).join('');
+    openModal('uploadDocumentModal');
+  }
+
+  function handleUploadDocSubmit(e) {
+    e.preventDefault();
+    const prop = document.getElementById('docPropertySelect').value;
+    const name = document.getElementById('docNameInput').value;
+    const cat = document.getElementById('docCategorySelect').value;
+
+    const newDoc = {
+      id: 'D' + String(SELLER_DOCUMENTS.length + 1).padStart(3, '0'),
+      name: name,
+      property: prop,
+      uploadDate: new Date().toISOString().split('T')[0],
+      category: cat,
+      status: 'Uploaded'
+    };
+
+    SELLER_DOCUMENTS.unshift(newDoc);
+    closeModal('uploadDocumentModal');
+    renderDocumentsTable();
+    if (window.showToast) window.showToast(`Document "${name}" uploaded for verification.`, 'success');
+  }
+
+  /* ------------------------------------------------------------
+     12. NOTIFICATIONS (SECTION 9)
+     ------------------------------------------------------------ */
+  function renderNotificationsList() {
+    updateTopStats();
+    const container = document.getElementById('notificationsListContainer');
+    if (!container) return;
+
+    if (SELLER_NOTIFICATIONS.length === 0) {
+      container.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--text-muted);">You have no notifications at this time.</div>`;
+      return;
+    }
+
+    container.innerHTML = SELLER_NOTIFICATIONS.map(n => {
+      let icon = '🔔';
+      let iconClass = 'notif-icon-listing';
+      if (n.type === 'offer') { icon = '🏷️'; iconClass = 'notif-icon-offer'; }
+      if (n.type === 'enquiry') { icon = '💬'; iconClass = 'notif-icon-enquiry'; }
+      if (n.type === 'visit') { icon = '📅'; iconClass = 'notif-icon-visit'; }
+
+      return `
+        <div class="notification-item ${n.read ? '' : 'unread'}" onclick="markNotificationRead('${n.id}')">
+          <div class="notif-icon-circle ${iconClass}">
+            <span style="font-size: 1.1rem;">${icon}</span>
+          </div>
+          <div class="notif-content">
+            <div class="notif-message">${n.message}</div>
+            <div class="notif-date">${n.date} ${n.read ? '&bull; Read' : '&bull; <strong>Unread</strong>'}</div>
+          </div>
+          ${!n.read ? '<span style="width: 8px; height: 8px; border-radius: 50%; background: var(--color-gold);"></span>' : ''}
+        </div>
+      `;
+    }).join('');
+  }
+
+  function markNotificationRead(id) {
+    const n = SELLER_NOTIFICATIONS.find(item => item.id === id);
+    if (n) {
+      n.read = true;
+      renderNotificationsList();
+    }
+  }
+
+  function markAllNotificationsAsRead() {
+    SELLER_NOTIFICATIONS.forEach(n => n.read = true);
+    renderNotificationsList();
+    if (window.showToast) window.showToast('All notifications marked as read', 'info');
+  }
+
+  /* ------------------------------------------------------------
+     13. PROFILE & SUPPORT (SECTIONS 10 & 11)
+     ------------------------------------------------------------ */
+  function handleProfileSave(e) {
+    e.preventDefault();
+    if (window.showToast) window.showToast('Seller profile details updated successfully! (Demo)', 'success');
+  }
+
+  function toggleFaq(header) {
+    const item = header.closest('.faq-accordion-item');
+    if (item) {
+      item.classList.toggle('open');
+    }
+  }
+
+  function handleSupportSubmit(e) {
+    e.preventDefault();
+    if (window.showToast) window.showToast('Your message has been sent to our Seller Support desk!', 'success');
+    document.getElementById('sellerSupportContactForm').reset();
+  }
+
+  function handleGlobalSearch(query) {
+    if (!query) return;
+    const q = query.toLowerCase();
+    // Search properties
+    const match = SELLER_LISTINGS.find(l => l.title.toLowerCase().includes(q) || l.location.toLowerCase().includes(q));
+    if (match) {
+      switchSection('my-listings');
+    }
+  }
+
+  /* ------------------------------------------------------------
+     14. INITIALIZATION
+     ------------------------------------------------------------ */
+  document.addEventListener('DOMContentLoaded', () => {
+    // Check initial hash in URL
+    const hash = window.location.hash.replace('#', '');
+    if (hash && SECTION_TITLES[hash]) {
+      switchSection(hash);
+    } else {
+      switchSection('overview');
+    }
+
+    // Set today's date
+    const dateEl = document.getElementById('currentDateDisplay');
+    if (dateEl) {
+      const now = new Date();
+      dateEl.textContent = `Today is ${now.toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}`;
+    }
+  });
+</script>
+
+</body>
+</html>

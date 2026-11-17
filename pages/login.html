@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cornerstone — Sign In & Register | Luxury Real Estate</title>
+  <meta name="description" content="Sign in or create an account with Cornerstone Real Estate to access your personalized buyer or seller dashboard, save properties, and track transactions.">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* Specific styles for Login / Register Split Screen */
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--bg-primary);
+      margin: 0;
+      padding: 0;
+    }
+
+    .auth-split-wrapper {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* Left Side - Visual Showcase */
+    .auth-visual-side {
+      flex: 1;
+      width: 50%;
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-12) var(--space-10);
+      color: var(--color-white);
+      overflow: hidden;
+    }
+
+    .auth-visual-side::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(23, 43, 58, 0.94) 0%, rgba(15, 30, 40, 0.82) 50%, rgba(40, 91, 74, 0.75) 100%);
+      z-index: 1;
+    }
+
+    .auth-visual-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+    }
+
+    .auth-brand-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      text-decoration: none;
+    }
+
+    .auth-brand-badge .badge-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--color-gold);
+      border-radius: var(--border-radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--color-navy);
+      box-shadow: 0 4px 15px rgba(198, 165, 107, 0.4);
+    }
+
+    .auth-brand-badge .badge-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .auth-brand-badge .brand-name {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-white);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    .auth-brand-badge .brand-tagline {
+      font-size: 0.75rem;
+      color: var(--color-gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .auth-hero-statement {
+      margin-block: var(--space-12);
+      max-width: 520px;
+    }
+
+    .auth-hero-statement h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 3.2vw, 2.85rem);
+      font-weight: 700;
+      color: var(--color-white);
+      line-height: 1.2;
+      margin-bottom: var(--space-4);
+    }
+
+    .auth-hero-statement h1 span {
+      color: var(--color-gold);
+      font-style: italic;
+    }
+
+    .auth-hero-statement p {
+      font-size: var(--font-size-md);
+      color: rgba(248, 246, 240, 0.85);
+      line-height: 1.6;
+      margin-bottom: var(--space-8);
+    }
+
+    /* Trust Stats */
+    .auth-trust-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+      padding: var(--space-6);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: var(--border-radius-lg);
+    }
+
+    .trust-stat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trust-stat-val {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--color-gold);
+      line-height: 1.1;
+    }
+
+    .trust-stat-label {
+      font-size: var(--font-size-xs);
+      color: rgba(248, 246, 240, 0.8);
+      margin-top: var(--space-1);
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    /* Testimonial Quote in Left Visual */
+    .auth-visual-quote {
+      position: relative;
+      margin-top: var(--space-6);
+      padding-left: var(--space-4);
+      border-left: 3px solid var(--color-gold);
+      font-style: italic;
+      font-size: var(--font-size-sm);
+      color: rgba(248, 246, 240, 0.9);
+      line-height: 1.5;
+    }
+
+    .auth-visual-quote span {
+      display: block;
+      margin-top: var(--space-2);
+      font-style: normal;
+      font-size: var(--font-size-xs);
+      color: var(--color-gold);
+      font-weight: 600;
+    }
+
+    /* Right Side - Form Panel */
+    .auth-form-side {
+      flex: 1;
+      width: 50%;
+      background: var(--bg-secondary);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--space-6) var(--space-8);
+      overflow-y: auto;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Top Utility Bar */
+    .auth-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 480px;
+      margin-inline: auto;
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-2);
+    }
+
+    .auth-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .auth-back-link:hover {
+      color: var(--color-gold);
+      transform: translateX(-3px);
+    }
+
+    body.rtl .auth-back-link:hover {
+      transform: translateX(3px);
+    }
+
+    .auth-quick-tools {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .auth-tool-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--border-radius-pill);
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+    }
+
+    .auth-tool-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+    }
+
+    .auth-tool-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Center Form Card */
+    .auth-card-container {
+      width: 100%;
+      max-width: 440px;
+      margin-inline: auto;
+      padding-block: var(--space-4);
+    }
+
+    /* Logo inside Auth Form */
+    .auth-panel-logo {
+      display: none; /* Shown on mobile when left panel is hidden */
+      align-items: center;
+      gap: var(--space-3);
+      text-decoration: none;
+      margin-bottom: var(--space-6);
+    }
+
+    /* Role Selector: Buyer | Seller */
+    .role-toggle-wrapper {
+      margin-bottom: var(--space-6);
+    }
+
+    .role-toggle-label {
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-bottom: var(--space-2);
+      display: block;
+    }
+
+    .role-toggle-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: var(--bg-primary);
+      padding: 4px;
+      border-radius: var(--border-radius-pill);
+      border: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .role-toggle-btn {
+      padding: 0.65rem var(--space-4);
+      background: transparent;
+      border: none;
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--text-muted);
+      border-radius: var(--border-radius-pill);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      transition: all var(--transition-base);
+    }
+
+    .role-toggle-btn.active {
+      background: var(--color-navy);
+      color: var(--color-white);
+      box-shadow: var(--shadow-sm);
+    }
+
+    body.dark-mode .role-toggle-btn.active {
+      background: var(--color-gold);
+      color: var(--color-navy);
+    }
+
+    .role-toggle-btn svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Form Switcher: Sign In vs Register */
+    .form-mode-tabs {
+      display: flex;
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: var(--space-6);
+      gap: var(--space-6);
+    }
+
+    .form-mode-tab {
+      background: transparent;
+      border: none;
+      padding-block: var(--space-3);
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .form-mode-tab:hover {
+      color: var(--text-primary);
+    }
+
+    .form-mode-tab.active {
+      color: var(--color-gold);
+      font-weight: 700;
+    }
+
+    .form-mode-tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--color-gold);
+      border-radius: var(--border-radius-pill);
+    }
+
+    /* Heading block */
+    .auth-header-block {
+      margin-bottom: var(--space-6);
+    }
+
+    .auth-header-block h2 {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .auth-header-block p {
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+    }
+
+    /* Demo Quick Fill Box */
+    .demo-credential-pill-box {
+      background: var(--bg-primary);
+      border: 1px dashed var(--color-gold);
+      border-radius: var(--border-radius-md);
+      padding: var(--space-3) var(--space-4);
+      margin-bottom: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .demo-pill-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .demo-pill-btns {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .demo-fill-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-sm);
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .demo-fill-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+      transform: translateY(-1px);
+    }
+
+    /* Password Input with show/hide */
+    .password-input-wrap {
+      position: relative;
+    }
+
+    .password-input-wrap .form-control {
+      padding-right: 2.75rem;
+    }
+
+    body.rtl .password-input-wrap .form-control {
+      padding-right: var(--space-4);
+      padding-left: 2.75rem;
+    }
+
+    .toggle-password-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--transition-fast);
+    }
+
+    body.rtl .toggle-password-btn {
+      right: auto;
+      left: 12px;
+    }
+
+    .toggle-password-btn:hover {
+      color: var(--color-gold);
+    }
+
+    .toggle-password-btn svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    /* Password Strength Meter */
+    .strength-meter-box {
+      margin-top: var(--space-2);
+    }
+
+    .strength-bars {
+      display: flex;
+      gap: 4px;
+      height: 4px;
+      margin-bottom: 4px;
+    }
+
+    .strength-bar-seg {
+      flex: 1;
+      height: 100%;
+      background: var(--border-color);
+      border-radius: 2px;
+      transition: background-color var(--transition-fast);
+    }
+
+    .strength-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Form Actions & Extras */
+    .form-extras {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: var(--font-size-sm);
+    }
+
+    .forgot-link {
+      color: var(--color-gold);
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity var(--transition-fast);
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    .auth-submit-btn {
+      width: 100%;
+      padding: 0.85rem;
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      margin-top: var(--space-2);
+    }
+
+    .auth-divider {
+      display: flex;
+      align-items: center;
+      margin-block: var(--space-6);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: var(--font-size-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .auth-divider::before,
+    .auth-divider::after {
+      content: '';
+      flex: 1;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .auth-divider span {
+      padding-inline: var(--space-3);
+    }
+
+    .auth-footer-prompt {
+      text-align: center;
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      margin-top: var(--space-4);
+    }
+
+    .auth-footer-prompt a {
+      color: var(--color-gold);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .auth-footer-prompt a:hover {
+      text-decoration: underline;
+    }
+
+    .auth-demo-disclaimer {
+      margin-top: var(--space-6);
+      padding: var(--space-3) var(--space-4);
+      background: var(--bg-primary);
+      border-radius: var(--border-radius-sm);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    /* Message Banners (Alerts) */
+    .auth-status-alert {
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--border-radius-md);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-4);
+      display: none;
+      align-items: flex-start;
+      gap: var(--space-2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .auth-status-alert.error {
+      background: #FEECEB;
+      color: #B71C1C;
+      border: 1px solid #FFCDD2;
+      display: flex;
+    }
+
+    .auth-status-alert.success {
+      background: #E8F5E9;
+      color: #1B5E20;
+      border: 1px solid #C8E6C9;
+      display: flex;
+    }
+
+    body.dark-mode .auth-status-alert.error {
+      background: rgba(183, 28, 28, 0.25);
+      color: #FF8A80;
+      border-color: rgba(183, 28, 28, 0.4);
+    }
+
+    body.dark-mode .auth-status-alert.success {
+      background: rgba(27, 94, 32, 0.25);
+      color: #B9F6CA;
+      border-color: rgba(27, 94, 32, 0.4);
+    }
+
+    /* Sub-sections toggle */
+    .auth-section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .auth-section.active {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .auth-visual-side {
+        display: none;
+      }
+      .auth-form-side {
+        width: 100%;
+        padding: var(--space-6) var(--space-4);
+      }
+      .auth-panel-logo {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-split-wrapper">
+    <!-- LEFT SIDE: Visual Brand Experience (50%) -->
+    <div class="auth-visual-side" role="complementary" aria-label="Cornerstone Luxury Experience">
+      <div class="auth-visual-content">
+        <!-- Top Logo -->
+        <a href="../index.html" class="auth-brand-badge" aria-label="Cornerstone Real Estate">
+          <div class="badge-icon">C</div>
+          <div class="badge-text">
+            <span class="brand-name">Cornerstone</span>
+            <span class="brand-tagline">Real Estate • India</span>
+          </div>
+        </a>
+
+        <!-- Center Hero Text -->
+        <div class="auth-hero-statement">
+          <h1>Exceptional Living, <span>Tailored</span> for You.</h1>
+          <p>Access India's most distinguished residential villas, penthouses, and bespoke commercial investments. Sign in to your portal to manage listings, save private viewings, and communicate with dedicated luxury advisors.</p>
+          
+          <!-- Trust Stats Grid -->
+          <div class="auth-trust-grid">
+            <div class="trust-stat-item">
+              <span class="trust-stat-val">1,200+</span>
+              <span class="trust-stat-label">Properties Listed</span>
+            </div>
+            <div class="trust-stat-item">
+              <span class="trust-stat-val">15+</span>
+              <span class="trust-stat-label">Years of Excellence</span>
+            </div>
+            <div class="trust-stat-item">
+              <span class="trust-stat-val">98%</span>
+              <span class="trust-stat-label">Client Satisfaction</span>
+            </div>
+          </div>
+
+          <!-- Testimonial Quote -->
+          <div class="auth-visual-quote">
+            "Cornerstone made acquiring our oceanfront estate in Mumbai completely effortless. Their discretion, market intelligence, and advisory are unmatched in luxury real estate."
+            <span>— Rajiv & Ananya Singhania, Premium Homeowners</span>
+          </div>
+        </div>
+
+        <!-- Bottom Footer info -->
+        <div style="font-size: 0.75rem; color: rgba(248, 246, 240, 0.65); display: flex; justify-content: space-between; align-items: center;">
+          <span>© 2026 Cornerstone Real Estate Ltd. All rights reserved.</span>
+          <span>Verified RERA Compliant</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE: Auth Form Panel (50%) -->
+    <div class="auth-form-side" role="main">
+      <!-- Top Utility Bar -->
+      <div class="auth-top-bar">
+        <a href="../index.html" class="auth-back-link">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          <span>Return Home</span>
+        </a>
+
+        <div class="auth-quick-tools">
+          <button type="button" class="auth-tool-btn js-theme-toggle" title="Toggle Theme" aria-label="Toggle Theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+          <button type="button" class="auth-tool-btn js-dir-toggle" title="Toggle RTL/LTR" aria-label="Toggle RTL/LTR">
+            RTL
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Center Form Container -->
+      <div class="auth-card-container">
+        <!-- Mobile Logo -->
+        <a href="../index.html" class="auth-panel-logo" aria-label="Cornerstone Home">
+          <div class="cs-navbar__logo-icon">C</div>
+          <div class="cs-navbar__logo-text">
+            <span class="cs-navbar__logo-name" style="color: var(--text-primary); font-size: 1.3rem;">Cornerstone</span>
+            <span class="cs-navbar__logo-tagline">Real Estate</span>
+          </div>
+        </a>
+
+        <!-- Role Selector Tabs: Buyer | Seller -->
+        <div class="role-toggle-wrapper">
+          <span class="role-toggle-label">Account Experience</span>
+          <div class="role-toggle-group" role="tablist" aria-label="Select User Role">
+            <button type="button" class="role-toggle-btn active" id="roleBtnBuyer" role="tab" aria-selected="true" data-role="buyer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Buyer Portal</span>
+            </button>
+            <button type="button" class="role-toggle-btn" id="roleBtnSeller" role="tab" aria-selected="false" data-role="seller">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="18"/></svg>
+              <span>Seller Portal</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Form Switcher: Sign In vs Register -->
+        <div class="form-mode-tabs" role="tablist">
+          <button type="button" class="form-mode-tab active" id="tabSignIn" role="tab" aria-selected="true">
+            Sign In
+          </button>
+          <button type="button" class="form-mode-tab" id="tabRegister" role="tab" aria-selected="false">
+            Create Account
+          </button>
+        </div>
+
+        <!-- Demo Credentials Helper Pill -->
+        <div class="demo-credential-pill-box" id="demoPillBox">
+          <div class="demo-pill-title">
+            <span>⚡ Quick Demo Credentials</span>
+            <span style="font-weight: 400; font-size: 0.7rem; color: var(--text-muted);">Click to auto-fill</span>
+          </div>
+          <div class="demo-pill-btns">
+            <button type="button" class="demo-fill-btn" id="fillBuyerDemo">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7.5" r="4"/></svg>
+              Buyer (buyer@demo.com)
+            </button>
+            <button type="button" class="demo-fill-btn" id="fillSellerDemo">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Seller (seller@demo.com)
+            </button>
+          </div>
+        </div>
+
+        <!-- Global Alert / Status Box -->
+        <div class="auth-status-alert" id="authStatusAlert" role="alert">
+          <svg class="alert-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span class="alert-text">Message goes here</span>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 1. SIGN IN SECTION                             -->
+        <!-- ============================================== -->
+        <div class="auth-section active" id="sectionSignIn">
+          <div class="auth-header-block">
+            <h2 id="signInHeading">Welcome Back</h2>
+            <p id="signInSubtext">Sign in to your Buyer account</p>
+          </div>
+
+          <form id="signInForm" novalidate>
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="signInIdentifier" class="form-label required">Email or Phone Number</label>
+              <input type="text" id="signInIdentifier" class="form-control" placeholder="name@domain.com or 10-digit phone" required autocomplete="username">
+              <span class="form-error" id="signInIdentifierError"></span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="signInPassword" class="form-label required">Password</label>
+              <div class="password-input-wrap">
+                <input type="password" id="signInPassword" class="form-control" placeholder="Enter your password" required autocomplete="current-password">
+                <button type="button" class="toggle-password-btn" data-target="signInPassword" aria-label="Toggle password visibility">
+                  <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <span class="form-error" id="signInPasswordError"></span>
+            </div>
+
+            <div class="form-extras" style="margin-bottom: var(--space-6);">
+              <label class="form-check">
+                <input type="checkbox" id="rememberMe" checked>
+                <span class="form-check-label">Remember Me</span>
+              </label>
+              <a href="#" class="forgot-link" id="linkShowForgot">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-submit-btn" id="btnSubmitSignIn">
+              <span>Sign In</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </form>
+
+          <div class="auth-divider"><span>or</span></div>
+
+          <p class="auth-footer-prompt">
+            Don't have an account? <a href="#" id="linkSwitchToRegister">Create one</a>
+          </p>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 2. FORGOT PASSWORD SECTION (INLINE)            -->
+        <!-- ============================================== -->
+        <div class="auth-section" id="sectionForgot">
+          <div class="auth-header-block">
+            <h2>Reset Password</h2>
+            <p>Enter your registered email and we'll send you a recovery link.</p>
+          </div>
+
+          <form id="forgotForm" novalidate>
+            <div class="form-group" style="margin-bottom: var(--space-6);">
+              <label for="forgotEmail" class="form-label required">Registered Email Address</label>
+              <input type="email" id="forgotEmail" class="form-control" placeholder="name@domain.com" required>
+              <span class="form-error" id="forgotEmailError"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-submit-btn">
+              <span>Send Reset Link</span>
+            </button>
+          </form>
+
+          <p class="auth-footer-prompt" style="margin-top: var(--space-6);">
+            <a href="#" id="linkBackToSignIn">← Back to Sign In</a>
+          </p>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 3. REGISTER SECTION                            -->
+        <!-- ============================================== -->
+        <div class="auth-section" id="sectionRegister">
+          <div class="auth-header-block">
+            <h2 id="registerHeading">Create Your Account</h2>
+            <p id="registerSubtext">Register your profile for premier property access</p>
+          </div>
+
+          <form id="registerForm" novalidate>
+            <!-- Hidden role synchronization -->
+            <input type="hidden" id="registerRole" value="buyer">
+
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="regFullName" class="form-label required">Full Name</label>
+              <input type="text" id="regFullName" class="form-control" placeholder="e.g. Vikramaditya Sharma" required autocomplete="name">
+              <span class="form-error" id="regFullNameError"></span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="regEmail" class="form-label required">Email Address</label>
+              <input type="email" id="regEmail" class="form-control" placeholder="vikram@example.com" required autocomplete="email">
+              <span class="form-error" id="regEmailError"></span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="regPhone" class="form-label required">Phone Number</label>
+              <input type="tel" id="regPhone" class="form-control" placeholder="e.g. 9876543210 (10+ digits)" required autocomplete="tel">
+              <span class="form-error" id="regPhoneError"></span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="regPassword" class="form-label required">Password (min 8 chars)</label>
+              <div class="password-input-wrap">
+                <input type="password" id="regPassword" class="form-control" placeholder="Create strong password" required autocomplete="new-password">
+                <button type="button" class="toggle-password-btn" data-target="regPassword" aria-label="Toggle password visibility">
+                  <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <!-- Strength Indicator -->
+              <div class="strength-meter-box">
+                <div class="strength-bars">
+                  <div class="strength-bar-seg" id="seg1"></div>
+                  <div class="strength-bar-seg" id="seg2"></div>
+                  <div class="strength-bar-seg" id="seg3"></div>
+                  <div class="strength-bar-seg" id="seg4"></div>
+                </div>
+                <div class="strength-label">
+                  <span id="strengthText">Password Strength</span>
+                  <span id="strengthScore">Min 8 characters</span>
+                </div>
+              </div>
+              <span class="form-error" id="regPasswordError"></span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="regConfirmPassword" class="form-label required">Confirm Password</label>
+              <div class="password-input-wrap">
+                <input type="password" id="regConfirmPassword" class="form-control" placeholder="Repeat your password" required autocomplete="new-password">
+                <button type="button" class="toggle-password-btn" data-target="regConfirmPassword" aria-label="Toggle password visibility">
+                  <svg class="eye-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                </button>
+              </div>
+              <span class="form-error" id="regConfirmPasswordError"></span>
+            </div>
+
+            <div class="form-group" style="margin-bottom: var(--space-4);">
+              <label for="regAccountTypeSelect" class="form-label required">Primary Account Intent</label>
+              <select id="regAccountTypeSelect" class="form-control">
+                <option value="buyer">I want to Buy / Invest in Properties</option>
+                <option value="seller">I want to List / Sell / Lease Properties</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom: var(--space-6);">
+              <label class="form-check">
+                <input type="checkbox" id="regAgreeTerms" required>
+                <span class="form-check-label">
+                  I agree to the <a href="#terms" onclick="event.preventDefault(); if (window.CS && window.CS.showToast) { window.CS.showToast('Terms of Service: By using Cornerstone demo platform, you agree to our standard property exploration terms.', 'info'); } else { alert('Terms of Service demo modal'); }" style="color: var(--color-gold); text-decoration: underline;">Terms of Service</a> and <a href="#privacy" onclick="event.preventDefault(); if (window.CS && window.CS.showToast) { window.CS.showToast('Privacy Policy: Your demonstration data is kept purely client-side in local storage and never shared.', 'info'); } else { alert('Privacy Policy demo modal'); }" style="color: var(--color-gold); text-decoration: underline;">Privacy Policy</a> *
+                </span>
+              </label>
+              <span class="form-error" id="regAgreeTermsError"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-submit-btn" id="btnSubmitRegister">
+              <span>Create Account</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </form>
+
+          <p class="auth-footer-prompt" style="margin-top: var(--space-6);">
+            Already have an account? <a href="#" id="linkSwitchToSignIn">Sign In</a>
+          </p>
+        </div>
+
+        <!-- Demo Security Notice -->
+        <div class="auth-demo-disclaimer">
+          🔒 <strong>Demo Authentication Flow:</strong> No credentials are saved to external databases. Use the demo credentials above or any test input to experience the full interactive workflow.
+        </div>
+      </div>
+
+      <!-- Bottom Small Copyright -->
+      <div style="text-align: center; font-size: 0.75rem; color: var(--text-muted); margin-top: var(--space-6);">
+        Cornerstone Luxury Real Estate • India's Premier Property Network
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Scripts -->
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/components.js"></script>
+
+  <!-- Login Page Controller Logic -->
+  <script>
+    (function() {
+      'use strict';
+
+      // Current State
+      let currentRole = 'buyer'; // 'buyer' | 'seller'
+      let currentSection = 'signIn'; // 'signIn' | 'forgot' | 'register'
+
+      // DOM Elements
+      const roleBtnBuyer = document.getElementById('roleBtnBuyer');
+      const roleBtnSeller = document.getElementById('roleBtnSeller');
+      const tabSignIn = document.getElementById('tabSignIn');
+      const tabRegister = document.getElementById('tabRegister');
+      const sectionSignIn = document.getElementById('sectionSignIn');
+      const sectionForgot = document.getElementById('sectionForgot');
+      const sectionRegister = document.getElementById('sectionRegister');
+      const signInHeading = document.getElementById('signInHeading');
+      const signInSubtext = document.getElementById('signInSubtext');
+      const registerRole = document.getElementById('registerRole');
+      const regAccountTypeSelect = document.getElementById('regAccountTypeSelect');
+      const demoPillBox = document.getElementById('demoPillBox');
+      const authStatusAlert = document.getElementById('authStatusAlert');
+
+      // Forms
+      const signInForm = document.getElementById('signInForm');
+      const registerForm = document.getElementById('registerForm');
+      const forgotForm = document.getElementById('forgotForm');
+
+      // Demo fill buttons
+      const fillBuyerDemo = document.getElementById('fillBuyerDemo');
+      const fillSellerDemo = document.getElementById('fillSellerDemo');
+
+      // Links
+      const linkShowForgot = document.getElementById('linkShowForgot');
+      const linkBackToSignIn = document.getElementById('linkBackToSignIn');
+      const linkSwitchToRegister = document.getElementById('linkSwitchToRegister');
+      const linkSwitchToSignIn = document.getElementById('linkSwitchToSignIn');
+
+      // Status Alert Helper
+      function showAlert(msg, type = 'error') {
+        const iconSvg = type === 'error'
+          ? `<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>`
+          : `<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>`;
+
+        authStatusAlert.className = `auth-status-alert ${type}`;
+        authStatusAlert.innerHTML = `
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${iconSvg}</svg>
+          <span class="alert-text">${msg}</span>
+        `;
+        authStatusAlert.style.display = 'flex';
+      }
+
+      function hideAlert() {
+        authStatusAlert.style.display = 'none';
+      }
+
+      // Role Selection Updates
+      function setRole(role) {
+        currentRole = role;
+        if (role === 'buyer') {
+          roleBtnBuyer.classList.add('active');
+          roleBtnBuyer.setAttribute('aria-selected', 'true');
+          roleBtnSeller.classList.remove('active');
+          roleBtnSeller.setAttribute('aria-selected', 'false');
+          signInSubtext.textContent = 'Sign in to your Buyer account';
+          registerRole.value = 'buyer';
+          if (regAccountTypeSelect) regAccountTypeSelect.value = 'buyer';
+        } else {
+          roleBtnSeller.classList.add('active');
+          roleBtnSeller.setAttribute('aria-selected', 'true');
+          roleBtnBuyer.classList.remove('active');
+          roleBtnBuyer.setAttribute('aria-selected', 'false');
+          signInSubtext.textContent = 'Sign in to your Seller account';
+          registerRole.value = 'seller';
+          if (regAccountTypeSelect) regAccountTypeSelect.value = 'seller';
+        }
+      }
+
+      roleBtnBuyer.addEventListener('click', () => {
+        setRole('buyer');
+        hideAlert();
+      });
+
+      roleBtnSeller.addEventListener('click', () => {
+        setRole('seller');
+        hideAlert();
+      });
+
+      if (regAccountTypeSelect) {
+        regAccountTypeSelect.addEventListener('change', (e) => {
+          setRole(e.target.value);
+        });
+      }
+
+      // Section Switching
+      function showSection(section) {
+        currentSection = section;
+        hideAlert();
+
+        if (section === 'signIn') {
+          sectionSignIn.classList.add('active');
+          sectionForgot.classList.remove('active');
+          sectionRegister.classList.remove('active');
+          tabSignIn.classList.add('active');
+          tabSignIn.setAttribute('aria-selected', 'true');
+          tabRegister.classList.remove('active');
+          tabRegister.setAttribute('aria-selected', 'false');
+          demoPillBox.style.display = 'flex';
+        } else if (section === 'register') {
+          sectionSignIn.classList.remove('active');
+          sectionForgot.classList.remove('active');
+          sectionRegister.classList.add('active');
+          tabSignIn.classList.remove('active');
+          tabSignIn.setAttribute('aria-selected', 'false');
+          tabRegister.classList.add('active');
+          tabRegister.setAttribute('aria-selected', 'true');
+          demoPillBox.style.display = 'none';
+        } else if (section === 'forgot') {
+          sectionSignIn.classList.remove('active');
+          sectionForgot.classList.add('active');
+          sectionRegister.classList.remove('active');
+          tabSignIn.classList.remove('active');
+          tabRegister.classList.remove('active');
+          demoPillBox.style.display = 'none';
+        }
+      }
+
+      tabSignIn.addEventListener('click', () => showSection('signIn'));
+      tabRegister.addEventListener('click', () => showSection('register'));
+      linkSwitchToRegister.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('register');
+      });
+      linkSwitchToSignIn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('signIn');
+      });
+      linkShowForgot.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('forgot');
+      });
+      linkBackToSignIn.addEventListener('click', (e) => {
+        e.preventDefault();
+        showSection('signIn');
+      });
+
+      // Quick Demo Fills
+      fillBuyerDemo.addEventListener('click', () => {
+        setRole('buyer');
+        showSection('signIn');
+        document.getElementById('signInIdentifier').value = 'buyer@demo.com';
+        document.getElementById('signInPassword').value = 'password123';
+        clearFieldErrors();
+        showAlert('Pre-filled Buyer credentials (buyer@demo.com). Click Sign In to test.', 'success');
+      });
+
+      fillSellerDemo.addEventListener('click', () => {
+        setRole('seller');
+        showSection('signIn');
+        document.getElementById('signInIdentifier').value = 'seller@demo.com';
+        document.getElementById('signInPassword').value = 'password123';
+        clearFieldErrors();
+        showAlert('Pre-filled Seller credentials (seller@demo.com). Click Sign In to test.', 'success');
+      });
+
+      // Show / Hide Password Toggles
+      document.querySelectorAll('.toggle-password-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-target');
+          const input = document.getElementById(targetId);
+          if (!input) return;
+
+          const isPassword = input.type === 'password';
+          input.type = isPassword ? 'text' : 'password';
+          
+          this.innerHTML = isPassword
+            ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`
+            : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
+        });
+      });
+
+      // Password Strength Meter
+      const regPasswordInput = document.getElementById('regPassword');
+      const seg1 = document.getElementById('seg1');
+      const seg2 = document.getElementById('seg2');
+      const seg3 = document.getElementById('seg3');
+      const seg4 = document.getElementById('seg4');
+      const strengthText = document.getElementById('strengthText');
+      const strengthScore = document.getElementById('strengthScore');
+
+      function calculateStrength(pwd) {
+        if (!pwd) return 0;
+        let score = 0;
+        if (pwd.length >= 8) score++;
+        if (/[A-Z]/.test(pwd)) score++;
+        if (/[0-9]/.test(pwd)) score++;
+        if (/[^A-Za-z0-9]/.test(pwd)) score++;
+        return score;
+      }
+
+      if (regPasswordInput) {
+        regPasswordInput.addEventListener('input', () => {
+          const val = regPasswordInput.value;
+          const score = calculateStrength(val);
+
+          // Reset seg colors
+          [seg1, seg2, seg3, seg4].forEach(seg => seg.style.backgroundColor = 'var(--border-color)');
+
+          if (score === 0) {
+            strengthText.textContent = 'Password Strength';
+            strengthScore.textContent = 'Min 8 characters';
+            strengthScore.style.color = 'var(--text-muted)';
+          } else if (score === 1) {
+            seg1.style.backgroundColor = '#E53935';
+            strengthText.textContent = 'Weak';
+            strengthScore.textContent = 'Add uppercase, numbers, or symbols';
+            strengthScore.style.color = '#E53935';
+          } else if (score === 2) {
+            seg1.style.backgroundColor = '#FB8C00';
+            seg2.style.backgroundColor = '#FB8C00';
+            strengthText.textContent = 'Fair';
+            strengthScore.textContent = 'Add symbols & numbers';
+            strengthScore.style.color = '#FB8C00';
+          } else if (score === 3) {
+            seg1.style.backgroundColor = '#FDD835';
+            seg2.style.backgroundColor = '#FDD835';
+            seg3.style.backgroundColor = '#FDD835';
+            strengthText.textContent = 'Good';
+            strengthScore.textContent = 'Strong enough';
+            strengthScore.style.color = 'var(--color-gold)';
+          } else {
+            seg1.style.backgroundColor = '#43A047';
+            seg2.style.backgroundColor = '#43A047';
+            seg3.style.backgroundColor = '#43A047';
+            seg4.style.backgroundColor = '#43A047';
+            strengthText.textContent = 'Strong';
+            strengthScore.textContent = 'Excellent protection';
+            strengthScore.style.color = '#43A047';
+          }
+        });
+      }
+
+      // Field Error Helpers
+      function setFieldError(fieldId, errorId, msg) {
+        const input = document.getElementById(fieldId);
+        const err = document.getElementById(errorId);
+        if (input) input.classList.add('error');
+        if (err) err.textContent = msg;
+      }
+
+      function clearFieldError(fieldId, errorId) {
+        const input = document.getElementById(fieldId);
+        const err = document.getElementById(errorId);
+        if (input) input.classList.remove('error');
+        if (err) err.textContent = '';
+      }
+
+      function clearFieldErrors() {
+        document.querySelectorAll('.form-control').forEach(el => el.classList.remove('error'));
+        document.querySelectorAll('.form-error').forEach(el => el.textContent = '');
+      }
+
+      // Real-time blur validation
+      ['signInIdentifier', 'signInPassword'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.addEventListener('blur', () => {
+            if (!el.value.trim()) {
+              setFieldError(id, id + 'Error', 'This field is required');
+            } else {
+              clearFieldError(id, id + 'Error');
+            }
+          });
+        }
+      });
+
+      // ==============================================
+      // SIGN IN SUBMISSION LOGIC
+      // ==============================================
+      signInForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        hideAlert();
+        clearFieldErrors();
+
+        const identifier = document.getElementById('signInIdentifier').value.trim();
+        const password = document.getElementById('signInPassword').value;
+        let hasError = false;
+
+        if (!identifier) {
+          setFieldError('signInIdentifier', 'signInIdentifierError', 'Please enter your email or phone number');
+          hasError = true;
+        }
+
+        if (!password) {
+          setFieldError('signInPassword', 'signInPasswordError', 'Please enter your password');
+          hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Demo User Evaluation
+        const isBuyerMatch = (identifier.toLowerCase() === 'buyer@demo.com' || identifier === '9876543211') && password === 'password123';
+        const isSellerMatch = (identifier.toLowerCase() === 'seller@demo.com' || identifier === '9876543222') && password === 'password123';
+
+        if (isBuyerMatch) {
+          if (currentRole !== 'buyer') {
+            showAlert('You entered Buyer credentials while the Seller tab is selected. Switching tab or re-check role.', 'error');
+            setRole('buyer');
+            return;
+          }
+          // Successful Buyer Login
+          const btn = document.getElementById('btnSubmitSignIn');
+          btn.disabled = true;
+          btn.innerHTML = `<span>Signing In...</span>`;
+          showAlert('Authentication successful! Loading your Buyer Dashboard...', 'success');
+
+          // Store demo auth state
+          localStorage.setItem('cs_auth_user', JSON.stringify({
+            name: 'Vikramaditya Sharma',
+            email: 'buyer@demo.com',
+            role: 'buyer',
+            loginTime: new Date().toISOString()
+          }));
+
+          setTimeout(() => {
+            window.location.href = 'buyer-dashboard.html';
+          }, 1200);
+
+        } else if (isSellerMatch) {
+          if (currentRole !== 'seller') {
+            showAlert('You entered Seller credentials while the Buyer tab is selected. Switching tab or re-check role.', 'error');
+            setRole('seller');
+            return;
+          }
+          // Successful Seller Login
+          const btn = document.getElementById('btnSubmitSignIn');
+          btn.disabled = true;
+          btn.innerHTML = `<span>Signing In...</span>`;
+          showAlert('Authentication successful! Loading your Seller Dashboard...', 'success');
+
+          // Store demo auth state
+          localStorage.setItem('cs_auth_user', JSON.stringify({
+            name: 'Priya Mehra Properties',
+            email: 'seller@demo.com',
+            role: 'seller',
+            loginTime: new Date().toISOString()
+          }));
+
+          setTimeout(() => {
+            window.location.href = 'seller-dashboard.html';
+          }, 1200);
+
+        } else {
+          // Check if user is testing with custom input
+          if (password === 'password123' || password.length >= 8) {
+            // Permit friendly demo sign in with any valid password for test convenience
+            const btn = document.getElementById('btnSubmitSignIn');
+            btn.disabled = true;
+            btn.innerHTML = `<span>Signing In...</span>`;
+            showAlert(`Welcome! Signing in to your ${currentRole === 'buyer' ? 'Buyer' : 'Seller'} dashboard...`, 'success');
+
+            localStorage.setItem('cs_auth_user', JSON.stringify({
+              name: identifier.split('@')[0] || 'Valued Client',
+              email: identifier,
+              role: currentRole,
+              loginTime: new Date().toISOString()
+            }));
+
+            setTimeout(() => {
+              window.location.href = currentRole === 'buyer' ? 'buyer-dashboard.html' : 'seller-dashboard.html';
+            }, 1200);
+          } else {
+            showAlert('Invalid email or password. Try buyer@demo.com or seller@demo.com with password123', 'error');
+            setFieldError('signInPassword', 'signInPasswordError', 'Invalid credentials entered');
+          }
+        }
+      });
+
+      // ==============================================
+      // FORGOT PASSWORD LOGIC
+      // ==============================================
+      forgotForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('forgotEmail').value.trim();
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!email || !emailRegex.test(email)) {
+          setFieldError('forgotEmail', 'forgotEmailError', 'Please enter a valid email address');
+          return;
+        }
+
+        clearFieldError('forgotEmail', 'forgotEmailError');
+        showAlert(`If ${email} is registered, you will receive a reset link. (Demo only)`, 'success');
+        forgotForm.reset();
+      });
+
+      // ==============================================
+      // REGISTER SUBMISSION LOGIC
+      // ==============================================
+      registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        hideAlert();
+        clearFieldErrors();
+
+        const fullName = document.getElementById('regFullName').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const phone = document.getElementById('regPhone').value.trim();
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+        const agreeTerms = document.getElementById('regAgreeTerms').checked;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneDigits = phone.replace(/\D/g, '');
+
+        let hasError = false;
+
+        if (!fullName) {
+          setFieldError('regFullName', 'regFullNameError', 'Full name is required');
+          hasError = true;
+        }
+
+        if (!email || !emailRegex.test(email)) {
+          setFieldError('regEmail', 'regEmailError', 'Please enter a valid email address');
+          hasError = true;
+        }
+
+        if (phoneDigits.length < 10) {
+          setFieldError('regPhone', 'regPhoneError', 'Please enter a valid phone number (at least 10 digits)');
+          hasError = true;
+        }
+
+        if (!password || password.length < 8) {
+          setFieldError('regPassword', 'regPasswordError', 'Password must be at least 8 characters');
+          hasError = true;
+        }
+
+        if (password !== confirmPassword) {
+          setFieldError('regConfirmPassword', 'regConfirmPasswordError', 'Passwords do not match');
+          hasError = true;
+        }
+
+        if (!agreeTerms) {
+          const err = document.getElementById('regAgreeTermsError');
+          if (err) err.textContent = 'You must agree to the Terms of Service & Privacy Policy';
+          hasError = true;
+        }
+
+        if (hasError) return;
+
+        // Registration success demo
+        const btn = document.getElementById('btnSubmitRegister');
+        btn.disabled = true;
+        btn.innerHTML = `<span>Creating Account...</span>`;
+        showAlert('Account created! Redirecting to your dashboard...', 'success');
+
+        localStorage.setItem('cs_auth_user', JSON.stringify({
+          name: fullName,
+          email: email,
+          phone: phone,
+          role: currentRole,
+          loginTime: new Date().toISOString()
+        }));
+
+        setTimeout(() => {
+          window.location.href = currentRole === 'buyer' ? 'buyer-dashboard.html' : 'seller-dashboard.html';
+        }, 2000);
+      });
+
+      // ==============================================
+      // URL PARAMETER HANDLING
+      // ==============================================
+      const params = new URLSearchParams(window.location.search);
+      
+      // ?type=buyer or ?type=seller
+      const typeParam = params.get('type') || params.get('role');
+      if (typeParam && typeParam.toLowerCase() === 'seller') {
+        setRole('seller');
+      } else if (typeParam && typeParam.toLowerCase() === 'buyer') {
+        setRole('buyer');
+      }
+
+      // ?action=register or ?tab=register
+      const tabParam = params.get('tab') || params.get('action');
+      if (tabParam && tabParam.toLowerCase() === 'register') {
+        showSection('register');
+      }
+
+      // ?email=...
+      const emailParam = params.get('email');
+      if (emailParam) {
+        const signInId = document.getElementById('signInIdentifier');
+        const regEmail = document.getElementById('regEmail');
+        if (signInId) signInId.value = emailParam;
+        if (regEmail) regEmail.value = emailParam;
+      }
+
+    })();
+  </script>
+</body>
+</html>

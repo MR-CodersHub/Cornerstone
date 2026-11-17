@@ -1,0 +1,306 @@
+/* ============================================================
+   Cornerstone Real Estate — Footer Styles
+   ============================================================ */
+
+.cs-footer {
+  background: var(--bg-footer);
+  color: var(--text-on-dark);
+  padding-top: var(--space-20);
+}
+
+.cs-footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+  gap: var(--space-10);
+  padding-bottom: var(--space-12);
+}
+
+/* ── Col 1: Agency Info ── */
+.cs-footer__brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  text-decoration: none;
+}
+
+.cs-footer__brand-icon {
+  width: 44px;
+  height: 44px;
+  background: var(--color-gold);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--color-navy);
+  flex-shrink: 0;
+}
+
+.cs-footer__brand-name {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-md);
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.cs-footer__brand-tagline {
+  font-size: var(--font-size-xs);
+  color: var(--color-gold);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cs-footer__agency-desc {
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,.6);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-5);
+  max-width: 32ch;
+}
+
+.cs-footer__contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,.7);
+  margin-bottom: var(--space-3);
+}
+
+.cs-footer__contact-item svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.cs-footer__socials {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.cs-footer__social-link {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,.7);
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.cs-footer__social-link:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-navy);
+}
+
+.cs-footer__social-link svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Columns 2–4: Link columns ── */
+.cs-footer__col-heading {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-white);
+  margin-bottom: var(--space-5);
+  position: relative;
+  padding-bottom: var(--space-3);
+}
+
+.cs-footer__col-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 32px;
+  height: 2px;
+  background: var(--color-gold);
+  border-radius: 2px;
+}
+
+body.rtl .cs-footer__col-heading::after {
+  left: auto;
+  right: 0;
+}
+
+.cs-footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cs-footer__link {
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,.65);
+  transition: color var(--transition-fast), padding-inline-start var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cs-footer__link::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.cs-footer__link:hover {
+  color: var(--color-gold);
+  padding-inline-start: var(--space-2);
+}
+
+.cs-footer__link:hover::before {
+  opacity: 1;
+}
+
+/* ── Col 5: Newsletter ── */
+.cs-footer__newsletter-heading {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-white);
+  margin-bottom: var(--space-3);
+}
+
+.cs-footer__newsletter-sub {
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,.6);
+  line-height: var(--line-height-relaxed);
+  margin-bottom: var(--space-5);
+}
+
+.cs-footer__newsletter-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.cs-footer__newsletter-input {
+  padding: var(--space-3) var(--space-4);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: var(--border-radius-md);
+  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  outline: none;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.cs-footer__newsletter-input::placeholder {
+  color: rgba(255,255,255,.4);
+}
+
+.cs-footer__newsletter-input:focus {
+  border-color: var(--color-gold);
+  background: rgba(255,255,255,.12);
+}
+
+.cs-footer__newsletter-btn {
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-gold);
+  color: var(--color-navy);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  border-radius: var(--border-radius-md);
+  transition: background var(--transition-fast), transform var(--transition-fast);
+  text-align: center;
+}
+
+.cs-footer__newsletter-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+}
+
+/* ── Bottom Bar ── */
+.cs-footer__bottom {
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-block: var(--space-5);
+}
+
+.cs-footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.cs-footer__copyright {
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,.5);
+}
+
+.cs-footer__bottom-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.cs-footer__bottom-link {
+  font-size: var(--font-size-sm);
+  color: rgba(255,255,255,.5);
+  transition: color var(--transition-fast);
+}
+
+.cs-footer__bottom-link:hover {
+  color: var(--color-gold);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .cs-footer__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: var(--space-8);
+  }
+  .cs-footer__grid > *:first-child {
+    grid-column: 1 / -1;
+  }
+  .cs-footer__agency-desc {
+    max-width: 60ch;
+  }
+}
+
+@media (max-width: 768px) {
+  .cs-footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+  .cs-footer__grid > *:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .cs-footer {
+    padding-top: var(--space-12);
+  }
+  .cs-footer__grid {
+    grid-template-columns: 1fr;
+  }
+  .cs-footer__bottom-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .cs-footer__bottom-links {
+    gap: var(--space-4);
+  }
+}

@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cornerstone Real Estate — Find Your Perfect Property</title>
+  <meta name="description" content="Discover exceptional homes, premium apartments, luxury villas, and commercial real estate with Cornerstone Real Estate." />
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/navbar.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+
+  <style>
+    /* ── Hero Custom Styles ── */
+    .hero-home1 {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(23, 43, 58, 0.78) 0%, rgba(23, 43, 58, 0.88) 100%),
+                  url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600') center/cover no-repeat fixed;
+      padding-top: 100px;
+      padding-bottom: 80px;
+      color: var(--color-white);
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 980px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(198, 165, 107, 0.2);
+      border: 1px solid rgba(198, 165, 107, 0.5);
+      color: var(--color-gold);
+      padding: 0.4rem 1.25rem;
+      border-radius: var(--border-radius-pill);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-6);
+      backdrop-filter: blur(8px);
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+      font-weight: 700;
+      color: var(--color-white);
+      line-height: 1.15;
+      margin-bottom: var(--space-6);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: rgba(248, 246, 240, 0.9);
+      max-width: 720px;
+      margin: 0 auto var(--space-8);
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-10);
+    }
+
+    .hero-actions .btn {
+      padding: 0.85rem 2rem;
+      font-size: var(--font-size-base);
+      border-radius: var(--border-radius-md);
+    }
+
+    /* ── Hero Search Box ── */
+    .hero-search-card {
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-5) var(--space-6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      color: var(--color-navy);
+      text-align: left;
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    body.dark-mode .hero-search-card {
+      background: rgba(30, 41, 59, 0.95);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: var(--color-ivory);
+    }
+
+    .hero-search-form {
+      display: grid;
+      grid-template-columns: 1.5fr 1.2fr 1fr 1.2fr auto;
+      gap: var(--space-4);
+      align-items: end;
+    }
+
+    .hero-search-field label {
+      display: block;
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-search-field input,
+    .hero-search-field select {
+      width: 100%;
+      height: 48px;
+      padding: 0 0.85rem;
+      border-radius: var(--border-radius-md);
+      border: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      font-size: var(--font-size-sm);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      outline: none;
+    }
+
+    .hero-search-field input:focus,
+    .hero-search-field select:focus {
+      border-color: var(--color-gold);
+      box-shadow: 0 0 0 3px rgba(198, 165, 107, 0.2);
+    }
+
+    .hero-search-btn {
+      height: 48px;
+      padding: 0 1.75rem;
+      font-size: var(--font-size-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 992px) {
+      .hero-search-form {
+        grid-template-columns: 1fr 1fr;
+      }
+      .hero-search-btn {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-search-form {
+        grid-template-columns: 1fr;
+      }
+      .hero-search-btn {
+        grid-column: span 1;
+      }
+    }
+
+    /* ── Property Card Grid ── */
+    .properties-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 992px) {
+      .properties-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-6);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .properties-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ── Category Cards Grid ── */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+
+    @media (max-width: 992px) {
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 580px) {
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .category-card {
+      position: relative;
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-6);
+      text-decoration: none;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .category-card__bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .category-card:hover .category-card__bg {
+      transform: scale(1.08);
+    }
+
+    .category-card__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(23, 43, 58, 0.15) 0%, rgba(23, 43, 58, 0.85) 100%);
+      transition: background var(--transition-normal);
+    }
+
+    .category-card:hover .category-card__overlay {
+      background: linear-gradient(180deg, rgba(23, 43, 58, 0.25) 0%, rgba(23, 43, 58, 0.95) 100%);
+    }
+
+    .category-card__content {
+      position: relative;
+      z-index: 2;
+      color: var(--color-white);
+    }
+
+    .category-card__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--border-radius-md);
+      background: rgba(198, 165, 107, 0.25);
+      border: 1px solid rgba(198, 165, 107, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-gold);
+      margin-bottom: var(--space-3);
+      backdrop-filter: blur(4px);
+    }
+
+    .category-card__title {
+      font-size: var(--font-size-xl);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--color-white);
+      margin-bottom: 0.25rem;
+    }
+
+    .category-card__count {
+      font-size: var(--font-size-sm);
+      color: var(--color-gold);
+      font-weight: 500;
+    }
+
+    /* ── Why Choose Us ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-6);
+    }
+
+    @media (max-width: 1100px) {
+      .features-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-6);
+      text-align: center;
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold);
+    }
+
+    .feature-card__icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(198, 165, 107, 0.12);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-4);
+      transition: transform var(--transition-normal), background var(--transition-normal);
+    }
+
+    .feature-card:hover .feature-card__icon {
+      transform: scale(1.1);
+      background: var(--color-gold);
+      color: var(--color-navy);
+    }
+
+    .feature-card__title {
+      font-size: var(--font-size-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+      font-family: var(--font-heading);
+    }
+
+    .feature-card__desc {
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── How It Works Steps ── */
+    .steps-container {
+      position: relative;
+      margin-top: var(--space-10);
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+      position: relative;
+      z-index: 2;
+    }
+
+    .steps-line {
+      position: absolute;
+      top: 40px;
+      left: 12%;
+      right: 12%;
+      height: 2px;
+      background: repeating-linear-gradient(90deg, var(--color-gold) 0, var(--color-gold) 8px, transparent 8px, transparent 16px);
+      z-index: 1;
+    }
+
+    @media (max-width: 900px) {
+      .steps-line {
+        display: none;
+      }
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-8);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .step-card {
+      text-align: center;
+      padding: var(--space-4);
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--color-navy);
+      color: var(--color-gold);
+      border: 3px solid var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: var(--font-size-lg);
+      font-weight: 700;
+      font-family: var(--font-heading);
+      margin: 0 auto var(--space-5);
+      position: relative;
+      z-index: 3;
+      box-shadow: 0 4px 15px rgba(23, 43, 58, 0.2);
+    }
+
+    body.dark-mode .step-number {
+      background: var(--color-charcoal);
+      color: var(--color-gold);
+    }
+
+    .step-card__title {
+      font-size: var(--font-size-lg);
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .step-card__desc {
+      font-size: var(--font-size-sm);
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ── Split Final CTA ── */
+    .cta-split-section {
+      background: var(--bg-primary);
+      padding-block: 80px;
+    }
+
+    .cta-split-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 840px) {
+      .cta-split-wrapper {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+    }
+
+    .cta-half-card {
+      border-radius: var(--border-radius-xl);
+      padding: clamp(2.5rem, 5vw, 4rem);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 380px;
+      box-shadow: var(--shadow-xl);
+      transition: transform var(--transition-normal);
+    }
+
+    .cta-half-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .cta-half-buyer {
+      background: linear-gradient(135deg, #172B3A 0%, #223e54 100%);
+      color: var(--color-white);
+      border: 1px solid rgba(198, 165, 107, 0.3);
+    }
+
+    .cta-half-seller {
+      background: linear-gradient(135deg, #285B4A 0%, #1a3c30 100%);
+      color: var(--color-white);
+      border: 1px solid rgba(169, 184, 165, 0.3);
+    }
+
+    .cta-half-content h3 {
+      font-size: clamp(2rem, 3.5vw, 2.5rem);
+      color: var(--color-white);
+      margin-bottom: var(--space-4);
+    }
+
+    .cta-half-content p {
+      font-size: var(--font-size-base);
+      color: rgba(248, 246, 240, 0.88);
+      line-height: 1.6;
+      max-width: 440px;
+      margin-bottom: var(--space-8);
+    }
+
+    .cta-half-footer {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Global Navbar -->
+  <div id="navbar-container"></div>
+
+  <!-- ========================================================
+       SECTION 1: HERO SECTION
+       ======================================================== -->
+  <section class="hero-home1" id="hero">
+    <div class="container hero-content">
+      <div class="reveal">
+        <div class="hero-badge">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          Premier Real Estate Advisory
+        </div>
+
+        <h1 class="hero-title">Find Your Perfect Property</h1>
+        <p class="hero-subtitle">
+          Discover exceptional homes, premium apartments and investment properties. We guide buyers and sellers every step of the way.
+        </p>
+
+        <div class="hero-actions">
+          <a href="pages/buy.html" class="btn btn-primary">
+            Explore Properties
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="pages/sell-rent.html" class="btn btn-outline" style="border-color: rgba(255,255,255,0.7); color: #fff;">
+            List Your Property
+          </a>
+        </div>
+      </div>
+
+      <!-- Property Search Bar -->
+      <div class="hero-search-card reveal">
+        <form class="hero-search-form" id="heroSearchForm">
+          <!-- Field 1: Location -->
+          <div class="hero-search-field">
+            <label for="searchLocation">Location</label>
+            <input type="text" id="searchLocation" name="location" placeholder="e.g. Worli, Bandra, Gurgaon..." />
+          </div>
+
+          <!-- Field 2: Property Type -->
+          <div class="hero-search-field">
+            <label for="searchType">Property Type</label>
+            <select id="searchType" name="type">
+              <option value="All">All Types</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Villa">Villa</option>
+              <option value="House">Independent House</option>
+              <option value="Plot">Plot / Land</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+
+          <!-- Field 3: Transaction -->
+          <div class="hero-search-field">
+            <label for="searchTransaction">Transaction</label>
+            <select id="searchTransaction" name="transaction">
+              <option value="Buy">Buy</option>
+              <option value="Rent">Rent</option>
+            </select>
+          </div>
+
+          <!-- Field 4: Budget -->
+          <div class="hero-search-field">
+            <label for="searchBudget">Budget</label>
+            <select id="searchBudget" name="budget">
+              <option value="All">Any Budget</option>
+              <option value="under-1cr">Under ₹1 Cr</option>
+              <option value="1cr-3cr">₹1 Cr - ₹3 Cr</option>
+              <option value="3cr-5cr">₹3 Cr - ₹5 Cr</option>
+              <option value="5cr-10cr">₹5 Cr - ₹10 Cr</option>
+              <option value="above-10cr">Above ₹10 Cr</option>
+            </select>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary hero-search-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Search
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 2: FEATURED PROPERTIES
+       ======================================================== -->
+  <section class="section" id="featured-properties" style="padding-block: 80px;">
+    <div class="container">
+      <div class="flex-between mb-8" style="flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+        <div class="reveal">
+          <span class="section-label">Curated Portfolio</span>
+          <h2 class="section-title">Featured Properties</h2>
+          <p class="section-subtitle">Handpicked premium listings verified for quality, legal clarity, and prime location.</p>
+        </div>
+        <div class="reveal">
+          <a href="pages/buy.html" class="btn btn-secondary">
+            View All Properties
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Grid of 6 Featured Properties rendered via JS -->
+      <div class="properties-grid reveal-stagger" id="featuredPropertiesGrid">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 3: PROPERTY CATEGORIES
+       ======================================================== -->
+  <section class="section" id="categories" style="padding-block: 80px; background: var(--bg-secondary);">
+    <div class="container">
+      <div class="text-center mb-8 reveal">
+        <span class="section-label">Browse by Class</span>
+        <h2 class="section-title">Explore by Category</h2>
+        <p class="section-subtitle" style="margin-inline: auto;">
+          Discover curated properties tailored to your lifestyle, whether luxury residences, open land, or high-yield commercial assets.
+        </p>
+      </div>
+
+      <div class="category-grid reveal-stagger">
+        <!-- 1. Apartments -->
+        <a href="pages/buy.html?type=Apartment" class="category-card" aria-label="Explore Apartments">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600" alt="Apartments" class="category-card__bg" loading="lazy" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <div class="category-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                <line x1="9" y1="22" x2="9" y2="22.01"></line>
+                <line x1="15" y1="22" x2="15" y2="22.01"></line>
+                <line x1="8" y1="6" x2="10" y2="6"></line>
+                <line x1="14" y1="6" x2="16" y2="6"></line>
+                <line x1="8" y1="10" x2="10" y2="10"></line>
+                <line x1="14" y1="10" x2="16" y2="10"></line>
+                <line x1="8" y1="14" x2="10" y2="14"></line>
+                <line x1="14" y1="14" x2="16" y2="14"></line>
+              </svg>
+            </div>
+            <h3 class="category-card__title">Apartments</h3>
+            <span class="category-card__count" id="count-Apartment">24+ Properties</span>
+          </div>
+        </a>
+
+        <!-- 2. Villas -->
+        <a href="pages/buy.html?type=Villa" class="category-card" aria-label="Explore Luxury Villas">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600" alt="Luxury Villas" class="category-card__bg" loading="lazy" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <div class="category-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <h3 class="category-card__title">Villas</h3>
+            <span class="category-card__count" id="count-Villa">14+ Properties</span>
+          </div>
+        </a>
+
+        <!-- 3. Independent Houses -->
+        <a href="pages/buy.html?type=House" class="category-card" aria-label="Explore Independent Houses">
+          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600" alt="Independent Houses" class="category-card__bg" loading="lazy" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <div class="category-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+            <h3 class="category-card__title">Independent Houses</h3>
+            <span class="category-card__count" id="count-House">18+ Properties</span>
+          </div>
+        </a>
+
+        <!-- 4. Plots/Land -->
+        <a href="pages/buy.html?type=Plot" class="category-card" aria-label="Explore Plots and Land">
+          <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600" alt="Plots & Land" class="category-card__bg" loading="lazy" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <div class="category-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon>
+                <line x1="8" y1="2" x2="8" y2="18"></line>
+                <line x1="16" y1="6" x2="16" y2="22"></line>
+              </svg>
+            </div>
+            <h3 class="category-card__title">Plots / Land</h3>
+            <span class="category-card__count" id="count-Plot">10+ Properties</span>
+          </div>
+        </a>
+
+        <!-- 5. Commercial -->
+        <a href="pages/buy.html?type=Commercial" class="category-card" aria-label="Explore Commercial Properties">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600" alt="Commercial Properties" class="category-card__bg" loading="lazy" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <div class="category-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <h3 class="category-card__title">Commercial</h3>
+            <span class="category-card__count" id="count-Commercial">12+ Properties</span>
+          </div>
+        </a>
+
+        <!-- 6. Rentals -->
+        <a href="pages/buy.html?transaction=rent" class="category-card" aria-label="Explore Rental Properties">
+          <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600" alt="Rentals" class="category-card__bg" loading="lazy" />
+          <div class="category-card__overlay"></div>
+          <div class="category-card__content">
+            <div class="category-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 2l-2 2m-1-1l-3 3m5 5l-7 7-4-4 7-7 4 4z"></path>
+                <circle cx="7.5" cy="16.5" r="2.5"></circle>
+              </svg>
+            </div>
+            <h3 class="category-card__title">Rentals</h3>
+            <span class="category-card__count" id="count-Rental">15+ Properties</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 4: WHY CHOOSE US
+       ======================================================== -->
+  <section class="section" id="why-choose-us" style="padding-block: 80px;">
+    <div class="container">
+      <div class="text-center mb-8 reveal">
+        <span class="section-label">Cornerstone Advantage</span>
+        <h2 class="section-title">Why Choose Cornerstone</h2>
+        <p class="section-subtitle" style="margin-inline: auto;">
+          Experience an uncompromised standard of integrity, deep market intelligence, and boutique client representation.
+        </p>
+      </div>
+
+      <div class="features-grid reveal-stagger">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+          </div>
+          <h3 class="feature-card__title">Local Market Knowledge</h3>
+          <p class="feature-card__desc">
+            In-depth micro-market trends and price analytics across top Indian tier-1 cities.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              <polyline points="9 12 11 14 15 10"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-card__title">Verified Listings</h3>
+          <p class="feature-card__desc">
+            Every listing passes 100% legal title verification, physical visits, and RERA audit.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <h3 class="feature-card__title">Professional Guidance</h3>
+          <p class="feature-card__desc">
+            Seasoned property advisors negotiating fair market value and protecting your investment.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              <line x1="9" y1="10" x2="15" y2="10"></line>
+            </svg>
+          </div>
+          <h3 class="feature-card__title">Transparent Communication</h3>
+          <p class="feature-card__desc">
+            Zero hidden costs, crystal-clear pricing documentation, and direct owner discussions.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-card__title">Buyer & Seller Support</h3>
+          <p class="feature-card__desc">
+            Dedicated legal documentation, bank loan assistance, and seamless key handover.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 5: HOW IT WORKS
+       ======================================================== -->
+  <section class="section" id="how-it-works" style="padding-block: 80px; background: var(--bg-secondary);">
+    <div class="container">
+      <div class="text-center mb-8 reveal">
+        <span class="section-label">Effortless Process</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-subtitle" style="margin-inline: auto;">
+          Four simple steps towards acquiring or transacting your dream property with complete peace of mind.
+        </p>
+      </div>
+
+      <div class="steps-container reveal">
+        <div class="steps-line" aria-hidden="true"></div>
+
+        <div class="steps-grid">
+          <!-- Step 1 -->
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3 class="step-card__title">Discover Properties</h3>
+            <p class="step-card__desc">
+              Browse our handpicked listings, filter by budget and configuration, or view 3D virtual tours.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3 class="step-card__title">Schedule a Visit</h3>
+            <p class="step-card__desc">
+              Book private in-person inspections with dedicated property specialists at your preferred time.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3 class="step-card__title">Submit an Offer</h3>
+            <p class="step-card__desc">
+              Put forward structured purchase or lease offers backed by objective valuation data.
+            </p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3 class="step-card__title">Complete the Transaction</h3>
+            <p class="step-card__desc">
+              Seamless title transfer, escrow supervision, stamp duty registration, and key handover.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 6: FINAL CTA (SPLIT BUYERS / SELLERS)
+       ======================================================== -->
+  <section class="cta-split-section" id="cta-split">
+    <div class="container">
+      <div class="cta-split-wrapper reveal-stagger">
+        <!-- Left: Buyers -->
+        <div class="cta-half-card cta-half-buyer">
+          <div class="cta-half-content">
+            <span class="badge badge-gold" style="margin-bottom: var(--space-4);">For Discerning Buyers</span>
+            <h3>Looking to Buy?</h3>
+            <p>
+              Explore thousands of verified homes, luxury villas, and high-yield real estate investments with transparent pricing and complete legal guidance.
+            </p>
+          </div>
+          <div class="cta-half-footer">
+            <a href="pages/buy.html" class="btn btn-primary">
+              Explore Properties
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Sellers -->
+        <div class="cta-half-card cta-half-seller">
+          <div class="cta-half-content">
+            <span class="badge badge-sale" style="background: rgba(255,255,255,0.2); color:#fff; margin-bottom: var(--space-4);">For Property Owners</span>
+            <h3>Ready to Sell?</h3>
+            <p>
+              Connect with high-net-worth buyers and pre-qualified tenants. Benefit from premium photography, digital staging, and dedicated advisory.
+            </p>
+          </div>
+          <div class="cta-half-footer">
+            <a href="pages/sell-rent.html" class="btn btn-secondary" style="border-color: #fff; color: #fff;">
+              List Your Property
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Dynamic Global Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Shared JavaScript Files -->
+  <script src="js/data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Page Specific JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. Render Navbar & Footer
+      if (typeof window.renderNavbar === 'function') {
+        window.renderNavbar('navbar-container', 'home', '');
+      }
+      if (typeof window.renderFooter === 'function') {
+        window.renderFooter('footer-container', '');
+      }
+
+      // 2. Render 6 Featured Properties
+      const featuredGrid = document.getElementById('featuredPropertiesGrid');
+      if (featuredGrid && Array.isArray(window.PROPERTIES)) {
+        const featuredProps = window.PROPERTIES.filter(p => p.featured === true).slice(0, 6);
+        featuredGrid.innerHTML = featuredProps
+          .map(prop => window.renderPropertyCard(prop, ''))
+          .join('');
+
+        // Re-trigger scroll reveal observer for dynamically added cards
+        if (window.CornerstoneApp && typeof window.CornerstoneApp.initScrollReveal === 'function') {
+          window.CornerstoneApp.initScrollReveal();
+        }
+      }
+
+      // 3. Category count updates from window.PROPERTIES
+      if (Array.isArray(window.PROPERTIES)) {
+        const counts = {
+          Apartment: window.PROPERTIES.filter(p => p.type === 'Apartment').length,
+          Villa: window.PROPERTIES.filter(p => p.type === 'Villa').length,
+          House: window.PROPERTIES.filter(p => p.type === 'House').length,
+          Plot: window.PROPERTIES.filter(p => p.type === 'Plot').length,
+          Commercial: window.PROPERTIES.filter(p => p.type === 'Commercial').length,
+          Rental: window.PROPERTIES.filter(p => p.listingType === 'For Rent').length
+        };
+
+        if (document.getElementById('count-Apartment')) document.getElementById('count-Apartment').textContent = `${counts.Apartment || 6}+ Properties`;
+        if (document.getElementById('count-Villa')) document.getElementById('count-Villa').textContent = `${counts.Villa || 4}+ Properties`;
+        if (document.getElementById('count-House')) document.getElementById('count-House').textContent = `${counts.House || 3}+ Properties`;
+        if (document.getElementById('count-Plot')) document.getElementById('count-Plot').textContent = `${counts.Plot || 2}+ Properties`;
+        if (document.getElementById('count-Commercial')) document.getElementById('count-Commercial').textContent = `${counts.Commercial || 3}+ Properties`;
+        if (document.getElementById('count-Rental')) document.getElementById('count-Rental').textContent = `${counts.Rental || 5}+ Properties`;
+      }
+
+      // 4. Hero Search Form Handler
+      const searchForm = document.getElementById('heroSearchForm');
+      if (searchForm) {
+        searchForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const location = document.getElementById('searchLocation').value.trim();
+          const type = document.getElementById('searchType').value;
+          const transaction = document.getElementById('searchTransaction').value;
+          const budget = document.getElementById('searchBudget').value;
+
+          const params = new URLSearchParams();
+          if (location) params.set('location', location);
+          if (type && type !== 'All') params.set('type', type);
+          if (transaction) params.set('transaction', transaction.toLowerCase());
+          if (budget && budget !== 'All') params.set('budget', budget);
+
+          window.location.href = `pages/buy.html?${params.toString()}`;
+        });
+      }
+    });
+  </script>
+</body>
+</html>

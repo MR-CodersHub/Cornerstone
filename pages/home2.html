@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cornerstone Real Estate — Featured Properties & Categories</title>
+  <meta name="description" content="Discover luxury listings, premium residential properties, and high-yield commercial investments with Cornerstone Real Estate." />
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/variables.css" />
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/navbar.css" />
+  <link rel="stylesheet" href="../css/footer.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+
+  <style>
+    /* ── Hero Custom Styles (Home 2) ── */
+    .hero-home2 {
+      position: relative;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(23, 43, 58, 0.72) 0%, rgba(23, 43, 58, 0.9) 100%),
+                  url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600') center/cover no-repeat fixed;
+      padding-top: 110px;
+      padding-bottom: 80px;
+      color: var(--color-white);
+      text-align: center;
+    }
+
+    .hero-content-home2 {
+      max-width: 900px;
+      margin: 0 auto;
+      z-index: 2;
+    }
+
+    .hero-home2 .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--color-white);
+      line-height: 1.15;
+      margin-bottom: var(--space-6);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-home2 .hero-subtitle {
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      color: rgba(248, 246, 240, 0.9);
+      max-width: 680px;
+      margin: 0 auto var(--space-8);
+      line-height: 1.6;
+    }
+
+    /* ── Large Card Style for Luxury & Premium Properties ── */
+    .luxury-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8);
+    }
+
+    @media (max-width: 860px) {
+      .luxury-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .luxury-card {
+      background: var(--bg-card);
+      border-radius: var(--border-radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .luxury-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--color-gold);
+    }
+
+    .luxury-card__image-wrap {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--color-navy);
+    }
+
+    .luxury-card__image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+
+    .luxury-card:hover .luxury-card__image {
+      transform: scale(1.06);
+    }
+
+    .luxury-card__tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: rgba(23, 43, 58, 0.85);
+      border: 1px solid var(--color-gold);
+      color: var(--color-gold);
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--border-radius-pill);
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(6px);
+      z-index: 2;
+    }
+
+    .luxury-card__price-badge {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      background: var(--color-navy);
+      color: var(--color-gold);
+      font-family: var(--font-heading);
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      padding: 0.45rem 1.15rem;
+      border-radius: var(--border-radius-md);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+
+    .luxury-card__body {
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .luxury-card__title {
+      font-size: var(--font-size-xl);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+
+    .luxury-card__location {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-4);
+    }
+
+    .luxury-card__desc {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: var(--space-5);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .luxury-card__specs {
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--border-color);
+      margin-top: auto;
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+    }
+
+    .luxury-card__spec {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .luxury-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: var(--space-5);
+    }
+
+    /* ── Tabbed Residential Filters ── */
+    .filter-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-8);
+    }
+
+    .filter-tab-btn {
+      padding: 0.65rem 1.5rem;
+      border-radius: var(--border-radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .filter-tab-btn:hover {
+      border-color: var(--color-gold);
+      color: var(--text-primary);
+    }
+
+    .filter-tab-btn.active {
+      background: var(--color-navy);
+      color: var(--color-gold);
+      border-color: var(--color-navy);
+      box-shadow: 0 4px 12px rgba(23, 43, 58, 0.15);
+    }
+
+    body.dark-mode .filter-tab-btn.active {
+      background: var(--color-gold);
+      color: var(--color-navy);
+      border-color: var(--color-gold);
+    }
+
+    /* ── Commercial & Investment Layout ── */
+    .investment-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+      margin-bottom: var(--space-10);
+    }
+
+    @media (max-width: 992px) {
+      .investment-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .investment-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .investment-stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-6);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border-top: 4px solid var(--color-gold);
+      transition: transform var(--transition-fast);
+    }
+
+    .investment-stat-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .investment-stat-value {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      color: var(--color-gold);
+      margin-bottom: var(--space-2);
+    }
+
+    .investment-stat-label {
+      font-size: var(--font-size-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-1);
+    }
+
+    .investment-stat-sub {
+      font-size: var(--font-size-xs);
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* ── Recently Added Badges ── */
+    .recently-added-badge {
+      position: absolute;
+      top: 1rem;
+      right: 3.5rem;
+      background: rgba(40, 91, 74, 0.9);
+      color: #fff;
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--border-radius-sm);
+      z-index: 2;
+      backdrop-filter: blur(4px);
+    }
+
+    /* ── Section 6 Search CTA Banner ── */
+    .cta-search-banner {
+      background: linear-gradient(135deg, var(--color-navy) 0%, #203a4e 100%);
+      border-radius: var(--border-radius-xl);
+      padding: clamp(3rem, 6vw, 5rem);
+      color: var(--color-white);
+      text-align: center;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(198, 165, 107, 0.3);
+    }
+
+    .cta-search-banner::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(198, 165, 107, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-search-banner h2 {
+      color: var(--color-white);
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: var(--space-4);
+    }
+
+    .cta-search-banner p {
+      color: rgba(248, 246, 240, 0.9);
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      max-width: 640px;
+      margin: 0 auto var(--space-8);
+      line-height: 1.6;
+    }
+
+    .cta-banner-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dynamic Global Navbar -->
+  <div id="navbar-container"></div>
+
+  <!-- ========================================================
+       SECTION 1: HERO SECTION
+       ======================================================== -->
+  <section class="hero-home2" id="hero">
+    <div class="container hero-content-home2">
+      <div class="reveal">
+        <span class="badge badge-gold" style="margin-bottom: var(--space-4);">Cornerstone Signature Showcase</span>
+        <h1 class="hero-title">Discover Exceptional Properties</h1>
+        <p class="hero-subtitle">
+          Curated listings of luxury homes, premium apartments and investment opportunities across India's premier metropolitan enclaves.
+        </p>
+        <div>
+          <a href="buy.html" class="btn btn-primary" style="padding: 0.85rem 2.25rem; font-size: var(--font-size-base);">
+            Browse Listings
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 2: LUXURY & PREMIUM PROPERTIES
+       ======================================================== -->
+  <section class="section" id="luxury-listings" style="padding-block: 80px;">
+    <div class="container">
+      <div class="flex-between mb-8" style="flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+        <div class="reveal">
+          <span class="section-label">High-Value Portfolio</span>
+          <h2 class="section-title">Luxury & Premium Listings</h2>
+          <p class="section-subtitle">Flagship architectural masterworks commanding exceptional vistas, expansive layouts, and legacy prestige.</p>
+        </div>
+        <div class="reveal">
+          <a href="buy.html?budget=above-10cr" class="btn btn-secondary">
+            View All Luxury
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- 4 Highest Price Properties (Large Card Style) -->
+      <div class="luxury-grid reveal-stagger" id="luxuryPropertiesGrid">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 3: RESIDENTIAL PROPERTIES (TABBED)
+       ======================================================== -->
+  <section class="section" id="residential-listings" style="padding-block: 80px; background: var(--bg-secondary);">
+    <div class="container">
+      <div class="text-center mb-8 reveal">
+        <span class="section-label">Family Living</span>
+        <h2 class="section-title">Residential Properties</h2>
+        <p class="section-subtitle" style="margin-inline: auto;">
+          From skyline apartments to standalone villas, explore residential sanctuaries designed for inspired daily living.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs reveal" role="tablist">
+        <button class="filter-tab-btn active" data-tab="all" role="tab">All Residential</button>
+        <button class="filter-tab-btn" data-tab="Apartment" role="tab">Apartments</button>
+        <button class="filter-tab-btn" data-tab="Villa" role="tab">Villas</button>
+        <button class="filter-tab-btn" data-tab="House" role="tab">Independent Houses</button>
+      </div>
+
+      <!-- Residential Grid (6 Cards) -->
+      <div class="grid grid-3 reveal-stagger" id="residentialPropertiesGrid" style="gap: var(--space-8);">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 4: COMMERCIAL & INVESTMENT PROPERTIES
+       ======================================================== -->
+  <section class="section" id="commercial-investment" style="padding-block: 80px;">
+    <div class="container">
+      <div class="text-center mb-8 reveal">
+        <span class="section-label">Institutional & Commercial</span>
+        <h2 class="section-title">Commercial & Investment</h2>
+        <p class="section-subtitle" style="margin-inline: auto;">
+          High-yielding Grade-A commercial assets, pre-leased corporate towers, and retail frontage built for sustainable alpha.
+        </p>
+      </div>
+
+      <!-- Investment Callout Cards with Yield / ROI Information -->
+      <div class="investment-stats-grid reveal-stagger">
+        <div class="investment-stat-card">
+          <div class="investment-stat-value">8.2%</div>
+          <div class="investment-stat-label">Avg. Gross Yield</div>
+          <div class="investment-stat-sub">Across prime Grade-A commercial IT and BFSI hubs</div>
+        </div>
+
+        <div class="investment-stat-card">
+          <div class="investment-stat-value">12.4%</div>
+          <div class="investment-stat-label">Annual Appreciation</div>
+          <div class="investment-stat-sub">3-year capital growth in key commercial corridors</div>
+        </div>
+
+        <div class="investment-stat-card">
+          <div class="investment-stat-value">100%</div>
+          <div class="investment-stat-label">Verified Titles</div>
+          <div class="investment-stat-sub">Strict RERA, environmental, and encumbrance checks</div>
+        </div>
+
+        <div class="investment-stat-card">
+          <div class="investment-stat-value">9 Yrs</div>
+          <div class="investment-stat-label">Average Lease Term</div>
+          <div class="investment-stat-sub">Blue-chip corporate tenants with built-in escalation</div>
+        </div>
+      </div>
+
+      <!-- Commercial Property Cards -->
+      <div class="grid grid-3 reveal-stagger" id="commercialPropertiesGrid" style="gap: var(--space-8);">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 5: RECENTLY ADDED LISTINGS
+       ======================================================== -->
+  <section class="section" id="recently-added" style="padding-block: 80px; background: var(--bg-secondary);">
+    <div class="container">
+      <div class="flex-between mb-8" style="flex-wrap: wrap; gap: 1rem; align-items: flex-end;">
+        <div class="reveal">
+          <span class="section-label">Fresh on the Market</span>
+          <h2 class="section-title">Recently Added</h2>
+          <p class="section-subtitle">The latest property listings brought to market by our verified advisory partners.</p>
+        </div>
+        <div class="reveal">
+          <a href="buy.html" class="btn btn-secondary">
+            View All New Listings
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- 6 Recently Added Cards -->
+      <div class="grid grid-3 reveal-stagger" id="recentlyAddedGrid" style="gap: var(--space-8);">
+        <!-- Rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================================
+       SECTION 6: PROPERTY SEARCH CTA
+       ======================================================== -->
+  <section class="section" id="search-cta" style="padding-block: 80px;">
+    <div class="container">
+      <div class="cta-search-banner reveal">
+        <span class="badge badge-gold" style="margin-bottom: var(--space-4);">Start Your Property Journey</span>
+        <h2>Find Your Dream Property</h2>
+        <p>
+          Create a free account to save properties, receive alerts, and manage your property journey with transparent advisory every step of the way.
+        </p>
+
+        <div class="cta-banner-buttons">
+          <a href="login.html?type=buyer" class="btn btn-primary" style="padding: 0.85rem 2rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            Create Buyer Account
+          </a>
+          <a href="sell-rent.html" class="btn btn-secondary" style="border-color: #fff; color: #fff; padding: 0.85rem 2rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            </svg>
+            List Your Property
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Dynamic Global Footer -->
+  <div id="footer-container"></div>
+
+  <!-- Shared JavaScript Files -->
+  <script src="../js/data.js"></script>
+  <script src="../js/components.js"></script>
+  <script src="../js/app.js"></script>
+
+  <!-- Page Specific JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 1. Render Navbar & Footer (with ../ base path)
+      if (typeof window.renderNavbar === 'function') {
+        window.renderNavbar('navbar-container', 'home2', '../');
+      }
+      if (typeof window.renderFooter === 'function') {
+        window.renderFooter('footer-container', '../');
+      }
+
+      if (!Array.isArray(window.PROPERTIES)) return;
+
+      // Helper to calculate days ago string
+      function getDaysAgo(dateStr) {
+        if (!dateStr) return 'Recently';
+        const added = new Date(dateStr);
+        const now = new Date('2024-04-01'); // Anchor for consistent realistic demo display
+        const diffTime = Math.abs(now - added);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        if (diffDays <= 1) return 'Listed today';
+        if (diffDays <= 7) return `Listed ${diffDays} days ago`;
+        if (diffDays <= 30) return `Listed ${Math.floor(diffDays / 7)}w ago`;
+        return `Listed ${Math.floor(diffDays / 30)}m ago`;
+      }
+
+      // 2. SECTION 2: Render 4 Luxury & Premium Properties (highest price, large card format)
+      const luxuryGrid = document.getElementById('luxuryPropertiesGrid');
+      if (luxuryGrid) {
+        const topLuxury = [...window.PROPERTIES]
+          .sort((a, b) => b.price - a.price)
+          .slice(0, 4);
+
+        luxuryGrid.innerHTML = topLuxury.map(prop => {
+          const isSaved = window.isPropertySaved ? window.isPropertySaved(prop.id) : false;
+          return `
+            <article class="luxury-card" data-property-id="${prop.id}">
+              <div class="luxury-card__image-wrap">
+                <img src="${prop.image}" alt="${prop.title}" class="luxury-card__image" loading="lazy" />
+                <span class="luxury-card__tag">Signature Collection</span>
+                <span class="luxury-card__price-badge">${prop.priceDisplay}</span>
+                <button class="property-card__save-btn ${isSaved ? 'saved' : ''}" 
+                        data-save-id="${prop.id}" 
+                        aria-label="${isSaved ? 'Remove from saved' : 'Save property'}"
+                        style="position:absolute; top:1rem; right:1rem;">
+                  <svg viewBox="0 0 24 24" fill="${isSaved ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                  </svg>
+                </button>
+              </div>
+
+              <div class="luxury-card__body">
+                <h3 class="luxury-card__title">${prop.title}</h3>
+                <div class="luxury-card__location">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  <span>${prop.location}</span>
+                </div>
+                <p class="luxury-card__desc">${prop.description}</p>
+
+                <div class="luxury-card__specs">
+                  ${prop.bedrooms > 0 ? `
+                    <div class="luxury-card__spec">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 20v-8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8"></path><path d="M5 10V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"></path></svg>
+                      <strong>${prop.bedrooms}</strong> Beds
+                    </div>
+                  ` : ''}
+
+                  ${prop.bathrooms > 0 ? `
+                    <div class="luxury-card__spec">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><path d="M4 12h16"></path></svg>
+                      <strong>${prop.bathrooms}</strong> Baths
+                    </div>
+                  ` : ''}
+
+                  <div class="luxury-card__spec">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+                    <strong>${prop.area.toLocaleString()}</strong> sqft
+                  </div>
+                </div>
+
+                <div class="luxury-card__footer">
+                  <span class="badge badge-gold">${prop.furnishing || 'Luxury Fitted'}</span>
+                  <a href="property-details.html?id=${prop.id}" class="btn btn-primary" style="padding: 0.5rem 1.25rem;">
+                    View Details
+                  </a>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join('');
+      }
+
+      // 3. SECTION 3: Residential Properties with Tab Switching (6 cards)
+      const resGrid = document.getElementById('residentialPropertiesGrid');
+      function renderResidential(filterTab) {
+        if (!resGrid) return;
+        let filtered = window.PROPERTIES.filter(p => p.type !== 'Commercial' && p.type !== 'Plot');
+        if (filterTab === 'Apartment') {
+          filtered = window.PROPERTIES.filter(p => p.type === 'Apartment');
+        } else if (filterTab === 'Villa') {
+          filtered = window.PROPERTIES.filter(p => p.type === 'Villa');
+        } else if (filterTab === 'House') {
+          filtered = window.PROPERTIES.filter(p => p.type === 'House');
+        }
+
+        resGrid.innerHTML = filtered.slice(0, 6)
+          .map(prop => window.renderPropertyCard(prop, '../'))
+          .join('');
+
+        if (window.CornerstoneApp && typeof window.CornerstoneApp.initScrollReveal === 'function') {
+          window.CornerstoneApp.initScrollReveal();
+        }
+      }
+
+      renderResidential('all');
+
+      // Tab click events
+      document.querySelectorAll('.filter-tab-btn').forEach(btn => {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.filter-tab-btn').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const tab = this.getAttribute('data-tab');
+          renderResidential(tab);
+        });
+      });
+
+      // 4. SECTION 4: Commercial & Investment Properties
+      const commGrid = document.getElementById('commercialPropertiesGrid');
+      if (commGrid) {
+        let commProps = window.PROPERTIES.filter(p => p.type === 'Commercial');
+        // If fewer than 3 commercial, fill with highest yield listings or plots
+        if (commProps.length < 3) {
+          const others = window.PROPERTIES.filter(p => p.type === 'Plot' || p.listingType === 'For Rent');
+          commProps = [...commProps, ...others];
+        }
+        commGrid.innerHTML = commProps.slice(0, 3)
+          .map(prop => window.renderPropertyCard(prop, '../'))
+          .join('');
+      }
+
+      // 5. SECTION 5: Recently Added Listings (sort by dateAdded desc, show "Listed X days ago")
+      const recentGrid = document.getElementById('recentlyAddedGrid');
+      if (recentGrid) {
+        const recentlyAdded = [...window.PROPERTIES]
+          .sort((a, b) => new Date(b.dateAdded || '2024-01-01') - new Date(a.dateAdded || '2024-01-01'))
+          .slice(0, 6);
+
+        recentGrid.innerHTML = recentlyAdded.map(prop => {
+          const daysAgoText = getDaysAgo(prop.dateAdded);
+          let cardHtml = window.renderPropertyCard(prop, '../');
+
+          // Inject custom "Listed X days ago" badge into the card
+          cardHtml = cardHtml.replace(
+            '<div class="property-card__overlay-badges">',
+            `<div class="recently-added-badge">${daysAgoText}</div><div class="property-card__overlay-badges">`
+          );
+          return cardHtml;
+        }).join('');
+      }
+
+      // Trigger scroll reveal
+      if (window.CornerstoneApp && typeof window.CornerstoneApp.initScrollReveal === 'function') {
+        window.CornerstoneApp.initScrollReveal();
+      }
+    });
+  </script>
+</body>
+</html>

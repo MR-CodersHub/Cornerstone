@@ -1,0 +1,2362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buyer Dashboard — Cornerstone Real Estate</title>
+  
+  <!-- Favicon / Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="./buyer-dashboard.css">
+</head>
+<body>
+
+<div class="dashboard-layout">
+  <!-- Mobile Sidebar Overlay -->
+  <div class="dashboard-sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SIDEBAR NAVIGATION (11 Items)
+  ══════════════════════════════════════════════════════════ -->
+  <aside class="dashboard-sidebar" id="dashboard-sidebar" aria-label="Sidebar Navigation">
+    <div class="dashboard-sidebar__header">
+      <a href="../index.html" class="dashboard-sidebar__logo" title="Back to Homepage">
+        <div class="dashboard-sidebar__logo-icon">C</div>
+        <div>
+          <div class="dashboard-sidebar__logo-title">Cornerstone</div>
+          <span class="dashboard-sidebar__logo-tagline">Real Estate</span>
+        </div>
+      </a>
+      <button class="dashboard-sidebar__close-btn" id="sidebar-close-btn" aria-label="Close Sidebar">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <nav class="dashboard-sidebar__nav">
+      <div class="dashboard-sidebar__section-label">Buyer Portal</div>
+      
+      <!-- 1. Overview -->
+      <button class="dashboard-nav-item active" data-section="overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>Overview</span>
+      </button>
+
+      <!-- 2. Saved Properties -->
+      <button class="dashboard-nav-item" data-section="saved">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+        <span>Saved Properties</span>
+        <span class="badge badge-gold" id="nav-badge-saved">4</span>
+      </button>
+
+      <!-- 3. Browse Properties -->
+      <button class="dashboard-nav-item" data-section="browse">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Browse Properties</span>
+      </button>
+
+      <!-- 4. Site Visits -->
+      <button class="dashboard-nav-item" data-section="visits">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <span>Site Visits</span>
+        <span class="badge badge-gold" id="nav-badge-visits">1</span>
+      </button>
+
+      <!-- 5. My Enquiries -->
+      <button class="dashboard-nav-item" data-section="enquiries">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        <span>My Enquiries</span>
+        <span class="badge badge-gold" id="nav-badge-enquiries">3</span>
+      </button>
+
+      <!-- 6. My Offers -->
+      <button class="dashboard-nav-item" data-section="offers">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+        <span>My Offers</span>
+        <span class="badge badge-gold" id="nav-badge-offers">2</span>
+      </button>
+
+      <!-- 7. Recently Viewed -->
+      <button class="dashboard-nav-item" data-section="recent">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        <span>Recently Viewed</span>
+      </button>
+
+      <!-- 8. Notifications -->
+      <button class="dashboard-nav-item" data-section="notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+        <span>Notifications</span>
+        <span class="badge" style="background:#E53935;color:#fff;" id="nav-badge-notif">2</span>
+      </button>
+
+      <div class="dashboard-sidebar__section-label" style="margin-top: 1rem;">Account</div>
+
+      <!-- 9. My Profile -->
+      <button class="dashboard-nav-item" data-section="profile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <span>My Profile</span>
+      </button>
+
+      <!-- 10. Help & Support -->
+      <button class="dashboard-nav-item" data-section="support">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <span>Help & Support</span>
+      </button>
+
+      <!-- 11. Logout -->
+      <button class="dashboard-nav-item" id="nav-btn-logout">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        <span>Logout</span>
+      </button>
+    </nav>
+
+    <div class="dashboard-sidebar__footer">
+      <span>Cornerstone OS v2.4</span>
+      <a href="../index.html" style="color:var(--color-gold);text-decoration:none;">Public Site &rarr;</a>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN CONTENT CONTAINER
+  ══════════════════════════════════════════════════════════ -->
+  <main class="dashboard-main">
+    
+    <!-- Topbar (Sticky 64px) -->
+    <header class="dashboard-topbar">
+      <div class="dashboard-topbar__left">
+        <button class="dashboard-hamburger" id="hamburger-btn" aria-label="Toggle Navigation">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <h1 class="dashboard-page-title" id="page-heading">Overview</h1>
+      </div>
+
+      <div class="dashboard-topbar__right">
+        <!-- Quick search -->
+        <div class="dashboard-search-wrap">
+          <svg class="dashboard-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="topbar-search" class="dashboard-search-input" placeholder="Search properties or IDs..." />
+        </div>
+
+        <!-- Dark / Light theme toggle -->
+        <button class="dashboard-notification-btn js-theme-toggle" aria-label="Toggle Theme" title="Toggle Theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <!-- RTL Toggle -->
+        <button class="dashboard-notification-btn js-rtl-toggle" style="font-size:0.75rem;font-weight:700;" title="Toggle RTL/LTR">RTL</button>
+
+        <!-- Notification Bell -->
+        <button class="dashboard-notification-btn" id="topbar-bell-btn" title="View Notifications">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span class="dashboard-notification-badge" id="topbar-notif-count">2</span>
+        </button>
+
+        <!-- User Profile Dropdown -->
+        <div class="dashboard-user-menu">
+          <button class="dashboard-user-btn" id="user-menu-btn" aria-haspopup="true" aria-expanded="false">
+            <div class="dashboard-user-avatar">RM</div>
+            <div class="dashboard-user-info">
+              <div class="dashboard-user-name">Rahul Mehta</div>
+              <div class="dashboard-user-role">Verified Buyer</div>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          
+          <div class="dashboard-dropdown" id="user-dropdown">
+            <button class="dashboard-dropdown-item" onclick="switchSection('profile')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span>My Profile</span>
+            </button>
+            <button class="dashboard-dropdown-item" onclick="switchSection('support')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <span>Help & Support</span>
+            </button>
+            <div class="dashboard-dropdown-divider"></div>
+            <button class="dashboard-dropdown-item" style="color:#E53935;" onclick="triggerLogout()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+              <span>Sign Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Workspace -->
+    <div class="dashboard-content">
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 1: OVERVIEW
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section active" id="section-overview">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+          <div>
+            <h2 class="welcome-banner__title">Welcome back, Rahul! 👋</h2>
+            <div class="welcome-banner__date" id="overview-today-date">Today's Date</div>
+          </div>
+          <div class="welcome-banner__quick-actions">
+            <button class="btn btn-secondary" onclick="switchSection('browse')">Browse Properties</button>
+            <button class="btn btn-secondary" onclick="openNewVisitModal()">Schedule a Visit</button>
+            <button class="btn btn-primary" onclick="openNewOfferModal()">Make an Offer</button>
+          </div>
+        </div>
+
+        <!-- Stats Row (4 Stat Cards) -->
+        <div class="stats-grid">
+          <div class="stat-card" onclick="switchSection('saved')">
+            <div class="stat-card__info">
+              <span class="stat-card__label">Saved Properties</span>
+              <span class="stat-card__value" id="stat-saved-count">4</span>
+            </div>
+            <div class="stat-card__icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            </div>
+          </div>
+
+          <div class="stat-card" onclick="switchSection('visits')">
+            <div class="stat-card__info">
+              <span class="stat-card__label">Upcoming Visits</span>
+              <span class="stat-card__value" id="stat-visits-count">1</span>
+            </div>
+            <div class="stat-card__icon-wrap" style="color:var(--color-green);background:rgba(40,91,74,0.12);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            </div>
+          </div>
+
+          <div class="stat-card" onclick="switchSection('enquiries')">
+            <div class="stat-card__info">
+              <span class="stat-card__label">Active Enquiries</span>
+              <span class="stat-card__value" id="stat-enquiries-count">3</span>
+            </div>
+            <div class="stat-card__icon-wrap" style="color:#0288D1;background:rgba(2,136,209,0.12);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+          </div>
+
+          <div class="stat-card" onclick="switchSection('offers')">
+            <div class="stat-card__info">
+              <span class="stat-card__label">Active Offers</span>
+              <span class="stat-card__value" id="stat-offers-count">2</span>
+            </div>
+            <div class="stat-card__icon-wrap" style="color:#7B1FA2;background:rgba(123,31,162,0.12);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two Column Feed & Upcoming Visit Preview -->
+        <div class="overview-columns">
+          <!-- Recent Activity Feed -->
+          <div class="card-box">
+            <div class="card-box__header">
+              <h3 class="card-box__title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <span>Recent Activity</span>
+              </h3>
+              <button class="btn btn-ghost" style="padding:0.25rem 0.5rem;font-size:0.75rem;" onclick="switchSection('notifications')">View All</button>
+            </div>
+            <div class="activity-feed" id="overview-activity-feed">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <!-- Upcoming Visit Preview -->
+          <div class="card-box">
+            <div class="card-box__header">
+              <h3 class="card-box__title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>Upcoming Site Visit</span>
+              </h3>
+              <button class="btn btn-ghost" style="padding:0.25rem 0.5rem;font-size:0.75rem;" onclick="switchSection('visits')">All Visits</button>
+            </div>
+            <div id="overview-upcoming-visit-container">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Recommended Properties -->
+        <div class="card-box" style="margin-bottom: 2rem;">
+          <div class="card-box__header">
+            <div>
+              <h3 class="card-box__title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <span>Curated Recommendations For You</span>
+              </h3>
+              <div class="section-subtitle">Hand-picked luxury residences matching your search profile in Mumbai & Delhi NCR</div>
+            </div>
+            <button class="btn btn-primary" onclick="switchSection('browse')">View Full Catalog &rarr;</button>
+          </div>
+          <div class="property-dashboard-grid" id="overview-recommended-grid">
+            <!-- 3 cards rendered via renderPropertyCard -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 2: SAVED PROPERTIES
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-saved">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Saved Properties</h2>
+            <div class="section-subtitle">Bookmark and track luxury properties of interest. Compare up to 3 listings side-by-side.</div>
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;">
+            <button class="btn btn-secondary" id="compare-selected-btn" onclick="openComparisonModal()" disabled>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              <span id="compare-btn-label">Compare Selected (0)</span>
+            </button>
+            <button class="btn btn-primary" onclick="switchSection('browse')">+ Explore More</button>
+          </div>
+        </div>
+
+        <div class="property-dashboard-grid" id="saved-properties-grid">
+          <!-- Rendered via JS -->
+        </div>
+
+        <div id="saved-empty-state" style="display:none;text-align:center;padding:4rem 2rem;background:#fff;border-radius:12px;border:1px dashed #D8DDE0;">
+          <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#C6A56B" stroke-width="1.5" style="margin-bottom:1rem;"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+          <h3 style="font-family:var(--font-heading);font-size:1.4rem;margin-bottom:0.5rem;">No Saved Properties Yet</h3>
+          <p style="color:#71828D;max-width:440px;margin:0 auto 1.5rem;">Explore our curated selection of ultra-luxury apartments, villas, and commercial real estate and click the heart icon to save.</p>
+          <button class="btn btn-primary" onclick="switchSection('browse')">Browse Properties Now</button>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 3: BROWSE PROPERTIES
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-browse">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Browse Properties</h2>
+            <div class="section-subtitle">Real-time marketplace of verified prime real estate across India</div>
+          </div>
+          <div id="browse-count-label" class="badge badge-gold" style="font-size:0.85rem;padding:6px 12px;">18 Properties Available</div>
+        </div>
+
+        <!-- Filter Row -->
+        <div class="browse-filter-bar">
+          <div class="filter-item">
+            <label class="form-label">Property Type</label>
+            <select id="browse-filter-type" class="form-control" onchange="applyBrowseFilters()">
+              <option value="">All Types</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Villa">Villa</option>
+              <option value="House">House</option>
+              <option value="Plot">Plot</option>
+              <option value="Commercial">Commercial</option>
+            </select>
+          </div>
+
+          <div class="filter-item">
+            <label class="form-label">Transaction</label>
+            <select id="browse-filter-listing" class="form-control" onchange="applyBrowseFilters()">
+              <option value="">Buy & Rent</option>
+              <option value="For Sale">For Sale</option>
+              <option value="For Rent">For Rent</option>
+            </select>
+          </div>
+
+          <div class="filter-item">
+            <label class="form-label">Price Range</label>
+            <select id="browse-filter-price" class="form-control" onchange="applyBrowseFilters()">
+              <option value="">Any Price</option>
+              <option value="under-5cr">Under ₹5 Cr</option>
+              <option value="5cr-15cr">₹5 Cr – ₹15 Cr</option>
+              <option value="above-15cr">Above ₹15 Cr</option>
+            </select>
+          </div>
+
+          <div class="filter-item" style="flex:1.5;">
+            <label class="form-label">Location / Neighborhood</label>
+            <input type="text" id="browse-filter-location" class="form-control" placeholder="e.g. Bandra, Worli, Delhi..." oninput="applyBrowseFilters()" />
+          </div>
+
+          <div class="filter-item">
+            <label class="form-label">Sort By</label>
+            <select id="browse-filter-sort" class="form-control" onchange="applyBrowseFilters()">
+              <option value="featured">Featured First</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="area-desc">Area: Largest First</option>
+            </select>
+          </div>
+
+          <div style="align-self: flex-end;">
+            <button class="btn btn-ghost" onclick="resetBrowseFilters()" title="Reset Filters" style="height:38px;">Clear</button>
+          </div>
+        </div>
+
+        <!-- Property Grid -->
+        <div class="property-dashboard-grid" id="browse-properties-grid">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 4: SITE VISITS
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-visits">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Site Visits</h2>
+            <div class="section-subtitle">Track, reschedule, or cancel on-site property walkthroughs with senior property advisors.</div>
+          </div>
+          <button class="btn btn-primary" onclick="openNewVisitModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Request New Visit</span>
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Date & Time</th>
+                <th>Assigned Agent</th>
+                <th>Status</th>
+                <th>Notes</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="visits-table-body">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 5: MY ENQUIRIES
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-enquiries">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">My Enquiries</h2>
+            <div class="section-subtitle">Direct communication channels with property relationship managers and seller brokers.</div>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Date</th>
+                <th>Agent</th>
+                <th>Your Enquiry</th>
+                <th>Latest Response</th>
+                <th>Status</th>
+                <th style="text-align:right;">Details</th>
+              </tr>
+            </thead>
+            <tbody id="enquiries-table-body">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 6: MY OFFERS
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-offers">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">My Offers & Negotiations</h2>
+            <div class="section-subtitle">Formal purchase bids, counteroffers, and settlement timelines.</div>
+          </div>
+          <button class="btn btn-primary" onclick="openNewOfferModal()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Submit New Offer</span>
+          </button>
+        </div>
+
+        <div class="table-responsive">
+          <table class="dashboard-table">
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Offer Amount</th>
+                <th>Target Closing</th>
+                <th>Financing</th>
+                <th>Status</th>
+                <th style="text-align:right;">Actions & Review</th>
+              </tr>
+            </thead>
+            <tbody id="offers-table-body">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 7: RECENTLY VIEWED
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-recent">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Recently Viewed Properties</h2>
+            <div class="section-subtitle">Quickly jump back into homes and investments you inspected recently.</div>
+          </div>
+          <button class="btn btn-ghost" onclick="clearRecentlyViewed()">Clear History</button>
+        </div>
+
+        <div class="property-dashboard-grid" id="recent-properties-grid">
+          <!-- Rendered via JS -->
+        </div>
+
+        <div id="recent-empty-state" style="display:none;text-align:center;padding:4rem 2rem;background:#fff;border-radius:12px;border:1px dashed #D8DDE0;">
+          <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#C6A56B" stroke-width="1.5" style="margin-bottom:1rem;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <h3 style="font-family:var(--font-heading);font-size:1.4rem;margin-bottom:0.5rem;">No Recently Viewed Properties</h3>
+          <p style="color:#71828D;max-width:440px;margin:0 auto 1.5rem;">Your browsing history will appear here once you explore property details pages.</p>
+          <button class="btn btn-primary" onclick="switchSection('browse')">Start Browsing</button>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 8: NOTIFICATIONS
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-notifications">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Notifications & Alerts</h2>
+            <div class="section-subtitle">Real-time alerts regarding visits, counteroffers, new matching listings, and agent responses.</div>
+          </div>
+          <button class="btn btn-secondary" onclick="markAllNotificationsRead()">Mark All as Read</button>
+        </div>
+
+        <div class="notifications-list" id="notifications-list-container">
+          <!-- Rendered via JS -->
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 9: MY PROFILE
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-profile">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Buyer Profile & Settings</h2>
+            <div class="section-subtitle">Manage personal contact credentials, official correspondence address, and notification preferences.</div>
+          </div>
+        </div>
+
+        <div class="card-box" style="margin-bottom: 2rem;">
+          <!-- Profile Avatar Top Area -->
+          <div style="display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid #EBEFF1;">
+            <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg, var(--color-green), var(--color-navy));color:#fff;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700;border:3px solid var(--color-gold);">
+              RM
+            </div>
+            <div>
+              <h3 style="font-family:var(--font-heading);font-size:1.35rem;margin:0 0 0.25rem;">Rahul Mehta</h3>
+              <p style="color:#71828D;font-size:0.85rem;margin:0 0 0.75rem;">Premium High-Net-Worth Buyer &bull; Registered Member since January 2023</p>
+              <button class="btn btn-ghost" style="padding:0.35rem 0.75rem;font-size:0.75rem;" onclick="if(window.showToast) window.showToast('Avatar upload available in live account','info');">Change Avatar</button>
+            </div>
+          </div>
+
+          <form id="profile-form" onsubmit="handleProfileSubmit(event)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2rem;">
+              <!-- Left Column: Personal Info -->
+              <div>
+                <h4 style="font-family:var(--font-heading);font-size:1.1rem;margin-bottom:1.25rem;color:var(--color-gold);">Personal Information</h4>
+                
+                <div class="form-group" style="margin-bottom:1rem;">
+                  <label class="form-label required">Full Legal Name</label>
+                  <input type="text" class="form-control" id="prof-name" value="Rahul Mehta" required />
+                </div>
+
+                <div class="form-group" style="margin-bottom:1rem;">
+                  <label class="form-label required">Email Address</label>
+                  <input type="email" class="form-control" id="prof-email" value="rahul.mehta@example.com" required />
+                </div>
+
+                <div class="form-group" style="margin-bottom:1rem;">
+                  <label class="form-label required">Phone Number</label>
+                  <input type="tel" class="form-control" id="prof-phone" value="+91 98201 54321" required />
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+                  <div class="form-group">
+                    <label class="form-label">Date of Birth</label>
+                    <input type="date" class="form-control" id="prof-dob" value="1988-06-15" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Gender</label>
+                    <select class="form-control" id="prof-gender">
+                      <option value="Male" selected>Male</option>
+                      <option value="Female">Female</option>
+                      <option value="Other">Prefer not to say</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Address -->
+              <div>
+                <h4 style="font-family:var(--font-heading);font-size:1.1rem;margin-bottom:1.25rem;color:var(--color-gold);">Primary Residence Address</h4>
+
+                <div class="form-group" style="margin-bottom:1rem;">
+                  <label class="form-label">Street Address</label>
+                  <input type="text" class="form-control" id="prof-street" value="Apt 1402, Sea Green Towers, Worli Seaface" />
+                </div>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+                  <div class="form-group">
+                    <label class="form-label">City</label>
+                    <input type="text" class="form-control" id="prof-city" value="Mumbai" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">State</label>
+                    <input type="text" class="form-control" id="prof-state" value="Maharashtra" />
+                  </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom:1rem;">
+                  <label class="form-label">Postal Pincode</label>
+                  <input type="text" class="form-control" id="prof-pincode" value="400018" />
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Preferred Currency</label>
+                  <select class="form-control" id="prof-curr">
+                    <option value="INR" selected>Indian Rupee (₹ INR)</option>
+                    <option value="USD">US Dollar ($ USD)</option>
+                    <option value="AED">UAE Dirham (AED)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <hr style="border:none;border-top:1px solid #EBEFF1;margin:1.5rem 0;" />
+
+            <!-- Password Section -->
+            <div style="margin-bottom:2rem;">
+              <h4 style="font-family:var(--font-heading);font-size:1.1rem;margin-bottom:1rem;color:var(--color-gold);">Security & Password</h4>
+              <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:1rem;">
+                <div class="form-group">
+                  <label class="form-label">Current Password</label>
+                  <input type="password" class="form-control" placeholder="••••••••" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">New Password</label>
+                  <input type="password" class="form-control" placeholder="New secure password" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Confirm New Password</label>
+                  <input type="password" class="form-control" placeholder="Confirm password" />
+                </div>
+              </div>
+            </div>
+
+            <hr style="border:none;border-top:1px solid #EBEFF1;margin:1.5rem 0;" />
+
+            <!-- Communication Preferences -->
+            <div style="margin-bottom:2rem;">
+              <h4 style="font-family:var(--font-heading);font-size:1.1rem;margin-bottom:1rem;color:var(--color-gold);">Communication Preferences</h4>
+              <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                <label class="form-check">
+                  <input type="checkbox" id="pref-email" checked />
+                  <span class="form-check-label">Receive instant email updates on enquiry replies and visit confirmations</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="pref-sms" checked />
+                  <span class="form-check-label">Receive SMS / WhatsApp alerts regarding site visit scheduling and counteroffers</span>
+                </label>
+                <label class="form-check">
+                  <input type="checkbox" id="pref-recs" checked />
+                  <span class="form-check-label">Receive weekly curated luxury property investment recommendations</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;gap:1rem;">
+              <button type="button" class="btn btn-ghost" onclick="switchSection('overview')">Cancel</button>
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 10: HELP & SUPPORT
+      ══════════════════════════════════════════════════════ -->
+      <section class="dashboard-section" id="section-support">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Help & Support Concierge</h2>
+            <div class="section-subtitle">Dedicated 24/7 advisory support for high-value real estate transactions.</div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:2.5rem;">
+          <!-- FAQ Accordion -->
+          <div>
+            <h3 style="font-family:var(--font-heading);font-size:1.25rem;margin-bottom:1rem;">Frequently Asked Questions</h3>
+            <div class="faq-accordion" id="faq-accordion-list">
+              <!-- Item 1 -->
+              <div class="faq-item active">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                  <span>How do I schedule or reschedule a site visit?</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-content" style="max-height: 200px;">
+                  You can schedule a site visit directly from the "Site Visits" tab or by clicking "Schedule a Visit" on any property. To reschedule, locate your confirmed appointment in the Site Visits table and click "Reschedule" to select a new preferred date and time slot.
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                  <span>What happens after I submit a formal offer?</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-content">
+                  Once submitted, our licensed brokerage team verifies financing eligibility and presents the offer deed to the property seller. The seller may accept, reject, or present a formal counteroffer within 48 business hours. You will receive an SMS and dashboard notification.
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                  <span>How does the property comparison tool work?</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-content">
+                  Navigate to your "Saved Properties" tab and select the checkbox on up to 3 listings. Click the "Compare Selected" button in the upper right header to generate an instant side-by-side spec comparison covering carpet area, pricing per sqft, amenities, and furnishings.
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                  <span>Are online offers legally binding on Cornerstone?</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-content">
+                  In this demo environment, offers represent non-binding letters of intent (LOI). In production, an agreement to sell is legally executed only following physical token disbursement, title deed searches, and notarized registration at the Sub-Registrar's office.
+                </div>
+              </div>
+
+              <!-- Item 5 -->
+              <div class="faq-item">
+                <div class="faq-header" onclick="toggleFaq(this)">
+                  <span>How quickly do agents respond to enquiries?</span>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="faq-content">
+                  Our private client relationship managers typically respond within 2 to 4 business hours. You can inspect the status and ongoing correspondence log in your "My Enquiries" section.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Us Form & Direct Concierge -->
+          <div>
+            <div class="card-box" style="margin-bottom:1.5rem;">
+              <h3 style="font-family:var(--font-heading);font-size:1.2rem;margin-bottom:0.75rem;">Direct Concierge Desk</h3>
+              <p style="color:#71828D;font-size:0.88rem;margin-bottom:1rem;">Require immediate assistance or bespoke off-market acquisition requests?</p>
+              
+              <div style="display:flex;gap:1.5rem;margin-bottom:1.25rem;">
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  <a href="tel:+9118002004567" style="color:var(--text-primary);text-decoration:none;font-weight:600;">+91 1800 200 4567</a>
+                </div>
+                <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                  <a href="mailto:support@cornerstone.in" style="color:var(--text-primary);text-decoration:none;font-weight:600;">support@cornerstone.in</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form -->
+            <div class="card-box">
+              <h3 style="font-family:var(--font-heading);font-size:1.2rem;margin-bottom:1rem;">Submit Support Ticket</h3>
+              <form id="support-ticket-form" onsubmit="handleSupportSubmit(event)">
+                <div class="form-group" style="margin-bottom:0.85rem;">
+                  <label class="form-label required">Your Name</label>
+                  <input type="text" class="form-control" value="Rahul Mehta" required />
+                </div>
+                <div class="form-group" style="margin-bottom:0.85rem;">
+                  <label class="form-label required">Email Address</label>
+                  <input type="email" class="form-control" value="rahul.mehta@example.com" required />
+                </div>
+                <div class="form-group" style="margin-bottom:0.85rem;">
+                  <label class="form-label required">Issue Category</label>
+                  <select class="form-control" required>
+                    <option value="Technical Issue">Technical / Platform Issue</option>
+                    <option value="Site Visit Query">Site Visit Scheduling Query</option>
+                    <option value="Offer Assistance">Offer & Counteroffer Advisory</option>
+                    <option value="Agent Feedback">Property Agent Feedback</option>
+                    <option value="Other">Other Enquiries</option>
+                  </select>
+                </div>
+                <div class="form-group" style="margin-bottom:1.25rem;">
+                  <label class="form-label required">Describe your query</label>
+                  <textarea class="form-control" rows="3" placeholder="Please provide details regarding your query..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Transmit Ticket to Concierge</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     MODALS
+══════════════════════════════════════════════════════════ -->
+
+<!-- 1. Request New Visit Modal -->
+<div class="modal-overlay" id="modal-new-visit">
+  <div class="modal">
+    <div style="padding:1.5rem;border-bottom:1px solid #EBEFF1;display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="font-family:var(--font-heading);font-size:1.25rem;margin:0;">Request a Property Site Visit</h3>
+      <button class="btn btn-ghost" style="padding:0.25rem 0.5rem;border:none;" onclick="closeModal('modal-new-visit')">&times;</button>
+    </div>
+    <form id="new-visit-form" onsubmit="handleNewVisitSubmit(event)" style="padding:1.5rem;">
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label class="form-label required">Select Property</label>
+        <select class="form-control" id="visit-prop-select" required>
+          <!-- Populated from window.PROPERTIES -->
+        </select>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+        <div class="form-group">
+          <label class="form-label required">Preferred Date</label>
+          <input type="date" class="form-control" id="visit-date-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Preferred Time Slot</label>
+          <select class="form-control" id="visit-time-select" required>
+            <option value="10:00 AM">Morning: 10:00 AM</option>
+            <option value="11:30 AM">Morning: 11:30 AM</option>
+            <option value="02:00 PM">Afternoon: 02:00 PM</option>
+            <option value="04:30 PM">Evening: 04:30 PM</option>
+            <option value="06:00 PM">Evening: 06:00 PM</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:1.5rem;">
+        <label class="form-label">Special Requests / Notes</label>
+        <textarea class="form-control" id="visit-notes-input" placeholder="e.g. Please bring architectural floor plans, parking queries, etc." rows="3"></textarea>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:1rem;">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-new-visit')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Submit Visit Request</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 2. Reschedule Visit Modal -->
+<div class="modal-overlay" id="modal-reschedule-visit">
+  <div class="modal">
+    <div style="padding:1.5rem;border-bottom:1px solid #EBEFF1;display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="font-family:var(--font-heading);font-size:1.25rem;margin:0;">Reschedule Site Visit</h3>
+      <button class="btn btn-ghost" style="padding:0.25rem 0.5rem;border:none;" onclick="closeModal('modal-reschedule-visit')">&times;</button>
+    </div>
+    <form id="reschedule-visit-form" onsubmit="handleRescheduleSubmit(event)" style="padding:1.5rem;">
+      <input type="hidden" id="reschedule-visit-id" />
+      <p id="reschedule-prop-name" style="font-weight:600;margin-bottom:1.25rem;color:var(--color-navy);"></p>
+      
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+        <div class="form-group">
+          <label class="form-label required">New Date</label>
+          <input type="date" class="form-control" id="reschedule-date-input" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label required">New Time Slot</label>
+          <select class="form-control" id="reschedule-time-select" required>
+            <option value="10:00 AM">Morning: 10:00 AM</option>
+            <option value="11:30 AM">Morning: 11:30 AM</option>
+            <option value="02:00 PM">Afternoon: 02:00 PM</option>
+            <option value="04:30 PM">Evening: 04:30 PM</option>
+            <option value="06:00 PM">Evening: 06:00 PM</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:1rem;">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-reschedule-visit')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Confirm Reschedule</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 3. Submit New Offer Modal -->
+<div class="modal-overlay" id="modal-new-offer">
+  <div class="modal">
+    <div style="padding:1.5rem;border-bottom:1px solid #EBEFF1;display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="font-family:var(--font-heading);font-size:1.25rem;margin:0;">Submit a Purchase Offer</h3>
+      <button class="btn btn-ghost" style="padding:0.25rem 0.5rem;border:none;" onclick="closeModal('modal-new-offer')">&times;</button>
+    </div>
+    <form id="new-offer-form" onsubmit="handleNewOfferSubmit(event)" style="padding:1.5rem;">
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label class="form-label required">Select Target Property</label>
+        <select class="form-control" id="offer-prop-select" required>
+          <!-- Populated from window.PROPERTIES -->
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:1rem;">
+        <label class="form-label required">Offer Amount (in ₹ Indian Rupees)</label>
+        <input type="number" class="form-control" id="offer-amount-input" placeholder="e.g. 85000000" min="100000" required />
+        <span class="form-hint" id="offer-amount-preview">Format: ₹8.50 Cr</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+        <div class="form-group">
+          <label class="form-label required">Preferred Closing Date</label>
+          <input type="date" class="form-control" id="offer-closing-date" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label required">Financing Arrangement</label>
+          <select class="form-control" id="offer-finance-select" required>
+            <option value="Home Loan">Pre-Approved Home Loan</option>
+            <option value="Cash">All-Cash / Liquidity Funds</option>
+            <option value="NRI Mortgage">NRI Offshore Mortgage</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:1.5rem;">
+        <label class="form-label">Contingencies & Notes</label>
+        <textarea class="form-control" id="offer-notes-input" placeholder="e.g. Subject to structural verification, inclusion of built-in white goods, etc." rows="3"></textarea>
+      </div>
+      <div style="display:flex;justify-content:flex-end;gap:1rem;">
+        <button type="button" class="btn btn-ghost" onclick="closeModal('modal-new-offer')">Cancel</button>
+        <button type="submit" class="btn btn-primary">Transmit Formal Offer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 4. Offer Details & Timeline Modal -->
+<div class="modal-overlay" id="modal-offer-detail">
+  <div class="modal" style="max-width:680px;">
+    <div style="padding:1.5rem;border-bottom:1px solid #EBEFF1;display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="font-family:var(--font-heading);font-size:1.25rem;margin:0;" id="offer-detail-title">Offer Details</h3>
+      <button class="btn btn-ghost" style="padding:0.25rem 0.5rem;border:none;" onclick="closeModal('modal-offer-detail')">&times;</button>
+    </div>
+    <div style="padding:1.5rem;" id="offer-detail-content">
+      <!-- Populated via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- 5. Enquiry Details & Thread Modal -->
+<div class="modal-overlay" id="modal-enquiry-detail">
+  <div class="modal" style="max-width:600px;">
+    <div style="padding:1.5rem;border-bottom:1px solid #EBEFF1;display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="font-family:var(--font-heading);font-size:1.25rem;margin:0;" id="enquiry-modal-title">Enquiry Conversation</h3>
+      <button class="btn btn-ghost" style="padding:0.25rem 0.5rem;border:none;" onclick="closeModal('modal-enquiry-detail')">&times;</button>
+    </div>
+    <div style="padding:1.5rem;" id="enquiry-modal-body">
+      <!-- Populated via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- 6. Compare Properties Modal -->
+<div class="modal-overlay" id="modal-compare">
+  <div class="modal" style="max-width:900px;width:95%;">
+    <div style="padding:1.5rem;border-bottom:1px solid #EBEFF1;display:flex;justify-content:space-between;align-items:center;">
+      <h3 style="font-family:var(--font-heading);font-size:1.25rem;margin:0;">Side-by-Side Property Comparison</h3>
+      <button class="btn btn-ghost" style="padding:0.25rem 0.5rem;border:none;" onclick="closeModal('modal-compare')">&times;</button>
+    </div>
+    <div style="padding:1.5rem;" id="compare-modal-content">
+      <!-- Comparison Table populated via JS -->
+    </div>
+  </div>
+</div>
+
+<!-- 7. Logout Confirmation Modal -->
+<div class="modal-overlay" id="modal-logout-confirm">
+  <div class="modal" style="max-width:440px;text-align:center;">
+    <div style="padding:2rem;">
+      <div style="width:56px;height:56px;border-radius:50%;background:#FFEBEE;color:#C62828;display:flex;align-items:center;justify-content:center;margin:0 auto 1.25rem;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </div>
+      <h3 style="font-family:var(--font-heading);font-size:1.3rem;margin-bottom:0.5rem;">Sign Out of Buyer Portal?</h3>
+      <p style="color:#71828D;font-size:0.9rem;margin-bottom:1.75rem;">Are you sure you want to log out? Any unsaved search queries or drafted forms will be preserved in your current session.</p>
+      
+      <div style="display:flex;gap:1rem;justify-content:center;">
+        <button class="btn btn-ghost" onclick="closeModal('modal-logout-confirm')">Stay Logged In</button>
+        <button class="btn btn-primary" style="background:#E53935;border-color:#E53935;color:#fff;" id="btn-confirm-logout" onclick="executeLogout()">Yes, Sign Out</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCRIPTS & APPLICATION LOGIC
+══════════════════════════════════════════════════════════ -->
+<script src="../js/data.js"></script>
+<script src="../js/app.js"></script>
+<script src="../js/components.js"></script>
+
+<script>
+/**
+ * Cornerstone Real Estate — Buyer Dashboard Application Logic
+ */
+
+// -------------------------------------------------------------
+// 1. DEMO DATA STATE
+// -------------------------------------------------------------
+let SAVED_PROPERTIES = ['P001', 'P003', 'P005', 'P008'];
+
+let SITE_VISITS = [
+  { 
+    id: "SV001", 
+    propertyId: "P001", 
+    propertyTitle: "Luxury Sea-Facing Apartment at Worli", 
+    date: "2024-11-25", 
+    time: "10:00 AM", 
+    status: "Confirmed", 
+    agent: "Priya Sharma", 
+    notes: "Please have floor layout and building society NOC documents available." 
+  },
+  { 
+    id: "SV002", 
+    propertyId: "P003", 
+    propertyTitle: "Grand Sea-Facing Penthouse, Worli", 
+    date: "2024-11-28", 
+    time: "02:00 PM", 
+    status: "Requested", 
+    agent: "Rahul Joshi", 
+    notes: "Please confirm clubhouse and private terrace accessibility." 
+  },
+  { 
+    id: "SV003", 
+    propertyId: "P005", 
+    propertyTitle: "Golf Course Penthouse at DLF Camellias", 
+    date: "2024-11-20", 
+    time: "11:00 AM", 
+    status: "Completed", 
+    agent: "Priya Sharma", 
+    notes: "Site walkthrough completed satisfactorily with client advisor." 
+  }
+];
+
+let ENQUIRIES = [
+  { 
+    id: "EQ001", 
+    propertyId: "P001", 
+    propertyTitle: "Luxury Sea-Facing Apartment at Worli", 
+    date: "2024-11-10", 
+    agent: "Priya Sharma", 
+    message: "I am interested in this property and would like clarification on monthly maintenance charges and covered car parking allotments.", 
+    response: "Thank you for reaching out Rahul! Monthly maintenance is ₹18,500/month. The deed includes 2 dedicated covered basement parking bays.", 
+    status: "Responded" 
+  },
+  { 
+    id: "EQ002", 
+    propertyId: "P002", 
+    propertyTitle: "Colonial Heritage Villa in Vasant Vihar", 
+    date: "2024-11-14", 
+    agent: "Rahul Joshi", 
+    message: "What is the clear title verification status and is there any outstanding municipal tax balance?", 
+    response: "", 
+    status: "New" 
+  },
+  { 
+    id: "EQ003", 
+    propertyId: "P007", 
+    propertyTitle: "Ultra-Luxury Penthouse at Worli Sea Face", 
+    date: "2024-11-08", 
+    agent: "Priya Sharma", 
+    message: "Is there flexibility on the token amount if we expedite closing before the financial year end?", 
+    response: "The seller is open to structured payment terms for verified institutional or pre-approved buyers.", 
+    status: "In Progress" 
+  }
+];
+
+let OFFERS = [
+  { 
+    id: "OF001", 
+    propertyId: "P001", 
+    propertyTitle: "Luxury Sea-Facing Apartment at Worli", 
+    offerAmount: 43500000, 
+    closingDate: "2025-01-15", 
+    financingType: "Home Loan", 
+    notes: "Pre-approved HDFC luxury loan ready. Request 30-day closing cycle.", 
+    status: "Under Review", 
+    submittedDate: "2024-11-12" 
+  },
+  { 
+    id: "OF002", 
+    propertyId: "P003", 
+    propertyTitle: "Grand Sea-Facing Penthouse, Worli", 
+    offerAmount: 220000000, 
+    closingDate: "2025-02-01", 
+    financingType: "Cash", 
+    notes: "Full liquidity reserve verified through escrow account.", 
+    status: "Counteroffer Received", 
+    counterAmount: 235000000, 
+    submittedDate: "2024-11-05" 
+  }
+];
+
+let NOTIFICATIONS = [
+  { id: "N001", type: "offer", message: "Your offer on Luxury Sea-Facing Apartment at Worli is currently under seller review", date: "2024-11-12", read: false },
+  { id: "N002", type: "enquiry", message: "Priya Sharma responded to your enquiry regarding property P001", date: "2024-11-11", read: false },
+  { id: "N003", type: "visit", message: "Your site visit for Luxury Sea-Facing Apartment is confirmed for Nov 25 at 10:00 AM", date: "2024-11-10", read: true },
+  { id: "N004", type: "property", message: "New 4BHK Penthouse in Worli matches your search criteria", date: "2024-11-09", read: true }
+];
+
+let selectedForComparison = [];
+
+// -------------------------------------------------------------
+// 2. INITIALIZATION
+// -------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  // Sync Saved Properties with LocalStorage if available
+  try {
+    const localSaved = localStorage.getItem('cs_saved_properties');
+    if (localSaved) {
+      const parsed = JSON.parse(localSaved);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        SAVED_PROPERTIES = Array.from(new Set([...SAVED_PROPERTIES, ...parsed]));
+      }
+    }
+  } catch (e) {}
+
+  // Date banner in overview
+  const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const todayFormatted = new Date().toLocaleDateString('en-IN', dateOptions);
+  const dateEl = document.getElementById('overview-today-date');
+  if (dateEl) dateEl.textContent = todayFormatted;
+
+  // Set min dates on date inputs
+  const todayISO = new Date().toISOString().split('T')[0];
+  const visitDateInput = document.getElementById('visit-date-input');
+  if (visitDateInput) {
+    visitDateInput.min = todayISO;
+    visitDateInput.value = todayISO;
+  }
+  const rescheduleDateInput = document.getElementById('reschedule-date-input');
+  if (rescheduleDateInput) rescheduleDateInput.min = todayISO;
+  
+  const offerClosingInput = document.getElementById('offer-closing-date');
+  if (offerClosingInput) offerClosingInput.min = todayISO;
+
+  // Populate Property Dropdowns
+  populatePropertyDropdowns();
+
+  // Initial renders
+  renderAll();
+
+  // Setup Event Listeners
+  setupNavigation();
+  setupUserMenu();
+  setupMobileSidebar();
+
+  // Listen for global property save changes
+  window.addEventListener('propertySavedChanged', (e) => {
+    const { id, saved } = e.detail;
+    if (saved && !SAVED_PROPERTIES.includes(id)) {
+      SAVED_PROPERTIES.push(id);
+    } else if (!saved) {
+      SAVED_PROPERTIES = SAVED_PROPERTIES.filter(x => x !== id);
+    }
+    updateBadgeCounts();
+    renderSavedPropertiesSection();
+  });
+
+  // Topbar search input handler
+  const searchInput = document.getElementById('topbar-search');
+  if (searchInput) {
+    searchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = searchInput.value.trim();
+        if (val) {
+          switchSection('browse');
+          const browseLoc = document.getElementById('browse-filter-location');
+          if (browseLoc) {
+            browseLoc.value = val;
+            applyBrowseFilters();
+          }
+        }
+      }
+    });
+  }
+
+  // Live currency formatting preview for offer amount input
+  const offerAmtInput = document.getElementById('offer-amount-input');
+  const offerAmtPreview = document.getElementById('offer-amount-preview');
+  if (offerAmtInput && offerAmtPreview) {
+    offerAmtInput.addEventListener('input', () => {
+      const val = Number(offerAmtInput.value);
+      if (!val || isNaN(val)) {
+        offerAmtPreview.textContent = 'Format: ₹0';
+      } else if (val >= 10000000) {
+        offerAmtPreview.textContent = `Format: ₹${(val / 10000000).toFixed(2)} Cr`;
+      } else if (val >= 100000) {
+        offerAmtPreview.textContent = `Format: ₹${(val / 100000).toFixed(2)} L`;
+      } else {
+        offerAmtPreview.textContent = `Format: ₹${val.toLocaleString('en-IN')}`;
+      }
+    });
+  }
+});
+
+function renderAll() {
+  updateBadgeCounts();
+  renderOverview();
+  renderSavedPropertiesSection();
+  renderBrowseSection();
+  renderSiteVisitsSection();
+  renderEnquiriesSection();
+  renderOffersSection();
+  renderRecentlyViewedSection();
+  renderNotificationsSection();
+}
+
+// -------------------------------------------------------------
+// 3. NAVIGATION (Single Page Application behavior)
+// -------------------------------------------------------------
+function setupNavigation() {
+  const navButtons = document.querySelectorAll('.dashboard-nav-item[data-section]');
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = btn.getAttribute('data-section');
+      switchSection(section);
+    });
+  });
+
+  // Topbar bell button navigates to notifications
+  const bellBtn = document.getElementById('topbar-bell-btn');
+  if (bellBtn) {
+    bellBtn.addEventListener('click', () => switchSection('notifications'));
+  }
+
+  // Logout button
+  const logoutBtn = document.getElementById('nav-btn-logout');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', triggerLogout);
+  }
+}
+
+const SECTION_TITLES = {
+  overview: 'Overview',
+  saved: 'Saved Properties',
+  browse: 'Browse Properties',
+  visits: 'Site Visits',
+  enquiries: 'My Enquiries',
+  offers: 'My Offers & Bids',
+  recent: 'Recently Viewed',
+  notifications: 'Notifications',
+  profile: 'My Profile & Preferences',
+  support: 'Help & Concierge Support'
+};
+
+window.switchSection = function(sectionId) {
+  // Hide all sections
+  document.querySelectorAll('.dashboard-section').forEach(sec => sec.classList.remove('active'));
+  
+  // Show target section
+  const target = document.getElementById(`section-${sectionId}`);
+  if (target) {
+    target.classList.add('active');
+  }
+
+  // Update nav item active states
+  document.querySelectorAll('.dashboard-nav-item').forEach(btn => {
+    if (btn.getAttribute('data-section') === sectionId) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+
+  // Update topbar title
+  const heading = document.getElementById('page-heading');
+  if (heading && SECTION_TITLES[sectionId]) {
+    heading.textContent = SECTION_TITLES[sectionId];
+  }
+
+  // Close mobile sidebar if open
+  closeMobileSidebar();
+
+  // Scroll to top of content
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// -------------------------------------------------------------
+// 4. USER MENU & MOBILE DRAWER
+// -------------------------------------------------------------
+function setupUserMenu() {
+  const btn = document.getElementById('user-menu-btn');
+  const dropdown = document.getElementById('user-dropdown');
+  if (btn && dropdown) {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('show');
+    });
+  }
+}
+
+function setupMobileSidebar() {
+  const hamburger = document.getElementById('hamburger-btn');
+  const sidebar = document.getElementById('dashboard-sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  const closeBtn = document.getElementById('sidebar-close-btn');
+
+  if (hamburger && sidebar && overlay) {
+    hamburger.addEventListener('click', () => {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+    });
+
+    overlay.addEventListener('click', closeMobileSidebar);
+    if (closeBtn) closeBtn.addEventListener('click', closeMobileSidebar);
+  }
+}
+
+function closeMobileSidebar() {
+  const sidebar = document.getElementById('dashboard-sidebar');
+  const overlay = document.getElementById('sidebar-overlay');
+  if (sidebar) sidebar.classList.remove('open');
+  if (overlay) overlay.classList.remove('active');
+}
+
+// -------------------------------------------------------------
+// 5. HELPER DATA LOOKUPS
+// -------------------------------------------------------------
+function getPropertyById(id) {
+  if (!window.PROPERTIES || !Array.isArray(window.PROPERTIES)) return null;
+  return window.PROPERTIES.find(p => p.id === id) || null;
+}
+
+function populatePropertyDropdowns() {
+  const visitSelect = document.getElementById('visit-prop-select');
+  const offerSelect = document.getElementById('offer-prop-select');
+
+  if (!window.PROPERTIES) return;
+
+  const optionsHtml = window.PROPERTIES.map(p => 
+    `<option value="${p.id}">${p.title} (${p.location}) — ${p.priceDisplay}</option>`
+  ).join('');
+
+  if (visitSelect) visitSelect.innerHTML = optionsHtml;
+  if (offerSelect) offerSelect.innerHTML = optionsHtml;
+}
+
+function updateBadgeCounts() {
+  // Saved count
+  const savedCount = SAVED_PROPERTIES.length;
+  const navBadgeSaved = document.getElementById('nav-badge-saved');
+  const statSaved = document.getElementById('stat-saved-count');
+  if (navBadgeSaved) navBadgeSaved.textContent = savedCount;
+  if (statSaved) statSaved.textContent = savedCount;
+
+  // Upcoming visits count (Confirmed or Requested)
+  const activeVisits = SITE_VISITS.filter(v => v.status === 'Confirmed' || v.status === 'Requested').length;
+  const navBadgeVisits = document.getElementById('nav-badge-visits');
+  const statVisits = document.getElementById('stat-visits-count');
+  if (navBadgeVisits) navBadgeVisits.textContent = activeVisits;
+  if (statVisits) statVisits.textContent = activeVisits;
+
+  // Active Enquiries
+  const activeEnquiries = ENQUIRIES.length;
+  const navBadgeEnquiries = document.getElementById('nav-badge-enquiries');
+  const statEnquiries = document.getElementById('stat-enquiries-count');
+  if (navBadgeEnquiries) navBadgeEnquiries.textContent = activeEnquiries;
+  if (statEnquiries) statEnquiries.textContent = activeEnquiries;
+
+  // Active Offers
+  const activeOffers = OFFERS.filter(o => o.status !== 'Rejected' && o.status !== 'Withdrawn').length;
+  const navBadgeOffers = document.getElementById('nav-badge-offers');
+  const statOffers = document.getElementById('stat-offers-count');
+  if (navBadgeOffers) navBadgeOffers.textContent = activeOffers;
+  if (statOffers) statOffers.textContent = activeOffers;
+
+  // Unread notifications
+  const unreadNotif = NOTIFICATIONS.filter(n => !n.read).length;
+  const navBadgeNotif = document.getElementById('nav-badge-notif');
+  const topbarNotif = document.getElementById('topbar-notif-count');
+  if (navBadgeNotif) navBadgeNotif.textContent = unreadNotif;
+  if (topbarNotif) {
+    topbarNotif.textContent = unreadNotif;
+    topbarNotif.style.display = unreadNotif > 0 ? 'flex' : 'none';
+  }
+}
+
+// -------------------------------------------------------------
+// 6. SECTION 1: OVERVIEW RENDERING
+// -------------------------------------------------------------
+function renderOverview() {
+  // Render Activity Feed (last 5 activities from across categories)
+  const activityContainer = document.getElementById('overview-activity-feed');
+  if (activityContainer) {
+    const activities = [
+      { type: 'offer', text: 'Offer of ₹22.0 Cr submitted on Grand Sea-Facing Penthouse (Worli)', time: 'Nov 12, 2024' },
+      { type: 'visit', text: 'Site Visit confirmed for Luxury Sea-Facing Apartment (Worli) on Nov 25', time: 'Nov 10, 2024' },
+      { type: 'enquiry', text: 'Priya Sharma responded to enquiry on Property P001', time: 'Nov 11, 2024' },
+      { type: 'offer', text: 'Counteroffer received from seller for Property P003 (₹23.5 Cr)', time: 'Nov 09, 2024' },
+      { type: 'visit', text: 'Site inspection completed for Golf Course Penthouse at DLF Camellias', time: 'Nov 05, 2024' }
+    ];
+
+    activityContainer.innerHTML = activities.map(act => `
+      <div class="activity-item">
+        <div class="activity-icon ${act.type}">
+          ${act.type === 'offer' ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg>' : ''}
+          ${act.type === 'visit' ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>' : ''}
+          ${act.type === 'enquiry' ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>' : ''}
+        </div>
+        <div class="activity-details">
+          <div class="activity-text">${act.text}</div>
+          <div class="activity-meta">${act.time}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Render Upcoming Visit Preview
+  const upcomingContainer = document.getElementById('overview-upcoming-visit-container');
+  if (upcomingContainer) {
+    const nextVisit = SITE_VISITS.find(v => v.status === 'Confirmed' || v.status === 'Requested');
+    if (nextVisit) {
+      const prop = getPropertyById(nextVisit.propertyId);
+      const visitDate = new Date(nextVisit.date);
+      const monthStr = visitDate.toLocaleString('default', { month: 'short' });
+      const dayNum = visitDate.getDate();
+
+      upcomingContainer.innerHTML = `
+        <div class="upcoming-visit-card">
+          <div class="upcoming-visit-header">
+            <span class="badge-status ${nextVisit.status.toLowerCase()}">${nextVisit.status} Visit</span>
+            <span style="font-size:0.75rem;color:#71828D;">ID: ${nextVisit.id}</span>
+          </div>
+          <div class="upcoming-visit-body">
+            <div class="upcoming-date-box">
+              <div class="upcoming-date-box__month">${monthStr}</div>
+              <div class="upcoming-date-box__day">${dayNum}</div>
+              <div class="upcoming-date-box__time">${nextVisit.time}</div>
+            </div>
+            <div class="upcoming-visit-info">
+              <h4>${nextVisit.propertyTitle}</h4>
+              <p>Advisor: <strong>${nextVisit.agent}</strong> &bull; ${prop ? prop.location : ''}</p>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                <button class="btn btn-ghost" style="padding:0.35rem 0.65rem;font-size:0.75rem;" onclick="openRescheduleModal('${nextVisit.id}')">Reschedule</button>
+                <button class="btn btn-ghost" style="padding:0.35rem 0.65rem;font-size:0.75rem;color:#E53935;" onclick="cancelSiteVisit('${nextVisit.id}')">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    } else {
+      upcomingContainer.innerHTML = `
+        <div style="text-align:center;padding:2rem 1rem;color:#71828D;">
+          <p>No upcoming visits scheduled.</p>
+          <button class="btn btn-primary" style="margin-top:0.5rem;font-size:0.8rem;" onclick="openNewVisitModal()">Request a Visit</button>
+        </div>
+      `;
+    }
+  }
+
+  // Render 3 Recommended Properties
+  const recGrid = document.getElementById('overview-recommended-grid');
+  if (recGrid && window.PROPERTIES && window.renderPropertyCard) {
+    const recProps = window.PROPERTIES.slice(0, 3);
+    recGrid.innerHTML = recProps.map(p => window.renderPropertyCard(p, '../')).join('');
+  }
+}
+
+// -------------------------------------------------------------
+// 7. SECTION 2: SAVED PROPERTIES RENDERING & COMPARISON
+// -------------------------------------------------------------
+function renderSavedPropertiesSection() {
+  const grid = document.getElementById('saved-properties-grid');
+  const emptyState = document.getElementById('saved-empty-state');
+  const compareBtn = document.getElementById('compare-selected-btn');
+  const compareLabel = document.getElementById('compare-btn-label');
+
+  if (!grid) return;
+
+  if (SAVED_PROPERTIES.length === 0) {
+    grid.style.display = 'none';
+    if (emptyState) emptyState.style.display = 'block';
+    if (compareBtn) compareBtn.disabled = true;
+    return;
+  }
+
+  grid.style.display = 'grid';
+  if (emptyState) emptyState.style.display = 'none';
+
+  grid.innerHTML = SAVED_PROPERTIES.map(id => {
+    const prop = getPropertyById(id);
+    if (!prop) return '';
+
+    const cardHtml = window.renderPropertyCard ? window.renderPropertyCard(prop, '../') : '';
+    const isChecked = selectedForComparison.includes(id);
+
+    return `
+      <div class="saved-property-card-wrapper" data-saved-card-id="${id}">
+        ${cardHtml}
+        <div class="saved-property-actions">
+          <label class="form-check" style="margin:0;">
+            <input type="checkbox" onchange="toggleCompareProperty('${id}', this.checked)" ${isChecked ? 'checked' : ''} />
+            <span class="form-check-label" style="font-size:0.8rem;">Compare</span>
+          </label>
+          <button class="btn btn-ghost" style="padding:0.35rem 0.75rem;font-size:0.75rem;color:#E53935;" onclick="removeSavedProperty('${id}')">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+            <span>Remove</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  updateCompareButton();
+}
+
+window.toggleCompareProperty = function(id, isChecked) {
+  if (isChecked) {
+    if (selectedForComparison.length >= 3) {
+      if (window.showToast) window.showToast('You can compare a maximum of 3 properties at a time', 'warning');
+      renderSavedPropertiesSection();
+      return;
+    }
+    if (!selectedForComparison.includes(id)) {
+      selectedForComparison.push(id);
+    }
+  } else {
+    selectedForComparison = selectedForComparison.filter(x => x !== id);
+  }
+  updateCompareButton();
+};
+
+function updateCompareButton() {
+  const compareBtn = document.getElementById('compare-selected-btn');
+  const compareLabel = document.getElementById('compare-btn-label');
+  if (compareBtn && compareLabel) {
+    compareLabel.textContent = `Compare Selected (${selectedForComparison.length})`;
+    compareBtn.disabled = selectedForComparison.length < 2;
+  }
+}
+
+window.removeSavedProperty = function(id) {
+  if (confirm('Are you sure you want to remove this property from your saved list?')) {
+    SAVED_PROPERTIES = SAVED_PROPERTIES.filter(x => x !== id);
+    selectedForComparison = selectedForComparison.filter(x => x !== id);
+    
+    // Sync with app.js / localStorage
+    try {
+      localStorage.setItem('cs_saved_properties', JSON.stringify(SAVED_PROPERTIES));
+    } catch (e) {}
+
+    if (window.showToast) window.showToast('Property removed from saved collection', 'info');
+    renderAll();
+  }
+};
+
+window.openComparisonModal = function() {
+  if (selectedForComparison.length < 2) {
+    if (window.showToast) window.showToast('Please select at least 2 properties to compare', 'info');
+    return;
+  }
+
+  const props = selectedForComparison.map(id => getPropertyById(id)).filter(Boolean);
+  const container = document.getElementById('compare-modal-content');
+  if (!container) return;
+
+  container.innerHTML = `
+    <div class="comparison-table-wrapper">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Specification</th>
+            ${props.map(p => `
+              <th>
+                <img src="${p.image}" alt="${p.title}" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:0.5rem;" />
+                <div style="font-family:var(--font-heading);font-weight:700;font-size:0.95rem;">${p.title}</div>
+                <div style="color:var(--color-gold);font-weight:700;font-size:1.1rem;margin:0.25rem 0;">${p.priceDisplay}</div>
+              </th>
+            `).join('')}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Type & Category</td>
+            ${props.map(p => `<td>${p.type} (${p.listingType})</td>`).join('')}
+          </tr>
+          <tr>
+            <td>Location</td>
+            ${props.map(p => `<td>${p.location}</td>`).join('')}
+          </tr>
+          <tr>
+            <td>Bedrooms & Baths</td>
+            ${props.map(p => `<td>${p.bedrooms} Beds / ${p.bathrooms} Baths</td>`).join('')}
+          </tr>
+          <tr>
+            <td>Super Built-up Area</td>
+            ${props.map(p => `<td>${p.area.toLocaleString()} sqft</td>`).join('')}
+          </tr>
+          <tr>
+            <td>Furnishing Status</td>
+            ${props.map(p => `<td>${p.furnishing}</td>`).join('')}
+          </tr>
+          <tr>
+            <td>Key Amenities</td>
+            ${props.map(p => `<td>${(p.amenities || []).slice(0, 4).join(', ')}</td>`).join('')}
+          </tr>
+          <tr>
+            <td>Action</td>
+            ${props.map(p => `
+              <td>
+                <a href="../pages/property-details.html?id=${p.id}" class="btn btn-primary" style="font-size:0.75rem;padding:0.4rem 0.8rem;">View Full Details</a>
+              </td>
+            `).join('')}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  `;
+
+  openModal('modal-compare');
+};
+
+// -------------------------------------------------------------
+// 8. SECTION 3: BROWSE PROPERTIES RENDERING & FILTERS
+// -------------------------------------------------------------
+function renderBrowseSection() {
+  applyBrowseFilters();
+}
+
+window.applyBrowseFilters = function() {
+  if (!window.PROPERTIES) return;
+
+  const typeVal = document.getElementById('browse-filter-type')?.value || '';
+  const listingVal = document.getElementById('browse-filter-listing')?.value || '';
+  const priceVal = document.getElementById('browse-filter-price')?.value || '';
+  const locVal = (document.getElementById('browse-filter-location')?.value || '').toLowerCase().trim();
+  const sortVal = document.getElementById('browse-filter-sort')?.value || 'featured';
+
+  let filtered = [...window.PROPERTIES];
+
+  if (typeVal) {
+    filtered = filtered.filter(p => p.type === typeVal);
+  }
+
+  if (listingVal) {
+    filtered = filtered.filter(p => p.listingType === listingVal);
+  }
+
+  if (priceVal) {
+    if (priceVal === 'under-5cr') {
+      filtered = filtered.filter(p => p.price < 50000000);
+    } else if (priceVal === '5cr-15cr') {
+      filtered = filtered.filter(p => p.price >= 50000000 && p.price <= 150000000);
+    } else if (priceVal === 'above-15cr') {
+      filtered = filtered.filter(p => p.price > 150000000);
+    }
+  }
+
+  if (locVal) {
+    filtered = filtered.filter(p => 
+      p.location.toLowerCase().includes(locVal) || 
+      p.title.toLowerCase().includes(locVal) ||
+      p.id.toLowerCase().includes(locVal)
+    );
+  }
+
+  // Sort
+  if (sortVal === 'price-asc') {
+    filtered.sort((a, b) => a.price - b.price);
+  } else if (sortVal === 'price-desc') {
+    filtered.sort((a, b) => b.price - a.price);
+  } else if (sortVal === 'area-desc') {
+    filtered.sort((a, b) => b.area - a.area);
+  }
+
+  const countBadge = document.getElementById('browse-count-label');
+  if (countBadge) countBadge.textContent = `${filtered.length} Properties Available`;
+
+  const grid = document.getElementById('browse-properties-grid');
+  if (grid) {
+    if (filtered.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align:center; padding: 4rem 1rem; color: #71828D;">
+          <h4 style="font-family:var(--font-heading);font-size:1.3rem;">No matching listings found</h4>
+          <p>Try modifying your filter parameters or search keywords.</p>
+          <button class="btn btn-ghost" onclick="resetBrowseFilters()" style="margin-top:1rem;">Clear All Filters</button>
+        </div>
+      `;
+    } else {
+      grid.innerHTML = filtered.map(p => window.renderPropertyCard(p, '../')).join('');
+    }
+  }
+};
+
+window.resetBrowseFilters = function() {
+  const typeSelect = document.getElementById('browse-filter-type');
+  const listSelect = document.getElementById('browse-filter-listing');
+  const priceSelect = document.getElementById('browse-filter-price');
+  const locInput = document.getElementById('browse-filter-location');
+  const sortSelect = document.getElementById('browse-filter-sort');
+
+  if (typeSelect) typeSelect.value = '';
+  if (listSelect) listSelect.value = '';
+  if (priceSelect) priceSelect.value = '';
+  if (locInput) locInput.value = '';
+  if (sortSelect) sortSelect.value = 'featured';
+
+  applyBrowseFilters();
+};
+
+// -------------------------------------------------------------
+// 9. SECTION 4: SITE VISITS LOGIC
+// -------------------------------------------------------------
+function renderSiteVisitsSection() {
+  const tbody = document.getElementById('visits-table-body');
+  if (!tbody) return;
+
+  if (SITE_VISITS.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align:center;padding:3rem 1rem;color:#71828D;">
+          No site visits scheduled yet. Click "Request New Visit" to book a property walkthrough.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = SITE_VISITS.map(v => {
+    const isCompleted = v.status === 'Completed';
+    const isCancelled = v.status === 'Cancelled';
+    const canAction = !isCompleted && !isCancelled;
+
+    return `
+      <tr>
+        <td>
+          <div style="font-weight:600;color:var(--color-navy);">${v.propertyTitle}</div>
+          <div style="font-size:0.75rem;color:#71828D;">ID: ${v.propertyId} &bull; Booking: ${v.id}</div>
+        </td>
+        <td>
+          <div style="font-weight:500;">${v.date}</div>
+          <div style="font-size:0.75rem;color:#71828D;">${v.time}</div>
+        </td>
+        <td>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>${v.agent}</span>
+          </div>
+        </td>
+        <td>
+          <span class="badge-status ${v.status.toLowerCase()}">${v.status}</span>
+        </td>
+        <td style="max-width:200px;font-size:0.8rem;color:#60727D;" class="truncate">
+          ${v.notes || '—'}
+        </td>
+        <td style="text-align:right;">
+          ${canAction ? `
+            <div style="display:inline-flex;gap:0.4rem;">
+              <button class="btn btn-ghost" style="padding:0.35rem 0.65rem;font-size:0.75rem;" onclick="openRescheduleModal('${v.id}')">Reschedule</button>
+              <button class="btn btn-ghost" style="padding:0.35rem 0.65rem;font-size:0.75rem;color:#E53935;" onclick="cancelSiteVisit('${v.id}')">Cancel</button>
+            </div>
+          ` : `
+            <span style="font-size:0.75rem;color:#8C9BA5;">No Actions</span>
+          `}
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+window.openNewVisitModal = function() {
+  openModal('modal-new-visit');
+};
+
+window.handleNewVisitSubmit = function(e) {
+  e.preventDefault();
+  const propId = document.getElementById('visit-prop-select').value;
+  const dateVal = document.getElementById('visit-date-input').value;
+  const timeVal = document.getElementById('visit-time-select').value;
+  const notesVal = document.getElementById('visit-notes-input').value;
+
+  const prop = getPropertyById(propId);
+  const newVisit = {
+    id: `SV00${SITE_VISITS.length + 1}`,
+    propertyId: propId,
+    propertyTitle: prop ? prop.title : 'Prime Luxury Listing',
+    date: dateVal,
+    time: timeVal,
+    status: 'Requested',
+    agent: prop && prop.agent ? prop.agent.name : 'Priya Sharma',
+    notes: notesVal
+  };
+
+  SITE_VISITS.unshift(newVisit);
+
+  // Add Notification
+  NOTIFICATIONS.unshift({
+    id: `N00${NOTIFICATIONS.length + 1}`,
+    type: 'visit',
+    message: `Site visit requested for ${newVisit.propertyTitle} on ${dateVal}`,
+    date: new Date().toISOString().split('T')[0],
+    read: false
+  });
+
+  closeModal('modal-new-visit');
+  document.getElementById('new-visit-form').reset();
+
+  if (window.showToast) window.showToast('Site visit requested! Advisor will confirm within 2 hours.', 'success');
+  renderAll();
+};
+
+window.openRescheduleModal = function(visitId) {
+  const visit = SITE_VISITS.find(v => v.id === visitId);
+  if (!visit) return;
+
+  document.getElementById('reschedule-visit-id').value = visit.id;
+  document.getElementById('reschedule-prop-name').textContent = `${visit.propertyTitle} (Current: ${visit.date} at ${visit.time})`;
+  document.getElementById('reschedule-date-input').value = visit.date;
+  document.getElementById('reschedule-time-select').value = visit.time;
+
+  openModal('modal-reschedule-visit');
+};
+
+window.handleRescheduleSubmit = function(e) {
+  e.preventDefault();
+  const visitId = document.getElementById('reschedule-visit-id').value;
+  const newDate = document.getElementById('reschedule-date-input').value;
+  const newTime = document.getElementById('reschedule-time-select').value;
+
+  const visit = SITE_VISITS.find(v => v.id === visitId);
+  if (visit) {
+    visit.date = newDate;
+    visit.time = newTime;
+    visit.status = 'Requested';
+
+    if (window.showToast) window.showToast(`Site visit rescheduled to ${newDate} at ${newTime}`, 'success');
+    closeModal('modal-reschedule-visit');
+    renderAll();
+  }
+};
+
+window.cancelSiteVisit = function(visitId) {
+  if (confirm('Are you sure you want to cancel this site visit appointment?')) {
+    const visit = SITE_VISITS.find(v => v.id === visitId);
+    if (visit) {
+      visit.status = 'Cancelled';
+      if (window.showToast) window.showToast('Site visit cancelled', 'info');
+      renderAll();
+    }
+  }
+};
+
+// -------------------------------------------------------------
+// 10. SECTION 5: MY ENQUIRIES LOGIC
+// -------------------------------------------------------------
+function renderEnquiriesSection() {
+  const tbody = document.getElementById('enquiries-table-body');
+  if (!tbody) return;
+
+  tbody.innerHTML = ENQUIRIES.map(eq => {
+    return `
+      <tr>
+        <td>
+          <div style="font-weight:600;color:var(--color-navy);">${eq.propertyTitle}</div>
+          <div style="font-size:0.75rem;color:#71828D;">ID: ${eq.propertyId} &bull; Ref: ${eq.id}</div>
+        </td>
+        <td>${eq.date}</td>
+        <td>
+          <div style="display:flex;align-items:center;gap:0.4rem;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>${eq.agent}</span>
+          </div>
+        </td>
+        <td style="max-width:180px;" class="truncate" title="${eq.message}">
+          ${eq.message}
+        </td>
+        <td style="max-width:180px;" class="truncate" title="${eq.response || 'Awaiting advisor reply'}">
+          ${eq.response ? eq.response : '<em style="color:#8C9BA5;">Pending Response</em>'}
+        </td>
+        <td>
+          <span class="badge-status ${eq.status.toLowerCase().replace(/\s+/g, '-')}">${eq.status}</span>
+        </td>
+        <td style="text-align:right;">
+          <button class="btn btn-ghost" style="padding:0.35rem 0.65rem;font-size:0.75rem;" onclick="openEnquiryModal('${eq.id}')">View Thread</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+window.openEnquiryModal = function(enquiryId) {
+  const eq = ENQUIRIES.find(e => e.id === enquiryId);
+  if (!eq) return;
+
+  const titleEl = document.getElementById('enquiry-modal-title');
+  const bodyEl = document.getElementById('enquiry-modal-body');
+
+  if (titleEl) titleEl.textContent = `Enquiry Thread: ${eq.propertyTitle}`;
+  if (bodyEl) {
+    bodyEl.innerHTML = `
+      <div style="margin-bottom:1.5rem;padding:1rem;background:#F8F9FA;border-radius:8px;">
+        <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.75rem;color:#71828D;">
+          <span>Sent by You &bull; ${eq.date}</span>
+          <span class="badge-status ${eq.status.toLowerCase().replace(/\s+/g, '-')}">${eq.status}</span>
+        </div>
+        <div style="font-size:0.9rem;color:var(--color-navy);line-height:1.5;">${eq.message}</div>
+      </div>
+
+      ${eq.response ? `
+        <div style="margin-bottom:1.5rem;padding:1rem;background:rgba(40,91,74,0.06);border-left:4px solid var(--color-green);border-radius:4px;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.5rem;font-size:0.75rem;color:#71828D;">
+            <span style="font-weight:600;color:var(--color-green);">${eq.agent} (Advisor)</span>
+          </div>
+          <div style="font-size:0.9rem;color:var(--color-navy);line-height:1.5;">${eq.response}</div>
+        </div>
+      ` : `
+        <div style="margin-bottom:1.5rem;padding:1rem;background:#FFF9C4;border-radius:8px;font-size:0.85rem;color:#F57F17;">
+          Our relationship advisor is reviewing your query. You will receive an alert once an update is posted.
+        </div>
+      `}
+
+      <form onsubmit="handleEnquiryReply(event, '${eq.id}')">
+        <div class="form-group" style="margin-bottom:1rem;">
+          <label class="form-label">Send Follow-Up Message</label>
+          <textarea class="form-control" rows="3" id="enquiry-reply-text" placeholder="Type your follow-up enquiry or clarification..." required></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:1rem;">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modal-enquiry-detail')">Close</button>
+          <button type="submit" class="btn btn-primary">Transmit Reply</button>
+        </div>
+      </form>
+    `;
+  }
+
+  openModal('modal-enquiry-detail');
+};
+
+window.handleEnquiryReply = function(e, enquiryId) {
+  e.preventDefault();
+  const replyInput = document.getElementById('enquiry-reply-text');
+  const text = replyInput ? replyInput.value.trim() : '';
+  if (!text) return;
+
+  const eq = ENQUIRIES.find(x => x.id === enquiryId);
+  if (eq) {
+    eq.status = 'In Progress';
+    eq.message += `\n\n[Follow-up ${new Date().toISOString().split('T')[0]}]: ${text}`;
+    if (window.showToast) window.showToast('Follow-up transmitted to advisor', 'success');
+    closeModal('modal-enquiry-detail');
+    renderAll();
+  }
+};
+
+// -------------------------------------------------------------
+// 11. SECTION 6: MY OFFERS LOGIC
+// -------------------------------------------------------------
+function renderOffersSection() {
+  const tbody = document.getElementById('offers-table-body');
+  if (!tbody) return;
+
+  if (OFFERS.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="6" style="text-align:center;padding:3rem 1rem;color:#71828D;">
+          No purchase bids submitted yet. Click "Submit New Offer" to propose acquisition terms on a property.
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  tbody.innerHTML = OFFERS.map(of => {
+    const isCounter = of.status === 'Counteroffer Received';
+    const isActive = of.status === 'Submitted' || of.status === 'Under Review' || isCounter;
+
+    return `
+      <tr>
+        <td>
+          <div style="font-weight:600;color:var(--color-navy);">${of.propertyTitle}</div>
+          <div style="font-size:0.75rem;color:#71828D;">Ref: ${of.id} &bull; Submitted: ${of.submittedDate}</div>
+        </td>
+        <td>
+          <div style="font-family:var(--font-heading);font-weight:700;font-size:1.05rem;color:var(--color-navy);">₹${(of.offerAmount / 10000000).toFixed(2)} Cr</div>
+          ${isCounter ? `
+            <div style="font-size:0.75rem;color:#E65100;font-weight:600;">Counter: ₹${(of.counterAmount / 10000000).toFixed(2)} Cr</div>
+          ` : ''}
+        </td>
+        <td>${of.closingDate}</td>
+        <td>${of.financingType}</td>
+        <td>
+          <span class="badge-status ${of.status.toLowerCase().replace(/\s+/g, '-')}">${of.status}</span>
+        </td>
+        <td style="text-align:right;">
+          <div style="display:inline-flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end;">
+            <button class="btn btn-ghost" style="padding:0.35rem 0.65rem;font-size:0.75rem;" onclick="openOfferDetailModal('${of.id}')">View Details</button>
+            ${isCounter ? `
+              <button class="btn btn-primary" style="padding:0.35rem 0.65rem;font-size:0.75rem;background:var(--color-green);border-color:var(--color-green);" onclick="acceptCounteroffer('${of.id}')">Accept Counter</button>
+              <button class="btn btn-ghost" style="padding:0.35rem 0.65rem;font-size:0.75rem;color:#E53935;" onclick="rejectCounteroffer('${of.id}')">Reject</button>
+            ` : ''}
+            ${(of.status === 'Submitted' || of.status === 'Under Review') ? `
+              <button class="btn btn-ghost" style="padding:0.35rem 0.65rem;font-size:0.75rem;color:#E53935;" onclick="withdrawOffer('${of.id}')">Withdraw</button>
+            ` : ''}
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+}
+
+window.openNewOfferModal = function() {
+  openModal('modal-new-offer');
+};
+
+window.handleNewOfferSubmit = function(e) {
+  e.preventDefault();
+  const propId = document.getElementById('offer-prop-select').value;
+  const amountVal = Number(document.getElementById('offer-amount-input').value);
+  const closingDate = document.getElementById('offer-closing-date').value;
+  const financeType = document.getElementById('offer-finance-select').value;
+  const notes = document.getElementById('offer-notes-input').value;
+
+  const prop = getPropertyById(propId);
+  const newOffer = {
+    id: `OF00${OFFERS.length + 1}`,
+    propertyId: propId,
+    propertyTitle: prop ? prop.title : 'Prime Luxury Residence',
+    offerAmount: amountVal,
+    closingDate: closingDate,
+    financingType: financeType,
+    notes: notes,
+    status: 'Submitted',
+    submittedDate: new Date().toISOString().split('T')[0]
+  };
+
+  OFFERS.unshift(newOffer);
+
+  // Add Notification
+  NOTIFICATIONS.unshift({
+    id: `N00${NOTIFICATIONS.length + 1}`,
+    type: 'offer',
+    message: `Offer of ₹${(amountVal / 10000000).toFixed(2)} Cr submitted on ${newOffer.propertyTitle}`,
+    date: new Date().toISOString().split('T')[0],
+    read: false
+  });
+
+  closeModal('modal-new-offer');
+  document.getElementById('new-offer-form').reset();
+
+  if (window.showToast) window.showToast('Offer submitted (demo only – not sent to a real server)', 'success');
+  renderAll();
+};
+
+window.openOfferDetailModal = function(offerId) {
+  const of = OFFERS.find(o => o.id === offerId);
+  if (!of) return;
+
+  const titleEl = document.getElementById('offer-detail-title');
+  const contentEl = document.getElementById('offer-detail-content');
+
+  if (titleEl) titleEl.textContent = `Offer Overview: ${of.propertyTitle}`;
+  if (contentEl) {
+    const isUnderReview = of.status === 'Under Review';
+    const isCounter = of.status === 'Counteroffer Received';
+    const isAccepted = of.status === 'Accepted';
+
+    contentEl.innerHTML = `
+      <!-- Timeline Header -->
+      <div class="offer-timeline">
+        <div class="offer-step completed">
+          <div class="offer-step-dot">&#10003;</div>
+          <div class="offer-step-label">Drafted</div>
+        </div>
+        <div class="offer-step completed">
+          <div class="offer-step-dot">&#10003;</div>
+          <div class="offer-step-label">Submitted</div>
+        </div>
+        <div class="offer-step ${isUnderReview || isCounter || isAccepted ? 'completed' : 'active'}">
+          <div class="offer-step-dot">${isUnderReview ? '3' : '&#10003;'}</div>
+          <div class="offer-step-label">Under Review</div>
+        </div>
+        <div class="offer-step ${isCounter ? 'active' : isAccepted ? 'completed' : ''}">
+          <div class="offer-step-dot">4</div>
+          <div class="offer-step-label">Decision / Counter</div>
+        </div>
+      </div>
+
+      <div style="background:#F8F9FA;border-radius:10px;padding:1.25rem;margin-bottom:1.5rem;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;">
+          <div>
+            <span style="font-size:0.75rem;color:#71828D;text-transform:uppercase;">Offered Amount</span>
+            <div style="font-family:var(--font-heading);font-size:1.4rem;font-weight:700;color:var(--color-navy);">
+              ₹${(of.offerAmount / 10000000).toFixed(2)} Cr
+            </div>
+          </div>
+          <div>
+            <span style="font-size:0.75rem;color:#71828D;text-transform:uppercase;">Current Bid Status</span>
+            <div><span class="badge-status ${of.status.toLowerCase().replace(/\s+/g, '-')}">${of.status}</span></div>
+          </div>
+        </div>
+
+        ${of.counterAmount ? `
+          <div style="padding:0.75rem 1rem;background:#FFF3E0;border-radius:6px;border-left:4px solid #E65100;margin-bottom:1rem;">
+            <span style="font-size:0.75rem;color:#E65100;font-weight:600;text-transform:uppercase;">Seller Counteroffer</span>
+            <div style="font-family:var(--font-heading);font-size:1.3rem;font-weight:700;color:#E65100;">
+              ₹${(of.counterAmount / 10000000).toFixed(2)} Cr
+            </div>
+            <div style="font-size:0.8rem;color:#60727D;margin-top:0.25rem;">Seller agreed to all requested fittings but adjusted price to ₹${(of.counterAmount / 10000000).toFixed(2)} Cr.</div>
+          </div>
+        ` : ''}
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;">
+          <div>
+            <span style="font-size:0.75rem;color:#71828D;">Financing Strategy</span>
+            <div style="font-weight:600;">${of.financingType}</div>
+          </div>
+          <div>
+            <span style="font-size:0.75rem;color:#71828D;">Target Deed Registration Date</span>
+            <div style="font-weight:600;">${of.closingDate}</div>
+          </div>
+        </div>
+
+        <div style="margin-top:1rem;border-top:1px solid #E8ECEE;padding-top:0.75rem;">
+          <span style="font-size:0.75rem;color:#71828D;">Buyer Conditions & Notes</span>
+          <div style="font-size:0.85rem;color:#30383D;margin-top:0.25rem;">${of.notes || 'Standard RERA conveyance clauses.'}</div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;gap:1rem;">
+        <button class="btn btn-ghost" onclick="closeModal('modal-offer-detail')">Close</button>
+      </div>
+    `;
+  }
+
+  openModal('modal-offer-detail');
+};
+
+window.acceptCounteroffer = function(offerId) {
+  if (confirm('Accept the seller counteroffer and proceed to digital token drafting? (Demo only)')) {
+    const of = OFFERS.find(o => o.id === offerId);
+    if (of) {
+      of.status = 'Accepted';
+      of.offerAmount = of.counterAmount;
+      if (window.showToast) window.showToast('Counteroffer accepted! Advisor is preparing purchase contract.', 'success');
+      renderAll();
+    }
+  }
+};
+
+window.rejectCounteroffer = function(offerId) {
+  if (confirm('Decline this seller counteroffer?')) {
+    const of = OFFERS.find(o => o.id === offerId);
+    if (of) {
+      of.status = 'Rejected';
+      if (window.showToast) window.showToast('Seller counteroffer rejected.', 'info');
+      renderAll();
+    }
+  }
+};
+
+window.withdrawOffer = function(offerId) {
+  if (confirm('Are you sure you want to withdraw this formal offer?')) {
+    const of = OFFERS.find(o => o.id === offerId);
+    if (of) {
+      of.status = 'Withdrawn';
+      if (window.showToast) window.showToast('Offer withdrawn successfully', 'info');
+      renderAll();
+    }
+  }
+};
+
+// -------------------------------------------------------------
+// 12. SECTION 7: RECENTLY VIEWED LOGIC
+// -------------------------------------------------------------
+function renderRecentlyViewedSection() {
+  const grid = document.getElementById('recent-properties-grid');
+  const emptyState = document.getElementById('recent-empty-state');
+  if (!grid) return;
+
+  let recentIds = [];
+  try {
+    const raw = localStorage.getItem('cs_recently_viewed');
+    if (raw) recentIds = JSON.parse(raw);
+  } catch (e) {}
+
+  // Fallback demo IDs if nothing viewed yet
+  if (!recentIds || recentIds.length === 0) {
+    recentIds = ['P002', 'P004', 'P006'];
+  }
+
+  const props = recentIds.map(id => getPropertyById(id)).filter(Boolean);
+
+  if (props.length === 0) {
+    grid.style.display = 'none';
+    if (emptyState) emptyState.style.display = 'block';
+  } else {
+    grid.style.display = 'grid';
+    if (emptyState) emptyState.style.display = 'none';
+    grid.innerHTML = props.map(p => window.renderPropertyCard(p, '../')).join('');
+  }
+}
+
+window.clearRecentlyViewed = function() {
+  try {
+    localStorage.removeItem('cs_recently_viewed');
+  } catch (e) {}
+  
+  const grid = document.getElementById('recent-properties-grid');
+  const emptyState = document.getElementById('recent-empty-state');
+  if (grid) grid.style.display = 'none';
+  if (emptyState) emptyState.style.display = 'block';
+
+  if (window.showToast) window.showToast('Recently viewed history cleared', 'info');
+};
+
+// -------------------------------------------------------------
+// 13. SECTION 8: NOTIFICATIONS LOGIC
+// -------------------------------------------------------------
+function renderNotificationsSection() {
+  const container = document.getElementById('notifications-list-container');
+  if (!container) return;
+
+  if (NOTIFICATIONS.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center;padding:3rem 1rem;color:#71828D;background:#fff;border-radius:12px;">
+        No notifications to display.
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = NOTIFICATIONS.map(n => `
+    <div class="notification-card ${!n.read ? 'unread' : ''}" onclick="markNotificationRead('${n.id}')">
+      <div class="activity-icon ${n.type}" style="width:44px;height:44px;">
+        ${n.type === 'offer' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path></svg>' : ''}
+        ${n.type === 'visit' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>' : ''}
+        ${n.type === 'enquiry' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>' : ''}
+        ${n.type === 'property' ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>' : ''}
+      </div>
+      <div style="flex:1;">
+        <div style="font-size:0.92rem;color:var(--color-navy);font-weight:${!n.read ? '600' : '400'};">${n.message}</div>
+        <div style="font-size:0.75rem;color:#8C9BA5;margin-top:0.25rem;">${n.date} &bull; ${n.type.toUpperCase()} ALERT</div>
+      </div>
+      ${!n.read ? '<div class="notification-unread-dot" title="Unread"></div>' : ''}
+    </div>
+  `).join('');
+}
+
+window.markNotificationRead = function(notifId) {
+  const notif = NOTIFICATIONS.find(n => n.id === notifId);
+  if (notif) {
+    notif.read = true;
+    updateBadgeCounts();
+    renderNotificationsSection();
+  }
+};
+
+window.markAllNotificationsRead = function() {
+  NOTIFICATIONS.forEach(n => n.read = true);
+  updateBadgeCounts();
+  renderNotificationsSection();
+  if (window.showToast) window.showToast('All notifications marked as read', 'info');
+};
+
+// -------------------------------------------------------------
+// 14. SECTION 9 & 10: PROFILE & SUPPORT
+// -------------------------------------------------------------
+window.handleProfileSubmit = function(e) {
+  e.preventDefault();
+  const name = document.getElementById('prof-name').value;
+  if (window.showToast) window.showToast(`Profile changes saved successfully for ${name}! (Demo Mode)`, 'success');
+};
+
+window.toggleFaq = function(headerEl) {
+  const item = headerEl.parentElement;
+  const content = item.querySelector('.faq-content');
+  const isActive = item.classList.contains('active');
+
+  // Close all others
+  document.querySelectorAll('.faq-item').forEach(el => {
+    el.classList.remove('active');
+    const c = el.querySelector('.faq-content');
+    if (c) c.style.maxHeight = '0px';
+  });
+
+  if (!isActive) {
+    item.classList.add('active');
+    if (content) content.style.maxHeight = `${content.scrollHeight + 30}px`;
+  }
+};
+
+window.handleSupportSubmit = function(e) {
+  e.preventDefault();
+  if (window.showToast) window.showToast('Support ticket dispatched to senior concierge desk. Case #CS-94821.', 'success');
+  e.target.reset();
+};
+
+// -------------------------------------------------------------
+// 15. SECTION 11: LOGOUT MODAL & TRANSITION
+// -------------------------------------------------------------
+window.triggerLogout = function() {
+  openModal('modal-logout-confirm');
+};
+
+window.executeLogout = function() {
+  const confirmBtn = document.getElementById('btn-confirm-logout');
+  if (confirmBtn) {
+    confirmBtn.innerHTML = 'Signing out...';
+    confirmBtn.disabled = true;
+  }
+
+  if (window.showToast) window.showToast('Signing out of session...', 'info');
+
+  setTimeout(() => {
+    window.location.href = '../pages/login.html';
+  }, 900);
+};
+
+// -------------------------------------------------------------
+// 16. MODAL UTILITIES
+// -------------------------------------------------------------
+window.openModal = function(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+window.closeModal = function(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+};
+
+// Close modal on outside backdrop click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

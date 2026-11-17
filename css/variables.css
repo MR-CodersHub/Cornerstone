@@ -1,0 +1,134 @@
+/* ============================================================
+   Cornerstone Real Estate — CSS Custom Properties
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* ── Brand Colours ── */
+  --color-navy:        #172B3A;
+  --color-green:       #285B4A;
+  --color-gold:        #C6A56B;
+  --color-ivory:       #F8F6F0;
+  --color-white:       #FFFFFF;
+  --color-light-gray:  #EEF1F2;
+  --color-charcoal:    #30383D;
+  --color-sage:        #A9B8A5;
+
+  /* ── Semantic Tokens (light mode) ── */
+  --bg-primary:        var(--color-ivory);
+  --bg-secondary:      var(--color-white);
+  --bg-card:           var(--color-white);
+  --bg-navbar:         var(--color-navy);
+  --bg-footer:         var(--color-navy);
+
+  --text-primary:      var(--color-navy);
+  --text-secondary:    var(--color-charcoal);
+  --text-muted:        #6B7A82;
+  --text-on-dark:      var(--color-ivory);
+  --text-on-gold:      var(--color-navy);
+
+  --border-color:      #D8DDE0;
+  --border-radius-sm:  4px;
+  --border-radius-md:  8px;
+  --border-radius-lg:  16px;
+  --border-radius-xl:  24px;
+  --border-radius-pill:9999px;
+
+  /* ── Accent ── */
+  --accent-primary:    var(--color-gold);
+  --accent-secondary:  var(--color-green);
+  --accent-hover:      #B5924F;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 3px rgba(23,43,58,.08), 0 1px 2px rgba(23,43,58,.06);
+  --shadow-md:  0 4px 12px rgba(23,43,58,.12), 0 2px 6px rgba(23,43,58,.08);
+  --shadow-lg:  0 10px 30px rgba(23,43,58,.15), 0 4px 10px rgba(23,43,58,.10);
+  --shadow-xl:  0 20px 50px rgba(23,43,58,.20), 0 8px 20px rgba(23,43,58,.12);
+
+  /* ── Typography ── */
+  --font-heading:   'Playfair Display', Georgia, serif;
+  --font-body:      'Inter', system-ui, -apple-system, sans-serif;
+
+  --font-size-xs:   0.75rem;    /* 12px */
+  --font-size-sm:   0.875rem;   /* 14px */
+  --font-size-base: 1rem;       /* 16px */
+  --font-size-md:   1.125rem;   /* 18px */
+  --font-size-lg:   1.25rem;    /* 20px */
+  --font-size-xl:   1.5rem;     /* 24px */
+  --font-size-2xl:  1.875rem;   /* 30px */
+  --font-size-3xl:  2.25rem;    /* 36px */
+  --font-size-4xl:  3rem;       /* 48px */
+  --font-size-5xl:  3.75rem;    /* 60px */
+
+  --line-height-tight:  1.2;
+  --line-height-snug:   1.4;
+  --line-height-normal: 1.6;
+  --line-height-relaxed:1.75;
+
+  /* ── Spacing ── */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* ── Layout ── */
+  --container-max:  1280px;
+  --container-pad:  1.5rem;
+  --navbar-height:  72px;
+
+  /* ── Transitions ── */
+  --transition-fast:   0.15s ease;
+  --transition-base:   0.25s ease;
+  --transition-slow:   0.4s ease;
+  --transition-spring: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ── Z-index layers ── */
+  --z-below:    -1;
+  --z-base:     0;
+  --z-raised:   10;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-modal:    400;
+  --z-toast:    500;
+  --z-tooltip:  600;
+
+  /* ── Status Colours ── */
+  --status-available:    #2E7D32;
+  --status-available-bg: #E8F5E9;
+  --status-offer:        #E65100;
+  --status-offer-bg:     #FFF3E0;
+  --status-sold:         #B71C1C;
+  --status-sold-bg:      #FFEBEE;
+  --status-rented:       #1565C0;
+  --status-rented-bg:    #E3F2FD;
+}
+
+/* ── Dark Mode ── */
+body.dark-mode {
+  --bg-primary:       #0F1E28;
+  --bg-secondary:     #172B3A;
+  --bg-card:          #1E3345;
+  --bg-navbar:        #0F1E28;
+  --bg-footer:        #0A1620;
+
+  --text-primary:     #F0EDE5;
+  --text-secondary:   #C8D0D5;
+  --text-muted:       #8A9BA6;
+  --text-on-dark:     #F0EDE5;
+
+  --border-color:     #2D4455;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.2);
+  --shadow-md:  0 4px 12px rgba(0,0,0,.35), 0 2px 6px rgba(0,0,0,.25);
+  --shadow-lg:  0 10px 30px rgba(0,0,0,.40), 0 4px 10px rgba(0,0,0,.30);
+  --shadow-xl:  0 20px 50px rgba(0,0,0,.50), 0 8px 20px rgba(0,0,0,.35);
+}

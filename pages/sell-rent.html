@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sell or Rent Your Property | Cornerstone Real Estate</title>
+  <meta name="description" content="List your luxury property with Cornerstone. Access verified high-net-worth buyers and pre-screened tenants with our full-service property marketing and transaction management.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* ── Sell/Rent Hero ── */
+    .sell-hero {
+      position: relative;
+      background-image: url('https://images.unsplash.com/photo-1560184897-ae75f418493e?w=1600');
+      background-size: cover;
+      background-position: center;
+      color: var(--color-white);
+      padding: clamp(5rem, 12vw, 9rem) 0;
+      overflow: hidden;
+    }
+    .sell-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(23, 43, 58, 0.94) 0%, rgba(23, 43, 58, 0.82) 60%, rgba(40, 91, 74, 0.85) 100%);
+      z-index: 1;
+    }
+    .sell-hero__content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+    }
+    .sell-hero__title {
+      font-size: clamp(2.3rem, 5vw, 3.6rem);
+      color: var(--color-white);
+      margin-bottom: var(--space-4);
+      line-height: 1.15;
+    }
+    .sell-hero__title span {
+      color: var(--color-gold);
+    }
+    .sell-hero__subtext {
+      font-size: var(--font-size-lg);
+      color: var(--color-sage);
+      margin-bottom: var(--space-8);
+      line-height: 1.6;
+    }
+
+    /* ── Service Cards (Sections 2 & 3) ── */
+    .services-grid-6 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-6);
+    }
+    @media (max-width: 992px) {
+      .services-grid-6 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 600px) {
+      .services-grid-6 {
+        grid-template-columns: 1fr;
+      }
+    }
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-xl);
+      padding: var(--space-8);
+      transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+      display: flex;
+      flex-direction: column;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--color-gold);
+    }
+    .service-card__icon {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--border-radius-lg);
+      background: rgba(198, 165, 107, 0.15);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-5);
+    }
+    .service-card__title {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .service-card__desc {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+      line-height: var(--line-height-relaxed);
+      margin: 0;
+    }
+
+    /* ── How Listing Works Timeline (Section 4) ── */
+    .steps-timeline-wrap {
+      position: relative;
+      margin-top: var(--space-12);
+      padding: 0 var(--space-4);
+    }
+    .steps-timeline-bar {
+      position: absolute;
+      top: 36px;
+      left: 10%;
+      right: 10%;
+      height: 3px;
+      background: var(--border-color);
+      z-index: 1;
+    }
+    .steps-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-4);
+    }
+    @media (max-width: 900px) {
+      .steps-timeline-bar {
+        display: none;
+      }
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-6);
+      }
+    }
+    .step-card {
+      text-align: center;
+    }
+    .step-number-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      border: 3px solid var(--color-gold);
+      color: var(--color-gold);
+      font-family: var(--font-heading);
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-4);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all var(--transition-base);
+    }
+    .step-card:hover .step-number-circle {
+      background: var(--color-gold);
+      color: var(--color-navy);
+      transform: scale(1.1);
+    }
+    .step-title {
+      font-family: var(--font-heading);
+      font-size: var(--font-size-md);
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .step-desc {
+      font-size: var(--font-size-xs);
+      color: var(--text-muted);
+      line-height: var(--line-height-normal);
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    /* ── Submission Form Card (Section 5) ── */
+    .submission-section {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .submission-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-2xl);
+      padding: clamp(var(--space-6), 4vw, var(--space-12));
+      box-shadow: var(--shadow-lg);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .upload-dropzone {
+      border: 2px dashed var(--border-color);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-8);
+      text-align: center;
+      cursor: pointer;
+      background: var(--bg-secondary);
+      transition: border-color var(--transition-fast), background var(--transition-fast);
+    }
+    .upload-dropzone:hover {
+      border-color: var(--color-gold);
+      background: rgba(198, 165, 107, 0.05);
+    }
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+    .preview-item {
+      position: relative;
+      height: 90px;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    .preview-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .preview-remove-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .submission-success {
+      display: none;
+      text-align: center;
+      padding: var(--space-16) var(--space-6);
+    }
+    .submission-success.active {
+      display: block;
+      animation: fadeIn 0.4s ease;
+    }
+    .success-icon-wrap {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(40, 91, 74, 0.15);
+      color: var(--color-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-6);
+    }
+
+    /* ── FAQ Section & CTA Box (Section 6) ── */
+    .owner-cta-box {
+      background: linear-gradient(135deg, var(--color-navy) 0%, #162a39 100%);
+      border: 1px solid rgba(198, 165, 107, 0.3);
+      border-radius: var(--border-radius-xl);
+      padding: var(--space-10) var(--space-8);
+      color: var(--color-white);
+      text-align: center;
+      margin-top: var(--space-16);
+      box-shadow: var(--shadow-lg);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Container -->
+  <div id="navbar-container"></div>
+
+  <!-- SECTION 1 – Hero -->
+  <section class="sell-hero" id="hero-section">
+    <div class="container">
+      <div class="sell-hero__content">
+        <span class="section-label" style="color: var(--color-gold);">Premier Asset Management</span>
+        <h1 class="sell-hero__title">List Your Property with <span>Confidence</span></h1>
+        <p class="sell-hero__subtext">
+          Reach thousands of verified buyers and corporate tenants. Our specialized directors handle every facet from high-definition presentation to closing negotiation.
+        </p>
+        <div class="flex items-center gap-4 flex-wrap">
+          <a href="#submit-property" class="btn btn-primary" style="padding: 0.85rem 2rem; font-size: var(--font-size-base);">
+            List Your Property
+          </a>
+          <a href="#how-it-works" class="btn btn-secondary" style="padding: 0.85rem 2rem; font-size: var(--font-size-base);">
+            How It Works
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- SECTION 2 – Selling Services -->
+    <section class="section" id="selling-services">
+      <div class="container">
+        <div class="text-center mb-12">
+          <span class="section-label">Tailored For Property Owners</span>
+          <h2 class="section-title">Selling Services</h2>
+          <p class="section-subtitle" style="margin-inline: auto;">
+            Our bespoke brokerage platform pairs institutional diligence with discreet personal attention for prime residential assets.
+          </p>
+        </div>
+
+        <div class="services-grid-6">
+          
+          <!-- Service 1: Property Valuation -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Property Valuation</h3>
+            <p class="service-card__desc">
+              Comprehensive micro-market comparative valuation analyzing recent verified registry transactions and current liquidity trends.
+            </p>
+          </div>
+
+          <!-- Service 2: Listing Presentation -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                <line x1="8" y1="21" x2="16" y2="21"></line>
+                <line x1="12" y1="17" x2="12" y2="21"></line>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Listing Presentation</h3>
+            <p class="service-card__desc">
+              Curated editorial property profiles with tailored copywriting, detailed dimension layouts, and key highlight dossiers.
+            </p>
+          </div>
+
+          <!-- Service 3: Photography & Marketing -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Photography & Marketing</h3>
+            <p class="service-card__desc">
+              Architectural high-res photography, twilight drone captures, immersive 3D tours, and targeted high-net-worth digital campaigns.
+            </p>
+          </div>
+
+          <!-- Service 4: Buyer Enquiry Management -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Buyer Enquiry Management</h3>
+            <p class="service-card__desc">
+              Pre-qualification and financial vetting of prospective buyers to protect your privacy and ensure qualified site visits only.
+            </p>
+          </div>
+
+          <!-- Service 5: Negotiation Support -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Negotiation Support</h3>
+            <p class="service-card__desc">
+              Experienced transaction directors advocate on your behalf to defend valuation benchmarks and secure optimal contract conditions.
+            </p>
+          </div>
+
+          <!-- Service 6: Transaction Guidance -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Transaction Guidance</h3>
+            <p class="service-card__desc">
+              End-to-end legal title verification, stamp duty calculation, formal sale deed structuring, and seamless escrow coordination.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3 – Rental Services -->
+    <section class="section" id="rental-services" style="background: var(--bg-secondary); border-top: 1px solid var(--border-color);">
+      <div class="container">
+        <div class="text-center mb-12">
+          <span class="section-label">Premium Asset Leasing</span>
+          <h2 class="section-title">Rental Services</h2>
+          <p class="section-subtitle" style="margin-inline: auto;">
+            Maximize annual yields and secure premier corporate leases with our specialized tenancy management suite.
+          </p>
+        </div>
+
+        <div class="services-grid-6">
+          
+          <!-- Service 1: Rental Listing -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Rental Listing</h3>
+            <p class="service-card__desc">
+              High-visibility digital positioning across elite corporate channels, relocation networks, and diplomatic housing registries.
+            </p>
+          </div>
+
+          <!-- Service 2: Tenant Enquiry Management -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Tenant Enquiry Management</h3>
+            <p class="service-card__desc">
+              Rapid response protocols for prospective tenants, comprehensive ID verification, and corporate employment credential screening.
+            </p>
+          </div>
+
+          <!-- Service 3: Viewing Coordination -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Viewing Coordination</h3>
+            <p class="service-card__desc">
+              Scheduled accompanied walkthroughs managed directly by our leasing agents, completely eliminating owner scheduling hassle.
+            </p>
+          </div>
+
+          <!-- Service 4: Rental Marketing -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon points="12 8 8 12 12 16 12 8"></polygon>
+                <line x1="12" y1="16" x2="16" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Rental Marketing</h3>
+            <p class="service-card__desc">
+              Syndicated distribution across MNC HR desks, executive relocation agencies, and Cornerstone’s private executive database.
+            </p>
+          </div>
+
+          <!-- Service 5: Application Management -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Application Management</h3>
+            <p class="service-card__desc">
+              Comprehensive credit checks, reference validation, security deposit collection handling, and clear owner decision dossiers.
+            </p>
+          </div>
+
+          <!-- Service 6: Lease Support -->
+          <div class="service-card">
+            <div class="service-card__icon">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Lease Support</h3>
+            <p class="service-card__desc">
+              Standardized leave & license drafting, biometric e-registration with local authorities, and handover inspection inventories.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 – How Listing Works -->
+    <section class="section" id="how-it-works">
+      <div class="container">
+        <div class="text-center mb-10">
+          <span class="section-label">A Seamless Process</span>
+          <h2 class="section-title">How Listing Works</h2>
+          <p class="section-subtitle" style="margin-inline: auto;">
+            From initial property submission to final agreement execution, our 5-step structured journey ensures total transparency.
+          </p>
+        </div>
+
+        <div class="steps-timeline-wrap">
+          <div class="steps-timeline-bar"></div>
+          <div class="steps-grid">
+            
+            <!-- Step 1 -->
+            <div class="step-card">
+              <div class="step-number-circle">1</div>
+              <h3 class="step-title">Submit Details</h3>
+              <p class="step-desc">Share property specifications, location coordinates, and pricing expectations.</p>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step-card">
+              <div class="step-number-circle">2</div>
+              <h3 class="step-title">Expert Review</h3>
+              <p class="step-desc">Our valuation director evaluates documentation and establishes optimal market positioning.</p>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step-card">
+              <div class="step-number-circle">3</div>
+              <h3 class="step-title">Marketing Begins</h3>
+              <p class="step-desc">High-definition architectural visuals and targeted campaigns reach high-intent prospects.</p>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step-card">
+              <div class="step-number-circle">4</div>
+              <h3 class="step-title">Manage Visits</h3>
+              <p class="step-desc">We filter incoming inquiries and coordinate accompanied viewings with verified buyers.</p>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step-card">
+              <div class="step-number-circle">5</div>
+              <h3 class="step-title">Review Offers</h3>
+              <p class="step-desc">Evaluate formal purchase expressions or rental applications and finalize the transaction.</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5 – Property Submission Form -->
+    <section class="section submission-section" id="submit-property">
+      <div class="container">
+        <div class="text-center mb-10">
+          <span class="section-label">Owner Portal Intake</span>
+          <h2 class="section-title">Submit Your Property</h2>
+          <p class="section-subtitle" style="margin-inline: auto;">
+            Provide essential particulars about your luxury residence to initiate our comprehensive onboarding appraisal.
+          </p>
+        </div>
+
+        <div class="submission-card">
+          
+          <!-- Success State Display -->
+          <div id="submission-success-msg" class="submission-success">
+            <div class="success-icon-wrap">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="font-heading mb-3" style="font-size: var(--font-size-2xl);">Submission Received Successfully!</h3>
+            <p class="text-secondary mb-6" style="max-width: 540px; margin-inline: auto; font-size: var(--font-size-md);">
+              Your property has been submitted! Our team will review it and get back to you within 24-48 hours. This is a demo submission.
+            </p>
+            <div class="flex-center gap-4">
+              <button type="button" class="btn btn-primary" onclick="resetSubmissionForm()">Submit Another Property</button>
+              <a href="../index.html" class="btn btn-ghost">Return to Homepage</a>
+            </div>
+          </div>
+
+          <!-- Main Submission Form -->
+          <form id="owner-submission-form" onsubmit="event.preventDefault(); handlePropertySubmission();">
+            
+            <!-- Owner Contact Info -->
+            <h4 class="font-heading text-gold mb-4" style="font-size: var(--font-size-lg);">1. Owner Contact Information</h4>
+            <div class="grid grid-3 gap-4 mb-6">
+              <div class="form-group">
+                <label for="owner-name" class="form-label">Owner Full Name *</label>
+                <input type="text" id="owner-name" class="form-control" placeholder="e.g. Rajesh Khurana" required />
+              </div>
+              <div class="form-group">
+                <label for="owner-email" class="form-label">Email Address *</label>
+                <input type="email" id="owner-email" class="form-control" placeholder="owner@domain.com" required />
+              </div>
+              <div class="form-group">
+                <label for="owner-phone" class="form-label">Phone Number *</label>
+                <input type="tel" id="owner-phone" class="form-control" placeholder="+91 98111 22334" required />
+              </div>
+            </div>
+
+            <div class="form-group mb-8">
+              <label class="form-label">Preferred Contact Method</label>
+              <div class="flex items-center gap-6 mt-2">
+                <label class="form-check">
+                  <input type="radio" name="owner_contact_pref" value="Phone" checked />
+                  <span class="form-check-label">Phone Call</span>
+                </label>
+                <label class="form-check">
+                  <input type="radio" name="owner_contact_pref" value="WhatsApp" />
+                  <span class="form-check-label">WhatsApp</span>
+                </label>
+                <label class="form-check">
+                  <input type="radio" name="owner_contact_pref" value="Email" />
+                  <span class="form-check-label">Email</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Property Classification -->
+            <h4 class="font-heading text-gold mb-4" style="font-size: var(--font-size-lg); border-top: 1px solid var(--border-color); padding-top: var(--space-6);">
+              2. Listing Classification & Location
+            </h4>
+            
+            <div class="grid grid-2 gap-4 mb-4">
+              <div class="form-group">
+                <label class="form-label">Listing Type *</label>
+                <div class="flex items-center gap-6 mt-2">
+                  <label class="form-check">
+                    <input type="radio" name="submission_listing_type" value="Sell" checked />
+                    <span class="form-check-label font-bold">Sell Property</span>
+                  </label>
+                  <label class="form-check">
+                    <input type="radio" name="submission_listing_type" value="Rent" />
+                    <span class="form-check-label font-bold">Rent Out Property</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="submission-prop-type" class="form-label">Property Type *</label>
+                <select id="submission-prop-type" class="form-control" required>
+                  <option value="Apartment">Apartment</option>
+                  <option value="Villa">Villa</option>
+                  <option value="House">Independent House</option>
+                  <option value="Plot">Plot / Land</option>
+                  <option value="Commercial">Commercial Space</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-2 gap-4 mb-6">
+              <div class="form-group">
+                <label for="submission-title" class="form-label">Property Title / Name *</label>
+                <input type="text" id="submission-title" class="form-control" placeholder="e.g. Modern Penthouse with Panoramic Sea Views" required />
+              </div>
+              <div class="form-group">
+                <label for="submission-location" class="form-label">Property Location (Neighborhood, City) *</label>
+                <input type="text" id="submission-location" class="form-control" placeholder="e.g. Bandra West, Mumbai" required />
+              </div>
+            </div>
+
+            <!-- Property Metrics & Valuation -->
+            <h4 class="font-heading text-gold mb-4" style="font-size: var(--font-size-lg); border-top: 1px solid var(--border-color); padding-top: var(--space-6);">
+              3. Specifications & Expected Price
+            </h4>
+
+            <div class="grid grid-4 gap-4 mb-6">
+              <div class="form-group">
+                <label for="submission-price" class="form-label">Asking Price / Rent (₹) *</label>
+                <input type="number" id="submission-price" class="form-control" placeholder="e.g. 45000000" min="10000" required />
+              </div>
+              <div class="form-group">
+                <label for="submission-beds" class="form-label">Bedrooms</label>
+                <select id="submission-beds" class="form-control">
+                  <option value="1">1 BHK</option>
+                  <option value="2">2 BHK</option>
+                  <option value="3" selected>3 BHK</option>
+                  <option value="4">4 BHK</option>
+                  <option value="5+">5+ BHK</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="submission-baths" class="form-label">Bathrooms</label>
+                <select id="submission-baths" class="form-control">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3" selected>3</option>
+                  <option value="4">4</option>
+                  <option value="5+">5+</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="submission-area" class="form-label">Area in Sqft</label>
+                <input type="number" id="submission-area" class="form-control" placeholder="e.g. 2400" min="100" />
+              </div>
+            </div>
+
+            <div class="form-group mb-6">
+              <label for="submission-furnishing" class="form-label">Furnishing Status</label>
+              <select id="submission-furnishing" class="form-control">
+                <option value="Furnished">Furnished</option>
+                <option value="Semi-Furnished">Semi-Furnished</option>
+                <option value="Unfurnished">Unfurnished</option>
+              </select>
+            </div>
+
+            <div class="form-group mb-6">
+              <label for="submission-desc" class="form-label">Property Description</label>
+              <textarea id="submission-desc" class="form-control" rows="4" placeholder="Detail any standout finishes, balconies, clubhouse access, or recent renovations..."></textarea>
+            </div>
+
+            <!-- Property Images -->
+            <div class="form-group mb-8">
+              <label class="form-label">Property Images (Multiple)</label>
+              <div class="upload-dropzone" onclick="document.getElementById('property-images-input').click()">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2" style="margin: 0 auto 10px;">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                  <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                  <polyline points="21 15 16 10 5 21"></polyline>
+                </svg>
+                <div class="font-semi text-sm text-primary">Click or drop property photographs here</div>
+                <div class="text-xs text-muted mt-1">PNG, JPG, WEBP up to 15MB each (demo simulation)</div>
+                <input type="file" id="property-images-input" multiple accept="image/*" style="display: none;" onchange="handleImageSelection(event)" />
+              </div>
+
+              <!-- Preview Grid -->
+              <div id="image-previews" class="preview-grid">
+                <!-- Selected images previewed here -->
+              </div>
+            </div>
+
+            <!-- Notice & Submit Button -->
+            <div class="mb-6 p-4 rounded" style="background: rgba(198, 165, 107, 0.1); border: 1px solid rgba(198, 165, 107, 0.3);">
+              <p class="text-xs text-secondary" style="margin: 0;">
+                <strong>Note:</strong> This is a demo submission form. A live platform would require backend processing and encrypted document verification.
+              </p>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.95rem; font-size: var(--font-size-base);">
+              Submit Property Listing
+            </button>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6 – FAQ & Owner CTA -->
+    <section class="section" id="faq-section">
+      <div class="container" style="max-width: 900px;">
+        <div class="text-center mb-12">
+          <span class="section-label">Clarity & Confidence</span>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+          <p class="section-subtitle" style="margin-inline: auto;">
+            Clear answers to common questions regarding fees, marketing timelines, photography, and client onboarding.
+          </p>
+        </div>
+
+        <!-- 6 Accordion Items -->
+        <div class="accordion" id="faq-accordion">
+          
+          <!-- FAQ 1: Fees -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">What are Cornerstone's brokerage and transaction fees?</span>
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                For residential sales, our standard success commission ranges between 1% to 2% based on mandate exclusivity and property scale, payable strictly upon registry completion. For rental tenancies, our fee equals one month's rent for 11-month or multi-year leave & license agreements. There are no hidden upfront cataloging fees.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 2: Timeline -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">How long does it typically take to sell or rent a luxury property?</span>
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                On average, accurately priced prime residences secure qualified offers within 30 to 60 days of syndicated marketing. Rental homes frequently conclude tenant agreements within 10 to 20 days given strong demand from corporate relocations.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 3: Photography -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Do you provide professional architectural photography and staging?</span>
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                Yes. Exclusive mandate properties receive complimentary professional architectural shoot coverage, drone aerial cinematography, and virtual 3D Matterport walkthrough scans handled by our internal media production team.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 4: Tenant Screening -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">How do you screen and vet prospective tenants or buyers?</span>
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                Every applicant undergoes rigorous multi-point verification: KYC identity confirmation, employment and corporate credential checks, past tenancy landlord references, and formal credit reporting before an accompanied inspection is arranged.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 5: Process -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">What documentation is required before listing a home?</span>
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                We require standard ownership proof (registered sale deed, share certificate, or allotment letter), property tax receipts, occupancy certificate (OC), and RERA registration details if applicable. Our legal advisory team assists in reviewing all title papers.
+              </div>
+            </div>
+          </div>
+
+          <!-- FAQ 6: Cancellation -->
+          <div class="accordion-item">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">Can I cancel or modify my listing agreement at any time?</span>
+              <svg class="accordion-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <div class="accordion-body">
+              <div class="accordion-content">
+                Yes. We pride ourselves on relationship-driven advisory rather than restrictive lock-ins. You may pause, adjust pricing, or terminate non-exclusive mandates with a simple 14-day written notice with no penalty fees whatsoever.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Owner CTA Box -->
+        <div class="owner-cta-box">
+          <span class="section-label" style="color: var(--color-gold);">Dedicated Owner Suite</span>
+          <h3 class="font-heading mb-3" style="font-size: var(--font-size-2xl); color: var(--color-white);">
+            Manage All Your Listings in Real-Time
+          </h3>
+          <p class="text-sm mb-6" style="color: var(--color-sage); max-width: 580px; margin-inline: auto;">
+            Track viewings, monitor received buyer offers, communicate securely with your assigned listing agent, and access market performance analytics.
+          </p>
+          <a href="login.html?type=seller" class="btn btn-primary" style="padding: 0.9rem 2.5rem; font-size: var(--font-size-base);">
+            Create Your Seller Account
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/components.js"></script>
+
+  <script>
+    /* ============================================================
+       SELL & RENT PAGE LOGIC
+       ============================================================ */
+
+    let uploadedImages = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Render Navbar & Footer
+      if (typeof window.renderNavbar === 'function') {
+        window.renderNavbar('navbar-container', 'sell', '../');
+      }
+      if (typeof window.renderFooter === 'function') {
+        window.renderFooter('footer-container', '../');
+      }
+
+      // Pre-populate demo image previews
+      initDemoImages();
+    });
+
+    // Accordion Toggle Logic
+    function toggleAccordion(headerEl) {
+      const item = headerEl.parentElement;
+      const isOpen = item.classList.contains('open');
+
+      // Close all other accordions
+      document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('open'));
+
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    }
+
+    // Default demo images for preview demonstration
+    function initDemoImages() {
+      uploadedImages = [
+        'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300',
+        'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=300'
+      ];
+      renderImagePreviews();
+    }
+
+    // File input change handler
+    function handleImageSelection(event) {
+      const files = event.target.files;
+      if (!files || files.length === 0) return;
+
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          uploadedImages.push(e.target.result);
+          renderImagePreviews();
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function removeUploadedImage(index) {
+      uploadedImages.splice(index, 1);
+      renderImagePreviews();
+    }
+
+    function renderImagePreviews() {
+      const container = document.getElementById('image-previews');
+      if (!container) return;
+
+      container.innerHTML = uploadedImages.map((src, idx) => `
+        <div class="preview-item">
+          <img src="${src}" alt="Preview ${idx + 1}" />
+          <div class="preview-remove-btn" onclick="removeUploadedImage(${idx})" title="Remove">&times;</div>
+        </div>
+      `).join('');
+    }
+
+    // Handle Form Submission
+    function handlePropertySubmission() {
+      const name = document.getElementById('owner-name').value.trim();
+      const email = document.getElementById('owner-email').value.trim();
+      const phone = document.getElementById('owner-phone').value.trim();
+      const title = document.getElementById('submission-title').value.trim();
+      const location = document.getElementById('submission-location').value.trim();
+      const price = document.getElementById('submission-price').value;
+      const listingType = document.querySelector('input[name="submission_listing_type"]:checked')?.value || 'Sell';
+      const propType = document.getElementById('submission-prop-type').value;
+
+      // Validation
+      if (!name || !email || !phone || !title || !location || !price) {
+        if (window.showToast) window.showToast('Please fill in all required fields (*)', 'error');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        if (window.showToast) window.showToast('Please provide a valid email address', 'error');
+        return;
+      }
+
+      const cleanPhone = phone.replace(/\D/g, '');
+      if (cleanPhone.length < 10) {
+        if (window.showToast) window.showToast('Please provide a valid 10+ digit phone number', 'error');
+        return;
+      }
+
+      // Save submission record to localStorage
+      const newListing = {
+        id: 'LST-' + Date.now(),
+        ownerName: name,
+        ownerEmail: email,
+        ownerPhone: phone,
+        listingType: listingType === 'Rent' ? 'For Rent' : 'For Sale',
+        propertyType: propType,
+        title,
+        location,
+        price: Number(price),
+        bedrooms: Number(document.getElementById('submission-beds').value) || 3,
+        bathrooms: Number(document.getElementById('submission-baths').value) || 3,
+        area: Number(document.getElementById('submission-area').value) || 2000,
+        furnishing: document.getElementById('submission-furnishing').value,
+        description: document.getElementById('submission-desc').value.trim(),
+        imagesCount: uploadedImages.length,
+        submittedAt: new Date().toISOString(),
+        status: 'Under Review'
+      };
+
+      try {
+        const stored = JSON.parse(localStorage.getItem('cs_owner_submissions') || '[]');
+        stored.push(newListing);
+        localStorage.setItem('cs_owner_submissions', JSON.stringify(stored));
+      } catch (e) {
+        console.warn('LocalStorage error:', e);
+      }
+
+      // Hide form, show success state
+      document.getElementById('owner-submission-form').style.display = 'none';
+      document.getElementById('submission-success-msg').classList.add('active');
+
+      if (window.showToast) {
+        window.showToast('Your property listing has been submitted for review!', 'success', 5000);
+      }
+
+      // Scroll to message
+      document.getElementById('submit-property').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetSubmissionForm() {
+      document.getElementById('owner-submission-form').reset();
+      document.getElementById('owner-submission-form').style.display = 'block';
+      document.getElementById('submission-success-msg').classList.remove('active');
+      uploadedImages = [];
+      initDemoImages();
+    }
+  </script>
+</body>
+</html>

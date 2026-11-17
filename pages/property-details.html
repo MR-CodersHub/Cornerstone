@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Details | Cornerstone Real Estate</title>
+  <meta name="description" content="View comprehensive property details, interior specifications, floor plans, neighborhood amenities, and contact the listing agent.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/navbar.css">
+  <link rel="stylesheet" href="../css/footer.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+
+  <style>
+    /* ── Gallery & Overview Styles ── */
+    .prop-header {
+      padding: var(--space-8) 0 var(--space-4);
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-primary);
+    }
+    .prop-breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-xs);
+      color: var(--text-muted);
+      margin-bottom: var(--space-3);
+    }
+    .prop-breadcrumbs a:hover {
+      color: var(--color-gold);
+    }
+    .prop-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+    }
+    .prop-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      margin-bottom: var(--space-2);
+      color: var(--text-primary);
+    }
+    .prop-price {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--color-gold);
+      white-space: nowrap;
+    }
+    .prop-meta-badges {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+      margin-top: var(--space-2);
+    }
+
+    /* Gallery */
+    .prop-gallery-section {
+      padding-top: var(--space-6);
+      padding-bottom: var(--space-10);
+    }
+    .prop-main-image-wrap {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      max-height: 580px;
+      min-height: 340px;
+      border-radius: var(--border-radius-xl);
+      overflow: hidden;
+      cursor: zoom-in;
+      background: #111;
+      box-shadow: var(--shadow-md);
+    }
+    .prop-main-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-slow);
+    }
+    .prop-main-image-wrap:hover .prop-main-image {
+      transform: scale(1.02);
+    }
+    .prop-gallery-actions {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      display: flex;
+      gap: var(--space-2);
+      z-index: 5;
+    }
+    .action-icon-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--color-navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      transition: transform var(--transition-spring), background var(--transition-fast);
+      cursor: pointer;
+    }
+    .action-icon-btn:hover {
+      transform: scale(1.1);
+      background: var(--color-white);
+    }
+    .action-icon-btn.saved svg {
+      fill: #e53935;
+      color: #e53935;
+    }
+
+    .prop-thumb-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+      margin-top: var(--space-3);
+    }
+    .prop-thumb {
+      height: 100px;
+      border-radius: var(--border-radius-md);
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      opacity: 0.75;
+      transition: all var(--transition-fast);
+      position: relative;
+    }
+    .prop-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .prop-thumb.active, .prop-thumb:hover {
+      opacity: 1;
+      border-color: var(--color-gold);
+      transform: translateY(-2px);
+    }
+
+    /* ── Lightbox Modal ── */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-modal.active {
+      display: flex;
+    }
+    .lightbox-image-wrap {
+      max-width: 90vw;
+      max-height: 85vh;
+      position: relative;
+    }
+    .lightbox-image-wrap img {
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: var(--border-radius-md);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+      object-fit: contain;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+    .lightbox-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+    .lightbox-nav-btn:hover {
+      background: var(--color-gold);
+      color: var(--color-navy);
+    }
+    .lightbox-prev { left: 24px; }
+    .lightbox-next { right: 24px; }
+
+    /* ── Key Details Grid (Section 2) ── */
+    .key-details-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-xl);
+      padding: var(--space-6) var(--space-8);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: var(--space-12);
+    }
+    .key-details-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: var(--space-6);
+    }
+    @media (max-width: 992px) {
+      .key-details-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 576px) {
+      .key-details-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    .key-detail-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .key-detail-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--border-radius-md);
+      background: rgba(198, 165, 107, 0.15);
+      color: var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .key-detail-label {
+      font-size: var(--font-size-xs);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+    .key-detail-val {
+      font-size: var(--font-size-base);
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    /* ── Tabs Content (Section 3) ── */
+    .tab-content-panel {
+      display: none;
+      padding-top: var(--space-6);
+    }
+    .tab-content-panel.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+    .amenities-chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+    .amenity-chip-item {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-4);
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-pill);
+      font-size: var(--font-size-sm);
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    .amenity-chip-item svg {
+      width: 16px;
+      height: 16px;
+      color: var(--color-gold);
+    }
+
+    /* ── Location & Nearby (Section 4) ── */
+    .nearby-facilities-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-6);
+      margin-top: var(--space-6);
+    }
+    @media (max-width: 992px) {
+      .nearby-facilities-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 576px) {
+      .nearby-facilities-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .nearby-facility-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-lg);
+      padding: var(--space-5);
+    }
+    .nearby-facility-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--font-size-md);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .nearby-facility-header svg {
+      color: var(--color-gold);
+    }
+    .facility-list {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .facility-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--font-size-sm);
+    }
+    .facility-item .name {
+      color: var(--text-secondary);
+    }
+    .facility-item .distance {
+      color: var(--color-gold);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* ── Agent & Enquiry (Section 5) ── */
+    .agent-enquiry-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: var(--space-8);
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .agent-enquiry-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+    .agent-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-xl);
+      padding: var(--space-8);
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+    }
+    .agent-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto var(--space-4);
+      border: 3px solid var(--color-gold);
+    }
+    .enquiry-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius-xl);
+      padding: var(--space-8);
+      box-shadow: var(--shadow-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Container -->
+  <div id="navbar-container"></div>
+
+  <!-- SECTION 1 – Gallery & Overview -->
+  <header class="prop-header" id="overview-section">
+    <div class="container">
+      <div class="prop-breadcrumbs">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <a href="buy.html">Properties</a>
+        <span>/</span>
+        <span id="breadcrumb-prop-title" class="text-gold">Loading Property...</span>
+      </div>
+
+      <div class="prop-title-row">
+        <div>
+          <h1 class="prop-title" id="prop-title">Loading Property Title...</h1>
+          <div class="flex items-center gap-3 flex-wrap text-secondary text-sm">
+            <span class="flex items-center gap-1" id="prop-location">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>...</span>
+            </span>
+            <span>&bull;</span>
+            <span id="prop-id-tag">ID: ...</span>
+          </div>
+          <div class="prop-meta-badges mt-3" id="prop-badges">
+            <!-- Badges injected via JS -->
+          </div>
+        </div>
+
+        <div style="text-align: right;">
+          <div class="prop-price" id="prop-price">₹0.00 Cr</div>
+          <div class="text-xs text-muted" id="prop-price-unit">Government taxes & registration extra</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="prop-gallery-section">
+    <div class="container">
+      <div class="prop-main-image-wrap" id="main-image-wrap" onclick="openLightbox()">
+        <img id="main-prop-image" src="" alt="Property Main Preview" class="prop-main-image" />
+        
+        <div class="prop-gallery-actions">
+          <!-- Save / Favorite Button -->
+          <button id="save-prop-btn" class="action-icon-btn" onclick="event.stopPropagation(); toggleDetailSave();" aria-label="Save Property">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+          </button>
+
+          <!-- Share Button -->
+          <button id="share-prop-btn" class="action-icon-btn" onclick="event.stopPropagation(); shareProperty();" aria-label="Share Property">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Thumbnail Strip -->
+      <div class="prop-thumb-strip" id="prop-thumbnails">
+        <!-- 4 thumbnails rendered via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox(event)">
+    <div class="lightbox-close" onclick="closeLightbox()">&times;</div>
+    <div class="lightbox-nav-btn lightbox-prev" onclick="event.stopPropagation(); prevLightboxImage();">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </div>
+    <div class="lightbox-image-wrap" onclick="event.stopPropagation()">
+      <img id="lightbox-active-img" src="" alt="Fullscreen Lightbox" />
+    </div>
+    <div class="lightbox-nav-btn lightbox-next" onclick="event.stopPropagation(); nextLightboxImage();">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+      
+      <!-- SECTION 2 – Key Details -->
+      <section class="key-details-card" id="key-details-section">
+        <div class="key-details-grid">
+          
+          <div class="key-detail-item">
+            <div class="key-detail-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 20v-8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8"></path>
+                <path d="M5 10V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="key-detail-label">Bedrooms</div>
+              <div class="key-detail-val" id="key-val-beds">-</div>
+            </div>
+          </div>
+
+          <div class="key-detail-item">
+            <div class="key-detail-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path>
+                <path d="M4 12h16"></path>
+                <path d="M6 12V5a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v7"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="key-detail-label">Bathrooms</div>
+              <div class="key-detail-val" id="key-val-baths">-</div>
+            </div>
+          </div>
+
+          <div class="key-detail-item">
+            <div class="key-detail-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="3" y1="9" x2="21" y2="9"></line>
+                <line x1="9" y1="21" x2="9" y2="9"></line>
+              </svg>
+            </div>
+            <div>
+              <div class="key-detail-label">Area</div>
+              <div class="key-detail-val" id="key-val-area">- sqft</div>
+            </div>
+          </div>
+
+          <div class="key-detail-item">
+            <div class="key-detail-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="key-detail-label">Property Type</div>
+              <div class="key-detail-val" id="key-val-type">-</div>
+            </div>
+          </div>
+
+          <div class="key-detail-item">
+            <div class="key-detail-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 9h-4V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="key-detail-label">Furnishing</div>
+              <div class="key-detail-val" id="key-val-furnishing">-</div>
+            </div>
+          </div>
+
+          <div class="key-detail-item">
+            <div class="key-detail-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <div>
+              <div class="key-detail-label">Floor / Plot</div>
+              <div class="key-detail-val" id="key-val-floor">Level 18 of 34</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 3 – Description & Features -->
+      <section class="section-sm" id="description-section">
+        <div class="tabs mb-6" role="tablist">
+          <button class="tab active" onclick="switchDetailTab('overview', this)">Overview</button>
+          <button class="tab" onclick="switchDetailTab('features', this)">Features</button>
+          <button class="tab" onclick="switchDetailTab('amenities', this)">Amenities</button>
+        </div>
+
+        <!-- Overview Tab Panel -->
+        <div id="tab-overview" class="tab-content-panel active">
+          <h3 class="font-heading mb-4" style="font-size: var(--font-size-xl);">Property Architecture & Lifestyle</h3>
+          <div id="prop-full-description" class="text-secondary" style="line-height: 1.8; font-size: var(--font-size-md);">
+            <!-- Description paragraphs populated via JS -->
+          </div>
+          
+          <div class="card mt-6" style="background: var(--bg-secondary);">
+            <div class="flex items-center gap-3">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              <div>
+                <strong class="text-primary text-sm">RERA Approved Residence</strong>
+                <p class="text-xs text-muted">Clear freehold title, certified occupancy status, and verified legal clearances through Cornerstone Prime Advisory.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Features Tab Panel -->
+        <div id="tab-features" class="tab-content-panel">
+          <h3 class="font-heading mb-6" style="font-size: var(--font-size-xl);">Interior & Architectural Features</h3>
+          <div class="grid grid-2 gap-8">
+            <div class="card">
+              <h4 class="font-heading text-gold mb-4" style="font-size: var(--font-size-lg);">Interior Highlights</h4>
+              <ul style="display: flex; flex-direction: column; gap: 10px; font-size: var(--font-size-sm); color: var(--text-secondary);">
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Custom Italian Statuario marble slab flooring
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Floor-to-ceiling double-glazed acoustic acoustic glass facades
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Modular Poggenpohl kitchen with integrated Miele appliances
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Lutron centralized smart lighting and motorized shading
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Daikin VRV central climate control with HEPA filtration
+                </li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h4 class="font-heading text-gold mb-4" style="font-size: var(--font-size-lg);">Exterior & Structure</h4>
+              <ul style="display: flex; flex-direction: column; gap: 10px; font-size: var(--font-size-sm); color: var(--text-secondary);">
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Earthquake resistant RCC seismic zone structural engineering
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Dedicated private high-speed biometric elevators
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Wrap-around cantilevered landscaped viewing balconies
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  Multi-tier subterranean automated stack vehicle parking
+                </li>
+                <li class="flex items-center gap-2">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  100% full-load DG power backup with instant transfer
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Amenities Tab Panel -->
+        <div id="tab-amenities" class="tab-content-panel">
+          <h3 class="font-heading mb-6" style="font-size: var(--font-size-xl);">Clubhouse & Community Amenities</h3>
+          <div class="amenities-chip-grid" id="detail-amenities-list">
+            <!-- Amenities chips populated via JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 – Location & Nearby -->
+      <section class="section" id="location-section">
+        <div class="text-left mb-6">
+          <span class="section-label">Neighborhood Context</span>
+          <h2 class="section-title">Location & Nearby Facilities</h2>
+          <p class="section-subtitle">
+            Strategically nestled within an elite enclave, minutes away from premier healthcare, international academies, and fine dining.
+          </p>
+        </div>
+
+        <!-- Location Map Placeholder -->
+        <div class="map-view-container" style="height: 380px;">
+          <svg class="map-grid-roads" width="100%" height="100%">
+            <path d="M0,80 Q400,200 800,90 T1400,180" stroke="#C6A56B" stroke-width="2" fill="none"/>
+            <path d="M350,0 C380,180 500,250 520,400" stroke="#285B4A" stroke-width="3" fill="none"/>
+            <circle cx="500" cy="190" r="80" fill="rgba(198,165,107,0.08)"/>
+          </svg>
+          <div class="map-marker active" style="left: 50%; top: 50%;">
+            <div class="map-marker__bubble" style="background: var(--color-gold); color: var(--color-navy); padding: 8px 14px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <strong id="map-pin-title">Property Location</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Nearby Categories -->
+        <div class="nearby-facilities-grid">
+          
+          <!-- Category 1: Schools -->
+          <div class="nearby-facility-card">
+            <div class="nearby-facility-header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+              <span>Schools</span>
+            </div>
+            <div class="facility-list">
+              <div class="facility-item">
+                <span class="name">Oakridge International</span>
+                <span class="distance">1.2 km</span>
+              </div>
+              <div class="facility-item">
+                <span class="name">The Cathedral & John Connon</span>
+                <span class="distance">2.8 km</span>
+              </div>
+              <div class="facility-item">
+                <span class="name">American School Bombay</span>
+                <span class="distance">4.5 km</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 2: Hospitals -->
+          <div class="nearby-facility-card">
+            <div class="nearby-facility-header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="9" x2="12" y2="17"></line><line x1="8" y1="13" x2="16" y2="13"></line></svg>
+              <span>Hospitals</span>
+            </div>
+            <div class="facility-list">
+              <div class="facility-item">
+                <span class="name">Max Super Speciality</span>
+                <span class="distance">1.8 km</span>
+              </div>
+              <div class="facility-item">
+                <span class="name">Apollo Multispecialty</span>
+                <span class="distance">3.1 km</span>
+              </div>
+              <div class="facility-item">
+                <span class="name">Lilavati Healthcare Center</span>
+                <span class="distance">4.2 km</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 3: Shopping -->
+          <div class="nearby-facility-card">
+            <div class="nearby-facility-header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              <span>Shopping</span>
+            </div>
+            <div class="facility-list">
+              <div class="facility-item">
+                <span class="name">Palladium Luxury Mall</span>
+                <span class="distance">0.9 km</span>
+              </div>
+              <div class="facility-item">
+                <span class="name">The Galleria Promenade</span>
+                <span class="distance">2.4 km</span>
+              </div>
+              <div class="facility-item">
+                <span class="name">Gourmet Food Hall</span>
+                <span class="distance">1.1 km</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category 4: Transport -->
+          <div class="nearby-facility-card">
+            <div class="nearby-facility-header">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M7 17h10"></path><path d="M7 21v-4"></path><path d="M17 21v-4"></path><circle cx="7.5" cy="8.5" r="1.5"></circle><circle cx="16.5" cy="8.5" r="1.5"></circle></svg>
+              <span>Transport</span>
+            </div>
+            <div class="facility-list">
+              <div class="facility-item">
+                <span class="name">Metro Line 3 Station</span>
+                <span class="distance">400 m</span>
+              </div>
+              <div class="facility-item">
+                <span class="name">Coastal Expressway Ramp</span>
+                <span class="distance">1.5 km</span>
+              </div>
+              <div class="facility-item">
+                <span class="name">International Terminal</span>
+                <span class="distance">14.0 km</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="text-xs text-muted mt-4 text-center">
+          * Nearby facilities shown are illustrative and based on the general area.
+        </p>
+      </section>
+
+      <!-- SECTION 5 – Agent & Enquiry -->
+      <section class="section" id="enquiry-section">
+        <div class="agent-enquiry-layout">
+          
+          <!-- Agent Card -->
+          <div class="agent-card">
+            <img id="agent-photo" src="" alt="Listing Agent" class="agent-avatar" />
+            <h3 class="font-heading" id="agent-name" style="font-size: var(--font-size-xl); margin-bottom: 4px;">Agent Name</h3>
+            <p class="text-xs text-gold font-semi uppercase tracking-wider mb-4">Certified Luxury Specialist</p>
+            
+            <div style="display: flex; flex-direction: column; gap: var(--space-3); margin-bottom: var(--space-6); text-align: left; font-size: var(--font-size-sm);">
+              <div class="flex items-center gap-3">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                <span id="agent-phone">+91 98000 00000</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <span id="agent-email" class="truncate">agent@cornerstone.in</span>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-outline" style="width: 100%; border-color: var(--color-gold); color: var(--color-gold);" onclick="document.getElementById('enquiry-message').focus()">
+              Contact Agent
+            </button>
+            <div class="mt-4 pt-4" style="border-top: 1px solid var(--border-color);">
+              <a href="buyer-dashboard.html#site-visits" class="btn btn-ghost text-xs" style="width: 100%;">
+                Schedule a Site Visit &rarr;
+              </a>
+            </div>
+          </div>
+
+          <!-- Enquiry Form -->
+          <div class="enquiry-panel">
+            <span class="section-label">Confidential Advisory</span>
+            <h3 class="font-heading mb-4" style="font-size: var(--font-size-2xl);">Express Interest or Schedule Viewing</h3>
+            <p class="text-secondary text-sm mb-6">
+              Complete your contact details below to receive the complete architectural brochure, private video walkthrough, or to schedule an accompanied on-site preview.
+            </p>
+
+            <form id="prop-enquiry-form" onsubmit="event.preventDefault(); submitEnquiry();">
+              <div class="grid grid-2 gap-4 mb-4">
+                <div class="form-group">
+                  <label for="enquiry-name" class="form-label">Full Name *</label>
+                  <input type="text" id="enquiry-name" class="form-control" placeholder="e.g. Vikram Singhania" required />
+                </div>
+                <div class="form-group">
+                  <label for="enquiry-email" class="form-label">Email Address *</label>
+                  <input type="email" id="enquiry-email" class="form-control" placeholder="name@domain.com" required />
+                </div>
+              </div>
+
+              <div class="grid grid-2 gap-4 mb-4">
+                <div class="form-group">
+                  <label for="enquiry-phone" class="form-label">Phone Number *</label>
+                  <input type="tel" id="enquiry-phone" class="form-control" placeholder="+91 98765 43210" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Preferred Contact Method</label>
+                  <div class="flex items-center gap-4 mt-2">
+                    <label class="form-check">
+                      <input type="radio" name="contact_method" value="Call" checked />
+                      <span class="form-check-label">Call</span>
+                    </label>
+                    <label class="form-check">
+                      <input type="radio" name="contact_method" value="WhatsApp" />
+                      <span class="form-check-label">WhatsApp</span>
+                    </label>
+                    <label class="form-check">
+                      <input type="radio" name="contact_method" value="Email" />
+                      <span class="form-check-label">Email</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="grid grid-2 gap-4 mb-4">
+                <div class="form-group">
+                  <label for="enquiry-date" class="form-label">Preferred Visit Date</label>
+                  <input type="date" id="enquiry-date" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label for="enquiry-time" class="form-label">Preferred Visit Time</label>
+                  <select id="enquiry-time" class="form-control">
+                    <option value="Morning (10:00 AM - 1:00 PM)">Morning (10:00 AM - 1:00 PM)</option>
+                    <option value="Afternoon (1:00 PM - 4:00 PM)">Afternoon (1:00 PM - 4:00 PM)</option>
+                    <option value="Evening (4:00 PM - 7:00 PM)">Evening (4:00 PM - 7:00 PM)</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group mb-6">
+                <label for="enquiry-message" class="form-label">Message or Special Requirements</label>
+                <textarea id="enquiry-message" class="form-control" rows="4" placeholder="I am interested in exploring this residence and would like to arrange an appointment..."></textarea>
+              </div>
+
+              <div class="flex items-center gap-4 flex-wrap">
+                <button type="submit" class="btn btn-primary" style="padding: 0.8rem 2rem;">
+                  Send Enquiry
+                </button>
+                <button type="button" class="btn btn-ghost" onclick="requestCallback()">
+                  Request a Callback
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 6 – Similar Properties -->
+      <section class="section" id="similar-section">
+        <div class="flex-between flex-wrap gap-4 mb-8">
+          <div>
+            <span class="section-label">Comparable Opportunities</span>
+            <h2 class="section-title">Similar Properties</h2>
+            <p class="section-subtitle">
+              Alternative luxury offerings sharing similar architectural aesthetics or prime geographical proximity.
+            </p>
+          </div>
+          <div>
+            <a href="buy.html" class="btn btn-secondary">
+              Browse More Properties &rarr;
+            </a>
+          </div>
+        </div>
+
+        <div id="similar-grid" class="property-grid-3">
+          <!-- Populated via JS -->
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer Container -->
+  <div id="footer-container"></div>
+
+  <!-- Scripts -->
+  <script src="../js/data.js"></script>
+  <script src="../js/app.js"></script>
+  <script src="../js/components.js"></script>
+
+  <script>
+    /* ============================================================
+       PROPERTY DETAILS PAGE LOGIC
+       ============================================================ */
+
+    let currentProperty = null;
+    let galleryImages = [];
+    let currentLightboxIndex = 0;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Initialize Navbar & Footer
+      if (typeof window.renderNavbar === 'function') {
+        window.renderNavbar('navbar-container', 'buy', '../');
+      }
+      if (typeof window.renderFooter === 'function') {
+        window.renderFooter('footer-container', '../');
+      }
+
+      // 2. Load Property Data by URL ID
+      loadPropertyDetails();
+
+      // 3. Listen for keyboard navigation in Lightbox
+      document.addEventListener('keydown', (e) => {
+        const modal = document.getElementById('lightbox-modal');
+        if (modal && modal.classList.contains('active')) {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') prevLightboxImage();
+          if (e.key === 'ArrowRight') nextLightboxImage();
+        }
+      });
+    });
+
+    function loadPropertyDetails() {
+      const allProps = window.PROPERTIES || [];
+      if (allProps.length === 0) return;
+
+      const params = new URLSearchParams(window.location.search);
+      const propId = params.get('id');
+
+      // Find property or default to first
+      currentProperty = allProps.find(p => p.id === propId) || allProps[0];
+
+      // Track recently viewed
+      if (typeof window.addRecentlyViewed === 'function') {
+        window.addRecentlyViewed(currentProperty.id);
+      }
+
+      // Populate Page Content
+      document.title = `${currentProperty.title} | Cornerstone Real Estate`;
+      
+      const breadcrumb = document.getElementById('breadcrumb-prop-title');
+      if (breadcrumb) breadcrumb.textContent = currentProperty.title;
+
+      const titleEl = document.getElementById('prop-title');
+      if (titleEl) titleEl.textContent = currentProperty.title;
+
+      const locEl = document.getElementById('prop-location');
+      if (locEl) locEl.querySelector('span').textContent = currentProperty.location;
+
+      const idTag = document.getElementById('prop-id-tag');
+      if (idTag) idTag.textContent = `Listing ID: ${currentProperty.id}`;
+
+      const priceEl = document.getElementById('prop-price');
+      if (priceEl) priceEl.textContent = currentProperty.priceDisplay;
+
+      // Badges
+      const badgesEl = document.getElementById('prop-badges');
+      if (badgesEl) {
+        let statusBadge = 'badge-available';
+        if (currentProperty.status === 'Under Offer') statusBadge = 'badge-offer';
+        if (currentProperty.status === 'Sold') statusBadge = 'badge-sold';
+        if (currentProperty.status === 'Rented') statusBadge = 'badge-rented';
+
+        const typeBadge = currentProperty.listingType === 'For Rent' ? 'badge-rent' : 'badge-sale';
+
+        badgesEl.innerHTML = `
+          <span class="badge ${typeBadge}">${currentProperty.listingType}</span>
+          <span class="badge badge-gold">${currentProperty.type}</span>
+          <span class="badge ${statusBadge}">${currentProperty.status}</span>
+        `;
+      }
+
+      // Images Gallery
+      // Main image + images array
+      const mainImg = currentProperty.image;
+      const otherImgs = currentProperty.images || [];
+      galleryImages = [mainImg, ...otherImgs.filter(img => img !== mainImg)].slice(0, 4);
+      if (galleryImages.length < 4) {
+        galleryImages = [mainImg, ...(currentProperty.images || [])].slice(0, 4);
+      }
+
+      const mainImgEl = document.getElementById('main-prop-image');
+      if (mainImgEl) mainImgEl.src = galleryImages[0];
+
+      const thumbStrip = document.getElementById('prop-thumbnails');
+      if (thumbStrip) {
+        thumbStrip.innerHTML = galleryImages.map((src, i) => `
+          <div class="prop-thumb ${i === 0 ? 'active' : ''}" onclick="selectGalleryImage(${i})">
+            <img src="${src}" alt="Gallery Thumbnail ${i + 1}" />
+          </div>
+        `).join('');
+      }
+
+      // Update Save Button State
+      updateSaveBtnState();
+
+      // Populate Key Details (Section 2)
+      document.getElementById('key-val-beds').textContent = currentProperty.bedrooms ? `${currentProperty.bedrooms} BHK` : 'Studio / Open';
+      document.getElementById('key-val-baths').textContent = currentProperty.bathrooms ? `${currentProperty.bathrooms} Baths` : 'N/A';
+      document.getElementById('key-val-area').textContent = `${(currentProperty.area || 0).toLocaleString()} sqft`;
+      document.getElementById('key-val-type').textContent = currentProperty.type;
+      document.getElementById('key-val-furnishing').textContent = currentProperty.furnishing || 'Unfurnished';
+      
+      const floorVal = currentProperty.type === 'Plot' 
+        ? 'Independent Parcel' 
+        : currentProperty.type === 'Villa' 
+        ? 'G+2 Private Grounds' 
+        : 'Level 14 of 32 (Sea-Facing)';
+      document.getElementById('key-val-floor').textContent = floorVal;
+
+      // Populate Description
+      const descEl = document.getElementById('prop-full-description');
+      if (descEl) {
+        descEl.innerHTML = `
+          <p class="mb-4">${currentProperty.description}</p>
+          <p class="mb-4">
+            Embodying the pinnacle of metropolitan sophistication, this property represents an unparalleled acquisition opportunity. 
+            Meticulously planned by distinguished architects, every room commands abundant natural illumination, high ceiling clearances, 
+            and breathtaking vistas across manicured greenery or coastal horizons.
+          </p>
+          <p>
+            Residents enjoy comprehensive security protocols, dedicated concierge services, valet assistance, and private access to the premier clubhouse amenities.
+          </p>
+        `;
+      }
+
+      // Populate Amenities
+      const amenitiesContainer = document.getElementById('detail-amenities-list');
+      if (amenitiesContainer) {
+        const amenities = currentProperty.amenities || ['Swimming Pool', 'Gymnasium', '24/7 Security', 'Covered Parking', 'Power Backup', 'Landscaped Garden'];
+        amenitiesContainer.innerHTML = amenities.map(am => `
+          <div class="amenity-chip-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>${am}</span>
+          </div>
+        `).join('');
+      }
+
+      // Populate Agent
+      const agent = currentProperty.agent || {
+        name: 'Priya Sharma',
+        phone: '+91 98201 12345',
+        email: 'priya.sharma@cornerstone.in',
+        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200'
+      };
+      document.getElementById('agent-name').textContent = agent.name;
+      document.getElementById('agent-phone').textContent = agent.phone;
+      document.getElementById('agent-email').textContent = agent.email;
+      const agentImg = document.getElementById('agent-photo');
+      if (agentImg) agentImg.src = agent.image;
+
+      // Map pin title
+      const pinTitle = document.getElementById('map-pin-title');
+      if (pinTitle) pinTitle.textContent = currentProperty.location;
+
+      // Populate Similar Properties (Section 6)
+      renderSimilarProperties();
+    }
+
+    // Gallery Thumbnail Selection
+    function selectGalleryImage(index) {
+      currentLightboxIndex = index;
+      const mainImgEl = document.getElementById('main-prop-image');
+      if (mainImgEl && galleryImages[index]) {
+        mainImgEl.src = galleryImages[index];
+      }
+      document.querySelectorAll('.prop-thumb').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+      });
+    }
+
+    // Lightbox Controls
+    function openLightbox() {
+      const modal = document.getElementById('lightbox-modal');
+      const img = document.getElementById('lightbox-active-img');
+      if (!modal || !img) return;
+
+      img.src = galleryImages[currentLightboxIndex] || galleryImages[0];
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(e) {
+      if (e && e.target && e.target.tagName === 'IMG') return;
+      const modal = document.getElementById('lightbox-modal');
+      if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function prevLightboxImage() {
+      currentLightboxIndex = (currentLightboxIndex - 1 + galleryImages.length) % galleryImages.length;
+      document.getElementById('lightbox-active-img').src = galleryImages[currentLightboxIndex];
+      selectGalleryImage(currentLightboxIndex);
+    }
+
+    function nextLightboxImage() {
+      currentLightboxIndex = (currentLightboxIndex + 1) % galleryImages.length;
+      document.getElementById('lightbox-active-img').src = galleryImages[currentLightboxIndex];
+      selectGalleryImage(currentLightboxIndex);
+    }
+
+    // Tab Switching for Section 3
+    function switchDetailTab(tabName, btnEl) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+
+      document.querySelectorAll('.tab-content-panel').forEach(panel => panel.classList.remove('active'));
+      const activePanel = document.getElementById(`tab-${tabName}`);
+      if (activePanel) activePanel.classList.add('active');
+    }
+
+    // Save/Favorite Toggle
+    function toggleDetailSave() {
+      if (!currentProperty) return;
+      if (typeof window.toggleSaveProperty === 'function') {
+        const isSaved = window.toggleSaveProperty(currentProperty.id);
+        updateSaveBtnState(isSaved);
+      }
+    }
+
+    function updateSaveBtnState(savedOverride) {
+      if (!currentProperty) return;
+      const isSaved = savedOverride !== undefined ? savedOverride : (window.isPropertySaved ? window.isPropertySaved(currentProperty.id) : false);
+      const btn = document.getElementById('save-prop-btn');
+      if (btn) {
+        btn.classList.toggle('saved', isSaved);
+        btn.setAttribute('aria-label', isSaved ? 'Remove from saved' : 'Save property');
+      }
+    }
+
+    // Share Property Link
+    function shareProperty() {
+      const url = window.location.href;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          if (window.showToast) {
+            window.showToast('Property link copied to clipboard!', 'success');
+          }
+        }).catch(() => fallbackShare(url));
+      } else {
+        fallbackShare(url);
+      }
+    }
+
+    function fallbackShare(url) {
+      if (window.showToast) {
+        window.showToast(`URL: ${url}`, 'info');
+      }
+    }
+
+    // Enquiry Form Submission
+    function submitEnquiry() {
+      const name = document.getElementById('enquiry-name').value.trim();
+      const email = document.getElementById('enquiry-email').value.trim();
+      const phone = document.getElementById('enquiry-phone').value.trim();
+      const method = document.querySelector('input[name="contact_method"]:checked')?.value || 'Call';
+      const date = document.getElementById('enquiry-date').value;
+      const time = document.getElementById('enquiry-time').value;
+      const message = document.getElementById('enquiry-message').value.trim();
+
+      // Basic validation
+      if (!name || !email || !phone) {
+        if (window.showToast) window.showToast('Please fill out all required fields (*)', 'error');
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        if (window.showToast) window.showToast('Please enter a valid email address', 'error');
+        return;
+      }
+
+      if (phone.replace(/\D/g, '').length < 10) {
+        if (window.showToast) window.showToast('Please enter a valid phone number (10+ digits)', 'error');
+        return;
+      }
+
+      const enquiryRecord = {
+        id: 'ENQ-' + Date.now(),
+        propertyId: currentProperty.id,
+        propertyTitle: currentProperty.title,
+        name,
+        email,
+        phone,
+        method,
+        date,
+        time,
+        message,
+        createdAt: new Date().toISOString()
+      };
+
+      try {
+        const stored = JSON.parse(localStorage.getItem('cs_enquiries') || '[]');
+        stored.push(enquiryRecord);
+        localStorage.setItem('cs_enquiries', JSON.stringify(stored));
+      } catch (e) {
+        console.warn('LocalStorage error:', e);
+      }
+
+      if (window.showToast) {
+        window.showToast('Thank you! Your enquiry has been sent to our private wealth desk.', 'success', 5000);
+      }
+
+      // Reset form
+      document.getElementById('prop-enquiry-form').reset();
+    }
+
+    function requestCallback() {
+      const phone = document.getElementById('enquiry-phone').value.trim();
+      if (!phone) {
+        if (window.showToast) {
+          window.showToast('Please enter your phone number in the form for a callback', 'info');
+        }
+        document.getElementById('enquiry-phone').focus();
+        return;
+      }
+      if (window.showToast) {
+        window.showToast(`Callback requested for ${phone}. A senior director will call you shortly.`, 'success');
+      }
+    }
+
+    // SECTION 6: Similar Properties
+    function renderSimilarProperties() {
+      const grid = document.getElementById('similar-grid');
+      const allProps = window.PROPERTIES || [];
+      if (!grid || !currentProperty) return;
+
+      // Filter by same type or same city, excluding current
+      let similar = allProps.filter(p => p.id !== currentProperty.id && (p.type === currentProperty.type || p.location.includes(currentProperty.location.split(',')[1]?.trim() || '')));
+      
+      if (similar.length < 3) {
+        similar = allProps.filter(p => p.id !== currentProperty.id);
+      }
+
+      const selected = similar.slice(0, 3);
+      grid.innerHTML = selected.map(p => window.renderPropertyCard(p, '../')).join('');
+    }
+  </script>
+</body>
+</html>
