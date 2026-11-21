@@ -358,8 +358,36 @@
     } catch (e) {}
     applyDirection(savedDir);
 
-    // 3. Delegate Theme & RTL toggle clicks
+    // 3. Delegate profile menu, theme & RTL toggle clicks
     document.addEventListener('click', (e) => {
+      const profileBtn = e.target.closest('.cs-navbar__profile-btn');
+      if (profileBtn) {
+        e.preventDefault();
+        const profile = profileBtn.closest('.cs-navbar__profile');
+        const isOpen = profile.classList.toggle('open');
+        profileBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        return;
+      }
+
+      const profileLink = e.target.closest('.cs-navbar__profile-link');
+      if (profileLink) {
+        const profile = profileLink.closest('.cs-navbar__profile');
+        if (profile) {
+          profile.classList.remove('open');
+          const btn = profile.querySelector('.cs-navbar__profile-btn');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        }
+        return;
+      }
+
+      if (!e.target.closest('.cs-navbar__profile')) {
+        document.querySelectorAll('.cs-navbar__profile.open').forEach(profile => {
+          profile.classList.remove('open');
+          const btn = profile.querySelector('.cs-navbar__profile-btn');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
+        });
+      }
+
       const themeBtn = e.target.closest('.js-theme-toggle');
       if (themeBtn) {
         e.preventDefault();
@@ -397,7 +425,7 @@
       }
 
       // Close mobile menu when clicking outside or on a link
-      const mobileLink = e.target.closest('.cs-mobile-nav__link:not(.has-submenu), .cs-mobile-nav__sub-link');
+      const mobileLink = e.target.closest('.cs-mobile-nav__link:not(.has-submenu), .cs-mobile-nav__sub-link, .cs-mobile-nav__dash-link');
       if (mobileLink) {
         const hamburger = document.querySelector('.cs-navbar__hamburger');
         const menu = document.querySelector('.cs-navbar__mobile-menu');
@@ -415,6 +443,22 @@
           submenu.classList.toggle('open');
         }
       }
+    });
+
+    // Close the profile dropdown and mobile menu on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.cs-navbar__profile.open').forEach(profile => {
+        profile.classList.remove('open');
+        const btn = profile.querySelector('.cs-navbar__profile-btn');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+      });
+      const hamburger = document.querySelector('.cs-navbar__hamburger.open');
+      const menu = document.querySelector('.cs-navbar__mobile-menu.open');
+      if (hamburger) hamburger.setAttribute('aria-expanded', 'false');
+      if (hamburger) hamburger.classList.remove('open');
+      if (menu) menu.classList.remove('open');
+      document.body.style.overflow = '';
     });
 
     // 5. Sticky Nav, Back to top & Scroll Reveal

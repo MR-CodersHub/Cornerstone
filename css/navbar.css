@@ -248,6 +248,71 @@ body.rtl .cs-navbar__dropdown {
   height: 20px;
 }
 
+/* Profile dropdown */
+.cs-navbar__profile {
+  position: relative;
+  display: flex;
+}
+
+.cs-navbar__profile.open .cs-navbar__profile-btn {
+  background: rgba(198, 165, 107, 0.15);
+  color: var(--color-gold);
+}
+
+.cs-navbar__profile-menu {
+  position: absolute;
+  top: calc(100% + var(--space-2));
+  right: 0;
+  min-width: 210px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  z-index: var(--z-dropdown);
+}
+
+.cs-navbar__profile.open .cs-navbar__profile-menu {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.cs-navbar__profile-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.cs-navbar__profile-link + .cs-navbar__profile-link {
+  border-top: 1px solid var(--border-color);
+}
+
+.cs-navbar__profile-link svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.cs-navbar__profile-link:hover {
+  background: var(--bg-primary);
+  color: var(--color-gold);
+}
+
+body.rtl .cs-navbar__profile-menu {
+  right: auto;
+  left: 0;
+}
+
 /* Login button */
 .cs-navbar__login-btn {
   display: flex;
@@ -390,6 +455,45 @@ body.rtl .cs-navbar__mobile-menu.open {
 .cs-mobile-nav__actions .cs-navbar__login-btn {
   flex: 1;
   justify-content: center;
+}
+
+.cs-mobile-nav__profile-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.cs-mobile-nav__dash-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--border-radius-sm);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: var(--font-size-sm);
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.cs-mobile-nav__dash-link svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-gold);
+  flex-shrink: 0;
+}
+
+.cs-mobile-nav__dash-link:hover {
+  color: var(--color-gold);
+  border-color: var(--color-gold);
+}
+
+/* Keep all eight links comfortable just above the mobile breakpoint */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  .cs-navbar__nav { gap: 0; }
+  .cs-navbar__nav-link { padding: var(--space-2); font-size: 0.8rem; }
+  .cs-navbar__logo-name { font-size: 1.4rem; }
+  .cs-navbar__logo-tagline { font-size: 0.58rem; }
 }
 
 /* ── Responsive breakpoints ── */

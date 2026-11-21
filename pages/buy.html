@@ -26,11 +26,28 @@
   <style>
     /* ── Buy Page Specific Styles ── */
     .buy-hero {
-      background: linear-gradient(135deg, var(--color-navy) 0%, #1c364b 100%);
+      background-image: linear-gradient(rgba(23, 43, 58, 0.82), rgba(23, 43, 58, 0.88)), url('https://i.pinimg.com/736x/2a/ba/41/2aba41c8dee2ec412ed4cd0bcd6b4664.jpg');
+      background-size: cover;
+      background-position: center;
       color: var(--color-white);
-      padding: var(--space-16) 0 var(--space-12);
+      padding: calc(var(--navbar-height) + var(--space-8)) 0 var(--space-12);
+      scroll-margin-top: var(--navbar-height);
       border-bottom: 2px solid rgba(198, 165, 107, 0.2);
       position: relative;
+    }
+    .buy-hero .section-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 0.95rem;
+      margin-bottom: var(--space-4);
+      background: rgba(198, 165, 107, 0.14);
+      border: 1px solid rgba(198, 165, 107, 0.5);
+      border-radius: var(--border-radius-pill);
+      color: #F6E3BC;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-shadow: none;
     }
     .buy-hero__title {
       font-size: clamp(2.2rem, 4vw, 3.2rem);

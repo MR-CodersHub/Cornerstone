@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Executive Admin Command Center | Cornerstone Real Estate</title>
+  <meta name="description" content="Cornerstone internal operations: listings moderation, client CRM, tour dispatch, escrow tracking, and financial analytics.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+
+<div class="cs-dash-layout">
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="cs-dash-overlay" id="dashOverlay" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       ADMIN SIDEBAR NAVIGATION
+  ══════════════════════════════════════════════════════════ -->
+  <aside class="cs-dash-sidebar" id="dashSidebar" aria-label="Admin Navigation Sidebar">
+    <!-- Header -->
+    <div class="cs-dash-sidebar__header">
+      <a href="../index.html" class="cs-dash-sidebar__brand" title="Return to Public Website">
+        <div class="cs-dash-sidebar__logo-icon">
+          <svg class="cs-logo-svg" viewBox="0 0 48 48" width="44" height="44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="csAdmGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFF1D0"/>
+                <stop offset="45%" stop-color="#E5C788"/>
+                <stop offset="80%" stop-color="#C6A56B"/>
+                <stop offset="100%" stop-color="#936F2C"/>
+              </linearGradient>
+              <linearGradient id="csAdmGoldLight" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF"/>
+                <stop offset="60%" stop-color="#EAD3A2"/>
+                <stop offset="100%" stop-color="#C6A56B"/>
+              </linearGradient>
+              <linearGradient id="csAdmGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#B89454"/>
+                <stop offset="100%" stop-color="#5C4214"/>
+              </linearGradient>
+              <linearGradient id="csAdmNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#1B3244"/>
+                <stop offset="100%" stop-color="#0E1922"/>
+              </linearGradient>
+            </defs>
+            <rect width="48" height="48" rx="10" fill="url(#csAdmNavyGrad)"/>
+            <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="9.25" fill="none" stroke="url(#csAdmGoldGrad)" stroke-width="1.5" stroke-opacity="0.85"/>
+            <path d="M24 8.5 L38 16.5 L24 24.5 L10 16.5 Z" fill="url(#csAdmGoldLight)"/>
+            <path d="M10 16.5 L24 24.5 L24 38.5 L10 30.5 Z" fill="url(#csAdmGoldGrad)"/>
+            <path d="M24 24.5 L38 16.5 L38 30.5 L24 38.5 Z" fill="url(#csAdmGoldDark)"/>
+            <path d="M24 14.5 L32 19 L24 23.5 L16 19 Z" fill="#0E1922" fill-opacity="0.9"/>
+            <path d="M16 19 L24 23.5 L24 33.5 L16 29 Z" fill="#132330" fill-opacity="0.95"/>
+            <path d="M24 23.5 L32 19 L32 29 L24 33.5 Z" fill="#1A3346" fill-opacity="0.85"/>
+            <path d="M24 11.5 L34.5 17.5 L24 23.5 L18 20 Z" fill="url(#csAdmGoldLight)"/>
+            <path d="M14 20 L18 17.5 L18 31 L14 28.5 Z" fill="url(#csAdmGoldLight)"/>
+            <path d="M14 28.5 L24 34.5 L34.5 28.5 L34.5 31.5 L24 37.5 L14 31.5 Z" fill="url(#csAdmGoldGrad)"/>
+            <polygon points="24,5 26.5,8 24,11 21.5,8" fill="#FFFFFF"/>
+            <circle cx="24" cy="8" r="1.2" fill="#FFF9ED"/>
+          </svg>
+        </div>
+        <div class="cs-dash-sidebar__brand-text">
+          <div class="cs-dash-sidebar__brand-name">
+            Cornerstone
+            <span class="cs-dash-badge-role">Admin</span>
+          </div>
+          <span class="cs-dash-sidebar__brand-tagline">Foundation of Prime Living</span>
+        </div>
+      </a>
+      <button class="cs-dash-sidebar__close-btn" id="dashSidebarClose" aria-label="Close navigation sidebar">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      </button>
+    </div>
+
+    <!-- Admin User Info -->
+    <div class="cs-dash-sidebar__user">
+      <div class="cs-dash-sidebar__avatar">
+        AS
+        <span class="cs-dash-avatar-status" title="System Administrator"></span>
+      </div>
+      <div class="cs-dash-sidebar__user-info">
+        <h4 class="cs-dash-sidebar__user-name">Arthur Sterling</h4>
+        <span class="cs-dash-sidebar__user-role">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Managing Director
+        </span>
+      </div>
+    </div>
+
+    <!-- Navigation Menu -->
+    <nav class="cs-dash-sidebar__nav">
+      <div class="cs-dash-nav-header">Command Center</div>
+
+      <button type="button" class="cs-dash-nav-item active" data-target="overview">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        <span>Executive Overview</span>
+      </button>
+
+      <button type="button" class="cs-dash-nav-item" data-target="listings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+        <span>Property Inventory</span>
+        <span class="cs-dash-nav-badge cs-badge-gold" id="navListingBadge">18</span>
+      </button>
+
+      <button type="button" class="cs-dash-nav-item" data-target="moderation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+        <span>Moderation Queue</span>
+        <span class="cs-dash-nav-badge cs-badge-red" id="navModerationBadge">2</span>
+      </button>
+
+      <button type="button" class="cs-dash-nav-item" data-target="leads">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        <span>Client Leads & CRM</span>
+        <span class="cs-dash-nav-badge cs-badge-green">14</span>
+      </button>
+
+      <button type="button" class="cs-dash-nav-item" data-target="dispatches">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <span>Tour Dispatches</span>
+        <span class="cs-dash-nav-badge cs-badge-muted">5</span>
+      </button>
+
+      <div class="cs-dash-nav-header" style="margin-top: 0.75rem;">Agency & Governance</div>
+
+      <button type="button" class="cs-dash-nav-item" data-target="team">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+        <span>Broker Team Roster</span>
+      </button>
+
+      <button type="button" class="cs-dash-nav-item" data-target="analytics">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+        <span>Financial Analytics</span>
+      </button>
+
+      <button type="button" class="cs-dash-nav-item" data-target="settings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+        <span>System & Security</span>
+      </button>
+
+      <a href="seller-dashboard.html" class="cs-dash-nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        <span>Seller Portal &rarr;</span>
+      </a>
+    </nav>
+
+    <!-- Footer Controls -->
+    <div class="cs-dash-sidebar__footer">
+      <div class="cs-dash-sidebar__controls">
+        <button type="button" class="cs-dash-ctrl-btn js-theme-toggle" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <span>Theme</span>
+        </button>
+        <button type="button" class="cs-dash-ctrl-btn js-rtl-toggle" aria-label="Toggle text direction">
+          <span>RTL</span>
+        </button>
+      </div>
+      <div class="cs-dash-footer-links">
+        <span style="color:#10B981; font-weight:600; display:inline-flex; align-items:center; gap:0.25rem;">
+          <span style="width:7px; height:7px; border-radius:50%; background:#10B981;"></span>
+          API Live
+        </span>
+        <button type="button" class="cs-dash-logout-link" id="btnLogoutAdmin">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN DASHBOARD CONTENT
+  ══════════════════════════════════════════════════════════ -->
+  <main class="cs-dash-main">
+    <!-- Topbar -->
+    <header class="cs-dash-topbar">
+      <div class="cs-dash-topbar__left">
+        <button type="button" class="cs-dash-hamburger" id="dashSidebarOpen" aria-label="Open sidebar menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <div class="cs-dash-topbar__title-wrap">
+          <h2 class="cs-dash-topbar__page-title" id="adminPageTitle">Executive Overview</h2>
+          <div class="cs-dash-topbar__breadcrumbs">
+            <span>Admin</span> &bull; <span id="adminBreadcrumb">Command Center</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-dash-topbar__center">
+        <div class="cs-dash-search">
+          <svg class="cs-dash-search__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="adminOmniSearch" placeholder="Global search: listings, client CRM, contracts..." aria-label="Search within admin system">
+          <span class="cs-dash-search__kbd">&#8984;K</span>
+        </div>
+      </div>
+
+      <div class="cs-dash-topbar__right">
+        <button type="button" class="btn btn-gold btn-sm" id="btnOpenNewListingModal">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          <span>New Listing</span>
+        </button>
+
+        <button type="button" class="cs-dash-icon-btn" id="btnAdminNotif" aria-label="Notifications" title="2 Moderation Alerts">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+          <span class="cs-dash-notif-ping"></span>
+        </button>
+
+        <a href="#settings" class="cs-dash-topbar__profile" data-target="settings">
+          <div class="cs-dash-topbar__avatar">AS</div>
+          <div class="cs-dash-topbar__user-text">
+            <span class="cs-dash-topbar__user-name">Arthur Sterling</span>
+            <span class="cs-dash-topbar__user-tag">Managing Director</span>
+          </div>
+        </a>
+      </div>
+    </header>
+
+    <!-- Dashboard Content Body -->
+    <div class="cs-dash-body">
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 1: EXECUTIVE OVERVIEW
+      ══════════════════════════════════════════════════════ -->
+      <section class="cs-dash-section active" id="sec-overview">
+        <!-- Hero Summary -->
+        <div class="cs-dash-hero">
+          <div class="cs-dash-hero__inner">
+            <div class="cs-dash-hero__main">
+              <div class="cs-dash-hero__avatar">AS</div>
+              <div class="cs-dash-hero__text">
+                <span class="section-label" style="color: var(--color-gold); font-size: 0.72rem;">Executive Operations</span>
+                <h1>Cornerstone Command Center</h1>
+                <p>18 active verified residences &bull; ₹148.5 Cr gross asset portfolio &bull; 2 moderation reviews pending</p>
+              </div>
+            </div>
+            <div class="cs-dash-hero__actions">
+              <button type="button" class="btn btn-gold btn-sm" id="btnExportLedger">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                Export Audit Ledger
+              </button>
+              <button type="button" class="btn btn-ghost btn-sm" data-target="moderation" style="color:#FFFFFF; border-color:rgba(255,255,255,0.3);">
+                Review Queue (2)
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Executive KPI Cards -->
+        <div class="cs-stat-grid">
+          <div class="cs-stat-card">
+            <div class="cs-stat-icon cs-stat-icon--gold">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div class="cs-stat-content">
+              <div class="cs-stat-val">₹148.5 Cr</div>
+              <div class="cs-stat-label">Gross Portfolio Value</div>
+              <span class="cs-stat-trend up">
+                <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                +8.4% vs last quarter
+              </span>
+            </div>
+          </div>
+
+          <div class="cs-stat-card">
+            <div class="cs-stat-icon cs-stat-icon--green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            </div>
+            <div class="cs-stat-content">
+              <div class="cs-stat-val" id="kpiAdminListings">18</div>
+              <div class="cs-stat-label">Active Listings</div>
+              <span class="cs-stat-trend up">2 under pending review</span>
+            </div>
+          </div>
+
+          <div class="cs-stat-card">
+            <div class="cs-stat-icon cs-stat-icon--blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <div class="cs-stat-content">
+              <div class="cs-stat-val">128</div>
+              <div class="cs-stat-label">Monthly HNW Leads</div>
+              <span class="cs-stat-trend up">+22% month-on-month</span>
+            </div>
+          </div>
+
+          <div class="cs-stat-card">
+            <div class="cs-stat-icon cs-stat-icon--navy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            <div class="cs-stat-content">
+              <div class="cs-stat-val">₹3.42 Cr</div>
+              <div class="cs-stat-label">Commission in Escrow</div>
+              <span class="cs-stat-trend up">3 closings this week</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2-Column Split: Sales Velocity Chart + System Activity -->
+        <div class="cs-grid-2col">
+          <!-- Chart -->
+          <div class="cs-panel">
+            <div class="cs-panel__header">
+              <div class="cs-panel__title-wrap">
+                <h2>Sales Velocity & Closed Escrows</h2>
+                <p>Quarterly portfolio progression (in ₹ Crores)</p>
+              </div>
+              <span class="cs-status-pill cs-status--green">+14.2% YoY</span>
+            </div>
+            <div class="cs-panel__body">
+              <div class="cs-chart-container">
+                <div class="cs-chart-bar-group">
+                  <div class="cs-chart-bar-wrap">
+                    <div class="cs-chart-bar" style="height: 48%;"></div>
+                  </div>
+                  <span class="cs-chart-label">Jan (₹18M)</span>
+                </div>
+                <div class="cs-chart-bar-group">
+                  <div class="cs-chart-bar-wrap">
+                    <div class="cs-chart-bar" style="height: 64%;"></div>
+                  </div>
+                  <span class="cs-chart-label">Feb (₹24M)</span>
+                </div>
+                <div class="cs-chart-bar-group">
+                  <div class="cs-chart-bar-wrap">
+                    <div class="cs-chart-bar" style="height: 55%;"></div>
+                  </div>
+                  <span class="cs-chart-label">Mar (₹21M)</span>
+                </div>
+                <div class="cs-chart-bar-group">
+                  <div class="cs-chart-bar-wrap">
+                    <div class="cs-chart-bar secondary" style="height: 78%;"></div>
+                  </div>
+                  <span class="cs-chart-label">Apr (₹32M)</span>
+                </div>
+                <div class="cs-chart-bar-group">
+                  <div class="cs-chart-bar-wrap">
+                    <div class="cs-chart-bar secondary" style="height: 92%;"></div>
+                  </div>
+                  <span class="cs-chart-label">May (₹41M)</span>
+                </div>
+                <div class="cs-chart-bar-group">
+                  <div class="cs-chart-bar-wrap">
+                    <div class="cs-chart-bar" style="height: 100%;"></div>
+                  </div>
+                  <span class="cs-chart-label">Jun (₹48M)</span>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; font-size: 0.82rem; color: var(--text-muted);">
+                <span>Gold: Luxury Residential Volume</span>
+                <span>Green: Commercial Capital Assets</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity Stream -->
+          <div class="cs-panel">
+            <div class="cs-panel__header">
+              <div class="cs-panel__title-wrap">
+                <h3>Live Operations Feed</h3>
+                <p>Real-time broker & buyer triggers</p>
+              </div>
+            </div>
+            <div class="cs-panel__body">
+              <div class="cs-activity-feed">
+                <div class="cs-activity-item">
+                  <div class="cs-activity-dot cs-stat-icon--green">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <div class="cs-activity-text">
+                    <p><strong>Rahul Mehta</strong> placed a ₹4.25 Cr acquisition bid on <em>Worli Sea-Facing 3BHK</em>.</p>
+                    <span class="cs-activity-time">12 minutes ago &bull; Assigned to Priya Sharma</span>
+                  </div>
+                </div>
+
+                <div class="cs-activity-item">
+                  <div class="cs-activity-dot cs-stat-icon--gold">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  </div>
+                  <div class="cs-activity-text">
+                    <p><strong>New Listing Submission</strong>: <em>Commercial Office in Whitefield</em> submitted by Suresh Iyengar.</p>
+                    <span class="cs-activity-time">45 minutes ago &bull; Pending Moderation</span>
+                  </div>
+                </div>
+
+                <div class="cs-activity-item">
+                  <div class="cs-activity-dot cs-stat-icon--blue">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line></svg>
+                  </div>
+                  <div class="cs-activity-text">
+                    <p><strong>Chauffeured Tour Dispatched</strong> for Sneha Iyer &bull; Hiranandani Gardens 3BHK.</p>
+                    <span class="cs-activity-time">2 hours ago &bull; Driver: Rajesh K.</span>
+                  </div>
+                </div>
+
+                <div class="cs-activity-item">
+                  <div class="cs-activity-dot cs-stat-icon--wine">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  </div>
+                  <div class="cs-activity-text">
+                    <p><strong>Escrow Milestone Cleared</strong>: Title insurance signed for ₹12.5 Cr Vasant Vihar Villa.</p>
+                    <span class="cs-activity-time">4 hours ago &bull; Lead Counsel Approved</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Enquiries Snapshot -->
+        <div class="cs-panel">
+          <div class="cs-panel__header">
+            <div class="cs-panel__title-wrap">
+              <h2>Recent Buyer Enquiries</h2>
+              <p>Top incoming client leads awaiting broker action</p>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" data-target="leads">View All 14 Leads &rarr;</button>
+          </div>
+          <div class="cs-panel__body">
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>Buyer Name</th>
+                    <th>Target Residence</th>
+                    <th>Budget</th>
+                    <th>Date Received</th>
+                    <th>Assigned Broker</th>
+                    <th>Status</th>
+                    <th>Quick Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cs-cell-strong">Aarav Mehta</td>
+                    <td>Luxury Sea-Facing Apartment, Worli</td>
+                    <td>₹4.50 Cr</td>
+                    <td>21 Nov 2026</td>
+                    <td>Priya Sharma</td>
+                    <td><span class="cs-status-pill cs-status--gold">New Lead</span></td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm" onclick="showToast('Lead routed to Priya Sharma with priority flag.', 'success')">Dispatch</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="cs-cell-strong">Sneha Iyer</td>
+                    <td>3BHK Apartment, Hiranandani Gardens</td>
+                    <td>₹2.80 Cr</td>
+                    <td>20 Nov 2026</td>
+                    <td>Vikramaditya S.</td>
+                    <td><span class="cs-status-pill cs-status--blue">Tour Booked</span></td>
+                    <td>
+                      <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Showing itinerary sent.', 'info')">Itinerary</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="cs-cell-strong">Rohan Verma</td>
+                    <td>Signature Penthouse, BKC</td>
+                    <td>₹8.50 Cr</td>
+                    <td>19 Nov 2026</td>
+                    <td>Priya Sharma</td>
+                    <td><span class="cs-status-pill cs-status--green">Under Offer</span></td>
+                    <td>
+                      <button type="button" class="btn btn-ghost btn-sm" onclick="showToast('Escrow ledger opened.', 'info')">Review</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 2: PROPERTY INVENTORY
+      ══════════════════════════════════════════════════════ -->
+      <section class="cs-dash-section" id="sec-listings">
+        <div class="cs-panel">
+          <div class="cs-panel__header">
+            <div class="cs-panel__title-wrap">
+              <h2>Master Property Portfolio (18)</h2>
+              <p>Real-time inventory status, pricing indices, and broker assignments</p>
+            </div>
+            <div class="cs-dash-filter-group">
+              <button type="button" class="cs-dash-pill-btn active" data-inv="all">All (18)</button>
+              <button type="button" class="cs-dash-pill-btn" data-inv="sale">For Sale (14)</button>
+              <button type="button" class="cs-dash-pill-btn" data-inv="rent">For Rent (4)</button>
+              <button type="button" class="btn btn-gold btn-sm" onclick="openNewListingModal()">+ Add Listing</button>
+            </div>
+          </div>
+          <div class="cs-panel__body">
+            <div class="cs-table-wrap">
+              <table class="cs-table" id="adminInventoryTable">
+                <thead>
+                  <tr>
+                    <th>Ref #</th>
+                    <th>Property Title</th>
+                    <th>Type & Category</th>
+                    <th>Location</th>
+                    <th>List Price</th>
+                    <th>Assigned Broker</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                  <!-- Injected via JavaScript from window.PROPERTIES -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 3: LISTING MODERATION QUEUE
+      ══════════════════════════════════════════════════════ -->
+      <section class="cs-dash-section" id="sec-moderation">
+        <div class="cs-panel">
+          <div class="cs-panel__header">
+            <div class="cs-panel__title-wrap">
+              <h2>Seller Submissions & Moderation Queue</h2>
+              <p>Review new seller applications, inspect deeds and verify compliance before publishing</p>
+            </div>
+            <span class="cs-dash-nav-badge cs-badge-red" id="modCountHeader">2 Pending Approval</span>
+          </div>
+          <div class="cs-panel__body">
+            <div style="display: grid; gap: 1.25rem;">
+
+              <div class="cs-panel" style="margin: 0; background: var(--bg-secondary);" id="modItem1">
+                <div class="cs-panel__body" style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+                  <div style="display: flex; gap: 1.25rem; align-items: flex-start; min-width: 280px; flex: 1;">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300" style="width: 90px; height: 90px; border-radius: var(--border-radius-md); object-fit: cover;" alt="Juhu Property">
+                    <div>
+                      <span class="cs-status-pill cs-status--gold" style="margin-bottom: 0.35rem;">Seller Submission</span>
+                      <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin: 0 0 0.25rem;">Sea-View 3BHK Penthouse in Juhu</h3>
+                      <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0 0 0.35rem;">
+                        Submitted by: <strong>Ananya Krishnan</strong> &bull; Asking: <strong>₹6.80 Cr</strong> &bull; 2,400 sq ft
+                      </p>
+                      <span style="font-size: 0.75rem; color: #10B981; font-weight: 600;">&#10003; Title Deed & NOC documents attached</span>
+                    </div>
+                  </div>
+                  <div style="display: flex; gap: 0.65rem;">
+                    <button type="button" class="btn btn-green btn-sm" onclick="approveModeration('modItem1', 'Sea-View 3BHK in Juhu')">Approve & Publish</button>
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="rejectModeration('modItem1', 'Sea-View 3BHK in Juhu')">Request Changes</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cs-panel" style="margin: 0; background: var(--bg-secondary);" id="modItem2">
+                <div class="cs-panel__body" style="display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+                  <div style="display: flex; gap: 1.25rem; align-items: flex-start; min-width: 280px; flex: 1;">
+                    <img src="https://images.unsplash.com/photo-1555636222-cae831e670b3?w=300" style="width: 90px; height: 90px; border-radius: var(--border-radius-md); object-fit: cover;" alt="Whitefield Office">
+                    <div>
+                      <span class="cs-status-pill cs-status--gold" style="margin-bottom: 0.35rem;">Commercial Asset</span>
+                      <h3 style="font-family: var(--font-heading); font-size: 1.15rem; margin: 0 0 0.25rem;">Grade-A Commercial IT Suite in Whitefield</h3>
+                      <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0 0 0.35rem;">
+                        Submitted by: <strong>Suresh Iyengar</strong> &bull; Asking: <strong>₹14.20 Cr</strong> &bull; 10,500 sq ft
+                      </p>
+                      <span style="font-size: 0.75rem; color: #10B981; font-weight: 600;">&#10003; Leased to Fortune 500 Tenant &bull; 8.2% Cap Rate</span>
+                    </div>
+                  </div>
+                  <div style="display: flex; gap: 0.65rem;">
+                    <button type="button" class="btn btn-green btn-sm" onclick="approveModeration('modItem2', 'Commercial IT Suite')">Approve & Publish</button>
+                    <button type="button" class="btn btn-ghost btn-sm" onclick="rejectModeration('modItem2', 'Commercial IT Suite')">Request Changes</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 4: CLIENT LEADS & CRM
+      ══════════════════════════════════════════════════════ -->
+      <section class="cs-dash-section" id="sec-leads">
+        <div class="cs-panel">
+          <div class="cs-panel__header">
+            <div class="cs-panel__title-wrap">
+              <h2>High-Net-Worth Client CRM</h2>
+              <p>Active buyer and investor registry with conversion pipeline</p>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Lead export prepared for Salesforce/HubSpot.', 'info')">Export CRM Data</button>
+          </div>
+          <div class="cs-panel__body">
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>Lead Name</th>
+                    <th>Contact Info</th>
+                    <th>Target City</th>
+                    <th>Budget Allocation</th>
+                    <th>Assigned Broker</th>
+                    <th>Pipeline Stage</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cs-cell-strong">Aarav Mehta</td>
+                    <td>aarav.m@corporate.com &bull; +91 98201 11223</td>
+                    <td>Mumbai (Worli)</td>
+                    <td>₹4.50 Cr</td>
+                    <td>Priya Sharma</td>
+                    <td>
+                      <select class="form-control" style="padding: 0.2rem 0.5rem; font-size: 0.78rem;">
+                        <option selected>Hot Acquisition Lead</option>
+                        <option>Site Visit Scheduled</option>
+                        <option>Contract In Escrow</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm" onclick="showToast('Direct line dialed.', 'info')">Call</button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="cs-cell-strong">Sneha Iyer</td>
+                    <td>sneha.iyer@fintech.io &bull; +91 98199 44556</td>
+                    <td>Mumbai (Powai)</td>
+                    <td>₹2.80 Cr</td>
+                    <td>Vikramaditya S.</td>
+                    <td>
+                      <select class="form-control" style="padding: 0.2rem 0.5rem; font-size: 0.78rem;">
+                        <option>Hot Acquisition Lead</option>
+                        <option selected>Site Visit Scheduled</option>
+                        <option>Contract In Escrow</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm" onclick="showToast('Direct line dialed.', 'info')">Call</button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="cs-cell-strong">Rohan Verma</td>
+                    <td>rohan.v@equitycap.in &bull; +91 99300 77881</td>
+                    <td>Mumbai (BKC)</td>
+                    <td>₹8.50 Cr</td>
+                    <td>Priya Sharma</td>
+                    <td>
+                      <select class="form-control" style="padding: 0.2rem 0.5rem; font-size: 0.78rem;">
+                        <option>Hot Acquisition Lead</option>
+                        <option>Site Visit Scheduled</option>
+                        <option selected>Contract In Escrow</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm" onclick="showToast('Direct line dialed.', 'info')">Call</button>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="cs-cell-strong">Kavya Nair</td>
+                    <td>kavya@designs.co &bull; +91 98450 33221</td>
+                    <td>Bangalore (Indiranagar)</td>
+                    <td>₹6.20 Cr</td>
+                    <td>Ananya Roy</td>
+                    <td>
+                      <select class="form-control" style="padding: 0.2rem 0.5rem; font-size: 0.78rem;">
+                        <option selected>Negotiation Counter</option>
+                        <option>Site Visit Scheduled</option>
+                        <option>Contract In Escrow</option>
+                      </select>
+                    </td>
+                    <td>
+                      <button type="button" class="btn btn-primary btn-sm" onclick="showToast('Direct line dialed.', 'info')">Call</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 5: TOUR DISPATCHES
+      ══════════════════════════════════════════════════════ -->
+      <section class="cs-dash-section" id="sec-dispatches">
+        <div class="cs-panel">
+          <div class="cs-panel__header">
+            <div class="cs-panel__title-wrap">
+              <h2>Site Visit Logistics & Chauffeur Dispatches</h2>
+              <p>Fleet coordination and broker escort assignments for client showings</p>
+            </div>
+            <button type="button" class="btn btn-gold btn-sm" onclick="showToast('Dispatched new vehicle route.', 'success')">+ Dispatch Showing</button>
+          </div>
+          <div class="cs-panel__body">
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>Showing Time</th>
+                    <th>Client Name</th>
+                    <th>Destination Property</th>
+                    <th>Chauffeur & Vehicle</th>
+                    <th>Escort Specialist</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cs-cell-strong">Today, 11:00 AM</td>
+                    <td>Rahul Mehta</td>
+                    <td>Worli Sea-Facing 3BHK</td>
+                    <td>Rajesh K. &bull; Mercedes E-Class (MH 01 DX 4422)</td>
+                    <td>Priya Sharma</td>
+                    <td><span class="cs-status-pill cs-status--green">En Route</span></td>
+                  </tr>
+                  <tr>
+                    <td class="cs-cell-strong">Today, 03:00 PM</td>
+                    <td>Sneha Iyer</td>
+                    <td>Hiranandani Gardens 3BHK</td>
+                    <td>Mukesh S. &bull; BMW 5 Series (MH 02 CB 9988)</td>
+                    <td>Vikramaditya S.</td>
+                    <td><span class="cs-status-pill cs-status--blue">Confirmed</span></td>
+                  </tr>
+                  <tr>
+                    <td class="cs-cell-strong">Tomorrow, 10:30 AM</td>
+                    <td>Vikramaditya Oberoi</td>
+                    <td>Vasant Vihar Heritage Villa</td>
+                    <td>Devinder T. &bull; Audi A6 (DL 01 AA 7711)</td>
+                    <td>Vikramaditya S.</td>
+                    <td><span class="cs-status-pill cs-status--gold">Scheduled</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 6: BROKER TEAM
+      ══════════════════════════════════════════════════════ -->
+      <section class="cs-dash-section" id="sec-team">
+        <div class="cs-panel">
+          <div class="cs-panel__header">
+            <div class="cs-panel__title-wrap">
+              <h2>Senior Advisory Team</h2>
+              <p>Performance metrics, active transaction load and quota achievements</p>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" onclick="showToast('Broker onboard dialog opened.', 'info')">+ Add Specialist</button>
+          </div>
+          <div class="cs-panel__body">
+            <div class="cs-dash-property-grid">
+              <div class="cs-dash-card" style="padding: 1.5rem; text-align: center;">
+                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200" alt="Priya Sharma" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 1rem; object-fit: cover; border: 3px solid var(--color-gold);">
+                <h3 style="font-family: var(--font-heading); margin: 0 0 0.25rem;">Priya Sharma</h3>
+                <span style="font-size: 0.8rem; color: var(--color-gold); font-weight: 600; text-transform: uppercase;">VP Luxury Residential</span>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.75rem 0;">Closed Volume: <strong>₹62.4 Cr</strong> &bull; 8 Active Escrows</p>
+                <button type="button" class="btn btn-secondary btn-sm" style="width:100%;" onclick="showToast('Performance dashboard opened for Priya.', 'info')">View Broker Record</button>
+              </div>
+
+              <div class="cs-dash-card" style="padding: 1.5rem; text-align: center;">
+                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200" alt="Vikramaditya" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 1rem; object-fit: cover; border: 3px solid var(--color-gold);">
+                <h3 style="font-family: var(--font-heading); margin: 0 0 0.25rem;">Vikramaditya Singhania</h3>
+                <span style="font-size: 0.8rem; color: var(--color-gold); font-weight: 600; text-transform: uppercase;">Director &bull; North Capital</span>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.75rem 0;">Closed Volume: <strong>₹54.8 Cr</strong> &bull; 6 Active Escrows</p>
+                <button type="button" class="btn btn-secondary btn-sm" style="width:100%;" onclick="showToast('Performance dashboard opened for Vikramaditya.', 'info')">View Broker Record</button>
+              </div>
+
+              <div class="cs-dash-card" style="padding: 1.5rem; text-align: center;">
+                <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200" alt="Ananya Roy" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 1rem; object-fit: cover; border: 3px solid var(--color-gold);">
+                <h3 style="font-family: var(--font-heading); margin: 0 0 0.25rem;">Ananya Roy</h3>
+                <span style="font-size: 0.8rem; color: var(--color-gold); font-weight: 600; text-transform: uppercase;">Senior Advisor &bull; South Assets</span>
+                <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0.75rem 0;">Closed Volume: <strong>₹38.2 Cr</strong> &bull; 5 Active Escrows</p>
+                <button type="button" class="btn btn-secondary btn-sm" style="width:100%;" onclick="showToast('Performance dashboard opened for Ananya.', 'info')">View Broker Record</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 7: FINANCIAL ANALYTICS
+      ══════════════════════════════════════════════════════ -->
+      <section class="cs-dash-section" id="sec-analytics">
+        <div class="cs-panel">
+          <div class="cs-panel__header">
+            <div class="cs-panel__title-wrap">
+              <h2>Revenue, Commissions & Escrow Ledgers</h2>
+              <p>Detailed fiscal breakdown for current accounting period</p>
+            </div>
+            <button type="button" class="btn btn-gold btn-sm" onclick="showToast('Downloading Fiscal Report PDF...', 'success')">Download Full Audit</button>
+          </div>
+          <div class="cs-panel__body">
+            <div class="cs-table-wrap">
+              <table class="cs-table">
+                <thead>
+                  <tr>
+                    <th>Quarter</th>
+                    <th>Total Transaction Volume</th>
+                    <th>Cornerstone Advisory Revenue</th>
+                    <th>Average Ticket Size</th>
+                    <th>Escrow Cleared Rate</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="cs-cell-strong">Q3 2026 (Current)</td>
+                    <td>₹148.5 Cr</td>
+                    <td>₹3.42 Cr</td>
+                    <td>₹8.25 Cr</td>
+                    <td><span class="cs-status-pill cs-status--green">98.4%</span></td>
+                  </tr>
+                  <tr>
+                    <td class="cs-cell-strong">Q2 2026</td>
+                    <td>₹124.0 Cr</td>
+                    <td>₹2.85 Cr</td>
+                    <td>₹7.75 Cr</td>
+                    <td><span class="cs-status-pill cs-status--green">97.8%</span></td>
+                  </tr>
+                  <tr>
+                    <td class="cs-cell-strong">Q1 2026</td>
+                    <td>₹105.8 Cr</td>
+                    <td>₹2.43 Cr</td>
+                    <td>₹6.61 Cr</td>
+                    <td><span class="cs-status-pill cs-status--green">96.5%</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════════════════════════════════════════════════
+           SECTION 8: SYSTEM SETTINGS
+      ══════════════════════════════════════════════════════ -->
+      <section class="cs-dash-section" id="sec-settings">
+        <div class="cs-panel">
+          <div class="cs-panel__header">
+            <div class="cs-panel__title-wrap">
+              <h2>Platform Architecture & Security</h2>
+              <p>System health checks, maintenance mode switches, and access credentials</p>
+            </div>
+          </div>
+          <div class="cs-panel__body">
+            <form onsubmit="event.preventDefault(); showToast('Platform configuration saved.', 'success');">
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+                <div>
+                  <label class="form-label">Agency Name</label>
+                  <input type="text" class="form-control" value="Cornerstone Real Estate Advisory LLP">
+                </div>
+                <div>
+                  <label class="form-label">Super Admin Email</label>
+                  <input type="email" class="form-control" value="arthur.sterling@cornerstone.in">
+                </div>
+                <div>
+                  <label class="form-label">Maintenance Mode</label>
+                  <select class="form-control">
+                    <option selected>Disabled (Marketplace Online)</option>
+                    <option>Enabled (Under Scheduled Maintenance)</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="form-label">Audit Log Retention</label>
+                  <select class="form-control">
+                    <option selected>365 Days (SEBI / RERA Compliant)</option>
+                    <option>180 Days</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Save System Settings</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /.cs-dash-body -->
+  </main>
+</div><!-- /.cs-dash-layout -->
+
+<!-- ══════════════════════════════════════════════════════════
+     NEW LISTING MODAL
+══════════════════════════════════════════════════════════ -->
+<div class="cs-dash-modal-backdrop" id="modalNewListing" aria-hidden="true">
+  <div class="cs-dash-modal" role="dialog" aria-modal="true" aria-labelledby="modalListingTitle">
+    <div class="cs-dash-modal__header">
+      <h3 id="modalListingTitle">Publish New Luxury Listing</h3>
+      <button type="button" class="btn btn-ghost btn-sm" id="modalListingClose" aria-label="Close modal">&times;</button>
+    </div>
+    <div class="cs-dash-modal__body">
+      <form id="newListingForm" onsubmit="handleCreateListing(event)">
+        <div style="margin-bottom: 1rem;">
+          <label class="form-label">Property Title</label>
+          <input type="text" id="newTitle" class="form-control" placeholder="e.g. Signature Waterfront Penthouse" required>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label class="form-label">Property Type</label>
+            <select id="newType" class="form-control">
+              <option selected>Apartment</option>
+              <option>Penthouse</option>
+              <option>Villa</option>
+              <option>Estate</option>
+              <option>Commercial</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Listing Type</label>
+            <select id="newListingType" class="form-control">
+              <option selected>For Sale</option>
+              <option>For Rent</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div>
+            <label class="form-label">Price (Display Text)</label>
+            <input type="text" id="newPrice" class="form-control" placeholder="e.g. ₹9.5 Cr" required>
+          </div>
+          <div>
+            <label class="form-label">Location (City, Area)</label>
+            <input type="text" id="newLocation" class="form-control" placeholder="e.g. Worli, Mumbai" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem;">
+          <div>
+            <label class="form-label">Bedrooms</label>
+            <input type="number" id="newBeds" class="form-control" value="3" min="1" max="10">
+          </div>
+          <div>
+            <label class="form-label">Bathrooms</label>
+            <input type="number" id="newBaths" class="form-control" value="3" min="1" max="10">
+          </div>
+          <div>
+            <label class="form-label">Area (Sq Ft)</label>
+            <input type="number" id="newArea" class="form-control" value="2200" min="500">
+          </div>
+        </div>
+
+        <div class="cs-dash-modal__footer" style="padding: 0; border: none;">
+          <button type="button" class="btn btn-ghost" id="modalListingCancel">Cancel</button>
+          <button type="submit" class="btn btn-gold">Publish Listing</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script src="../js/data.js"></script>
+<script src="../js/components.js"></script>
+<script src="../js/app.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ── Elements & State ──
+  const sidebar = document.getElementById('dashSidebar');
+  const overlay = document.getElementById('dashOverlay');
+  const btnOpen = document.getElementById('dashSidebarOpen');
+  const btnClose = document.getElementById('dashSidebarClose');
+  const navItems = document.querySelectorAll('.cs-dash-nav-item[data-target]');
+  const sections = document.querySelectorAll('.cs-dash-section');
+  const pageTitle = document.getElementById('adminPageTitle');
+  const breadcrumb = document.getElementById('adminBreadcrumb');
+
+  // ── Mobile Sidebar Drawer ──
+  function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+  }
+  function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+  }
+  if (btnOpen) btnOpen.addEventListener('click', openSidebar);
+  if (btnClose) btnClose.addEventListener('click', closeSidebar);
+  if (overlay) overlay.addEventListener('click', closeSidebar);
+
+  // ── Tab Switching ──
+  const sectionTitles = {
+    overview: 'Executive Overview',
+    listings: 'Property Inventory',
+    moderation: 'Moderation Queue',
+    leads: 'Client Leads & CRM',
+    dispatches: 'Tour Dispatches',
+    team: 'Broker Team Roster',
+    analytics: 'Financial Analytics',
+    settings: 'System & Security'
+  };
+
+  function switchSection(targetKey) {
+    if (!targetKey) return;
+    const targetSection = document.getElementById(`sec-${targetKey}`);
+    if (!targetSection) return;
+
+    sections.forEach(sec => sec.classList.remove('active'));
+    targetSection.classList.add('active');
+
+    navItems.forEach(item => {
+      if (item.getAttribute('data-target') === targetKey) {
+        item.classList.add('active');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    if (pageTitle && sectionTitles[targetKey]) {
+      pageTitle.textContent = sectionTitles[targetKey];
+    }
+    if (breadcrumb && sectionTitles[targetKey]) {
+      breadcrumb.textContent = sectionTitles[targetKey];
+    }
+
+    closeSidebar();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const target = item.getAttribute('data-target');
+      switchSection(target);
+    });
+  });
+
+  document.querySelectorAll('a[data-target], button[data-target]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = link.getAttribute('data-target');
+      switchSection(target);
+    });
+  });
+
+  // ── Inventory Table Population ──
+  const properties = Array.isArray(window.PROPERTIES) ? window.PROPERTIES : [];
+  const tableBody = document.getElementById('inventoryTableBody');
+
+  function renderTableRows(list) {
+    if (!tableBody) return;
+    tableBody.innerHTML = list.map(prop => `
+      <tr data-prop-id="${prop.id}" data-type="${prop.listingType === 'For Rent' ? 'rent' : 'sale'}">
+        <td class="cs-cell-strong">${prop.id}</td>
+        <td>
+          <div style="display:flex; align-items:center; gap:0.75rem;">
+            <img src="${prop.image}" alt="${prop.title}" style="width:40px; height:40px; border-radius:6px; object-fit:cover;" loading="lazy">
+            <div>
+              <span class="cs-cell-strong">${prop.title}</span>
+              <div style="font-size:0.75rem; color:var(--text-muted);">${prop.area.toLocaleString()} sq ft &bull; ${prop.bedrooms} Bed</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <span class="badge ${prop.listingType === 'For Rent' ? 'badge-rent' : 'badge-sale'}">${prop.listingType}</span>
+          <span style="font-size:0.8rem; margin-left:0.35rem;">${prop.type}</span>
+        </td>
+        <td>${prop.location}</td>
+        <td style="font-family:var(--font-heading); font-weight:700; color:var(--color-gold);">${prop.priceDisplay}</td>
+        <td>${prop.agent ? prop.agent.name : 'Priya Sharma'}</td>
+        <td><span class="cs-status-pill cs-status--green">Available</span></td>
+        <td>
+          <div style="display:flex; gap:0.4rem;">
+            <a href="property-details.html?id=${prop.id}" class="btn btn-ghost btn-sm" title="View Property Details">View</a>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="showToast('Listing #${prop.id} archived.', 'info')" title="Archive Listing">Archive</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  if (properties.length) {
+    renderTableRows(properties);
+  }
+
+  // Inventory Filter Pills
+  const invPills = document.querySelectorAll('.cs-dash-pill-btn[data-inv]');
+  invPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      invPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const filter = pill.getAttribute('data-inv');
+      const rows = document.querySelectorAll('#inventoryTableBody tr');
+      rows.forEach(row => {
+        const type = row.getAttribute('data-type');
+        if (filter === 'all' || filter === type) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // ── Moderation Queue Handlers ──
+  window.approveModeration = function(cardId, name) {
+    const card = document.getElementById(cardId);
+    if (card) {
+      card.style.opacity = '0.5';
+      card.style.pointerEvents = 'none';
+      if (window.showToast) window.showToast(`Listing "${name}" approved and published to Cornerstone live marketplace!`, 'success');
+      decrementModCount();
+    }
+  };
+
+  window.rejectModeration = function(cardId, name) {
+    const card = document.getElementById(cardId);
+    if (card) {
+      card.style.opacity = '0.5';
+      card.style.pointerEvents = 'none';
+      if (window.showToast) window.showToast(`Listing "${name}" returned to seller with requested amendments.`, 'info');
+      decrementModCount();
+    }
+  };
+
+  function decrementModCount() {
+    const badge = document.getElementById('navModerationBadge');
+    const header = document.getElementById('modCountHeader');
+    if (badge) {
+      const current = Math.max(0, parseInt(badge.textContent || '2') - 1);
+      badge.textContent = current;
+      if (header) header.textContent = `${current} Pending Approval`;
+    }
+  }
+
+  // ── New Listing Modal ──
+  const modalListing = document.getElementById('modalNewListing');
+  const btnOpenListing = document.getElementById('btnOpenNewListingModal');
+  const btnCloseListing = document.getElementById('modalListingClose');
+  const btnCancelListing = document.getElementById('modalListingCancel');
+
+  window.openNewListingModal = function() {
+    if (modalListing) modalListing.classList.add('active');
+  };
+
+  if (btnOpenListing) btnOpenListing.addEventListener('click', openNewListingModal);
+  if (btnCloseListing) btnCloseListing.addEventListener('click', () => modalListing.classList.remove('active'));
+  if (btnCancelListing) btnCancelListing.addEventListener('click', () => modalListing.classList.remove('active'));
+
+  if (modalListing) {
+    modalListing.addEventListener('click', (e) => {
+      if (e.target === modalListing) modalListing.classList.remove('active');
+    });
+  }
+
+  window.handleCreateListing = function(e) {
+    e.preventDefault();
+    const title = document.getElementById('newTitle').value;
+    const type = document.getElementById('newType').value;
+    const listingType = document.getElementById('newListingType').value;
+    const price = document.getElementById('newPrice').value;
+    const loc = document.getElementById('newLocation').value;
+    const beds = document.getElementById('newBeds').value;
+    const area = document.getElementById('newArea').value;
+
+    const newId = 'P' + String(properties.length + 1).padStart(3, '0');
+    const newProp = {
+      id: newId,
+      title: title,
+      type: type,
+      listingType: listingType,
+      priceDisplay: price,
+      location: loc,
+      bedrooms: parseInt(beds) || 3,
+      bathrooms: 3,
+      area: parseInt(area) || 2000,
+      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800',
+      agent: { name: 'Arthur Sterling' }
+    };
+
+    properties.unshift(newProp);
+    renderTableRows(properties);
+
+    const kpi = document.getElementById('kpiAdminListings');
+    const navB = document.getElementById('navListingBadge');
+    if (kpi) kpi.textContent = properties.length;
+    if (navB) navB.textContent = properties.length;
+
+    modalListing.classList.remove('active');
+    document.getElementById('newListingForm').reset();
+    if (window.showToast) window.showToast(`Listing #${newId} "${title}" successfully published!`, 'success');
+  };
+
+  // ── Omni Search & Keyboard Shortcuts ──
+  window.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      const s = document.getElementById('adminOmniSearch');
+      if (s) s.focus();
+    }
+  });
+
+  const omni = document.getElementById('adminOmniSearch');
+  if (omni) {
+    omni.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('#inventoryTableBody tr, #sec-leads tbody tr').forEach(row => {
+        if (!q || row.textContent.toLowerCase().includes(q)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // ── Topbar Actions ──
+  const btnExport = document.getElementById('btnExportLedger');
+  if (btnExport) {
+    btnExport.addEventListener('click', () => {
+      if (window.showToast) window.showToast('Cornerstone fiscal ledger CSV export generated.', 'success');
+    });
+  }
+
+  const btnNotif = document.getElementById('btnAdminNotif');
+  if (btnNotif) {
+    btnNotif.addEventListener('click', () => {
+      if (window.showToast) window.showToast('2 Moderation alerts pending your executive signoff.', 'info');
+    });
+  }
+
+  const btnLogout = document.getElementById('btnLogoutAdmin');
+  if (btnLogout) {
+    btnLogout.addEventListener('click', () => {
+      if (window.showToast) window.showToast('Signing out of Admin Command...', 'info');
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 400);
+    });
+  }
+});
+</script>
+
+</body>
+</html>

@@ -31,12 +31,14 @@
     const base = resolveBasePath(basePath);
 
     // Active page helpers
-    const isHome = activePage === 'home' || activePage === 'home1' || activePage === 'home2';
+    const isHome = activePage === 'home' || activePage === 'home1';
+    const isHome2 = activePage === 'home2';
     const isAbout = activePage === 'about';
     const isBuy = activePage === 'buy';
     const isSell = activePage === 'sell-rent' || activePage === 'sell';
     const isBlog = activePage === 'blog';
     const isPricing = activePage === 'pricing';
+    const isContact = activePage === 'contact';
 
     const html = `
       <header class="cs-navbar" role="banner">
@@ -89,16 +91,12 @@
 
           <!-- Desktop Navigation -->
           <nav class="cs-navbar__nav" role="navigation" aria-label="Main Navigation">
-            <!-- Home Dropdown -->
             <div class="cs-navbar__nav-item">
-              <a href="${base}index.html" class="cs-navbar__nav-link ${isHome ? 'active' : ''}">
-                <span>Home</span>
-                <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-              </a>
-              <div class="cs-navbar__dropdown">
-                <a href="${base}index.html" class="cs-navbar__dropdown-link ${activePage === 'home' || activePage === 'home1' ? 'active' : ''}">Home 1 (General)</a>
-                <a href="${base}pages/home2.html" class="cs-navbar__dropdown-link ${activePage === 'home2' ? 'active' : ''}">Home 2 (Featured & Categories)</a>
-              </div>
+              <a href="${base}index.html" class="cs-navbar__nav-link ${isHome ? 'active' : ''}">Home</a>
+            </div>
+
+            <div class="cs-navbar__nav-item">
+              <a href="${base}pages/home2.html" class="cs-navbar__nav-link ${isHome2 ? 'active' : ''}">Home 2</a>
             </div>
 
             <div class="cs-navbar__nav-item">
@@ -120,10 +118,31 @@
             <div class="cs-navbar__nav-item">
               <a href="${base}pages/pricing.html" class="cs-navbar__nav-link ${isPricing ? 'active' : ''}">Pricing</a>
             </div>
+
+            <div class="cs-navbar__nav-item">
+              <a href="${base}pages/contact.html" class="cs-navbar__nav-link ${isContact ? 'active' : ''}">Contact</a>
+            </div>
           </nav>
 
           <!-- Right Action Buttons -->
           <div class="cs-navbar__actions">
+            <!-- User Profile Menu -->
+            <div class="cs-navbar__profile">
+              <button class="cs-navbar__icon-btn cs-navbar__profile-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Open profile menu" title="Profile">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              </button>
+              <div class="cs-navbar__profile-menu" role="menu" aria-label="Profile links">
+                <a href="${base}pages/user-dashboard.html" class="cs-navbar__profile-link" role="menuitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  <span>User Dashboard</span>
+                </a>
+                <a href="${base}pages/admin-dashboard.html" class="cs-navbar__profile-link" role="menuitem">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                  <span>Admin Dashboard</span>
+                </a>
+              </div>
+            </div>
+
             <!-- Dark / Light Mode Toggle -->
             <button class="cs-navbar__icon-btn js-theme-toggle" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
@@ -150,24 +169,26 @@
         <!-- Mobile Menu Overlay -->
         <div class="cs-navbar__mobile-menu">
           <div class="cs-mobile-nav">
-            <div class="cs-mobile-nav__item">
-              <a href="#" class="cs-mobile-nav__link has-submenu ${isHome ? 'active' : ''}">
-                <span>Home</span>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-              </a>
-              <div class="cs-mobile-nav__submenu">
-                <a href="${base}index.html" class="cs-mobile-nav__sub-link">Home 1 (General)</a>
-                <a href="${base}pages/home2.html" class="cs-mobile-nav__sub-link">Home 2 (Featured & Categories)</a>
-              </div>
-            </div>
-
+            <a href="${base}index.html" class="cs-mobile-nav__link ${isHome ? 'active' : ''}">Home</a>
+            <a href="${base}pages/home2.html" class="cs-mobile-nav__link ${isHome2 ? 'active' : ''}">Home 2</a>
             <a href="${base}pages/about.html" class="cs-mobile-nav__link ${isAbout ? 'active' : ''}">About</a>
             <a href="${base}pages/buy.html" class="cs-mobile-nav__link ${isBuy ? 'active' : ''}">Buy Properties</a>
             <a href="${base}pages/sell-rent.html" class="cs-mobile-nav__link ${isSell ? 'active' : ''}">Sell / Rent</a>
             <a href="${base}pages/blog.html" class="cs-mobile-nav__link ${isBlog ? 'active' : ''}">Blog</a>
             <a href="${base}pages/pricing.html" class="cs-mobile-nav__link ${isPricing ? 'active' : ''}">Pricing</a>
+            <a href="${base}pages/contact.html" class="cs-mobile-nav__link ${isContact ? 'active' : ''}">Contact</a>
 
             <div class="cs-mobile-nav__actions">
+              <div class="cs-mobile-nav__profile-links">
+                <a href="${base}pages/user-dashboard.html" class="cs-mobile-nav__dash-link">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                  <span>User Dashboard</span>
+                </a>
+                <a href="${base}pages/admin-dashboard.html" class="cs-mobile-nav__dash-link">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                  <span>Admin Dashboard</span>
+                </a>
+              </div>
               <a href="${base}pages/login.html" class="cs-navbar__login-btn">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                 <span>Sign In / Register</span>
@@ -279,12 +300,14 @@
             <div class="cs-footer__col">
               <h4 class="cs-footer__col-heading">Quick Links</h4>
               <ul class="cs-footer__links">
-                <li><a href="${base}pages/about.html" class="cs-footer__link">About Us</a></li>
-                <li><a href="${base}pages/buy.html" class="cs-footer__link">Buy Property</a></li>
+                <li><a href="${base}index.html" class="cs-footer__link">Home</a></li>
+                <li><a href="${base}pages/home2.html" class="cs-footer__link">Home 2</a></li>
+                <li><a href="${base}pages/about.html" class="cs-footer__link">About</a></li>
+                <li><a href="${base}pages/buy.html" class="cs-footer__link">Buy</a></li>
                 <li><a href="${base}pages/sell-rent.html" class="cs-footer__link">Sell / Rent</a></li>
-                <li><a href="${base}pages/blog.html" class="cs-footer__link">Real Estate Blog</a></li>
-                <li><a href="${base}pages/pricing.html" class="cs-footer__link">Pricing Plans</a></li>
-                <li><a href="${base}pages/contact.html" class="cs-footer__link">Contact Us</a></li>
+                <li><a href="${base}pages/blog.html" class="cs-footer__link">Blog</a></li>
+                <li><a href="${base}pages/pricing.html" class="cs-footer__link">Pricing</a></li>
+                <li><a href="${base}pages/contact.html" class="cs-footer__link">Contact</a></li>
               </ul>
             </div>
 
