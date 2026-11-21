@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 54" width="280" height="54">
+  <defs>
+    <linearGradient id="csGoldFull" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1D0"/>
+      <stop offset="45%" stop-color="#E5C788"/>
+      <stop offset="80%" stop-color="#C6A56B"/>
+      <stop offset="100%" stop-color="#936F2C"/>
+    </linearGradient>
+    <linearGradient id="csGoldDarkFull" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B89454"/>
+      <stop offset="100%" stop-color="#5C4214"/>
+    </linearGradient>
+    <linearGradient id="csNavyFull" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3244"/>
+      <stop offset="100%" stop-color="#0E1922"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Left Icon Emblem (50x50) -->
+  <g transform="translate(2, 2)">
+    <rect width="50" height="50" rx="10" fill="url(#csNavyFull)"/>
+    <rect x="0.75" y="0.75" width="48.5" height="48.5" rx="9.25" fill="none" stroke="url(#csGoldFull)" stroke-width="1.5" stroke-opacity="0.85"/>
+    
+    <path d="M25 9 L39 17 L25 25 L11 17 Z" fill="#FFF1D0"/>
+    <path d="M11 17 L25 25 L25 39 L11 31 Z" fill="url(#csGoldFull)"/>
+    <path d="M25 25 L39 17 L39 31 L25 39 Z" fill="url(#csGoldDarkFull)"/>
+    
+    <path d="M25 15 L33 19.5 L25 24 L17 19.5 Z" fill="#0E1922" fill-opacity="0.9"/>
+    <path d="M17 19.5 L25 24 L25 34 L17 29.5 Z" fill="#132330" fill-opacity="0.95"/>
+    <path d="M25 24 L33 19.5 L33 29.5 L25 34 Z" fill="#1A3346" fill-opacity="0.85"/>
+    
+    <path d="M25 12 L35.5 18 L25 24 L19 20.5 Z" fill="#FFF1D0"/>
+    <path d="M15 20.5 L19 18 L19 32 L15 29.5 Z" fill="#FFF1D0"/>
+    <path d="M15 29.5 L25 35.5 L35.5 29.5 L35.5 32.5 L25 38.5 L15 32.5 Z" fill="url(#csGoldFull)"/>
+    
+    <polygon points="25,5.5 27.5,8.5 25,11.5 22.5,8.5" fill="#FFFFFF"/>
+    <circle cx="25" cy="8.5" r="1.2" fill="#FFF9ED"/>
+  </g>
+
+  <!-- Brand Typography -->
+  <g transform="translate(64, 4)">
+    <!-- Primary Brand Name -->
+    <text x="0" y="27" font-family="'Playfair Display', Georgia, serif" font-size="24" font-weight="800" fill="#FFFFFF" letter-spacing="-0.3">Cornerstone</text>
+    
+    <!-- Tagline -->
+    <text x="0" y="42" font-family="'Inter', -apple-system, sans-serif" font-size="8.5" font-weight="700" fill="#C6A56B" letter-spacing="1.8" text-transform="uppercase">FOUNDATION OF PRIME LIVING</text>
+  </g>
+</svg>

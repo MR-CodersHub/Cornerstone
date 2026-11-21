@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Seller Dashboard | Cornerstone Real Estate</title>
   <meta name="description" content="Manage your property listings, buyer enquiries, site visits, and received offers on Cornerstone Real Estate.">
+    <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -1420,11 +1424,46 @@
   <!-- ── SIDEBAR NAVIGATION (12 ITEMS) ── -->
   <aside class="dash-sidebar" id="dashSidebar">
     <div class="sidebar-header">
-      <a href="../index.html" class="sidebar-logo">
-        <div class="sidebar-logo-icon">C</div>
+      <a href="../index.html" class="sidebar-logo" aria-label="Cornerstone — Foundation of Prime Living">
+        <div class="sidebar-logo-icon"><svg class="cs-logo-svg" viewBox="0 0 48 48" width="44" height="44" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="csSellerGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1D0"/>
+      <stop offset="45%" stop-color="#E5C788"/>
+      <stop offset="80%" stop-color="#C6A56B"/>
+      <stop offset="100%" stop-color="#936F2C"/>
+    </linearGradient>
+    <linearGradient id="csSellerGoldLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#EAD3A2"/>
+      <stop offset="100%" stop-color="#C6A56B"/>
+    </linearGradient>
+    <linearGradient id="csSellerGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B89454"/>
+      <stop offset="100%" stop-color="#5C4214"/>
+    </linearGradient>
+    <linearGradient id="csSellerNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3244"/>
+      <stop offset="100%" stop-color="#0E1922"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="10" fill="url(#csSellerNavyGrad)"/>
+  <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="9.25" fill="none" stroke="url(#csSellerGoldGrad)" stroke-width="1.5" stroke-opacity="0.85"/>
+  <path d="M24 8.5 L38 16.5 L24 24.5 L10 16.5 Z" fill="url(#csSellerGoldLight)"/>
+  <path d="M10 16.5 L24 24.5 L24 38.5 L10 30.5 Z" fill="url(#csSellerGoldGrad)"/>
+  <path d="M24 24.5 L38 16.5 L38 30.5 L24 38.5 Z" fill="url(#csSellerGoldDark)"/>
+  <path d="M24 14.5 L32 19 L24 23.5 L16 19 Z" fill="#0E1922" fill-opacity="0.9"/>
+  <path d="M16 19 L24 23.5 L24 33.5 L16 29 Z" fill="#132330" fill-opacity="0.95"/>
+  <path d="M24 23.5 L32 19 L32 29 L24 33.5 Z" fill="#1A3346" fill-opacity="0.85"/>
+  <path d="M24 11.5 L34.5 17.5 L24 23.5 L18 20 Z" fill="url(#csSellerGoldLight)"/>
+  <path d="M14 20 L18 17.5 L18 31 L14 28.5 Z" fill="url(#csSellerGoldLight)"/>
+  <path d="M14 28.5 L24 34.5 L34.5 28.5 L34.5 31.5 L24 37.5 L14 31.5 Z" fill="url(#csSellerGoldGrad)"/>
+  <polygon points="24,5 26.5,8 24,11 21.5,8" fill="#FFFFFF"/>
+  <circle cx="24" cy="8" r="1.2" fill="#FFF9ED"/>
+</svg></div>
         <div class="sidebar-logo-text">
           <span class="brand-name">Cornerstone</span>
-          <span class="portal-tag">Seller Portal</span>
+          <span class="portal-tag">Seller Portal • Prime Living</span>
         </div>
       </a>
       <button class="sidebar-close-btn" onclick="toggleMobileSidebar(false)" aria-label="Close sidebar">
@@ -1623,7 +1662,7 @@
         <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
           <div>
             <h2 style="font-family: var(--font-heading); font-size: 1.8rem; margin: 0 0 0.35rem; color: var(--text-primary);">
-              Welcome back, Meera! 👋
+              Welcome back, Meera! <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: -0.2em; color: var(--color-gold);"><path d="M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8"></path><path d="M18 8a2 2 0 0 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L6 14"></path></svg>
             </h2>
             <p style="margin: 0; color: var(--text-muted); font-size: 0.95rem;" id="currentDateDisplay">
               Today is Monday, 18 November 2024
@@ -2021,18 +2060,18 @@
               <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Check all features that apply to your property.</p>
 
               <div class="amenities-grid" id="amenitiesCheckboxes">
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Covered Parking" checked><span>🚗 Covered Parking</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Gymnasium" checked><span>🏋️ Gymnasium</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Swimming Pool" checked><span>🏊 Swimming Pool</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="24/7 Security" checked><span>🛡️ 24/7 Security</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="High-Speed Elevators" checked><span>🛗 High-Speed Elevators</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Landscaped Garden"><span>🌳 Landscaped Garden</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Clubhouse"><span>🏛️ Clubhouse</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="24hr Water Supply" checked><span>💧 24hr Water Supply</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="100% Power Backup" checked><span>⚡ Power Backup</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Children's Play Area"><span>🛝 Children's Play Area</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Intercom Facility"><span>📞 Intercom</span></label>
-                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Vastu Compliant"><span>🧭 Vastu Compliant</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Covered Parking" checked><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M4 12l1.8-5A2 2 0 0 1 7.7 5.5h8.6a2 2 0 0 1 1.9 1.5L20 12"></path><path d="M4 12h16v5H4z"></path><circle cx="7.5" cy="17.5" r="1.5"></circle><circle cx="16.5" cy="17.5" r="1.5"></circle></svg> Covered Parking</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Gymnasium" checked><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M6.5 6.5v11M3.5 9v6M17.5 6.5v11M20.5 9v6M6.5 12h11"></path></svg> Gymnasium</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Swimming Pool" checked><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M2 15c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"></path><path d="M2 20c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"></path></svg> Swimming Pool</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="24/7 Security" checked><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> 24/7 Security</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="High-Speed Elevators" checked><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><rect x="4" y="3" width="16" height="18" rx="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line><path d="M6 11l2-2 2 2"></path><line x1="8" y1="9" x2="8" y2="14"></line><path d="M14 13l2 2 2-2"></path><line x1="16" y1="15" x2="16" y2="10"></line></svg> High-Speed Elevators</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Landscaped Garden"><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M12 3l5 7h-3l4 6H6l4-6H7z"></path><path d="M12 16v6"></path></svg> Landscaped Garden</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Clubhouse"><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M3 21h18"></path><path d="M5 21V10"></path><path d="M19 21V10"></path><path d="M3 10l9-7 9 7"></path><path d="M9 21v-6h6v6"></path></svg> Clubhouse</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="24hr Water Supply" checked><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M12 2.7l5.3 5.3a7.5 7.5 0 1 1-10.6 0z"></path></svg> 24hr Water Supply</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="100% Power Backup" checked><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> Power Backup</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Children's Play Area"><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M3 21h18"></path><path d="M6 21V7"></path><path d="M6 7h5"></path><path d="M11 7l8 10"></path><path d="M19 17v4"></path><path d="M6 11h4"></path><path d="M6 15h4"></path></svg> Children's Play Area</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Intercom Facility"><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> Intercom</span></label>
+                <label class="checkbox-pill-label"><input type="checkbox" name="amenity" value="Vastu Compliant"><span><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color: var(--color-gold); flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg> Vastu Compliant</span></label>
               </div>
             </div>
 
@@ -2571,9 +2610,9 @@
                 <h4 style="font-family: var(--font-heading); margin: 0 0 0.5rem;">Dedicated Seller Support Desk</h4>
                 <p style="margin: 0 0 1rem; color: var(--text-muted); font-size: 0.88rem;">Our executive advisors are available Monday through Saturday, 9:00 AM – 7:00 PM IST.</p>
                 <div style="font-size: 0.88rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                  <div>📞 <strong>Phone:</strong> +91 (22) 6789-0100</div>
-                  <div>✉️ <strong>Email:</strong> seller-support@cornerstone.in</div>
-                  <div>📍 <strong>Corporate Office:</strong> Level 14, Tower 3, BKC, Mumbai 400051</div>
+                  <div><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: -0.15em; color: var(--color-gold);"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg> <strong>Phone:</strong> +91 (22) 6789-0100</div>
+                  <div><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: -0.15em; color: var(--color-gold);"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg> <strong>Email:</strong> seller-support@cornerstone.in</div>
+                  <div><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: -0.15em; color: var(--color-gold);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> <strong>Corporate Office:</strong> Level 14, Tower 3, BKC, Mumbai 400051</div>
                 </div>
               </div>
 
@@ -3124,13 +3163,13 @@
           </div>
           <div style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column;">
             <h4 style="margin: 0 0 0.35rem; font-size: 1.05rem; font-family: var(--font-heading); color: var(--text-primary);">${item.title}</h4>
-            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.85rem;">📍 ${item.location}</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.85rem;">${csIcon('map-pin', 14)} ${item.location}</div>
             <div style="font-size: 1.25rem; font-weight: 700; color: var(--color-gold); margin-bottom: 1rem;">${item.priceDisplay}</div>
             
             <div style="display: flex; justify-content: space-between; border-top: 1px solid var(--border-color); padding-top: 0.75rem; font-size: 0.78rem; color: var(--text-secondary); margin-top: auto;">
-              <span>👀 <strong>${item.views}</strong> views</span>
-              <span>💬 <strong>${item.enquiries}</strong> leads</span>
-              <span>❤️ <strong>${item.savedCount}</strong> saves</span>
+              <span>${csIcon('eye', 13)} <strong>${item.views}</strong> views</span>
+              <span>${csIcon('message-circle', 13)} <strong>${item.enquiries}</strong> leads</span>
+              <span>${csIcon('heart', 13)} <strong>${item.savedCount}</strong> saves</span>
             </div>
           </div>
         </div>
@@ -3173,7 +3212,7 @@
               <strong style="font-size: 0.88rem;">${v.buyerName}</strong>
             </div>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;">
-              📅 ${v.requestedDate} at ${v.requestedTime} &bull; ${v.propertyTitle}
+              ${csIcon('calendar', 13)} ${v.requestedDate} at ${v.requestedTime} &bull; ${v.propertyTitle}
             </div>
           </div>
           <button class="btn btn-ghost" style="padding: 0.3rem 0.65rem; font-size: 0.75rem;" onclick="switchSection('site-visits')">View</button>
@@ -3749,8 +3788,8 @@
             <div style="font-size: 0.72rem; color: var(--text-muted);">${v.propertyId}</div>
           </td>
           <td>${v.buyerName}</td>
-          <td>📅 ${v.requestedDate}</td>
-          <td>⏰ ${v.requestedTime}</td>
+          <td>${csIcon('calendar', 14)} ${v.requestedDate}</td>
+          <td>${csIcon('clock', 14)} ${v.requestedTime}</td>
           <td><span class="badge-status ${statusClass}">${v.status}</span></td>
           <td>
             <div class="action-group">${actionButtons}</div>
@@ -3981,7 +4020,7 @@
             <img src="${p.image}" alt="${p.title}" class="perf-thumb">
             <div>
               <h4 class="perf-card-title">${p.title}</h4>
-              <div class="perf-card-loc">📍 ${p.location} &bull; ${p.priceDisplay}</div>
+              <div class="perf-card-loc">${csIcon('map-pin', 13)} ${p.location} &bull; ${p.priceDisplay}</div>
             </div>
           </div>
 
@@ -4040,7 +4079,7 @@
       return `
         <tr>
           <td>
-            <strong>📄 ${doc.name}</strong>
+            <strong>${csIcon('file-text', 14)} ${doc.name}</strong>
             <div style="font-size: 0.72rem; color: var(--text-muted);">${doc.id}</div>
           </td>
           <td>${doc.property}</td>
@@ -4101,16 +4140,16 @@
     }
 
     container.innerHTML = SELLER_NOTIFICATIONS.map(n => {
-      let icon = '🔔';
+      let icon = csIcon('bell', 20);
       let iconClass = 'notif-icon-listing';
-      if (n.type === 'offer') { icon = '🏷️'; iconClass = 'notif-icon-offer'; }
-      if (n.type === 'enquiry') { icon = '💬'; iconClass = 'notif-icon-enquiry'; }
-      if (n.type === 'visit') { icon = '📅'; iconClass = 'notif-icon-visit'; }
+      if (n.type === 'offer') { icon = csIcon('tag', 20); iconClass = 'notif-icon-offer'; }
+      if (n.type === 'enquiry') { icon = csIcon('message-circle', 20); iconClass = 'notif-icon-enquiry'; }
+      if (n.type === 'visit') { icon = csIcon('calendar', 20); iconClass = 'notif-icon-visit'; }
 
       return `
         <div class="notification-item ${n.read ? '' : 'unread'}" onclick="markNotificationRead('${n.id}')">
           <div class="notif-icon-circle ${iconClass}">
-            <span style="font-size: 1.1rem;">${icon}</span>
+            ${icon}
           </div>
           <div class="notif-content">
             <div class="notif-message">${n.message}</div>

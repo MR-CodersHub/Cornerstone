@@ -42,11 +42,48 @@
       <header class="cs-navbar" role="banner">
         <div class="cs-navbar__inner">
           <!-- Logo -->
-          <a href="${base}index.html" class="cs-navbar__logo" aria-label="Cornerstone Real Estate Home">
-            <div class="cs-navbar__logo-icon">C</div>
+          <a href="${base}index.html" class="cs-navbar__logo" aria-label="Cornerstone — Foundation of Prime Living">
+            <div class="cs-navbar__logo-icon">
+              <svg class="cs-logo-svg" viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="csNavGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1D0"/>
+      <stop offset="45%" stop-color="#E5C788"/>
+      <stop offset="80%" stop-color="#C6A56B"/>
+      <stop offset="100%" stop-color="#936F2C"/>
+    </linearGradient>
+    <linearGradient id="csNavGoldLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#EAD3A2"/>
+      <stop offset="100%" stop-color="#C6A56B"/>
+    </linearGradient>
+    <linearGradient id="csNavGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B89454"/>
+      <stop offset="100%" stop-color="#5C4214"/>
+    </linearGradient>
+    <linearGradient id="csNavNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3244"/>
+      <stop offset="100%" stop-color="#0E1922"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="10" fill="url(#csNavNavyGrad)"/>
+  <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="9.25" fill="none" stroke="url(#csNavGoldGrad)" stroke-width="1.5" stroke-opacity="0.85"/>
+  <path d="M24 8.5 L38 16.5 L24 24.5 L10 16.5 Z" fill="url(#csNavGoldLight)"/>
+  <path d="M10 16.5 L24 24.5 L24 38.5 L10 30.5 Z" fill="url(#csNavGoldGrad)"/>
+  <path d="M24 24.5 L38 16.5 L38 30.5 L24 38.5 Z" fill="url(#csNavGoldDark)"/>
+  <path d="M24 14.5 L32 19 L24 23.5 L16 19 Z" fill="#0E1922" fill-opacity="0.9"/>
+  <path d="M16 19 L24 23.5 L24 33.5 L16 29 Z" fill="#132330" fill-opacity="0.95"/>
+  <path d="M24 23.5 L32 19 L32 29 L24 33.5 Z" fill="#1A3346" fill-opacity="0.85"/>
+  <path d="M24 11.5 L34.5 17.5 L24 23.5 L18 20 Z" fill="url(#csNavGoldLight)"/>
+  <path d="M14 20 L18 17.5 L18 31 L14 28.5 Z" fill="url(#csNavGoldLight)"/>
+  <path d="M14 28.5 L24 34.5 L34.5 28.5 L34.5 31.5 L24 37.5 L14 31.5 Z" fill="url(#csNavGoldGrad)"/>
+  <polygon points="24,5 26.5,8 24,11 21.5,8" fill="#FFFFFF"/>
+  <circle cx="24" cy="8" r="1.2" fill="#FFF9ED"/>
+</svg>
+            </div>
             <div class="cs-navbar__logo-text">
               <span class="cs-navbar__logo-name">Cornerstone</span>
-              <span class="cs-navbar__logo-tagline">Real Estate</span>
+              <span class="cs-navbar__logo-tagline">Foundation of Prime Living</span>
             </div>
           </a>
 
@@ -162,11 +199,48 @@
           <div class="cs-footer__grid">
             <!-- Col 1: Agency Brand & Contacts -->
             <div class="cs-footer__col">
-              <a href="${base}index.html" class="cs-footer__brand-logo">
-                <div class="cs-footer__brand-icon">C</div>
+              <a href="${base}index.html" class="cs-footer__brand-logo" aria-label="Cornerstone — Foundation of Prime Living">
+                <div class="cs-footer__brand-icon">
+                  <svg class="cs-logo-svg" viewBox="0 0 48 48" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <linearGradient id="csFtrGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1D0"/>
+      <stop offset="45%" stop-color="#E5C788"/>
+      <stop offset="80%" stop-color="#C6A56B"/>
+      <stop offset="100%" stop-color="#936F2C"/>
+    </linearGradient>
+    <linearGradient id="csFtrGoldLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#EAD3A2"/>
+      <stop offset="100%" stop-color="#C6A56B"/>
+    </linearGradient>
+    <linearGradient id="csFtrGoldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B89454"/>
+      <stop offset="100%" stop-color="#5C4214"/>
+    </linearGradient>
+    <linearGradient id="csFtrNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3244"/>
+      <stop offset="100%" stop-color="#0E1922"/>
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="10" fill="url(#csFtrNavyGrad)"/>
+  <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="9.25" fill="none" stroke="url(#csFtrGoldGrad)" stroke-width="1.5" stroke-opacity="0.85"/>
+  <path d="M24 8.5 L38 16.5 L24 24.5 L10 16.5 Z" fill="url(#csFtrGoldLight)"/>
+  <path d="M10 16.5 L24 24.5 L24 38.5 L10 30.5 Z" fill="url(#csFtrGoldGrad)"/>
+  <path d="M24 24.5 L38 16.5 L38 30.5 L24 38.5 Z" fill="url(#csFtrGoldDark)"/>
+  <path d="M24 14.5 L32 19 L24 23.5 L16 19 Z" fill="#0E1922" fill-opacity="0.9"/>
+  <path d="M16 19 L24 23.5 L24 33.5 L16 29 Z" fill="#132330" fill-opacity="0.95"/>
+  <path d="M24 23.5 L32 19 L32 29 L24 33.5 Z" fill="#1A3346" fill-opacity="0.85"/>
+  <path d="M24 11.5 L34.5 17.5 L24 23.5 L18 20 Z" fill="url(#csFtrGoldLight)"/>
+  <path d="M14 20 L18 17.5 L18 31 L14 28.5 Z" fill="url(#csFtrGoldLight)"/>
+  <path d="M14 28.5 L24 34.5 L34.5 28.5 L34.5 31.5 L24 37.5 L14 31.5 Z" fill="url(#csFtrGoldGrad)"/>
+  <polygon points="24,5 26.5,8 24,11 21.5,8" fill="#FFFFFF"/>
+  <circle cx="24" cy="8" r="1.2" fill="#FFF9ED"/>
+</svg>
+                </div>
                 <div>
                   <div class="cs-footer__brand-name">Cornerstone</div>
-                  <div class="cs-footer__brand-tagline">Real Estate</div>
+                  <div class="cs-footer__brand-tagline">Foundation of Prime Living</div>
                 </div>
               </a>
               <p class="cs-footer__agency-desc">

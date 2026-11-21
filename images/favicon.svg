@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="csGoldGradFavImg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF1D0"/>
+      <stop offset="45%" stop-color="#E5C788"/>
+      <stop offset="80%" stop-color="#C6A56B"/>
+      <stop offset="100%" stop-color="#936F2C"/>
+    </linearGradient>
+    <linearGradient id="csGoldLightFavImg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#EAD3A2"/>
+      <stop offset="100%" stop-color="#C6A56B"/>
+    </linearGradient>
+    <linearGradient id="csGoldDarkFavImg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B89454"/>
+      <stop offset="100%" stop-color="#5C4214"/>
+    </linearGradient>
+    <linearGradient id="csNavyGradFavImg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3244"/>
+      <stop offset="100%" stop-color="#0E1922"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Base Rounded Container with Gold Border -->
+  <rect width="64" height="64" rx="14" fill="url(#csNavyGradFavImg)"/>
+  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="url(#csGoldGradFavImg)" stroke-width="1.8" stroke-opacity="0.85"/>
+
+  <!-- Architectural 3D Cornerstone Keystone Motif -->
+  <!-- Top Foundation Cap -->
+  <path d="M32 11.5 L50 22 L32 32.5 L14 22 Z" fill="url(#csGoldLightFavImg)"/>
+  
+  <!-- Left Foundation Wall (Lit) -->
+  <path d="M14 22 L32 32.5 L32 51 L14 40.5 Z" fill="url(#csGoldGradFavImg)"/>
+  
+  <!-- Right Foundation Wall (Shaded) -->
+  <path d="M32 32.5 L50 22 L50 40.5 L32 51 Z" fill="url(#csGoldDarkFavImg)"/>
+
+  <!-- Inner Recessed Architectural Core / Keystone Cutout -->
+  <path d="M32 19.5 L42.5 25.5 L32 31.5 L21.5 25.5 Z" fill="#0E1922" fill-opacity="0.9"/>
+  <path d="M21.5 25.5 L32 31.5 L32 44.5 L21.5 38.5 Z" fill="#132330" fill-opacity="0.95"/>
+  <path d="M32 31.5 L42.5 25.5 L42.5 38.5 L32 44.5 Z" fill="#1A3346" fill-opacity="0.85"/>
+
+  <!-- Distinctive Monogram "C" Architectural Framing Arch -->
+  <path d="M32 15.5 L46 23.5 L32 31.5 L24 27 Z" fill="url(#csGoldLightFavImg)"/>
+  <path d="M19 27 L24 23.5 L24 41.5 L19 38 Z" fill="url(#csGoldLightFavImg)"/>
+  <path d="M19 38 L32 46 L46 38 L46 42 L32 50 L19 42 Z" fill="url(#csGoldGradFavImg)"/>
+
+  <!-- Apex Diamond Sparkle -->
+  <polygon points="32,7 35.5,11 32,15 28.5,11" fill="#FFFFFF"/>
+  <circle cx="32" cy="11" r="1.5" fill="#FFF9ED"/>
+</svg>
