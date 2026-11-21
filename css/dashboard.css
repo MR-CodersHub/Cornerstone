@@ -461,6 +461,7 @@ body.dark-mode .cs-dash-topbar {
   align-items: center;
   gap: 1.25rem;
   min-width: 0;
+  flex: 1;
 }
 
 .cs-dash-hamburger {
@@ -469,11 +470,14 @@ body.dark-mode .cs-dash-topbar {
   border: 1px solid var(--border-color);
   color: var(--text-primary);
   border-radius: var(--border-radius-md);
-  padding: 0.45rem;
+  padding: 0;
+  width: 38px;
+  height: 38px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
+  flex-shrink: 0;
 }
 .cs-dash-hamburger:hover {
   background: var(--bg-secondary);
@@ -489,6 +493,7 @@ body.dark-mode .cs-dash-topbar {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  overflow: hidden;
 }
 
 .cs-dash-topbar__page-title {
@@ -584,6 +589,7 @@ body.rtl .cs-dash-search__kbd {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex-shrink: 0;
 }
 
 .cs-dash-icon-btn {
@@ -1443,6 +1449,7 @@ body.rtl .cs-dash-card__badges {
 
   .cs-dash-hamburger {
     display: inline-flex;
+    flex-shrink: 0;
   }
 
   .cs-dash-topbar {
@@ -1455,11 +1462,72 @@ body.rtl .cs-dash-card__badges {
 }
 
 @media (max-width: 768px) {
+  .cs-dash-topbar {
+    height: 60px;
+    padding: 0 1rem;
+  }
+  .cs-dash-topbar__left {
+    gap: 0.75rem;
+  }
+  .cs-dash-topbar__breadcrumbs {
+    display: none;
+  }
+  .cs-dash-topbar__page-title {
+    font-size: 1.05rem;
+  }
   .cs-dash-topbar__center {
     display: none;
   }
   .cs-dash-topbar__user-text {
     display: none;
+  }
+  .cs-dash-topbar__profile {
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+  .cs-dash-topbar__avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+  .cs-dash-topbar__right {
+    gap: 0.4rem;
+  }
+  .cs-dash-icon-btn {
+    width: 34px;
+    height: 34px;
+  }
+  .cs-dash-icon-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+  .cs-dash-topbar__right .btn {
+    padding: 0;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border-radius: var(--border-radius-md);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cs-dash-topbar__right .btn span,
+  .hide-mobile {
+    display: none !important;
+  }
+  .cs-dash-topbar__right .btn svg {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+  }
+  .cs-dash-hamburger {
+    width: 36px;
+    height: 36px;
+  }
+  .cs-dash-hamburger svg {
+    width: 18px;
+    height: 18px;
   }
   .cs-dash-property-grid {
     grid-template-columns: 1fr;
@@ -1474,6 +1542,51 @@ body.rtl .cs-dash-card__badges {
 }
 
 @media (max-width: 540px) {
+  .cs-dash-topbar {
+    padding: 0 0.65rem;
+    height: 56px;
+  }
+  .cs-dash-topbar__left {
+    gap: 0.5rem;
+  }
+  .cs-dash-hamburger {
+    width: 32px;
+    height: 32px;
+  }
+  .cs-dash-hamburger svg {
+    width: 16px;
+    height: 16px;
+  }
+  .cs-dash-topbar__page-title {
+    font-size: 0.95rem;
+  }
+  .cs-dash-topbar__right {
+    gap: 4px;
+  }
+  /* RTL toggle is available in the sidebar drawer, hide from compact header */
+  .cs-dash-topbar__right .js-rtl-toggle {
+    display: none;
+  }
+  .cs-dash-icon-btn {
+    width: 31px;
+    height: 31px;
+  }
+  .cs-dash-icon-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+  .cs-dash-topbar__right .btn {
+    width: 31px;
+    height: 31px;
+    min-width: 31px;
+    padding: 0;
+    justify-content: center;
+  }
+  .cs-dash-topbar__avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.76rem;
+  }
   .cs-stat-grid {
     grid-template-columns: 1fr;
   }
@@ -1488,5 +1601,50 @@ body.rtl .cs-dash-card__badges {
   }
   .cs-panel__body {
     padding: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .cs-dash-topbar {
+    padding: 0 0.45rem;
+    height: 52px;
+  }
+  .cs-dash-topbar__left {
+    gap: 0.35rem;
+  }
+  .cs-dash-hamburger {
+    width: 28px;
+    height: 28px;
+  }
+  .cs-dash-hamburger svg {
+    width: 15px;
+    height: 15px;
+  }
+  .cs-dash-topbar__page-title {
+    font-size: 0.85rem;
+  }
+  .cs-dash-topbar__right {
+    gap: 3px;
+  }
+  .cs-dash-icon-btn {
+    width: 27px;
+    height: 27px;
+  }
+  .cs-dash-icon-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+  .cs-dash-topbar__right .btn {
+    width: 27px;
+    height: 27px;
+    min-width: 27px;
+  }
+  .cs-dash-topbar__avatar {
+    width: 27px;
+    height: 27px;
+    font-size: 0.7rem;
+  }
+  .cs-dash-body {
+    padding: 0.65rem;
   }
 }

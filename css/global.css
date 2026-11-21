@@ -339,6 +339,7 @@ body.rtl #toast-container {
   .section-title { font-size: clamp(1.5rem, 4.5vw, 1.85rem); }
   .section-subtitle { font-size: 0.95rem; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .hide-mobile { display: none !important; }
 }
 
 @media (max-width: 480px) {
