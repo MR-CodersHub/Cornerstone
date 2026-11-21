@@ -218,11 +218,31 @@
       <footer class="cs-footer" role="contentinfo">
         <div class="cs-footer__glow" aria-hidden="true"></div>
         <div class="container">
-          <div class="cs-footer__intro">
-            <div class="cs-footer__identity">
+          <!-- ROW 1: Property Briefing Newsletter Bar -->
+          <div class="cs-footer__briefing-bar">
+            <div class="cs-footer__briefing-copy">
+              <span class="cs-footer__briefing-eyebrow">Exclusive Intelligence</span>
+              <h3 class="cs-footer__briefing-title">Cornerstone Property Briefing</h3>
+              <p class="cs-footer__briefing-sub">Receive curated market intelligence, off-market opportunities, and luxury investment insights weekly.</p>
+            </div>
+            <form class="cs-footer__briefing-form" onsubmit="event.preventDefault(); const inp=this.querySelector('input'); if(inp.value && inp.value.includes('@')){ if(window.showToast) window.showToast('Subscribed to Cornerstone Briefing!','success'); inp.value=''; } else { if(window.showToast) window.showToast('Please enter a valid email address','error'); }">
+              <div class="cs-footer__input-wrap">
+                <svg class="cs-footer__input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 7l-10 6L2 7"></path></svg>
+                <input type="email" class="cs-footer__newsletter-input" placeholder="Enter your email address" required aria-label="Email Address" />
+              </div>
+              <button type="submit" class="cs-footer__newsletter-btn">Subscribe</button>
+            </form>
+          </div>
+
+          <div class="cs-footer__rule" aria-hidden="true"></div>
+
+          <!-- ROW 2: 4-Column Row (Brand, Quick Links, Property Types, Direct Lines) -->
+          <div class="cs-footer__grid-4">
+            <!-- Col 1: Brand & Legacy -->
+            <div class="cs-footer__col-brand">
               <a href="${base}index.html" class="cs-footer__brand-logo" aria-label="Cornerstone — Foundation of Prime Living">
                 <div class="cs-footer__brand-icon">
-                  <svg class="cs-logo-svg" viewBox="0 0 48 48" width="52" height="52" style="width:52px!important;height:52px!important;max-width:52px!important;max-height:52px!important;min-width:52px!important;min-height:52px!important;display:block!important;flex-shrink:0!important;" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <svg class="cs-logo-svg" viewBox="0 0 48 48" width="48" height="48" style="width:48px!important;height:48px!important;max-width:48px!important;max-height:48px!important;min-width:48px!important;min-height:48px!important;display:block!important;flex-shrink:0!important;" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
     <linearGradient id="csFtrGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FFF1D0"/>
@@ -259,7 +279,7 @@
   <circle cx="24" cy="8" r="1.2" fill="#FFF9ED"/>
 </svg>
                 </div>
-                <div>
+                <div class="cs-footer__brand-text">
                   <div class="cs-footer__brand-name">Cornerstone</div>
                   <div class="cs-footer__brand-tagline">Foundation of Prime Living</div>
                 </div>
@@ -267,7 +287,6 @@
               <p class="cs-footer__agency-desc">
                 India's premier real estate consultancy. Delivering transparent, high-integrity property advisory across luxury residential, commercial assets, and land parcels.
               </p>
-              <!-- Social Icons -->
               <div class="cs-footer__socials">
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="cs-footer__social-link" aria-label="Facebook">
                   <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -284,39 +303,7 @@
               </div>
             </div>
 
-            <div class="cs-footer__contact-panel">
-              <span class="cs-footer__contact-kicker">Direct lines</span>
-              <h3 class="cs-footer__contact-heading">Get in touch</h3>
-              <div class="cs-footer__contact-grid">
-                <a class="cs-footer__contact-card" href="https://www.google.com/maps/search/?api=1&amp;query=Express%20Towers%20Nariman%20Point%20Mumbai" target="_blank" rel="noopener noreferrer">
-                  <span class="cs-footer__contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
-                  <span class="cs-footer__contact-text">
-                    <span class="cs-footer__contact-label">Visit</span>
-                    <span class="cs-footer__contact-value">Level 8, Express Towers, Nariman Point, Mumbai, India 400021</span>
-                  </span>
-                </a>
-                <a class="cs-footer__contact-card" href="tel:+912267890000">
-                  <span class="cs-footer__contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
-                  <span class="cs-footer__contact-text">
-                    <span class="cs-footer__contact-label">Call</span>
-                    <span class="cs-footer__contact-value">+91 (022) 6789 0000 / +91 98201 12345</span>
-                  </span>
-                </a>
-                <a class="cs-footer__contact-card" href="mailto:concierge@cornerstone.in">
-                  <span class="cs-footer__contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 7l-10 6L2 7"></path></svg></span>
-                  <span class="cs-footer__contact-text">
-                    <span class="cs-footer__contact-label">Email</span>
-                    <span class="cs-footer__contact-value">concierge@cornerstone.in</span>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="cs-footer__rule" aria-hidden="true"></div>
-
-          <div class="cs-footer__grid">
-            <!-- Quick Links -->
+            <!-- Col 2: Quick Links -->
             <div class="cs-footer__col">
               <h4 class="cs-footer__col-heading">Quick Links</h4>
               <ul class="cs-footer__links">
@@ -331,7 +318,7 @@
               </ul>
             </div>
 
-            <!-- Property Types -->
+            <!-- Col 3: Property Types -->
             <div class="cs-footer__col">
               <h4 class="cs-footer__col-heading">Property Types</h4>
               <ul class="cs-footer__links">
@@ -344,21 +331,43 @@
               </ul>
             </div>
 
-            <!-- Property Briefing -->
-            <div class="cs-footer__col">
-              <h4 class="cs-footer__newsletter-heading">Property Briefing</h4>
-              <p class="cs-footer__newsletter-sub">
-                Receive curated market intelligence, off-market opportunities, and investment insights weekly.
-              </p>
-              <form class="cs-footer__newsletter-form" onsubmit="event.preventDefault(); const inp=this.querySelector('input'); if(inp.value && inp.value.includes('@')){ if(window.showToast) window.showToast('Subscribed to Cornerstone Briefing!','success'); inp.value=''; } else { if(window.showToast) window.showToast('Please enter a valid email address','error'); }">
-                <input type="email" class="cs-footer__newsletter-input" placeholder="Your work or personal email" required aria-label="Email Address" />
-                <button type="submit" class="cs-footer__newsletter-btn">Subscribe</button>
-              </form>
+            <!-- Col 4: Direct Lines (Contact Info) -->
+            <div class="cs-footer__col cs-footer__col-contact">
+              <h4 class="cs-footer__col-heading">Direct Lines</h4>
+              <div class="cs-footer__contact-list">
+                <a class="cs-footer__contact-item" href="https://www.google.com/maps/search/?api=1&amp;query=Express%20Towers%20Nariman%20Point%20Mumbai" target="_blank" rel="noopener noreferrer">
+                  <span class="cs-footer__contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                  </span>
+                  <div class="cs-footer__contact-details">
+                    <span class="cs-footer__contact-label">Visit Office</span>
+                    <span class="cs-footer__contact-val">Level 8, Express Towers, Nariman Point, Mumbai 400021</span>
+                  </div>
+                </a>
+                <a class="cs-footer__contact-item" href="tel:+912267890000">
+                  <span class="cs-footer__contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  </span>
+                  <div class="cs-footer__contact-details">
+                    <span class="cs-footer__contact-label">Phone Inquiry</span>
+                    <span class="cs-footer__contact-val">+91 (022) 6789 0000 / +91 98201 12345</span>
+                  </div>
+                </a>
+                <a class="cs-footer__contact-item" href="mailto:concierge@cornerstone.in">
+                  <span class="cs-footer__contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 7l-10 6L2 7"></path></svg>
+                  </span>
+                  <div class="cs-footer__contact-details">
+                    <span class="cs-footer__contact-label">Concierge Email</span>
+                    <span class="cs-footer__contact-val">concierge@cornerstone.in</span>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Bottom Bar -->
+        <!-- ROW 3: Bottom Bar -->
         <div class="cs-footer__bottom">
           <div class="container">
             <div class="cs-footer__bottom-inner">
