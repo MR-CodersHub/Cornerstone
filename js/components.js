@@ -46,7 +46,7 @@
           <!-- Logo -->
           <a href="${base}index.html" class="cs-navbar__logo" aria-label="Cornerstone — Foundation of Prime Living">
             <div class="cs-navbar__logo-icon">
-              <svg class="cs-logo-svg" viewBox="0 0 48 48" width="48" height="48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <svg class="cs-logo-svg" viewBox="0 0 48 48" width="48" height="48" style="width:48px!important;height:48px!important;max-width:48px!important;max-height:48px!important;min-width:48px!important;min-height:48px!important;display:block!important;flex-shrink:0!important;" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
     <linearGradient id="csNavGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FFF1D0"/>
@@ -222,7 +222,7 @@
             <div class="cs-footer__identity">
               <a href="${base}index.html" class="cs-footer__brand-logo" aria-label="Cornerstone — Foundation of Prime Living">
                 <div class="cs-footer__brand-icon">
-                  <svg class="cs-logo-svg" viewBox="0 0 48 48" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <svg class="cs-logo-svg" viewBox="0 0 48 48" width="52" height="52" style="width:52px!important;height:52px!important;max-width:52px!important;max-height:52px!important;min-width:52px!important;min-height:52px!important;display:block!important;flex-shrink:0!important;" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
     <linearGradient id="csFtrGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#FFF1D0"/>
