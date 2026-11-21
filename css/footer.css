@@ -474,6 +474,31 @@ body.rtl .cs-footer__link:hover {
 }
 
 @media (max-width: 640px) {
+  .cs-footer__briefing-title {
+    font-size: 1.35rem;
+  }
+  .cs-footer__briefing-sub {
+    font-size: 0.82rem;
+  }
+  .cs-footer__brand-name {
+    font-size: 1.45rem;
+  }
+  .cs-footer__agency-desc {
+    font-size: 0.84rem;
+  }
+  .cs-footer__col-heading {
+    font-size: 0.74rem;
+  }
+  .cs-footer__link {
+    font-size: 0.84rem;
+  }
+  .cs-footer__contact-val {
+    font-size: 0.82rem;
+  }
+  .cs-footer__copyright,
+  .cs-footer__bottom-link {
+    font-size: 0.78rem;
+  }
   .cs-footer__briefing-form {
     flex-direction: column;
     width: 100%;

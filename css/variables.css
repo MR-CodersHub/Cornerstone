@@ -46,20 +46,20 @@
   --shadow-lg:  0 10px 30px rgba(23,43,58,.15), 0 4px 10px rgba(23,43,58,.10);
   --shadow-xl:  0 20px 50px rgba(23,43,58,.20), 0 8px 20px rgba(23,43,58,.12);
 
-  /* ── Typography ── */
+  /* ── Typography (Fluid Responsive Viewport-Scaled) ── */
   --font-heading:   'Playfair Display', Georgia, serif;
   --font-body:      'Inter', system-ui, -apple-system, sans-serif;
 
-  --font-size-xs:   0.75rem;    /* 12px */
-  --font-size-sm:   0.875rem;   /* 14px */
-  --font-size-base: 1rem;       /* 16px */
-  --font-size-md:   1.125rem;   /* 18px */
-  --font-size-lg:   1.25rem;    /* 20px */
-  --font-size-xl:   1.5rem;     /* 24px */
-  --font-size-2xl:  1.875rem;   /* 30px */
-  --font-size-3xl:  2.25rem;    /* 36px */
-  --font-size-4xl:  3rem;       /* 48px */
-  --font-size-5xl:  3.75rem;    /* 60px */
+  --font-size-xs:   clamp(0.6875rem, 0.65rem + 0.18vw, 0.75rem);   /* 11px - 12px */
+  --font-size-sm:   clamp(0.8125rem, 0.78rem + 0.22vw, 0.875rem);  /* 13px - 14px */
+  --font-size-base: clamp(0.9375rem, 0.9rem + 0.25vw, 1rem);       /* 15px - 16px */
+  --font-size-md:   clamp(1rem, 0.95rem + 0.35vw, 1.125rem);       /* 16px - 18px */
+  --font-size-lg:   clamp(1.125rem, 1.05rem + 0.5vw, 1.25rem);     /* 18px - 20px */
+  --font-size-xl:   clamp(1.25rem, 1.15rem + 0.75vw, 1.5rem);      /* 20px - 24px */
+  --font-size-2xl:  clamp(1.45rem, 1.3rem + 1.1vw, 1.875rem);      /* 23px - 30px */
+  --font-size-3xl:  clamp(1.75rem, 1.5rem + 1.6vw, 2.25rem);       /* 28px - 36px */
+  --font-size-4xl:  clamp(2.1rem, 1.75rem + 2.2vw, 3rem);          /* 33.6px - 48px */
+  --font-size-5xl:  clamp(2.5rem, 2rem + 3vw, 3.75rem);             /* 40px - 60px */
 
   --line-height-tight:  1.2;
   --line-height-snug:   1.4;
