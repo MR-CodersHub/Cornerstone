@@ -155,9 +155,20 @@
       </button>
     </nav>
 
-    <div class="dashboard-sidebar__footer">
-      <span>Cornerstone OS v2.4</span>
-      <a href="../index.html" style="color:var(--color-gold);text-decoration:none;">Public Site &rarr;</a>
+    <div class="dashboard-sidebar__footer" style="display:flex; flex-direction:column; gap:0.5rem;">
+      <div style="display:flex; justify-content:space-between; width:100%; gap:0.5rem;">
+        <button type="button" class="btn btn-ghost btn-sm js-theme-toggle" style="flex:1; padding:0.35rem; color:#fff;" title="Toggle Theme">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <span style="font-size:0.75rem; margin-left:0.3rem;">Theme</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-sm js-rtl-toggle" style="flex:1; padding:0.35rem; color:#fff; font-size:0.75rem; font-weight:700;" title="Toggle RTL/LTR">
+          RTL
+        </button>
+      </div>
+      <div style="display:flex; justify-content:space-between; width:100%; font-size:0.75rem; color:rgba(255,255,255,0.6);">
+        <span>Cornerstone v2.4</span>
+        <a href="../index.html" style="color:var(--color-gold);text-decoration:none;">Public Site &rarr;</a>
+      </div>
     </div>
   </aside>
 

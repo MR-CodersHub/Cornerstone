@@ -1577,6 +1577,15 @@
     </nav>
 
     <div class="sidebar-footer">
+      <div style="display:flex; justify-content:space-between; gap:0.5rem; margin-bottom:0.75rem; width:100%;">
+        <button type="button" class="btn btn-ghost btn-sm js-theme-toggle" style="flex:1; padding:0.35rem; color:#fff;" title="Toggle Theme">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <span style="font-size:0.75rem; margin-left:0.3rem;">Theme</span>
+        </button>
+        <button type="button" class="btn btn-ghost btn-sm js-rtl-toggle" style="flex:1; padding:0.35rem; color:#fff; font-size:0.75rem; font-weight:700;" title="Toggle RTL/LTR">
+          RTL
+        </button>
+      </div>
       <div class="user-brief">
         <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&amp;h=150&amp;fit=crop&amp;crop=faces&amp;auto=format&amp;q=80" alt="Meera Kapoor" class="user-avatar-sm">
         <div class="user-brief-info">
@@ -1610,8 +1619,8 @@
         </button>
 
         <!-- RTL Toggle -->
-        <button class="topbar-icon-btn js-dir-toggle" aria-label="Toggle Direction" title="Toggle RTL/LTR">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+        <button class="topbar-icon-btn js-rtl-toggle js-dir-toggle" aria-label="Toggle Direction" title="Toggle RTL/LTR" style="font-weight:700; font-size:0.75rem;">
+          RTL
         </button>
 
         <!-- Notification Bell -->

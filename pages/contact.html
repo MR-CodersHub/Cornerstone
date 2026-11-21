@@ -30,8 +30,11 @@
       overflow: hidden;
       text-align: center;
       color: var(--color-white);
-      background: linear-gradient(135deg, var(--color-navy) 0%, #1c3649 100%);
-      padding: var(--space-20) var(--container-pad);
+      background-image: linear-gradient(rgba(23, 43, 58, 0.8), rgba(23, 43, 58, 0.86)), url('https://i.pinimg.com/736x/db/fd/f6/dbfdf6b2160a73b899edab1d1fbe7619.jpg');
+      background-size: cover;
+      background-position: center;
+      scroll-margin-top: var(--navbar-height);
+      padding: calc(var(--navbar-height) + var(--space-8)) var(--container-pad) var(--space-20);
     }
     .contact-hero::before {
       content: '';
@@ -39,7 +42,7 @@
       inset: 0;
       background-image: radial-gradient(rgba(198, 165, 107, 0.25) 1px, transparent 1px);
       background-size: 24px 24px;
-      opacity: 0.35;
+      opacity: 0.12;
       pointer-events: none;
     }
     .contact-hero__content {

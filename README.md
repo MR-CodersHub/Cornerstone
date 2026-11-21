@@ -8,7 +8,7 @@ Built with **HTML5, CSS3, and Vanilla JavaScript ES6** (zero external frameworks
 
 ## 🌟 Features
 
-- **14 Complete Web Pages**:
+- **20 Complete Web Pages**:
   - `index.html` — Home 1: General Real Estate
   - `pages/home2.html` — Home 2: Featured Properties & Categories
   - `pages/about.html` — About Us: Agency & Team
@@ -17,12 +17,18 @@ Built with **HTML5, CSS3, and Vanilla JavaScript ES6** (zero external frameworks
   - `pages/blog.html` — Real Estate News & Guides
   - `pages/blog-details.html` — Individual Editorial Guide
   - `pages/sell-rent.html` — Property Listing Submission & Owner Services
+  - `pages/pricing.html` — Agency Services & Listing Packages
+  - `pages/contact.html` — Contact: Enquiry Form, Office Details & FAQs
+  - `pages/login.html` — Role-based (Buyer & Seller) Authentication Portal
   - `pages/buyer-dashboard.html` — Dedicated Buyer Discovery & Purchase Management Portal
   - `pages/seller-dashboard.html` — Dedicated Seller Listing & Sales Management Portal
-  - `pages/pricing.html` — Agency Services & Listing Packages
-  - `pages/login.html` — Role-based (Buyer & Seller) Authentication Portal
+  - `pages/user-dashboard.html` — User Profile Dashboard
+  - `pages/admin-dashboard.html` — Administrator Dashboard
+  - `pages/sitemap.html` — Complete Site Index
+  - `pages/terms.html` — Terms of Service
+  - `pages/privacy.html` — Privacy Policy
+  - `pages/maintenance.html` — Scheduled Maintenance Page with Vector Art & Live Timer
   - `pages/404.html` — Architectural Blueprint 404 Error Page
-  - `pages/coming-soon.html` — Maintenance / Coming Soon Page with Live Timer
 
 - **Dedicated Portals**:
   - **Buyer Dashboard**: Saved properties, 3-property comparison, site visit scheduler, enquiry history, offer management with counteroffer workflows, notifications, and profile settings.

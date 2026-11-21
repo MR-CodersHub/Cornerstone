@@ -358,6 +358,7 @@
                 &copy; 2024 Cornerstone Real Estate. All rights reserved. Registered under RERA Maharashtra &amp; Delhi.
               </div>
               <div class="cs-footer__bottom-links">
+                <a href="${base}pages/sitemap.html" class="cs-footer__bottom-link">Sitemap</a>
                 <a href="${base}pages/privacy.html" class="cs-footer__bottom-link">Privacy Policy</a>
                 <a href="${base}pages/terms.html" class="cs-footer__bottom-link">Terms of Service</a>
                 <a href="${base}pages/contact.html" class="cs-footer__bottom-link">Support</a>

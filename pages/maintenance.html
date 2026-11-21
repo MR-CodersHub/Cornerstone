@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scheduled Maintenance | Cornerstone Real Estate</title>
+  <meta name="description" content="Cornerstone Real Estate is temporarily offline for scheduled maintenance. See our estimated restore time and live countdown.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="apple-touch-icon" href="../favicon.svg">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheets -->
+  <link rel="stylesheet" href="../css/variables.css">
+  <link rel="stylesheet" href="../css/global.css">
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--font-body);
+      color: var(--color-ivory);
+      background-color: var(--color-navy);
+      background-image:
+        radial-gradient(circle at 15% 12%, rgba(198, 165, 107, 0.16), transparent 38%),
+        radial-gradient(circle at 85% 82%, rgba(40, 91, 74, 0.28), transparent 42%),
+        linear-gradient(135deg, #101F2A 0%, #172B3A 50%, #0B1822 100%);
+      background-attachment: fixed;
+    }
+
+    .maint-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.5;
+      background-image:
+        linear-gradient(rgba(198, 165, 107, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(198, 165, 107, 0.05) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(circle at center, #000 15%, transparent 78%);
+      -webkit-mask-image: radial-gradient(circle at center, #000 15%, transparent 78%);
+    }
+
+    .maint-shell {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-8) var(--container-pad) var(--space-6);
+    }
+
+    .maint-header,
+    .maint-footer {
+      width: 100%;
+      max-width: 1120px;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      position: relative;
+      z-index: 1;
+    }
+
+    .maint-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .maint-brand__icon {
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .maint-brand__name {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: 1.45rem;
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--color-white);
+    }
+
+    .maint-brand__tagline {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+    }
+
+    .maint-header-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(248, 246, 240, 0.78);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0.55rem 1rem;
+      border: 1px solid rgba(198, 165, 107, 0.35);
+      border-radius: var(--border-radius-pill);
+      transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .maint-header-link:hover {
+      color: var(--color-gold);
+      border-color: var(--color-gold);
+      background: rgba(198, 165, 107, 0.1);
+    }
+
+    .maint-header-link svg { width: 16px; height: 16px; }
+
+    .maint-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-block: var(--space-10);
+      position: relative;
+      z-index: 1;
+    }
+
+    .maint-panel {
+      width: 100%;
+      max-width: 920px;
+      text-align: center;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      border: 1px solid rgba(198, 165, 107, 0.22);
+      border-radius: 24px;
+      background: rgba(11, 24, 34, 0.62);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    .maint-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.4rem 0.95rem;
+      border-radius: var(--border-radius-pill);
+      border: 1px solid rgba(198, 165, 107, 0.45);
+      background: rgba(198, 165, 107, 0.12);
+      color: #F6E3BC;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .maint-badge__dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-gold);
+      box-shadow: 0 0 0 4px rgba(198, 165, 107, 0.18);
+      animation: maintPulse 2s ease-in-out infinite;
+    }
+
+    .maint-art {
+      display: block;
+      width: min(100%, 430px);
+      height: auto;
+      margin: var(--space-4) auto var(--space-2);
+    }
+
+    .maint-gear {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: maintSpin 16s linear infinite;
+    }
+
+    .maint-orbit {
+      animation: maintDash 24s linear infinite;
+    }
+
+    .maint-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.15;
+      margin: 0 0 var(--space-4);
+      color: var(--color-white);
+    }
+
+    .maint-title span { color: var(--color-gold); }
+
+    .maint-copy {
+      max-width: 620px;
+      margin: 0 auto var(--space-8);
+      color: rgba(248, 246, 240, 0.82);
+      font-size: var(--font-size-md);
+      line-height: var(--line-height-relaxed);
+    }
+
+    .maint-timer {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-4);
+      max-width: 620px;
+      margin: 0 auto var(--space-4);
+    }
+
+    .maint-timer__cell {
+      padding: var(--space-5) var(--space-2);
+      border-radius: 14px;
+      border: 1px solid rgba(198, 165, 107, 0.3);
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .maint-timer__value {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: clamp(1.75rem, 5vw, 2.75rem);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--color-gold);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .maint-timer__label {
+      display: block;
+      margin-top: var(--space-2);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(248, 246, 240, 0.65);
+    }
+
+    .maint-eta {
+      margin: 0 0 var(--space-8);
+      font-size: 0.9rem;
+      color: rgba(248, 246, 240, 0.68);
+    }
+
+    .maint-eta strong { color: #F6E3BC; font-weight: 600; }
+
+    .maint-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: var(--space-4);
+    }
+
+    .maint-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 46px;
+      padding: 0.75rem 1.6rem;
+      border-radius: var(--border-radius-pill);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
+    }
+
+    .maint-btn svg { width: 18px; height: 18px; }
+
+    .maint-btn--primary {
+      background: var(--color-gold);
+      color: #10202B;
+      border: 1px solid var(--color-gold);
+    }
+
+    .maint-btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(198, 165, 107, 0.3);
+    }
+
+    .maint-btn--ghost {
+      color: var(--color-ivory);
+      border: 1px solid rgba(198, 165, 107, 0.45);
+      background: transparent;
+    }
+
+    .maint-btn--ghost:hover {
+      background: rgba(198, 165, 107, 0.1);
+      color: var(--color-gold);
+    }
+
+    .maint-footer {
+      border-top: 1px solid rgba(198, 165, 107, 0.16);
+      padding-top: var(--space-5);
+      color: rgba(248, 246, 240, 0.55);
+      font-size: 0.82rem;
+    }
+
+    .maint-footer a { color: var(--color-gold); text-decoration: none; }
+    .maint-footer a:hover { text-decoration: underline; }
+
+    @keyframes maintSpin { to { transform: rotate(360deg); } }
+    @keyframes maintDash { to { stroke-dashoffset: -120; } }
+    @keyframes maintPulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(198, 165, 107, 0.18); }
+      50% { box-shadow: 0 0 0 7px rgba(198, 165, 107, 0.06); }
+    }
+
+    @media (max-width: 600px) {
+      .maint-header-link span { display: none; }
+      .maint-header-link { padding: 0.55rem 0.75rem; }
+      .maint-timer { gap: var(--space-2); }
+      .maint-timer__cell { padding: var(--space-4) var(--space-1); }
+      .maint-footer { flex-direction: column; text-align: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .maint-gear, .maint-orbit, .maint-badge__dot { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="maint-grid" aria-hidden="true"></div>
+
+  <div class="maint-shell">
+    <header class="maint-header">
+      <a class="maint-brand" href="../index.html" aria-label="Cornerstone — Foundation of Prime Living">
+        <svg class="maint-brand__icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="maintLogoGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FFF1D0"/><stop offset="0.5" stop-color="#E5C788"/><stop offset="1" stop-color="#936F2C"/>
+            </linearGradient>
+            <linearGradient id="maintLogoNavy" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#1B3244"/><stop offset="1" stop-color="#0E1922"/>
+            </linearGradient>
+          </defs>
+          <rect width="48" height="48" rx="10" fill="url(#maintLogoNavy)"/>
+          <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="9.25" fill="none" stroke="url(#maintLogoGold)" stroke-width="1.5"/>
+          <path d="M24 8.5 L38 16.5 L24 24.5 L10 16.5 Z" fill="url(#maintLogoGold)"/>
+          <path d="M10 16.5 L24 24.5 L24 38.5 L10 30.5 Z" fill="#C6A56B"/>
+          <path d="M24 24.5 L38 16.5 L38 30.5 L24 38.5 Z" fill="#8A682C"/>
+          <path d="M24 11.5 L34.5 17.5 L24 23.5 L18 20 Z" fill="#FFF1D0"/>
+          <path d="M14 28.5 L24 34.5 L34.5 28.5 L34.5 31.5 L24 37.5 L14 31.5 Z" fill="url(#maintLogoGold)"/>
+        </svg>
+        <span>
+          <span class="maint-brand__name">Cornerstone</span>
+          <span class="maint-brand__tagline">Foundation of Prime Living</span>
+        </span>
+      </a>
+
+      <a class="maint-header-link" href="../index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Return Home</span>
+      </a>
+    </header>
+
+    <main class="maint-main">
+      <div class="maint-panel">
+        <span class="maint-badge"><span class="maint-badge__dot" aria-hidden="true"></span> Scheduled Maintenance</span>
+
+        <!-- Vector illustration -->
+        <svg class="maint-art" viewBox="0 0 480 340" role="img" aria-labelledby="maintArtTitle maintArtDesc" xmlns="http://www.w3.org/2000/svg">
+          <title id="maintArtTitle">Building under maintenance</title>
+          <desc id="maintArtDesc">An illustrated property being carefully restored, with a rotating gear and tools.</desc>
+          <defs>
+            <linearGradient id="maintGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#F3DFB4"/><stop offset="0.5" stop-color="#C6A56B"/><stop offset="1" stop-color="#8A682C"/>
+            </linearGradient>
+            <linearGradient id="maintNavy" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#214059"/><stop offset="1" stop-color="#122635"/>
+            </linearGradient>
+          </defs>
+
+          <ellipse cx="240" cy="306" rx="148" ry="13" fill="#08141D" opacity="0.55"/>
+          <circle cx="240" cy="156" r="126" fill="rgba(255,255,255,0.025)" stroke="rgba(198,165,107,0.18)"/>
+          <circle class="maint-orbit" cx="240" cy="156" r="104" fill="none" stroke="rgba(198,165,107,0.32)" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+          <!-- Property -->
+          <path d="M164 286 V132 L240 96 L316 132 V286 Z" fill="url(#maintNavy)" stroke="url(#maintGold)" stroke-width="2.5" stroke-linejoin="round"/>
+          <path d="M156 134 L240 90 L324 134" fill="none" stroke="url(#maintGold)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <g fill="rgba(198,165,107,0.3)" stroke="rgba(198,165,107,0.6)" stroke-width="1">
+            <rect x="184" y="154" width="22" height="26" rx="2"/>
+            <rect x="216" y="154" width="22" height="26" rx="2"/>
+            <rect x="248" y="154" width="22" height="26" rx="2"/>
+            <rect x="280" y="154" width="22" height="26" rx="2"/>
+            <rect x="184" y="195" width="22" height="26" rx="2"/>
+            <rect x="216" y="195" width="22" height="26" rx="2"/>
+            <rect x="248" y="195" width="22" height="26" rx="2"/>
+            <rect x="280" y="195" width="22" height="26" rx="2"/>
+          </g>
+
+          <path d="M224 286 V236 H256 V286" fill="#0B1B27" stroke="url(#maintGold)" stroke-width="2"/>
+          <circle cx="248" cy="262" r="2.2" fill="url(#maintGold)"/>
+
+          <!-- Scaffolding -->
+          <g stroke="rgba(198,165,107,0.42)" stroke-width="2" fill="none" stroke-linecap="round">
+            <path d="M150 150 H330 M150 198 H330 M150 246 H330"/>
+            <path d="M156 128 V286 M324 128 V286"/>
+            <path d="M156 150 L324 198 M324 150 L156 198"/>
+          </g>
+
+          <!-- Rotating gear -->
+          <g transform="translate(352 88)">
+            <g class="maint-gear">
+              <circle r="33" fill="none" stroke="url(#maintGold)" stroke-width="10" stroke-dasharray="12 8"/>
+              <circle r="19" fill="url(#maintNavy)" stroke="url(#maintGold)" stroke-width="2"/>
+              <circle r="6" fill="url(#maintGold)"/>
+            </g>
+          </g>
+
+          <!-- Wrench -->
+          <g transform="translate(108 232) rotate(-32)">
+            <rect x="-5" y="0" width="10" height="34" rx="3" fill="url(#maintGold)"/>
+            <path d="M-11 -7 a11 11 0 1 1 22 0 l-5 0 v6 h-12 v-6 z" fill="url(#maintGold)"/>
+          </g>
+
+          <!-- Sparkles -->
+          <g fill="url(#maintGold)">
+            <path d="M84 102 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 z"/>
+            <path d="M394 214 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z"/>
+            <circle cx="118" cy="92" r="2.5"/>
+            <circle cx="372" cy="272" r="2.5"/>
+          </g>
+        </svg>
+
+        <h1 class="maint-title">We're polishing the <span>foundations.</span></h1>
+        <p class="maint-copy">Our property portal is temporarily offline while we upgrade your search experience. We'll be back shortly with a smoother, faster Cornerstone.</p>
+
+        <div class="maint-timer" id="maintenanceTimer" data-deadline="2026-11-23T09:00:00+05:30" role="timer" aria-label="Estimated time until service returns">
+          <div class="maint-timer__cell"><span class="maint-timer__value" id="maintDays">00</span><span class="maint-timer__label">Days</span></div>
+          <div class="maint-timer__cell"><span class="maint-timer__value" id="maintHours">00</span><span class="maint-timer__label">Hours</span></div>
+          <div class="maint-timer__cell"><span class="maint-timer__value" id="maintMinutes">00</span><span class="maint-timer__label">Minutes</span></div>
+          <div class="maint-timer__cell"><span class="maint-timer__value" id="maintSeconds">00</span><span class="maint-timer__label">Seconds</span></div>
+        </div>
+        <p class="maint-eta">Estimated restoration: <strong id="maintRestoreTime">—</strong> (IST)</p>
+
+        <div class="maint-actions">
+          <a class="maint-btn maint-btn--primary" href="../index.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            Return Home
+          </a>
+          <a class="maint-btn maint-btn--ghost" href="mailto:concierge@cornerstone.in?subject=Maintenance%20support">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Contact Support
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="maint-footer">
+      <span>&copy; 2026 Cornerstone Real Estate Ltd. All rights reserved.</span>
+      <span>Need urgent help? <a href="mailto:concierge@cornerstone.in">concierge@cornerstone.in</a></span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var timer = document.getElementById('maintenanceTimer');
+      var deadline = new Date(timer && timer.dataset.deadline).getTime();
+
+      // If the configured deadline has passed, show a rolling 2-hour maintenance window.
+      if (!isFinite(deadline) || deadline <= Date.now()) {
+        deadline = Date.now() + (2 * 60 * 60 * 1000);
+      }
+
+      var els = {
+        days: document.getElementById('maintDays'),
+        hours: document.getElementById('maintHours'),
+        minutes: document.getElementById('maintMinutes'),
+        seconds: document.getElementById('maintSeconds')
+      };
+
+      var restoreEl = document.getElementById('maintRestoreTime');
+      if (restoreEl) {
+        restoreEl.textContent = new Intl.DateTimeFormat('en-IN', {
+          day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit', hour12: false,
+          timeZone: 'Asia/Kolkata'
+        }).format(new Date(deadline));
+      }
+
+      function pad(value) { return value < 10 ? '0' + value : String(value); }
+
+      function update() {
+        var remaining = deadline - Date.now();
+        if (remaining <= 0) { remaining = 0; }
+
+        var seconds = Math.floor(remaining / 1000);
+        els.days.textContent = pad(Math.floor(seconds / 86400));
+        els.hours.textContent = pad(Math.floor((seconds % 86400) / 3600));
+        els.minutes.textContent = pad(Math.floor((seconds % 3600) / 60));
+        els.seconds.textContent = pad(seconds % 60);
+      }
+
+      update();
+      window.setInterval(update, 1000);
+    })();
+  </script>
+</body>
+</html>
