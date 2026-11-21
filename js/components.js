@@ -343,18 +343,6 @@
               </ul>
             </div>
 
-            <!-- Resources -->
-            <div class="cs-footer__col">
-              <h4 class="cs-footer__col-heading">Resources</h4>
-              <ul class="cs-footer__links">
-                <li><a href="${base}pages/buyer-dashboard.html" class="cs-footer__link">Buyer Dashboard</a></li>
-                <li><a href="${base}pages/seller-dashboard.html" class="cs-footer__link">Seller Dashboard</a></li>
-                <li><a href="${base}pages/sell-rent.html" class="cs-footer__link">List a Property</a></li>
-                <li><a href="${base}pages/pricing.html" class="cs-footer__link">Membership Plans</a></li>
-                <li><a href="${base}pages/login.html" class="cs-footer__link">User Portal</a></li>
-              </ul>
-            </div>
-
             <!-- Property Briefing -->
             <div class="cs-footer__col">
               <h4 class="cs-footer__newsletter-heading">Property Briefing</h4>
