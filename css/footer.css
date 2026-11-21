@@ -5,9 +5,12 @@
 .cs-footer {
   position: relative;
   overflow: hidden;
-  background: var(--bg-footer);
   color: var(--text-on-dark);
-  padding-top: var(--space-20);
+  background-color: var(--bg-footer);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 64px 64px;
 }
 
 .cs-footer::before {
@@ -15,20 +18,20 @@
   position: absolute;
   inset-inline: 0;
   top: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
-  opacity: 0.7;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-gold) 45%, var(--color-gold) 55%, transparent);
+  opacity: 0.85;
 }
 
 .cs-footer__glow {
   position: absolute;
-  top: -280px;
-  inset-inline-end: -180px;
-  width: 620px;
-  height: 620px;
+  top: -220px;
+  inset-inline-end: -160px;
+  width: 640px;
+  height: 640px;
   border-radius: 50%;
   pointer-events: none;
-  background: radial-gradient(circle, rgba(198, 165, 107, 0.12), transparent 65%);
+  background: radial-gradient(circle, rgba(198, 165, 107, 0.14), transparent 66%);
 }
 
 .cs-footer .container {
@@ -36,17 +39,109 @@
   z-index: 1;
 }
 
-/* ── Intro: identity + contact panel ── */
-.cs-footer__intro {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: var(--space-12);
+/* ── Consultation band ── */
+.cs-footer__cta {
+  position: relative;
+  border-bottom: 1px solid rgba(198, 165, 107, 0.25);
+  background: linear-gradient(120deg, rgba(198, 165, 107, 0.12), rgba(14, 25, 34, 0) 62%);
+}
+
+.cs-footer__cta::after {
+  content: '';
+  position: absolute;
+  inset-inline-end: 6%;
+  top: 50%;
+  width: 108px;
+  height: 108px;
+  transform: translateY(-50%) rotate(45deg);
+  border: 1px solid rgba(198, 165, 107, 0.18);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.cs-footer__cta-inner {
+  display: flex;
   align-items: center;
-  padding-bottom: var(--space-12);
+  justify-content: space-between;
+  gap: var(--space-10);
+  padding-block: var(--space-12);
+}
+
+.cs-footer__cta-copy {
+  max-width: 680px;
+}
+
+.cs-footer__eyebrow {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-3);
+}
+
+.cs-footer__cta-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--color-white);
+  margin: 0 0 var(--space-3);
+}
+
+.cs-footer__cta-text {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.62);
+  margin: 0;
+}
+
+.cs-footer__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--border-radius-md);
+  background: var(--color-gold);
+  color: var(--color-navy);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(198, 165, 107, 0.25);
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.cs-footer__cta-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--transition-fast);
+}
+
+.cs-footer__cta-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(198, 165, 107, 0.35);
+}
+
+.cs-footer__cta-btn:hover svg {
+  transform: translateX(3px);
+}
+
+body.rtl .cs-footer__cta-btn:hover svg {
+  transform: translateX(-3px) scaleX(-1);
+}
+
+/* ── Main: brand + contact rail ── */
+.cs-footer__main {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: var(--space-16);
+  padding-block: var(--space-12);
 }
 
 .cs-footer__identity {
-  max-width: 540px;
+  max-width: 520px;
 }
 
 .cs-footer__brand-logo {
@@ -63,48 +158,45 @@
 }
 
 .cs-footer__brand-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 10px;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4);
-  box-shadow: 0 4px 15px rgba(198, 165, 107, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   flex-shrink: 0;
+  box-shadow: 0 6px 18px rgba(198, 165, 107, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .cs-footer__brand-icon svg,
 .cs-footer__brand-icon img {
-  width: 52px !important;
-  height: 52px !important;
-  max-width: 52px !important;
-  max-height: 52px !important;
-  min-width: 52px !important;
-  min-height: 52px !important;
+  width: 56px !important;
+  height: 56px !important;
+  max-width: 56px !important;
+  max-height: 56px !important;
+  min-width: 56px !important;
+  min-height: 56px !important;
   display: block !important;
-  border-radius: 10px;
+  border-radius: 12px;
   flex-shrink: 0;
 }
 
 .cs-footer__brand-name {
   font-family: var(--font-heading);
-  font-size: 1.7rem;
+  font-size: 1.9rem;
   font-weight: 800;
   color: var(--color-white);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   line-height: 1.05;
 }
 
 .cs-footer__brand-tagline {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   color: var(--color-gold);
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  margin-top: 3px;
-  white-space: nowrap;
+  margin-top: 5px;
 }
 
 .cs-footer__agency-desc {
@@ -112,7 +204,7 @@
   color: rgba(255, 255, 255, 0.62);
   line-height: var(--line-height-relaxed);
   margin: 0 0 var(--space-6);
-  max-width: 55ch;
+  max-width: 52ch;
 }
 
 .cs-footer__socials {
@@ -122,9 +214,9 @@
 }
 
 .cs-footer__social-link {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   display: flex;
   align-items: center;
@@ -145,79 +237,86 @@
   height: 16px;
 }
 
-/* ── Contact cards ── */
-.cs-footer__contact-panel {
-  border-inline-start: 1px solid rgba(255, 255, 255, 0.12);
-  padding-inline-start: var(--space-10);
+/* ── Contact rail ── */
+.cs-footer__contact-kicker {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-2);
 }
 
 .cs-footer__contact-heading {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
+  font-size: 1.55rem;
   font-weight: 600;
   color: var(--color-white);
-  margin: 0 0 var(--space-5);
+  margin: 0 0 var(--space-6);
 }
 
 .cs-footer__contact-grid {
   display: grid;
-  gap: var(--space-3);
+  gap: 0;
 }
 
 .cs-footer__contact-card {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1fr);
+  align-items: center;
   gap: var(--space-4);
-  padding: var(--space-4);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.035);
+  padding: var(--space-4) var(--space-3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: inherit;
   text-decoration: none;
-  transition: border-color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);
+  transition: background var(--transition-fast), padding-inline-start var(--transition-fast);
+}
+
+.cs-footer__contact-card:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .cs-footer__contact-card:hover {
-  border-color: rgba(198, 165, 107, 0.55);
-  background: rgba(198, 165, 107, 0.08);
-  transform: translateY(-2px);
+  background: rgba(198, 165, 107, 0.07);
+  padding-inline-start: var(--space-5);
 }
 
 .cs-footer__contact-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
   display: grid;
   place-items: center;
-  flex-shrink: 0;
-  background: rgba(198, 165, 107, 0.14);
+  border: 1px solid rgba(198, 165, 107, 0.45);
   color: var(--color-gold);
+  background: rgba(198, 165, 107, 0.06);
 }
 
 .cs-footer__contact-icon svg {
-  width: 18px;
-  height: 18px;
+  width: 19px;
+  height: 19px;
 }
 
 .cs-footer__contact-text {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
   min-width: 0;
 }
 
 .cs-footer__contact-label {
-  font-size: 0.65rem;
+  font-size: 0.64rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-gold);
 }
 
 .cs-footer__contact-value {
-  font-size: var(--font-size-sm);
+  font-size: 0.95rem;
   line-height: var(--line-height-normal);
-  color: rgba(255, 255, 255, 0.76);
+  color: rgba(255, 255, 255, 0.82);
   transition: color var(--transition-fast);
 }
 
@@ -225,92 +324,125 @@
   color: var(--color-white);
 }
 
-/* ── Divider ── */
+/* ── Section rule ── */
 .cs-footer__rule {
+  position: relative;
   height: 1px;
   margin-bottom: var(--space-12);
-  background: linear-gradient(90deg, transparent, rgba(198, 165, 107, 0.45), transparent);
+  background: linear-gradient(90deg, transparent, rgba(198, 165, 107, 0.4), transparent);
+}
+
+.cs-footer__rule::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--color-gold);
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 /* ── Link columns ── */
 .cs-footer__grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr);
-  gap: var(--space-10);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: var(--space-12);
   padding-bottom: var(--space-12);
 }
 
-.cs-footer__col-heading {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  color: var(--color-white);
-  margin-bottom: var(--space-5);
-  position: relative;
-  padding-bottom: var(--space-3);
+.cs-footer__col:not(.cs-footer__briefing) {
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.08);
+  padding-inline-end: var(--space-8);
 }
 
-.cs-footer__col-heading::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  inset-inline-start: 0;
-  width: 32px;
-  height: 2px;
-  background: var(--color-gold);
-  border-radius: 2px;
+.cs-footer__col-heading,
+.cs-footer__newsletter-heading {
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin: 0 0 var(--space-6);
+}
+
+.cs-footer__newsletter-heading {
+  margin-bottom: var(--space-3);
 }
 
 .cs-footer__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
 }
 
 .cs-footer__link {
-  font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.65);
-  transition: color var(--transition-fast), padding-inline-start var(--transition-fast);
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.68);
+  text-decoration: none;
+  transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .cs-footer__link::before {
   content: '';
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
+  width: 10px;
+  height: 1px;
   background: var(--color-gold);
   flex-shrink: 0;
-  opacity: 0;
-  transition: opacity var(--transition-fast);
+  transition: width var(--transition-fast);
 }
 
 .cs-footer__link:hover {
-  color: var(--color-gold);
-  padding-inline-start: var(--space-2);
+  color: var(--color-white);
+  transform: translateX(2px);
 }
 
 .cs-footer__link:hover::before {
-  opacity: 1;
+  width: 18px;
 }
 
-/* ── Newsletter ── */
-.cs-footer__newsletter-heading {
-  font-family: var(--font-heading);
-  font-size: var(--font-size-base);
-  font-weight: 600;
-  color: var(--color-white);
-  margin-bottom: var(--space-3);
+body.rtl .cs-footer__link:hover {
+  transform: translateX(-2px);
+}
+
+/* ── Highlighted briefing card ── */
+.cs-footer__briefing {
+  position: relative;
+  padding: var(--space-6);
+  border: 1px solid rgba(198, 165, 107, 0.28);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(198, 165, 107, 0.1), rgba(198, 165, 107, 0.02));
+}
+
+.cs-footer__briefing-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  margin-bottom: var(--space-5);
+  color: var(--color-navy);
+  background: var(--color-gold);
+}
+
+.cs-footer__briefing-icon svg {
+  width: 20px;
+  height: 20px;
 }
 
 .cs-footer__newsletter-sub {
   font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.62);
   line-height: var(--line-height-relaxed);
-  margin-bottom: var(--space-5);
+  margin: 0 0 var(--space-6);
 }
 
 .cs-footer__newsletter-form {
@@ -321,8 +453,8 @@
 
 .cs-footer__newsletter-input {
   padding: var(--space-3) var(--space-4);
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: var(--border-radius-md);
   color: var(--color-white);
   font-size: var(--font-size-sm);
@@ -331,19 +463,19 @@
 }
 
 .cs-footer__newsletter-input::placeholder {
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.42);
 }
 
 .cs-footer__newsletter-input:focus {
   border-color: var(--color-gold);
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.28);
 }
 
 .cs-footer__newsletter-btn {
   padding: var(--space-3) var(--space-5);
   background: var(--color-gold);
   color: var(--color-navy);
-  font-weight: 600;
+  font-weight: 700;
   font-size: var(--font-size-sm);
   border-radius: var(--border-radius-md);
   transition: background var(--transition-fast), transform var(--transition-fast);
@@ -358,6 +490,7 @@
 /* ── Bottom Bar ── */
 .cs-footer__bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.14);
   padding-block: var(--space-5);
 }
 
@@ -371,7 +504,7 @@
 
 .cs-footer__copyright {
   font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.48);
 }
 
 .cs-footer__bottom-links {
@@ -382,7 +515,8 @@
 
 .cs-footer__bottom-link {
   font-size: var(--font-size-sm);
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
+  text-decoration: none;
   transition: color var(--transition-fast);
 }
 
@@ -392,22 +526,44 @@
 
 /* ── Responsive ── */
 @media (max-width: 1200px) {
-  .cs-footer__intro {
-    grid-template-columns: 1fr;
-    gap: var(--space-10);
+  .cs-footer__cta-inner {
+    gap: var(--space-6);
   }
-  .cs-footer__contact-panel {
-    border-inline-start: 0;
-    padding-inline-start: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
-    padding-top: var(--space-8);
+  .cs-footer__main {
+    grid-template-columns: 1fr;
+    gap: var(--space-12);
+    padding-block: var(--space-12);
   }
   .cs-footer__contact-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-5);
+  }
+  .cs-footer__contact-card,
+  .cs-footer__contact-card:first-child {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: var(--space-5);
+  }
+  .cs-footer__contact-card:hover {
+    padding-inline-start: var(--space-5);
   }
   .cs-footer__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-10) var(--space-8);
+    gap: var(--space-10);
+  }
+  .cs-footer__briefing {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .cs-footer__cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+  }
+  .cs-footer__cta::after {
+    display: none;
   }
 }
 
@@ -415,20 +571,29 @@
   .cs-footer__contact-grid {
     grid-template-columns: 1fr;
   }
+  .cs-footer__col:not(.cs-footer__briefing) {
+    border-inline-end: 0;
+    padding-inline-end: 0;
+  }
 }
 
 @media (max-width: 480px) {
-  .cs-footer {
-    padding-top: var(--space-12);
+  .cs-footer__cta-inner {
+    padding-block: var(--space-10);
   }
-  .cs-footer__intro {
-    padding-bottom: var(--space-10);
+  .cs-footer__main {
+    gap: var(--space-10);
+    padding-block: var(--space-10);
   }
   .cs-footer__rule {
     margin-bottom: var(--space-10);
   }
   .cs-footer__grid {
     grid-template-columns: 1fr;
+    padding-bottom: var(--space-10);
+  }
+  .cs-footer__briefing {
+    padding: var(--space-6);
   }
   .cs-footer__bottom-inner {
     flex-direction: column;
