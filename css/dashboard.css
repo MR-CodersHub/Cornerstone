@@ -1563,22 +1563,23 @@ body.rtl .cs-dash-card__badges {
   .cs-dash-topbar__right {
     gap: 4px;
   }
-  /* RTL toggle is available in the sidebar drawer, hide from compact header */
-  .cs-dash-topbar__right .js-rtl-toggle {
-    display: none;
-  }
   .cs-dash-icon-btn {
-    width: 31px;
-    height: 31px;
+    width: 30px;
+    height: 30px;
+  }
+  .cs-dash-icon-btn.js-rtl-toggle {
+    display: inline-flex !important;
+    font-size: 0.68rem;
+    padding: 0;
   }
   .cs-dash-icon-btn svg {
     width: 15px;
     height: 15px;
   }
   .cs-dash-topbar__right .btn {
-    width: 31px;
-    height: 31px;
-    min-width: 31px;
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
     padding: 0;
     justify-content: center;
   }
@@ -1627,22 +1628,27 @@ body.rtl .cs-dash-card__badges {
     gap: 3px;
   }
   .cs-dash-icon-btn {
-    width: 27px;
-    height: 27px;
+    width: 26px;
+    height: 26px;
+  }
+  .cs-dash-icon-btn.js-rtl-toggle {
+    display: inline-flex !important;
+    font-size: 0.62rem;
+    padding: 0;
   }
   .cs-dash-icon-btn svg {
     width: 14px;
     height: 14px;
   }
   .cs-dash-topbar__right .btn {
-    width: 27px;
-    height: 27px;
-    min-width: 27px;
+    width: 26px;
+    height: 26px;
+    min-width: 26px;
   }
   .cs-dash-topbar__avatar {
-    width: 27px;
-    height: 27px;
-    font-size: 0.7rem;
+    width: 26px;
+    height: 26px;
+    font-size: 0.68rem;
   }
   .cs-dash-body {
     padding: 0.65rem;
