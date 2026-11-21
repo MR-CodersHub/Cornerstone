@@ -313,3 +313,16 @@ body.rtl #toast-container {
   h1 { font-size: var(--font-size-xl); }
   .section { padding-block: var(--space-8); }
 }
+
+
+/* ── Cornerstone Logo Protection ── */
+.cs-logo-svg {
+  width: 48px;
+  height: 48px;
+  max-width: 48px;
+  max-height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  display: block;
+  flex-shrink: 0;
+}
