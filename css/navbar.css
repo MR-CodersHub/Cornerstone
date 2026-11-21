@@ -333,6 +333,10 @@ body.rtl .cs-navbar__profile-menu {
   transform: translateY(-1px);
 }
 
+body.rtl .cs-navbar__login-btn svg {
+  transform: scaleX(-1);
+}
+
 /* ── Hamburger ── */
 .cs-navbar__hamburger {
   display: none;

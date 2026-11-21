@@ -153,8 +153,8 @@
 
             <!-- Login / Register Button -->
             <a href="${base}pages/login.html" class="cs-navbar__login-btn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              <span>Sign In</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+              <span>Login</span>
             </a>
 
             <!-- Mobile Hamburger Toggle -->
@@ -190,8 +190,8 @@
                 </a>
               </div>
               <a href="${base}pages/login.html" class="cs-navbar__login-btn">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <span>Sign In / Register</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+                <span>Login</span>
               </a>
             </div>
           </div>
@@ -216,10 +216,10 @@
 
     const html = `
       <footer class="cs-footer" role="contentinfo">
+        <div class="cs-footer__glow" aria-hidden="true"></div>
         <div class="container">
-          <div class="cs-footer__grid">
-            <!-- Col 1: Agency Brand & Contacts -->
-            <div class="cs-footer__col">
+          <div class="cs-footer__intro">
+            <div class="cs-footer__identity">
               <a href="${base}index.html" class="cs-footer__brand-logo" aria-label="Cornerstone — Foundation of Prime Living">
                 <div class="cs-footer__brand-icon">
                   <svg class="cs-logo-svg" viewBox="0 0 48 48" width="52" height="52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -267,18 +267,6 @@
               <p class="cs-footer__agency-desc">
                 India's premier real estate consultancy. Delivering transparent, high-integrity property advisory across luxury residential, commercial assets, and land parcels.
               </p>
-              <div class="cs-footer__contact-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span>Level 8, Express Towers, Nariman Point, Mumbai, India 400021</span>
-              </div>
-              <div class="cs-footer__contact-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                <span>+91 (022) 6789 0000 / +91 98201 12345</span>
-              </div>
-              <div class="cs-footer__contact-item">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                <span>concierge@cornerstone.in</span>
-              </div>
               <!-- Social Icons -->
               <div class="cs-footer__socials">
                 <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="cs-footer__social-link" aria-label="Facebook">
@@ -296,7 +284,38 @@
               </div>
             </div>
 
-            <!-- Col 2: Quick Links -->
+            <div class="cs-footer__contact-panel">
+              <h3 class="cs-footer__contact-heading">Find Us. Call Us. Write to Us.</h3>
+              <div class="cs-footer__contact-grid">
+                <a class="cs-footer__contact-card" href="https://www.google.com/maps/search/?api=1&amp;query=Express%20Towers%20Nariman%20Point%20Mumbai" target="_blank" rel="noopener noreferrer">
+                  <span class="cs-footer__contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
+                  <span class="cs-footer__contact-text">
+                    <span class="cs-footer__contact-label">Visit</span>
+                    <span class="cs-footer__contact-value">Level 8, Express Towers, Nariman Point, Mumbai, India 400021</span>
+                  </span>
+                </a>
+                <a class="cs-footer__contact-card" href="tel:+912267890000">
+                  <span class="cs-footer__contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></span>
+                  <span class="cs-footer__contact-text">
+                    <span class="cs-footer__contact-label">Call</span>
+                    <span class="cs-footer__contact-value">+91 (022) 6789 0000 / +91 98201 12345</span>
+                  </span>
+                </a>
+                <a class="cs-footer__contact-card" href="mailto:concierge@cornerstone.in">
+                  <span class="cs-footer__contact-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 7l-10 6L2 7"></path></svg></span>
+                  <span class="cs-footer__contact-text">
+                    <span class="cs-footer__contact-label">Email</span>
+                    <span class="cs-footer__contact-value">concierge@cornerstone.in</span>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="cs-footer__rule" aria-hidden="true"></div>
+
+          <div class="cs-footer__grid">
+            <!-- Quick Links -->
             <div class="cs-footer__col">
               <h4 class="cs-footer__col-heading">Quick Links</h4>
               <ul class="cs-footer__links">
@@ -311,7 +330,7 @@
               </ul>
             </div>
 
-            <!-- Col 3: Property Types -->
+            <!-- Property Types -->
             <div class="cs-footer__col">
               <h4 class="cs-footer__col-heading">Property Types</h4>
               <ul class="cs-footer__links">
@@ -324,7 +343,7 @@
               </ul>
             </div>
 
-            <!-- Col 4: Resources -->
+            <!-- Resources -->
             <div class="cs-footer__col">
               <h4 class="cs-footer__col-heading">Resources</h4>
               <ul class="cs-footer__links">
@@ -336,7 +355,7 @@
               </ul>
             </div>
 
-            <!-- Col 5: Newsletter -->
+            <!-- Property Briefing -->
             <div class="cs-footer__col">
               <h4 class="cs-footer__newsletter-heading">Property Briefing</h4>
               <p class="cs-footer__newsletter-sub">
@@ -355,13 +374,12 @@
           <div class="container">
             <div class="cs-footer__bottom-inner">
               <div class="cs-footer__copyright">
-                &copy; 2024 Cornerstone Real Estate. All rights reserved. Registered under RERA Maharashtra &amp; Delhi.
+                &copy; 2026 Cornerstone Real Estate. All rights reserved. Registered under RERA Maharashtra &amp; Delhi.
               </div>
               <div class="cs-footer__bottom-links">
                 <a href="${base}pages/sitemap.html" class="cs-footer__bottom-link">Sitemap</a>
                 <a href="${base}pages/privacy.html" class="cs-footer__bottom-link">Privacy Policy</a>
                 <a href="${base}pages/terms.html" class="cs-footer__bottom-link">Terms of Service</a>
-                <a href="${base}pages/contact.html" class="cs-footer__bottom-link">Support</a>
               </div>
             </div>
           </div>
