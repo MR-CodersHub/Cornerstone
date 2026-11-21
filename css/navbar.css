@@ -2,6 +2,26 @@
    Cornerstone Real Estate — Navbar Styles
    ============================================================ */
 
+:root {
+  --navbar-height: 80px;
+  --nav-logo-size: 48px;
+  --nav-logo-name: 1.62rem;
+  --nav-logo-tagline: 0.64rem;
+  --nav-logo-spacing: 0.16em;
+  --nav-logo-gap: 12px;
+  --nav-logo-max-w: 320px;
+  --nav-link-font: 0.88rem;
+  --nav-link-pad-y: 0.45rem;
+  --nav-link-pad-x: 0.75rem;
+  --nav-link-gap: 0.2rem;
+  --nav-actions-gap: var(--space-2);
+  --nav-btn-size: 38px;
+  --nav-btn-icon: 20px;
+  --nav-login-font: var(--font-size-sm);
+  --nav-login-pad: var(--space-2) var(--space-4);
+  --nav-login-gap: var(--space-2);
+}
+
 .cs-navbar {
   position: fixed;
   top: 0;
@@ -16,20 +36,20 @@
 
 .cs-navbar.scrolled {
   box-shadow: var(--shadow-lg);
-  height: 68px;
+  height: calc(var(--navbar-height) - 8px);
 }
 
 .cs-navbar.scrolled .cs-navbar__logo-icon {
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  max-width: 44px;
-  max-height: 44px;
+  width: calc(var(--nav-logo-size) - 4px);
+  height: calc(var(--nav-logo-size) - 4px);
+  min-width: calc(var(--nav-logo-size) - 4px);
+  min-height: calc(var(--nav-logo-size) - 4px);
+  max-width: calc(var(--nav-logo-size) - 4px);
+  max-height: calc(var(--nav-logo-size) - 4px);
 }
 
 .cs-navbar.scrolled .cs-navbar__logo-name {
-  font-size: 1.45rem;
+  font-size: calc(var(--nav-logo-name) * 0.94);
 }
 
 .cs-navbar__inner {
@@ -47,10 +67,10 @@
 .cs-navbar__logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--nav-logo-gap);
   text-decoration: none;
   flex-shrink: 0;
-  max-width: 320px;
+  max-width: var(--nav-logo-max-w);
   transition: transform var(--transition-fast);
 }
 
@@ -59,12 +79,12 @@
 }
 
 .cs-navbar__logo-icon {
-  width: 48px;
-  height: 48px;
-  min-width: 48px;
-  min-height: 48px;
-  max-width: 48px;
-  max-height: 48px;
+  width: var(--nav-logo-size);
+  height: var(--nav-logo-size);
+  min-width: var(--nav-logo-size);
+  min-height: var(--nav-logo-size);
+  max-width: var(--nav-logo-size);
+  max-height: var(--nav-logo-size);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -77,24 +97,25 @@
 }
 
 .cs-navbar__logo-icon svg,
-.cs-navbar__logo-icon img {
-  width: 48px !important;
-  height: 48px !important;
-  max-width: 48px !important;
-  max-height: 48px !important;
-  min-width: 48px !important;
-  min-height: 48px !important;
+.cs-navbar__logo-icon img,
+.cs-navbar__logo-icon .cs-logo-svg {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
   display: block !important;
-  border-radius: 10px;
-  flex-shrink: 0;
+  border-radius: inherit;
+  flex-shrink: 0 !important;
 }
 
 .cs-navbar.scrolled .cs-navbar__logo-icon svg,
 .cs-navbar.scrolled .cs-navbar__logo-icon img {
-  width: 44px !important;
-  height: 44px !important;
-  max-width: 44px !important;
-  max-height: 44px !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
 }
 
 .cs-navbar__logo:hover .cs-navbar__logo-icon {
@@ -109,28 +130,30 @@
 
 .cs-navbar__logo-name {
   font-family: var(--font-heading);
-  font-size: 1.65rem;
+  font-size: var(--nav-logo-name);
   font-weight: 800;
   color: var(--color-white);
   letter-spacing: -0.015em;
   line-height: 1.05;
+  transition: font-size var(--transition-fast);
 }
 
 .cs-navbar__logo-tagline {
-  font-size: 0.65rem;
+  font-size: var(--nav-logo-tagline);
   color: var(--color-gold);
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--nav-logo-spacing);
   text-transform: uppercase;
   margin-top: 3px;
   white-space: nowrap;
+  transition: font-size var(--transition-fast);
 }
 
 /* ── Desktop Nav Links ── */
 .cs-navbar__nav {
   display: flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--nav-link-gap);
   flex: 1;
   justify-content: center;
 }
@@ -143,12 +166,12 @@
   display: flex;
   align-items: center;
   gap: var(--space-1);
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--font-size-sm);
+  padding: var(--nav-link-pad-y) var(--nav-link-pad-x);
+  font-size: var(--nav-link-font);
   font-weight: 500;
   color: rgba(255,255,255,.85);
   border-radius: var(--border-radius-sm);
-  transition: color var(--transition-fast), background var(--transition-fast);
+  transition: color var(--transition-fast), background var(--transition-fast), padding var(--transition-fast), font-size var(--transition-fast);
   white-space: nowrap;
 }
 
@@ -223,20 +246,21 @@ body.rtl .cs-navbar__dropdown {
 .cs-navbar__actions {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
+  gap: var(--nav-actions-gap);
   flex-shrink: 0;
 }
 
 /* Icon buttons (theme / RTL toggle) */
 .cs-navbar__icon-btn {
-  width: 38px;
-  height: 38px;
+  width: var(--nav-btn-size);
+  height: var(--nav-btn-size);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(255,255,255,.8);
-  transition: background var(--transition-fast), color var(--transition-fast);
+  transition: background var(--transition-fast), color var(--transition-fast),
+              width var(--transition-fast), height var(--transition-fast);
 }
 
 .cs-navbar__icon-btn:hover {
@@ -245,8 +269,9 @@ body.rtl .cs-navbar__dropdown {
 }
 
 .cs-navbar__icon-btn svg {
-  width: 20px;
-  height: 20px;
+  width: var(--nav-btn-icon);
+  height: var(--nav-btn-icon);
+  transition: width var(--transition-fast), height var(--transition-fast);
 }
 
 /* Profile dropdown */
@@ -318,14 +343,15 @@ body.rtl .cs-navbar__profile-menu {
 .cs-navbar__login-btn {
   display: flex;
   align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
+  gap: var(--nav-login-gap);
+  padding: var(--nav-login-pad);
   background: var(--color-gold);
   color: var(--color-navy);
-  font-size: var(--font-size-sm);
+  font-size: var(--nav-login-font);
   font-weight: 600;
   border-radius: var(--border-radius-pill);
-  transition: background var(--transition-fast), transform var(--transition-fast);
+  transition: background var(--transition-fast), transform var(--transition-fast),
+              padding var(--transition-fast), font-size var(--transition-fast);
   white-space: nowrap;
 }
 
@@ -343,12 +369,12 @@ body.rtl .cs-navbar__login-btn svg {
   display: none;
   flex-direction: column;
   gap: 5px;
-  width: 36px;
-  height: 36px;
+  width: var(--nav-btn-size);
+  height: var(--nav-btn-size);
   align-items: center;
   justify-content: center;
   border-radius: var(--border-radius-sm);
-  transition: background var(--transition-fast);
+  transition: background var(--transition-fast), width var(--transition-fast), height var(--transition-fast);
 }
 
 .cs-navbar__hamburger:hover {
@@ -513,50 +539,242 @@ body.rtl .cs-navbar__mobile-menu.open {
   height: 16px;
 }
 
-/* Keep all eight links comfortable just above the mobile breakpoint */
-@media (min-width: 1025px) and (max-width: 1200px) {
-  .cs-navbar__nav { gap: 0; }
-  .cs-navbar__nav-link { padding: var(--space-2); font-size: 0.8rem; }
-  .cs-navbar__logo-name { font-size: 1.4rem; }
-  .cs-navbar__logo-tagline { font-size: 0.58rem; }
+/* ── Viewport-Specific Responsive Navbar Scaling ── */
+
+/* Ultra-Wide Screens (> 1600px) */
+@media (min-width: 1600px) {
+  :root {
+    --navbar-height: 84px;
+    --nav-logo-size: 50px;
+    --nav-logo-name: 1.75rem;
+    --nav-logo-tagline: 0.68rem;
+    --nav-logo-spacing: 0.18em;
+    --nav-logo-gap: 14px;
+    --nav-logo-max-w: 340px;
+    --nav-link-font: 0.95rem;
+    --nav-link-pad-y: 0.5rem;
+    --nav-link-pad-x: 0.9rem;
+    --nav-link-gap: 0.35rem;
+    --nav-actions-gap: var(--space-3);
+    --nav-btn-size: 42px;
+    --nav-btn-icon: 21px;
+    --nav-login-font: 0.92rem;
+    --nav-login-pad: 0.55rem 1.35rem;
+  }
 }
 
-/* ── Responsive breakpoints ── */
+/* Compact Desktop / Laptop (1025px - 1200px) */
+@media (min-width: 1025px) and (max-width: 1200px) {
+  :root {
+    --navbar-height: 72px;
+    --nav-logo-size: 42px;
+    --nav-logo-name: 1.38rem;
+    --nav-logo-tagline: 0.54rem;
+    --nav-logo-spacing: 0.12em;
+    --nav-logo-gap: 10px;
+    --nav-logo-max-w: 260px;
+    --nav-link-font: 0.8rem;
+    --nav-link-pad-y: 0.35rem;
+    --nav-link-pad-x: 0.42rem;
+    --nav-link-gap: 2px;
+    --nav-actions-gap: 0.35rem;
+    --nav-btn-size: 34px;
+    --nav-btn-icon: 17px;
+    --nav-login-font: 0.8rem;
+    --nav-login-pad: 0.4rem 0.85rem;
+    --nav-login-gap: 0.35rem;
+  }
+  .cs-navbar__inner {
+    gap: var(--space-3);
+  }
+}
+
+/* Tablet (769px - 1024px) */
 @media (max-width: 1024px) {
+  :root {
+    --navbar-height: 70px;
+    --nav-logo-size: 42px;
+    --nav-logo-name: 1.45rem;
+    --nav-logo-tagline: 0.58rem;
+    --nav-logo-spacing: 0.14em;
+    --nav-logo-gap: 10px;
+    --nav-actions-gap: 0.5rem;
+    --nav-btn-size: 36px;
+    --nav-btn-icon: 18px;
+  }
   .cs-navbar__nav { display: none; }
   .cs-navbar__hamburger { display: flex; }
   .cs-navbar__login-btn { display: none; }
+  .cs-navbar__inner {
+    gap: var(--space-4);
+  }
+  .cs-navbar__mobile-menu {
+    padding: 1.75rem var(--container-pad);
+  }
+  .cs-mobile-nav__link {
+    font-size: 1.125rem;
+    padding: 0.85rem 0;
+  }
+  .cs-mobile-nav__sub-link {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.85rem;
+  }
+  .cs-mobile-nav__book-btn {
+    font-size: 1rem;
+    padding: 13px 20px;
+  }
+  .cs-mobile-nav__login-btn {
+    font-size: 0.92rem;
+    padding: 11px 20px;
+  }
 }
 
+/* Phablet / Large Mobile (481px - 768px) */
 @media (max-width: 768px) {
-  .cs-navbar__logo-icon {
-    width: 44px;
-    height: 44px;
-    font-size: 1.5rem;
+  :root {
+    --navbar-height: 64px;
+    --nav-logo-size: 38px;
+    --nav-logo-name: 1.32rem;
+    --nav-logo-tagline: 0.52rem;
+    --nav-logo-spacing: 0.12em;
+    --nav-logo-gap: 9px;
+    --nav-actions-gap: 6px;
+    --nav-btn-size: 34px;
+    --nav-btn-icon: 17px;
   }
-  .cs-navbar__logo-name {
-    font-size: 1.45rem;
+  .cs-navbar__inner {
+    gap: 10px;
   }
-  .cs-navbar__logo-tagline {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-  }
-}
-
-@media (max-width: 480px) {
   .cs-navbar__logo {
     gap: 9px;
   }
-  .cs-navbar__logo-icon {
-    width: 40px;
-    height: 40px;
-    font-size: 1.35rem;
+  .cs-navbar__hamburger span {
+    width: 20px;
   }
-  .cs-navbar__logo-name {
-    font-size: 1.3rem;
+  .cs-navbar__mobile-menu {
+    padding: 1.5rem var(--container-pad);
   }
-  .cs-navbar__logo-tagline {
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
+  .cs-mobile-nav__link {
+    font-size: 1.05rem;
+    padding: 0.75rem 0;
+  }
+  .cs-mobile-nav__sub-link {
+    font-size: 0.88rem;
+    padding: 0.55rem 0.75rem;
+  }
+  .cs-mobile-nav__actions {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    gap: 0.65rem;
+  }
+  .cs-mobile-nav__book-btn {
+    font-size: 0.95rem;
+    padding: 11px 16px;
+  }
+  .cs-mobile-nav__login-btn {
+    font-size: 0.88rem;
+    padding: 9px 16px;
+  }
+}
+
+/* Standard Mobile (361px - 480px) */
+@media (max-width: 480px) {
+  :root {
+    --navbar-height: 60px;
+    --nav-logo-size: 34px;
+    --nav-logo-name: 1.2rem;
+    --nav-logo-tagline: 0.46rem;
+    --nav-logo-spacing: 0.1em;
+    --nav-logo-gap: 8px;
+    --nav-logo-max-w: 220px;
+    --nav-actions-gap: 4px;
+    --nav-btn-size: 32px;
+    --nav-btn-icon: 16px;
+  }
+  .cs-navbar__inner {
+    gap: 8px;
+  }
+  .cs-navbar__logo {
+    gap: 8px;
+    max-width: 220px;
+  }
+  .cs-navbar__hamburger span {
+    width: 19px;
+  }
+  .cs-navbar__mobile-menu {
+    padding: 1.25rem var(--container-pad);
+  }
+  .cs-mobile-nav__link {
+    font-size: 0.95rem;
+    padding: 0.65rem 0;
+  }
+  .cs-mobile-nav__sub-link {
+    font-size: 0.82rem;
+    padding: 0.45rem 0.65rem;
+  }
+  .cs-mobile-nav__actions {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    gap: 0.55rem;
+  }
+  .cs-mobile-nav__book-btn {
+    font-size: 0.9rem;
+    padding: 10px 14px;
+  }
+  .cs-mobile-nav__login-btn {
+    font-size: 0.84rem;
+    padding: 8px 14px;
+  }
+}
+
+/* Small / Compact Mobile (<= 360px) */
+@media (max-width: 360px) {
+  :root {
+    --navbar-height: 56px;
+    --nav-logo-size: 30px;
+    --nav-logo-name: 1.05rem;
+    --nav-logo-tagline: 0.4rem;
+    --nav-logo-spacing: 0.06em;
+    --nav-logo-gap: 6px;
+    --nav-logo-max-w: 175px;
+    --nav-actions-gap: 2px;
+    --nav-btn-size: 28px;
+    --nav-btn-icon: 14px;
+  }
+  .cs-navbar__inner {
+    padding-inline: 0.5rem;
+    gap: 4px;
+  }
+  .cs-navbar__logo {
+    gap: 6px;
+    max-width: 175px;
+  }
+  .cs-navbar__hamburger span {
+    width: 17px;
+    height: 1.75px;
+  }
+  .cs-navbar__mobile-menu {
+    padding: 0.85rem 0.65rem;
+  }
+  .cs-mobile-nav__link {
+    font-size: 0.88rem;
+    padding: 0.55rem 0;
+  }
+  .cs-mobile-nav__sub-link {
+    font-size: 0.76rem;
+    padding: 0.35rem 0.5rem;
+  }
+  .cs-mobile-nav__actions {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    gap: 0.5rem;
+  }
+  .cs-mobile-nav__book-btn {
+    font-size: 0.82rem;
+    padding: 8px 10px;
+  }
+  .cs-mobile-nav__login-btn {
+    font-size: 0.76rem;
+    padding: 7px 10px;
   }
 }
